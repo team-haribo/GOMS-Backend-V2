@@ -11,15 +11,47 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":goms-application"))
-    implementation(project(":goms-presentation"))
+    /* impl */
     implementation(project(":goms-domain"))
+
+    /* spring */
+    implementation(Dependencies.SPRING_WEB)
+
+    /* jpa */
+    implementation(Dependencies.SPRING_DATA_JPA)
+
+    /* queryDsl */
+    implementation(Dependencies.QUERYDSL)
+    kapt(Dependencies.QUERYDSL_PROCESSOR)
+
+    /* database */
+    runtimeOnly(Dependencies.MYSQL_CONNECTOR)
+    implementation(Dependencies.REDIS)
+    implementation(Dependencies.SPRING_REDIS)
+
+    /* mapstruct */
+    implementation(Dependencies.MAP_STRUCT)
+    annotationProcessor(Dependencies.MAP_STRUCT_BINDING)
+    annotationProcessor(Dependencies.MAP_STRUCT_PROCESSPR)
 }
 
 allOpen {
     annotation(AllOpen.ENTITY)
     annotation(AllOpen.MAPPED_SUPERCLASS)
     annotation(AllOpen.EMBEDDABLE)
+}
+
+noArg {
+    annotation(AllOpen.ENTITY)
+    annotation(AllOpen.MAPPED_SUPERCLASS)
+    annotation(AllOpen.EMBEDDABLE)
+}
+
+kapt {
+    arguments {
+        arg("mapstruct.defaultComponentModel", "spring")
+        arg("mapstruct.unmappedTargetPolicy", "ignore")
+    }
 }
 
 tasks.getByName<Jar>("bootJar") {
