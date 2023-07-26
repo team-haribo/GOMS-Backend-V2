@@ -14,10 +14,10 @@ springBoot {
 }
 
 dependencies {
+    /* impl */
     implementation(project(":goms-domain"))
+
+    /* spring */
     implementation(Dependencies.TRANSACTION)
-
-    implementation(Dependencies.WEB)
-
-    implementation(Dependencies.SECURIRY)
+    implementation(Dependencies.SPRING_WEB)
 }
