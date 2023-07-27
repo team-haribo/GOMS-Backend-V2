@@ -8,10 +8,11 @@ import org.springframework.stereotype.Repository
 @Repository
 class AccountRepositoryImpl(
     private val accountJpaRepository: AccountJpaRepository,
+    private val accountMapper: AccountMapper
 ): AccountRepository {
 
     override fun save(account: Account) {
-        val accountEntity = AccountMapper.INSTANCE.toEntity(account)
+        val accountEntity = accountMapper.toEntity(account)
         accountJpaRepository.save(accountEntity)
     }
 
