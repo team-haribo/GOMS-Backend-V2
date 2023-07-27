@@ -31,8 +31,8 @@ dependencies {
 
     /* mapstruct */
     implementation(Dependencies.MAP_STRUCT)
-    annotationProcessor(Dependencies.MAP_STRUCT_BINDING)
-    annotationProcessor(Dependencies.MAP_STRUCT_PROCESSOR)
+    kapt(Dependencies.MAP_STRUCT_PROCESSOR)
+    kaptTest(Dependencies.MAP_STRUCT_PROCESSOR)
 }
 
 allOpen {

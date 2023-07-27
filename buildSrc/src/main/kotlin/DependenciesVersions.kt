@@ -10,6 +10,5 @@ object DependenciesVersions {
     const val EMAIL = "2.6.7"
     const val REDIS_VERSION = "2.7.2"
     const val JWT_VERSION = "0.9.1"
-    const val MAP_STRUCT_VERSION = "1.5.5.Final"
-    const val MAP_STRUCT_BINDING_VERSION = "0.2.0"
+    const val MAP_STRUCT_VERSION = "1.5.2.Final"
 }

@@ -40,5 +40,4 @@ object Dependencies {
     /** code generator **/
     const val MAP_STRUCT = "org.mapstruct:mapstruct:${DependenciesVersions.MAP_STRUCT_VERSION}"
     const val MAP_STRUCT_PROCESSOR = "org.mapstruct:mapstruct-processor:${DependenciesVersions.MAP_STRUCT_VERSION}"
-    const val MAP_STRUCT_BINDING = "org.projectlombok:lombok-mapstruct-binding:${DependenciesVersions.MAP_STRUCT_BINDING_VERSION}"
 }
