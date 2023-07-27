@@ -11,10 +11,19 @@ subprojects {
 		plugin("org.jetbrains.kotlin.jvm")
 		version = PluginVersions.JVM_VERSION
 	}
+
+	apply {
+		plugin("org.jetbrains.kotlin.kapt")
+		version = PluginVersions.KAPT_VERSION
+	}
+
 	dependencies {
 		/* kotlin */
 		implementation(Dependencies.KOTLIN_JDK)
 		implementation(Dependencies.KOTLIN_REFLECT)
+
+		/* servlet */
+		implementation(Dependencies.JAVA_SERVLET)
 
 		/* test */
 		implementation(Dependencies.SPRING_TEST)

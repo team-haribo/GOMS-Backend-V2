@@ -3,10 +3,13 @@ object Dependencies {
     const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect"
     const val KOTLIN_JDK = "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
+    /* java servlet */
+    const val JAVA_SERVLET = "javax.servlet:javax.servlet-api:${DependenciesVersions.SERVLET_VERSION}"
+
     /* spring app */
     const val VALIDATION = "org.springframework.boot:spring-boot-starter-validation"
-    const val SECURIRY = "org.springframework.boot:spring-boot-starter-security"
-    const val WEB = "org.springframework.boot:spring-boot-starter-web"
+    const val SPRING_SECURITY = "org.springframework.boot:spring-boot-starter-security"
+    const val SPRING_WEB = "org.springframework.boot:spring-boot-starter-web"
     const val TRANSACTION = "org.springframework:spring-tx:${DependenciesVersions.SPRING_TRANSACTION}"
     const val CONFIGURATION_PROCESSOR = "org.springframework.boot:spring-boot-configuration-processor"
 
@@ -33,4 +36,8 @@ object Dependencies {
 
     /* jwt */
     const val JWT = "io.jsonwebtoken:jjwt:${DependenciesVersions.JWT_VERSION}"
+
+    /** code generator **/
+    const val MAP_STRUCT = "org.mapstruct:mapstruct:${DependenciesVersions.MAP_STRUCT_VERSION}"
+    const val MAP_STRUCT_PROCESSOR = "org.mapstruct:mapstruct-processor:${DependenciesVersions.MAP_STRUCT_VERSION}"
 }
