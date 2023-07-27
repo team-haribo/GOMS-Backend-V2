@@ -3,7 +3,6 @@ package com.goms.v2.persistence.account.mapper
 import com.goms.v2.domain.account.Account
 import com.goms.v2.persistence.account.entity.AccountJpaEntity
 import org.mapstruct.*
-import org.mapstruct.factory.Mappers
 
 @Mapper(
     componentModel = MappingConstants.ComponentModel.SPRING,
@@ -11,10 +10,6 @@ import org.mapstruct.factory.Mappers
     unmappedTargetPolicy = ReportingPolicy.WARN,
 )
 interface AccountMapper {
-
-    companion object {
-        val INSTANCE: AccountMapper = Mappers.getMapper(AccountMapper::class.java)
-    }
 
     @Mappings(
         Mapping(target = "studentNumber.grade", source = "studentNumber.grade"),
