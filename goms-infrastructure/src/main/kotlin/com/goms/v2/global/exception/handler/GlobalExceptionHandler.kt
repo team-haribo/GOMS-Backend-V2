@@ -19,7 +19,7 @@ class GlobalExceptionHandler {
 		)
 
 	@ExceptionHandler(MethodArgumentNotValidException::class)
-	fun  handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<ErrorResponse> =
+	fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<ErrorResponse> =
 		ResponseEntity(
 			ErrorResponse(e.message, HttpStatus.BAD_REQUEST.value()),
 			HttpStatus.valueOf(e.hashCode())
