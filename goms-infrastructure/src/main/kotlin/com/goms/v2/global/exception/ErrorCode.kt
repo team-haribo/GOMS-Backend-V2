@@ -1,4 +1,4 @@
-package com.goms.v2.global.error
+package com.goms.v2.global.exception
 
 import org.springframework.http.HttpStatus
 
