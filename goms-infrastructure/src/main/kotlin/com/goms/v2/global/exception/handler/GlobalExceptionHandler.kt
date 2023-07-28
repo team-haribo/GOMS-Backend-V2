@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class GlobalExceptionHandler {
 
 	@ExceptionHandler(GomsException::class)
-	fun handler(e: GomsException): ResponseEntity<ErrorResponse> =
+	fun handleGomsException(e: GomsException): ResponseEntity<ErrorResponse> =
 		ResponseEntity(
 			ErrorResponse(e.errorCode.message, e.errorCode.status.value()),
 			HttpStatus.valueOf(e.errorCode.status.name)
