@@ -26,4 +26,12 @@ class GlobalExceptionHandler {
 			HttpStatus.valueOf(e.hashCode())
 		)
 
+
+	@ExceptionHandler(HttpMessageNotReadableException::class)
+	fun  handleHttpMessageNotReadableException(e: HttpMessageNotReadableException): ResponseEntity<ErrorResponse> =
+		ResponseEntity(
+			ErrorResponse(e.message, e.hashCode()),
+			HttpStatus.valueOf(e.hashCode())
+		)
+
 }
