@@ -3,7 +3,9 @@ package com.goms.v2.persistence.account.mapper
 import com.goms.v2.domain.account.Account
 import com.goms.v2.persistence.account.entity.AccountJpaEntity
 import org.mapstruct.*
+import org.springframework.stereotype.Component
 
+@Component
 @Mapper(
     componentModel = MappingConstants.ComponentModel.SPRING,
     injectionStrategy = InjectionStrategy.CONSTRUCTOR,
@@ -16,7 +18,7 @@ interface AccountMapper {
         Mapping(target = "studentNumber.classNum", source = "studentNumber.classNum"),
         Mapping(target = "studentNumber.number", source = "studentNumber.number")
     )
-    fun toDomain(accountJpaEntity: AccountJpaEntity): Account
+    fun toDomain(accountJpaEntity: AccountJpaEntity?): Account
 
     @Mappings(
         Mapping(target = "studentNumber.grade", source = "studentNumber.grade"),
