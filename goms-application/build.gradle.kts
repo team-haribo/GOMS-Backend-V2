@@ -7,6 +7,7 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://jitpack.io") }
 }
 
 springBoot {
@@ -16,6 +17,9 @@ springBoot {
 dependencies {
     /* impl */
     implementation(project(":goms-domain"))
+
+    /* gauth */
+    implementation(Dependencies.GAUTH)
 
     /* spring */
     implementation(Dependencies.TRANSACTION)

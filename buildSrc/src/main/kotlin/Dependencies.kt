@@ -13,6 +13,9 @@ object Dependencies {
     const val TRANSACTION = "org.springframework:spring-tx:${DependenciesVersions.SPRING_TRANSACTION}"
     const val CONFIGURATION_PROCESSOR = "org.springframework.boot:spring-boot-configuration-processor"
 
+    /* gauth */
+    const val GAUTH = "com.github.GSM-MSG:GAuth-SDK-Java:${DependenciesVersions.GAUTH_VERSION}"
+
     /* mail */
     const val EMAIL = "org.springframework.boot:spring-boot-starter-mail:${DependenciesVersions.EMAIL}"
 

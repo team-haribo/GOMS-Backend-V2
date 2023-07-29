@@ -6,11 +6,21 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
+
+    // impl project
+    implementation(project(":goms-application"))
+    implementation(project(":goms-domain"))
+
     /* web */
     implementation(Dependencies.SPRING_WEB)
+
+    /* validation */
+    implementation(Dependencies.VALIDATION)
+
 }
 
 tasks.getByName<Jar>("bootJar") {
