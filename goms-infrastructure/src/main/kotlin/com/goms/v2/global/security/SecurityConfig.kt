@@ -19,15 +19,21 @@ class SecurityConfig(
 ) {
 
     @Bean
-    fun filterChain(http: HttpSecurity): SecurityFilterChain =
+    fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
             .cors()
             .and()
             .csrf().disable()
             .formLogin().disable()
             .httpBasic().disable()
+            .apply(FilterConfig(jwtParser))
+        authorizeHttpRequests(http)
+        exceptionHandling(http)
+        return http.build()
+    }
 
-            .authorizeRequests()
+    private fun authorizeHttpRequests(http: HttpSecurity) {
+        http.authorizeRequests()
             // /auth
             .mvcMatchers(HttpMethod.POST, "/api/v1/auth/signin").permitAll()
             .mvcMatchers(HttpMethod.PATCH, "/api/v1/auth").permitAll()
@@ -54,19 +60,12 @@ class SecurityConfig(
 
             // /health
             .mvcMatchers(HttpMethod.GET, "/").permitAll()
-            
-            .anyRequest().permitAll()
-            .and()
+    }
 
-            .exceptionHandling()
-            .accessDeniedHandler(CustomAccessDeniedHandler())
-            .and()
-            .httpBasic()
+    private fun exceptionHandling(http: HttpSecurity) {
+        http.exceptionHandling()
             .authenticationEntryPoint(CustomAuthenticationEntryPoint())
-            .and()
-
-            .apply(FilterConfig(jwtParser))
-            .and()
-            .build()
+            .accessDeniedHandler(CustomAccessDeniedHandler())
+    }
 
 }
