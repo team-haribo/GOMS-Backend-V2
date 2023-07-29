@@ -20,6 +20,14 @@ dependencies {
     /* jpa */
     implementation(Dependencies.SPRING_DATA_JPA)
 
+    /* jwt */
+    implementation(Dependencies.JWT_API)
+    runtimeOnly(Dependencies.JWT_IMPL)
+    runtimeOnly(Dependencies.JWT_JACKSON)
+
+    // security
+    implementation(Dependencies.SPRING_SECURITY)
+
     /* queryDsl */
     implementation(Dependencies.QUERYDSL)
     kapt(Dependencies.QUERYDSL_PROCESSOR)

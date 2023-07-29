@@ -9,6 +9,8 @@ object DependenciesVersions {
     const val SERVLET_VERSION = "4.0.1"
     const val EMAIL = "2.6.7"
     const val REDIS_VERSION = "2.7.2"
-    const val JWT_VERSION = "0.9.1"
+    const val JWT_VERSION = "0.11.5"
     const val MAP_STRUCT_VERSION = "1.5.2.Final"
+    const val GAUTH_VERSION = "2.0.0"
+    const val LOG_VERSION = "2.1.21"
 }

@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/goms
+    url: jdbc:mysql://localhost:3306/goms_v2_local
     username: root
     password: ${DB_LOCAL_PASSWORD}
 

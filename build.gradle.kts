@@ -22,6 +22,10 @@ subprojects {
 		implementation(Dependencies.KOTLIN_JDK)
 		implementation(Dependencies.KOTLIN_REFLECT)
 
+		/* logging */
+		implementation(Dependencies.LOGGING)
+		testImplementation(Dependencies.LOGGING)
+
 		/* servlet */
 		implementation(Dependencies.JAVA_SERVLET)
 

@@ -27,6 +27,9 @@ object Dependencies {
     const val QUERYDSL = "com.querydsl:querydsl-jpa:${DependenciesVersions.QUERYDSL}"
     const val QUERYDSL_PROCESSOR = "com.querydsl:querydsl-apt:${DependenciesVersions.QUERYDSL}:jpa"
 
+    /* logging */
+    const val LOGGING = "io.github.microutils:kotlin-logging-jvm:${DependenciesVersions.LOG_VERSION}"
+
     /* test */
     const val SPRING_TEST = "org.springframework.boot:spring-boot-starter-test:${DependenciesVersions.SPRING_TEST}"
     const val MOCKK = "io.mockk:mockk:${DependenciesVersions.MOCKK}"
@@ -35,7 +38,9 @@ object Dependencies {
     const val KOTEST_ASSERTIONS = "io.kotest:kotest-assertions-core:${DependenciesVersions.KOTEST_ASSERTIONS}"
 
     /* jwt */
-    const val JWT = "io.jsonwebtoken:jjwt:${DependenciesVersions.JWT_VERSION}"
+    const val JWT_API = "io.jsonwebtoken:jjwt-api:${DependenciesVersions.JWT_VERSION}"
+    const val JWT_IMPL = "io.jsonwebtoken:jjwt-impl:${DependenciesVersions.JWT_VERSION}"
+    const val JWT_JACKSON = "io.jsonwebtoken:jjwt-jackson:${DependenciesVersions.JWT_VERSION}"
 
     /** code generator **/
     const val MAP_STRUCT = "org.mapstruct:mapstruct:${DependenciesVersions.MAP_STRUCT_VERSION}"

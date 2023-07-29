@@ -16,7 +16,7 @@ interface AccountMapper {
         Mapping(target = "studentNumber.classNum", source = "studentNumber.classNum"),
         Mapping(target = "studentNumber.number", source = "studentNumber.number")
     )
-    fun toDomain(accountJpaEntity: AccountJpaEntity): Account
+    fun toDomain(accountJpaEntity: AccountJpaEntity?): Account
 
     @Mappings(
         Mapping(target = "studentNumber.grade", source = "studentNumber.grade"),
