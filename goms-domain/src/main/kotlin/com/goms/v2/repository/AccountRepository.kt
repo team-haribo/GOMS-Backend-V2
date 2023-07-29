@@ -7,6 +7,6 @@ interface AccountRepository {
 
     fun save(account: Account)
 
-    fun findByIdOrNull(uuid: UUID): Account?
+    fun findByIdOrNull(accountIdx: UUID): Account?
 
 }
