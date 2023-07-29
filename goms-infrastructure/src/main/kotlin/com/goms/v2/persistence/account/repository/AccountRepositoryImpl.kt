@@ -18,9 +18,8 @@ class AccountRepositoryImpl(
         accountJpaRepository.save(accountEntity)
     }
 
-    override fun findByIdOrNull(uuid: UUID) =
-        accountJpaRepository.findByIdOrNull(uuid)
+    override fun findByIdOrNull(accountIdx: UUID) =
+        accountJpaRepository.findByIdOrNull(accountIdx)
             .let { accountMapper.toDomain(it) }
-
 
 }
