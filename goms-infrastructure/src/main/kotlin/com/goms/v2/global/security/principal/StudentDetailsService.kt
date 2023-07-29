@@ -1,7 +1,7 @@
 package com.goms.v2.global.security.principal
 
 import com.goms.v2.global.security.jwt.common.exception.InvalidTokenException
-import com.goms.v2.repository.AccountRepository
+import com.goms.v2.repository.account.AccountRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
