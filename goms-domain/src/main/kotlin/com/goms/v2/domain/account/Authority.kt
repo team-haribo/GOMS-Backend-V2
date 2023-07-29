@@ -5,6 +5,6 @@ import com.goms.v2.common.annotation.Aggregate
 @Aggregate
 enum class Authority {
 
-    ROLE_ACCOUNT, ROLE_ADMIN
+    ROLE_STUDENT, ROLE_STUDENT_COUNCIL
 
 }
