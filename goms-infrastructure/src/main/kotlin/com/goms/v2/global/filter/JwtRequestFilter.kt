@@ -16,7 +16,6 @@ class JwtRequestFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-
         val accessToken = jwtParser.parseAccessToken(request)
 
         if (!accessToken.isNullOrBlank()) {
@@ -26,7 +25,6 @@ class JwtRequestFilter(
         }
 
         filterChain.doFilter(request, response)
-
     }
 
 }
