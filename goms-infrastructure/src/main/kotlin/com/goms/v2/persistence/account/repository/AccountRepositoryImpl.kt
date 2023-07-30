@@ -2,7 +2,7 @@ package com.goms.v2.persistence.account.repository
 
 import com.goms.v2.domain.account.Account
 import com.goms.v2.persistence.account.mapper.AccountMapper
-import com.goms.v2.repository.AccountRepository
+import com.goms.v2.repository.account.AccountRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
 import java.util.*
@@ -20,6 +20,10 @@ class AccountRepositoryImpl(
 
     override fun findByIdOrNull(accountIdx: UUID) =
         accountJpaRepository.findByIdOrNull(accountIdx)
+            .let { accountMapper.toDomain(it) }
+
+    override fun findByEmail(email: String) =
+        accountJpaRepository.findByEmail(email)
             .let { accountMapper.toDomain(it) }
 
 }
