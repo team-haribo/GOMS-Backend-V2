@@ -1,6 +1,6 @@
 package com.goms.v2.thirdparty.gauth
 
-import com.goms.v2.common.spi.GAuthPort
+import com.goms.v2.spi.GAuthPort
 import com.goms.v2.global.gauth.property.GAuthProperties
 import gauth.GAuth
 import gauth.GAuthToken

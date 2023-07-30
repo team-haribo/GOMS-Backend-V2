@@ -1,8 +1,8 @@
 package com.goms.v2.domain.auth.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithTransaction
-import com.goms.v2.common.spi.GAuthPort
-import com.goms.v2.common.spi.JwtPort
+import com.goms.v2.spi.GAuthPort
+import com.goms.v2.spi.JwtPort
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber
