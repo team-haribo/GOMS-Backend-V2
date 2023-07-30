@@ -9,6 +9,10 @@ import com.goms.v2.domain.account.StudentNumber
 import com.goms.v2.domain.auth.RefreshToken
 import com.goms.v2.domain.auth.dto.request.SignInDto
 import com.goms.v2.domain.auth.dto.response.TokenInDto
+import com.goms.v2.domain.auth.exception.ExpiredCodeException
+import com.goms.v2.domain.auth.exception.InternalServerErrorException
+import com.goms.v2.domain.auth.exception.SecretMismatchException
+import com.goms.v2.domain.auth.exception.ServiceNotFoundException
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.auth.RefreshTokenRepository
 import gauth.GAuth
@@ -30,21 +34,21 @@ class SignInUseCase(
 ) {
 
     fun execute(dto: SignInDto): TokenInDto {
-        runCatching {
-            gAuthPort.receiveGAuthToken(dto.code)
-        }.onFailure {
-            throw GAuthException(500)
-        }.onSuccess {
-            log.info { "GAuth Token is ${it.accessToken}" }
-            val gAuthInfo = gAuth.getUserInfo(it.accessToken)
+        try {
+            val gAuthToken = gAuthPort.receiveGAuthToken(dto.code)
+            log.info { "GAuth Token is ${gAuthToken.accessToken}" }
+            val gAuthInfo = gAuth.getUserInfo(gAuthToken.accessToken)
             log.info { "GAuth email is ${gAuthInfo.email}" }
             val account = accountRepository.findByEmail(gAuthInfo.email) ?: saveAccount(gAuthInfo)
-            val (accessToken, refreshToken, accessTokenExp, refreshTokenExp) = tokenPort.generateToken(account.idx, account.authority)
+            val (accessToken, refreshToken, accessTokenExp, refreshTokenExp) = tokenPort.generateToken(
+                account.idx,
+                account.authority
+            )
             refreshTokenRepository.save(
                 RefreshToken(
                     refreshToken = refreshToken,
                     accountIdx = account.idx,
-                    )
+                )
             )
             return TokenInDto(
                 accessToken = accessToken,
@@ -53,9 +57,16 @@ class SignInUseCase(
                 refreshTokenExp = refreshTokenExp,
                 authority = account.authority,
             )
+        } catch (error: GAuthException) {
+            println("예외처리ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ")
+            println(error.code)
+            when (error.code) {
+                400 -> throw SecretMismatchException
+                401 -> throw ExpiredCodeException
+                404 -> throw ServiceNotFoundException
+                else -> throw InternalServerErrorException
+            }
         }
-
-        throw GAuthException(500)
     }
 
     private fun saveAccount(gAuthInfo: GAuthUserInfo): Account {
