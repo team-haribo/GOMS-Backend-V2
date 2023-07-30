@@ -3,7 +3,7 @@ package com.goms.v2.global.security.jwt
 import com.goms.v2.common.spi.JwtPort
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.auth.RefreshToken
-import com.goms.v2.domain.auth.dto.response.TokenInResponse
+import com.goms.v2.domain.auth.dto.response.TokenInDto
 import com.goms.v2.global.security.jwt.common.properties.JwtExpTimeProperties
 import com.goms.v2.global.security.jwt.common.properties.JwtProperties
 import com.goms.v2.repository.auth.RefreshTokenRepository
@@ -19,8 +19,8 @@ class GenerateJwtAdapter(
     private val jwtProperties: JwtProperties,
     private val jwtExpTimeProperties: JwtExpTimeProperties
 ): JwtPort {
-    override fun generateToken(accountIdx: UUID, authority: Authority): TokenInResponse =
-        TokenInResponse(
+    override fun generateToken(accountIdx: UUID, authority: Authority): TokenInDto =
+        TokenInDto(
             accessToken = generateAccessToken(accountIdx, authority),
             refreshToken = generateRefreshToken(accountIdx),
             accessTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.accessExp.toLong()),

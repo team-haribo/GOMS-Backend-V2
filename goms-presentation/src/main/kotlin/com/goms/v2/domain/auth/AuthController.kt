@@ -1,7 +1,7 @@
 package com.goms.v2.domain.auth
 
 import com.goms.v2.domain.auth.dto.request.SignInHttpRequest
-import com.goms.v2.domain.auth.dto.response.TokenInResponse
+import com.goms.v2.domain.auth.dto.response.TokenInDto
 import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
 import com.goms.v2.domain.auth.usecase.SignInUseCase
 import org.springframework.http.ResponseEntity
@@ -22,7 +22,7 @@ class AuthController(
         signInUseCase.execute(signInHttpRequest.toData())
             .let { ResponseEntity.ok(it.toResponse()) }
 
-    private fun TokenInResponse.toResponse(): TokenHttpResponse =
+    private fun TokenInDto.toResponse(): TokenHttpResponse =
         TokenHttpResponse(
             accessToken = accessToken,
             refreshToken = refreshToken,

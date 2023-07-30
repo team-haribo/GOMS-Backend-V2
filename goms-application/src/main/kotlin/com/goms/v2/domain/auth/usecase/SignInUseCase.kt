@@ -7,8 +7,8 @@ import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber
 import com.goms.v2.domain.auth.RefreshToken
-import com.goms.v2.domain.auth.dto.request.SignInRequest
-import com.goms.v2.domain.auth.dto.response.TokenInResponse
+import com.goms.v2.domain.auth.dto.request.SignInDto
+import com.goms.v2.domain.auth.dto.response.TokenInDto
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.auth.RefreshTokenRepository
 import gauth.GAuth
@@ -29,7 +29,7 @@ class SignInUseCase(
     private val jwtPort: JwtPort
 ) {
 
-    fun execute(dto: SignInRequest): TokenInResponse {
+    fun execute(dto: SignInDto): TokenInDto {
         runCatching {
             gAuthPort.receiveGAuthToken(dto.code)
         }.onFailure {
@@ -46,7 +46,7 @@ class SignInUseCase(
                     accountIdx = account.idx,
                     )
             )
-            return TokenInResponse(
+            return TokenInDto(
                 accessToken = accessToken,
                 refreshToken = refreshToken,
                 accessTokenExp = accessTokenExp,

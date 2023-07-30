@@ -7,7 +7,7 @@ data class SignInHttpRequest @JsonCreator constructor(
     @field:NotNull
     val code: String
 ) {
-    fun toData() = SignInRequest(
+    fun toData() = SignInDto(
         code = code
     )
 }
