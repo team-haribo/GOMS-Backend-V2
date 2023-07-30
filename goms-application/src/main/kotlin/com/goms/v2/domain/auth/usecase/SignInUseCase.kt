@@ -2,7 +2,7 @@ package com.goms.v2.domain.auth.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithTransaction
 import com.goms.v2.spi.GAuthPort
-import com.goms.v2.spi.JwtPort
+import com.goms.v2.spi.TokenPort
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber
@@ -26,7 +26,7 @@ class SignInUseCase(
     private val accountRepository: AccountRepository,
     private val refreshTokenRepository: RefreshTokenRepository,
     private val gAuthPort: GAuthPort,
-    private val jwtPort: JwtPort
+    private val tokenPort: TokenPort
 ) {
 
     fun execute(dto: SignInDto): TokenInDto {
@@ -39,7 +39,7 @@ class SignInUseCase(
             val gAuthInfo = gAuth.getUserInfo(it.accessToken)
             log.info { "GAuth email is ${gAuthInfo.email}" }
             val account = accountRepository.findByEmail(gAuthInfo.email) ?: saveAccount(gAuthInfo)
-            val (accessToken, refreshToken, accessTokenExp, refreshTokenExp) = jwtPort.generateToken(account.idx, account.authority)
+            val (accessToken, refreshToken, accessTokenExp, refreshTokenExp) = tokenPort.generateToken(account.idx, account.authority)
             refreshTokenRepository.save(
                 RefreshToken(
                     refreshToken = refreshToken,

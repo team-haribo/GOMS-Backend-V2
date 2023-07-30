@@ -1,6 +1,6 @@
 package com.goms.v2.global.security.jwt
 
-import com.goms.v2.spi.JwtPort
+import com.goms.v2.spi.TokenPort
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.auth.RefreshToken
 import com.goms.v2.domain.auth.dto.response.TokenInDto
@@ -14,11 +14,11 @@ import java.time.LocalDateTime
 import java.util.*
 
 @Component
-class GenerateJwtAdapter(
+class GenerateTokenAdapter(
     private val refreshTokenRepository: RefreshTokenRepository,
     private val jwtProperties: JwtProperties,
     private val jwtExpTimeProperties: JwtExpTimeProperties
-): JwtPort {
+): TokenPort {
     override fun generateToken(accountIdx: UUID, authority: Authority): TokenInDto =
         TokenInDto(
             accessToken = generateAccessToken(accountIdx, authority),

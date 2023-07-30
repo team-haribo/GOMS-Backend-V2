@@ -4,7 +4,7 @@ import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.auth.dto.response.TokenInDto
 import java.util.*
 
-interface JwtPort {
+interface TokenPort {
 
     fun generateToken(accountIdx: UUID, authority: Authority): TokenInDto
 
