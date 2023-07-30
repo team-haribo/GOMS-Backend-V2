@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 class GAuthAdapter(
     private val gAuth: GAuth,
     private val gAuthProperties: GAuthProperties
-) : GAuthPort {
+): GAuthPort {
     override fun receiveGAuthToken(code: String): GAuthToken =
         gAuth.generateToken(
             code,

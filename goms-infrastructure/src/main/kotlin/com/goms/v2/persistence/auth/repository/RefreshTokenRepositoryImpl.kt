@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 class RefreshTokenRepositoryImpl(
     private val refreshTokenJpaRepository: RefreshTokenJpaRepository,
     private val refreshTokenMapper: RefreshTokenMapper
-) : RefreshTokenRepository{
+): RefreshTokenRepository{
     override fun save(refreshToken: RefreshToken) {
         val refreshTokenEntity = refreshTokenMapper.toEntity(refreshToken)
             refreshTokenJpaRepository.save(refreshTokenEntity)
