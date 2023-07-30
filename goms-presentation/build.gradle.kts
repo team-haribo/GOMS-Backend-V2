@@ -10,7 +10,6 @@ repositories {
 }
 
 dependencies {
-
     // impl project
     implementation(project(":goms-application"))
     implementation(project(":goms-domain"))
@@ -20,7 +19,6 @@ dependencies {
 
     /* validation */
     implementation(Dependencies.VALIDATION)
-
 }
 
 tasks.getByName<Jar>("bootJar") {
