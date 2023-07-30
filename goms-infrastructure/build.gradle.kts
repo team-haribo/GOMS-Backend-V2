@@ -26,6 +26,9 @@ dependencies {
     /* gauth */
     implementation(Dependencies.GAUTH)
 
+    /* redis */
+    implementation(Dependencies.REDIS)
+
     /* jwt */
     implementation(Dependencies.JWT_API)
     runtimeOnly(Dependencies.JWT_IMPL)

@@ -22,9 +22,6 @@ subprojects {
 		implementation(Dependencies.KOTLIN_JDK)
 		implementation(Dependencies.KOTLIN_REFLECT)
 
-		/* redis */
-		implementation(Dependencies.REDIS)
-
 		/* logging */
 		implementation(Dependencies.LOGGING)
 		testImplementation(Dependencies.LOGGING)
