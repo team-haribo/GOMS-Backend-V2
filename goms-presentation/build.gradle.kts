@@ -19,6 +19,11 @@ dependencies {
 
     /* validation */
     implementation(Dependencies.VALIDATION)
+
+    /* mapstruct */
+    implementation(Dependencies.MAP_STRUCT)
+    kapt(Dependencies.MAP_STRUCT_PROCESSOR)
+    kaptTest(Dependencies.MAP_STRUCT_PROCESSOR)
 }
 
 tasks.getByName<Jar>("bootJar") {

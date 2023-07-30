@@ -6,8 +6,4 @@ import org.jetbrains.annotations.NotNull
 data class SignInHttpRequest @JsonCreator constructor(
     @field:NotNull
     val code: String
-) {
-    fun toData() = SignInDto(
-        code = code
-    )
-}
+)
