@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import com.goms.v2.domain.account.Authority
 import java.time.LocalDateTime
 
-data class TokenWebResponse(
+data class TokenHttpResponse(
     val accessToken: String,
     val refreshToken: String,
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH-mm-ss")

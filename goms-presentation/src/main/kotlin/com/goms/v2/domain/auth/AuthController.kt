@@ -1,8 +1,8 @@
 package com.goms.v2.domain.auth
 
-import com.goms.v2.domain.auth.dto.request.SignInWebRequest
+import com.goms.v2.domain.auth.dto.request.SignInHttpRequest
 import com.goms.v2.domain.auth.dto.response.TokenInResponse
-import com.goms.v2.domain.auth.dto.response.TokenWebResponse
+import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
 import com.goms.v2.domain.auth.usecase.SignInUseCase
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -18,12 +18,12 @@ class AuthController(
 ) {
 
     @PostMapping("/signin")
-    fun signIn(@RequestBody @Valid signInWebRequest: SignInWebRequest): ResponseEntity<TokenWebResponse> =
-        signInUseCase.execute(signInWebRequest.toData())
+    fun signIn(@RequestBody @Valid signInHttpRequest: SignInHttpRequest): ResponseEntity<TokenHttpResponse> =
+        signInUseCase.execute(signInHttpRequest.toData())
             .let { ResponseEntity.ok(it.toResponse()) }
 
-    private fun TokenInResponse.toResponse(): TokenWebResponse =
-        TokenWebResponse(
+    private fun TokenInResponse.toResponse(): TokenHttpResponse =
+        TokenHttpResponse(
             accessToken = accessToken,
             refreshToken = refreshToken,
             accessTokenExp = accessTokenExp,
