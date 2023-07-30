@@ -13,6 +13,7 @@ repositories {
 dependencies {
     /* impl */
     implementation(project(":goms-domain"))
+    implementation(project(":goms-application"))
 
     /* spring */
     implementation(Dependencies.SPRING_WEB)
