@@ -10,7 +10,7 @@ import org.mapstruct.*
     unmappedTargetPolicy = ReportingPolicy.WARN,
 )
 interface RefreshTokenMapper {
-    @Mappings()
+
     fun toEntity(refreshToken: RefreshToken): RefreshTokenJpaEntity
 
 }

@@ -12,7 +12,8 @@ class RefreshTokenRepositoryImpl(
 ): RefreshTokenRepository{
     override fun save(refreshToken: RefreshToken) {
         val refreshTokenEntity = refreshTokenMapper.toEntity(refreshToken)
-            refreshTokenJpaRepository.save(refreshTokenEntity)
-        }
+        refreshTokenJpaRepository.save(refreshTokenEntity)
+
+    }
 
 }
