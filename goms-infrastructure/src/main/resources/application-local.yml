@@ -27,7 +27,7 @@ jwt:
   refreshSecret: ${JWT_REFRESH_SECRET}
   time:
     accessExp: 10800
-    refreshExp: 604800
+    refreshExp: 2592000
 
 gauth:
   clientId: ${GAUTH_CLIENTID}
