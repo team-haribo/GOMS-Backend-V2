@@ -14,7 +14,6 @@ import org.mapstruct.*
 interface GAuthDataMapper {
 
     fun toDto(gAuthUserInfo: GAuthUserInfo): GAuthUserInfoDto
-
     fun toDto(gAuthToken: GAuthToken): GAuthTokenDto
 
 }
