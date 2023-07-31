@@ -14,6 +14,7 @@ class GAuthAdapter(
     private val gAuthDataMapper: GAuthDataMapper,
     private val gAuthProperties: GAuthProperties
 ): GAuthPort {
+
     override fun receiveGAuthToken(code: String): GAuthTokenDto =
         gAuthDataMapper.toDto(gAuth.generateToken(
             code,
@@ -23,6 +24,6 @@ class GAuthAdapter(
         ))
 
     override fun receiveUserInfo(accessToken: String): GAuthUserInfoDto =
-    gAuthDataMapper.toDto(gAuth.getUserInfo(accessToken))
+        gAuthDataMapper.toDto(gAuth.getUserInfo(accessToken))
 
 }
