@@ -2,8 +2,8 @@ package com.goms.v2.domain.auth.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithTransaction
 import com.goms.v2.gloabl.exception.exception.GomsException
-import com.goms.v2.spi.GAuthPort
-import com.goms.v2.spi.TokenPort
+import com.goms.v2.domain.spi.GAuthPort
+import com.goms.v2.domain.spi.TokenPort
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber

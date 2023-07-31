@@ -2,7 +2,7 @@ package com.goms.v2.thirdparty.gauth
 
 import com.goms.v2.domain.auth.dto.GAuthTokenDto
 import com.goms.v2.domain.auth.dto.GAuthUserInfoDto
-import com.goms.v2.spi.GAuthPort
+import com.goms.v2.domain.spi.GAuthPort
 import com.goms.v2.global.gauth.property.GAuthProperties
 import com.goms.v2.persistence.auth.mapper.GAuthDataMapper
 import gauth.GAuth

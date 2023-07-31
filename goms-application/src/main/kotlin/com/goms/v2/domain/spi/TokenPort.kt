@@ -1,4 +1,4 @@
-package com.goms.v2.spi
+package com.goms.v2.domain.spi
 
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.auth.dto.response.TokenInDto

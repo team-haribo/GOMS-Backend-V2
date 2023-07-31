@@ -1,6 +1,6 @@
 package com.goms.v2.global.security.jwt
 
-import com.goms.v2.spi.TokenPort
+import com.goms.v2.domain.spi.TokenPort
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.auth.RefreshToken
 import com.goms.v2.domain.auth.dto.response.TokenInDto
