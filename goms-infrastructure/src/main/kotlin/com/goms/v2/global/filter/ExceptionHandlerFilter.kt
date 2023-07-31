@@ -1,9 +1,9 @@
 package com.goms.v2.global.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.goms.v2.global.exception.ErrorCode
-import com.goms.v2.global.exception.exception.GomsException
-import com.goms.v2.global.exception.response.ErrorResponse
+import com.goms.v2.gloabl.exception.ErrorCode
+import com.goms.v2.gloabl.exception.exception.GomsException
+import com.goms.v2.gloabl.exception.response.ErrorResponse
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.JwtException
 import org.springframework.web.filter.OncePerRequestFilter

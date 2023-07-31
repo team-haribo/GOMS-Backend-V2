@@ -1,7 +1,7 @@
-package com.goms.v2.global.exception.handler
+package com.goms.v2.gloabl.exception.handler
 
-import com.goms.v2.global.exception.exception.GomsException
-import com.goms.v2.global.exception.response.ErrorResponse
+import com.goms.v2.gloabl.exception.exception.GomsException
+import com.goms.v2.gloabl.exception.response.ErrorResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException

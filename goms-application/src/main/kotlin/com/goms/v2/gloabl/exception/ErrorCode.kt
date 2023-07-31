@@ -1,4 +1,4 @@
-package com.goms.v2.global.exception
+package com.goms.v2.gloabl.exception
 
 import org.springframework.http.HttpStatus
 
@@ -6,6 +6,11 @@ enum class ErrorCode(
 	val message: String,
 	val status: HttpStatus
 ) {
+
+	// GAUTH
+	SECRET_MISMATCH("클라이언트 시크릿 값이 일치하지 않습니다.",HttpStatus.BAD_REQUEST),
+	EXPIRED_CODE("만료된 코드입니다.",HttpStatus.UNAUTHORIZED),
+	SERVICE_NOT_FOUND("서비스를 찾지 못했습니다.",HttpStatus.NOT_FOUND),
 
 	// ACCOUNT
 	ACCOUNT_NOT_FOUND("계정을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
