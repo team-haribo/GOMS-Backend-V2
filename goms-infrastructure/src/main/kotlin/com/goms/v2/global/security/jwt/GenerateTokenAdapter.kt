@@ -19,6 +19,7 @@ class GenerateTokenAdapter(
     private val jwtProperties: JwtProperties,
     private val jwtExpTimeProperties: JwtExpTimeProperties
 ): TokenPort {
+
     override fun generateToken(accountIdx: UUID, authority: Authority): TokenDto =
         TokenDto(
             accessToken = generateAccessToken(accountIdx, authority),

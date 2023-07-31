@@ -14,7 +14,6 @@ import org.mapstruct.*
 interface AuthDataMapper {
 
     fun toResponse(tokeInDto: TokenDto?): TokenHttpResponse
-
     fun toDto(signInHttpRequest: SignInHttpRequest?): SignInDto
 
 }
