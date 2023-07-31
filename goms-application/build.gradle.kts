@@ -24,4 +24,9 @@ dependencies {
     /* spring */
     implementation(Dependencies.TRANSACTION)
     implementation(Dependencies.SPRING_WEB)
+
+    /* mapstruct */
+    implementation(Dependencies.MAP_STRUCT)
+    kapt(Dependencies.MAP_STRUCT_PROCESSOR)
+    kaptTest(Dependencies.MAP_STRUCT_PROCESSOR)
 }
