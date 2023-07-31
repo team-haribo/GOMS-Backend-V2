@@ -8,13 +8,13 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
     /* impl */
     implementation(project(":goms-domain"))
     implementation(project(":goms-application"))
+    implementation(project(":goms-presentation"))
 
     /* spring */
     implementation(Dependencies.SPRING_WEB)
