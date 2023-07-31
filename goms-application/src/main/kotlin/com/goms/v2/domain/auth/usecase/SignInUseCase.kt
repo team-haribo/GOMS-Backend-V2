@@ -10,7 +10,7 @@ import com.goms.v2.domain.account.StudentNumber
 import com.goms.v2.domain.auth.RefreshToken
 import com.goms.v2.domain.auth.dto.GAuthUserInfoDto
 import com.goms.v2.domain.auth.dto.request.SignInDto
-import com.goms.v2.domain.auth.dto.response.TokenInDto
+import com.goms.v2.domain.auth.dto.response.TokenDto
 import com.goms.v2.domain.auth.exception.ExpiredCodeException
 import com.goms.v2.domain.auth.exception.InternalServerErrorException
 import com.goms.v2.domain.auth.exception.SecretMismatchException
@@ -32,7 +32,7 @@ class SignInUseCase(
     private val tokenPort: TokenPort
 ) {
 
-    fun execute(dto: SignInDto): TokenInDto {
+    fun execute(dto: SignInDto): TokenDto {
         try {
             val gAuthToken = gAuthPort.receiveGAuthToken(dto.code)
             log.info { "GAuth Token is ${gAuthToken.accessToken}" }
@@ -49,7 +49,7 @@ class SignInUseCase(
                     accountIdx = account.idx,
                 )
             )
-            return TokenInDto(
+            return TokenDto(
                 accessToken = accessToken,
                 refreshToken = refreshToken,
                 accessTokenExp = accessTokenExp,
@@ -71,7 +71,11 @@ class SignInUseCase(
             idx = UUID.randomUUID(),
             email = gAuthUserInfoDto.email,
             name = gAuthUserInfoDto.name,
-            studentNumber = StudentNumber(grade = gAuthUserInfoDto.grade, classNum = gAuthUserInfoDto.classNum, number = gAuthUserInfoDto.num),
+            studentNumber = StudentNumber(
+                grade = gAuthUserInfoDto.grade,
+                classNum = gAuthUserInfoDto.classNum,
+                number = gAuthUserInfoDto.num
+            ),
             profileUrl = gAuthUserInfoDto.profileUrl,
             authority = Authority.ROLE_STUDENT,
             createdTime = LocalDateTime.now()

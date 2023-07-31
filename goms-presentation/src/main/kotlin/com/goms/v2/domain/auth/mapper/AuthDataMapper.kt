@@ -3,7 +3,7 @@ package com.goms.v2.domain.auth.mapper
 import com.goms.v2.domain.auth.dto.request.SignInDto
 import com.goms.v2.domain.auth.dto.request.SignInHttpRequest
 import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
-import com.goms.v2.domain.auth.dto.response.TokenInDto
+import com.goms.v2.domain.auth.dto.response.TokenDto
 import org.mapstruct.*
 
 @Mapper(
@@ -13,7 +13,7 @@ import org.mapstruct.*
 )
 interface AuthDataMapper {
 
-    fun toResponse(tokeInDto: TokenInDto?): TokenHttpResponse
+    fun toResponse(tokeInDto: TokenDto?): TokenHttpResponse
 
     fun toDto(signInHttpRequest: SignInHttpRequest?): SignInDto
 
