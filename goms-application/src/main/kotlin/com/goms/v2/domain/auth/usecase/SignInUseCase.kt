@@ -1,13 +1,11 @@
 package com.goms.v2.domain.auth.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithTransaction
-import com.goms.v2.gloabl.exception.exception.GomsException
-import com.goms.v2.domain.spi.GAuthPort
-import com.goms.v2.domain.spi.TokenPort
+import com.goms.v2.domain.auth.spi.GAuthPort
+import com.goms.v2.domain.auth.spi.TokenPort
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber
-import com.goms.v2.domain.auth.RefreshToken
 import com.goms.v2.domain.auth.dto.GAuthUserInfoDto
 import com.goms.v2.domain.auth.dto.request.SignInDto
 import com.goms.v2.domain.auth.dto.response.TokenDto
@@ -16,9 +14,7 @@ import com.goms.v2.domain.auth.exception.InternalServerErrorException
 import com.goms.v2.domain.auth.exception.SecretMismatchException
 import com.goms.v2.domain.auth.exception.ServiceNotFoundException
 import com.goms.v2.repository.account.AccountRepository
-import com.goms.v2.repository.auth.RefreshTokenRepository
 import mu.KotlinLogging
-import org.springframework.http.HttpStatus
 import java.time.LocalDateTime
 import java.util.*
 
@@ -27,7 +23,6 @@ private val log = KotlinLogging.logger { }
 @UseCaseWithTransaction
 class SignInUseCase(
     private val accountRepository: AccountRepository,
-    private val refreshTokenRepository: RefreshTokenRepository,
     private val gAuthPort: GAuthPort,
     private val tokenPort: TokenPort
 ) {
@@ -43,12 +38,7 @@ class SignInUseCase(
                 account.idx,
                 account.authority
             )
-            refreshTokenRepository.save(
-                RefreshToken(
-                    refreshToken = refreshToken,
-                    accountIdx = account.idx,
-                )
-            )
+
             return TokenDto(
                 accessToken = accessToken,
                 refreshToken = refreshToken,
@@ -56,11 +46,12 @@ class SignInUseCase(
                 refreshTokenExp = refreshTokenExp,
                 authority = account.authority,
             )
-        } catch (error: GomsException) {
-            when (error.errorCode.status) {
-                HttpStatus.BAD_REQUEST -> throw SecretMismatchException()
-                HttpStatus.UNAUTHORIZED -> throw ExpiredCodeException()
-                HttpStatus.NOT_FOUND -> throw ServiceNotFoundException()
+        } catch (error: Exception) {
+            val gAuthException = gAuthPort.receiveGAuthException(error)
+            when (gAuthException.code) {
+                400 -> throw SecretMismatchException()
+                401 -> throw ExpiredCodeException()
+                404 -> throw ServiceNotFoundException()
                 else -> throw InternalServerErrorException()
             }
         }
