@@ -1,4 +1,4 @@
-package com.goms.v2.global.gauth
+package com.goms.v2.thirdparty.gauth.config
 
 import gauth.GAuth
 import gauth.impl.GAuthImpl

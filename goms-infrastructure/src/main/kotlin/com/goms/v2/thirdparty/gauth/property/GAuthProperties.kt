@@ -1,4 +1,4 @@
-package com.goms.v2.global.gauth.property
+package com.goms.v2.thirdparty.gauth.property
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
