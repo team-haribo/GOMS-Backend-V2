@@ -9,10 +9,6 @@ import com.goms.v2.domain.account.StudentNumber
 import com.goms.v2.domain.auth.dto.GAuthUserInfoDto
 import com.goms.v2.domain.auth.dto.request.SignInDto
 import com.goms.v2.domain.auth.dto.response.TokenDto
-import com.goms.v2.domain.auth.exception.ExpiredCodeException
-import com.goms.v2.domain.auth.exception.InternalServerErrorException
-import com.goms.v2.domain.auth.exception.SecretMismatchException
-import com.goms.v2.domain.auth.exception.ServiceNotFoundException
 import com.goms.v2.repository.account.AccountRepository
 import mu.KotlinLogging
 import java.time.LocalDateTime
@@ -28,33 +24,22 @@ class SignInUseCase(
 ) {
 
     fun execute(dto: SignInDto): TokenDto {
-        try {
-            val gAuthToken = gAuthPort.receiveGAuthToken(dto.code)
-            log.info { "GAuth Token is ${gAuthToken.accessToken}" }
-            val gAuthInfo = gAuthPort.receiveUserInfo(gAuthToken.accessToken)
-            log.info { "GAuth email is ${gAuthInfo.email}" }
-            val account = accountRepository.findByEmail(gAuthInfo.email) ?: saveAccount(gAuthInfo)
-            val (accessToken, refreshToken, accessTokenExp, refreshTokenExp) = tokenPort.generateToken(
-                account.idx,
-                account.authority
-            )
-
-            return TokenDto(
-                accessToken = accessToken,
-                refreshToken = refreshToken,
-                accessTokenExp = accessTokenExp,
-                refreshTokenExp = refreshTokenExp,
-                authority = account.authority,
-            )
-        } catch (error: Exception) {
-            val gAuthException = gAuthPort.receiveGAuthException(error)
-            when (gAuthException.code) {
-                400 -> throw SecretMismatchException()
-                401 -> throw ExpiredCodeException()
-                404 -> throw ServiceNotFoundException()
-                else -> throw InternalServerErrorException()
-            }
-        }
+        val gAuthToken = gAuthPort.receiveGAuthToken(dto.code)
+        log.info { "GAuth Token is ${gAuthToken.accessToken}" }
+        val gAuthInfo = gAuthPort.receiveUserInfo(gAuthToken.accessToken)
+        log.info { "GAuth email is ${gAuthInfo.email}" }
+        val account = accountRepository.findByEmail(gAuthInfo.email) ?: saveAccount(gAuthInfo)
+        val (accessToken, refreshToken, accessTokenExp, refreshTokenExp) = tokenPort.generateToken(
+            account.idx,
+            account.authority
+        )
+        return TokenDto(
+            accessToken = accessToken,
+            refreshToken = refreshToken,
+            accessTokenExp = accessTokenExp,
+            refreshTokenExp = refreshTokenExp,
+            authority = account.authority,
+        )
     }
 
     private fun saveAccount(gAuthUserInfoDto: GAuthUserInfoDto): Account {
