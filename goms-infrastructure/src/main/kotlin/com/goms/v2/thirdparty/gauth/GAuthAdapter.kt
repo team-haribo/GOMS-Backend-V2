@@ -4,6 +4,7 @@ import com.goms.v2.domain.auth.dto.GAuthTokenDto
 import com.goms.v2.domain.auth.dto.GAuthUserInfoDto
 import com.goms.v2.domain.auth.exception.*
 import com.goms.v2.domain.auth.spi.GAuthPort
+import com.goms.v2.gloabl.exception.exception.GomsException
 import com.goms.v2.thirdparty.gauth.property.GAuthProperties
 import com.goms.v2.persistence.auth.mapper.GAuthDataMapper
 import gauth.GAuth
@@ -40,7 +41,7 @@ class GAuthAdapter(
         }
     }
 
-    private fun gAuthExceptionHandler(error: GAuthException): Exception {
+    private fun gAuthExceptionHandler(error: GAuthException): GomsException {
         return when (error.code) {
             400 -> SecretMismatchException()
             401 -> ExpiredCodeException()
