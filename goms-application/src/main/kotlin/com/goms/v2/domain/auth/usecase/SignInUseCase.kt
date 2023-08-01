@@ -29,16 +29,9 @@ class SignInUseCase(
         val gAuthInfo = gAuthPort.receiveUserInfo(gAuthToken.accessToken)
         log.info { "GAuth email is ${gAuthInfo.email}" }
         val account = accountRepository.findByEmail(gAuthInfo.email) ?: saveAccount(gAuthInfo)
-        val (accessToken, refreshToken, accessTokenExp, refreshTokenExp) = tokenPort.generateToken(
+        return tokenPort.generateToken(
             account.idx,
             account.authority
-        )
-        return TokenDto(
-            accessToken = accessToken,
-            refreshToken = refreshToken,
-            accessTokenExp = accessTokenExp,
-            refreshTokenExp = refreshTokenExp,
-            authority = account.authority,
         )
     }
 
