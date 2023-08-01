@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 class GAuthAdapter(
     private val gAuth: GAuth,
     private val gAuthDataMapper: GAuthDataMapper,
-    private val gAuthProperties: GAuthProperties,
+    private val gAuthProperties: GAuthProperties
 ): GAuthPort {
 
     override fun receiveGAuthToken(code: String): GAuthTokenDto {
