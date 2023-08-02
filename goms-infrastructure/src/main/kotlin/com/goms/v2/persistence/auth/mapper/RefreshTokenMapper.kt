@@ -12,5 +12,6 @@ import org.mapstruct.*
 interface RefreshTokenMapper {
 
     fun toEntity(refreshToken: RefreshToken): RefreshTokenJpaEntity
+    fun toDomain(refreshTokenJpaEntity: RefreshTokenJpaEntity): RefreshToken
 
 }

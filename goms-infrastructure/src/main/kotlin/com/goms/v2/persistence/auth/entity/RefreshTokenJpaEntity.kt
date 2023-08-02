@@ -3,6 +3,7 @@ package com.goms.v2.persistence.auth.entity
 import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash
 import org.springframework.data.redis.core.TimeToLive
+import java.time.LocalDateTime
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -14,5 +15,5 @@ data class RefreshTokenJpaEntity(
     val accountIdx: UUID,
 
     @TimeToLive(unit = TimeUnit.SECONDS)
-    val expiredAt: Int
+    val expiredAt: LocalDateTime
 )
