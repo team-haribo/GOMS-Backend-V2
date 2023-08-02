@@ -1,4 +1,4 @@
-package com.goms.v2.global.exception
+package com.goms.v2.gloabl.exception
 
 import org.springframework.http.HttpStatus
 
@@ -7,9 +7,16 @@ enum class ErrorCode(
 	val status: HttpStatus
 ) {
 
+	// GOMS
+	GOMS_SERVER_ERROR("GOMS 서버 오류 입니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+
+	// GAUTH
+	GAUTH_SECRET_MISMATCH("클라이언트 시크릿 값이 일치하지 않습니다.",HttpStatus.BAD_REQUEST),
+	EXPIRED_GAUTH_CODE("만료된 코드입니다.",HttpStatus.UNAUTHORIZED),
+	GAUTH_SERVICE_NOT_FOUND("서비스를 찾지 못했습니다.",HttpStatus.NOT_FOUND),
+
 	// ACCOUNT
 	ACCOUNT_NOT_FOUND("계정을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
-	GAUTH_SERVER_ERROR("GAuth 서버 오류 입니다.", HttpStatus.BAD_REQUEST),
 
 	// TOKEN
 	INVALID_TOKEN("유효하지 않은 토큰입니다.", HttpStatus.UNAUTHORIZED),

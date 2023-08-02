@@ -5,4 +5,7 @@ import org.springframework.data.repository.CrudRepository
 import java.util.UUID
 
 interface AccountJpaRepository: CrudRepository<AccountJpaEntity, UUID> {
+
+    fun findByEmail(email: String): AccountJpaEntity?
+
 }
