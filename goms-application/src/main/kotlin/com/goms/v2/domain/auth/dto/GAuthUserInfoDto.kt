@@ -6,5 +6,5 @@ data class GAuthUserInfoDto(
     val grade: Int,
     val classNum: Int,
     val num: Int,
-    val profileUrl: String,
+    val profileUrl: String
 )

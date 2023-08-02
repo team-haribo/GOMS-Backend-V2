@@ -7,7 +7,7 @@ import org.mapstruct.*
 @Mapper(
     componentModel = MappingConstants.ComponentModel.SPRING,
     injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.WARN,
+    unmappedTargetPolicy = ReportingPolicy.WARN
 )
 interface AccountMapper {
 

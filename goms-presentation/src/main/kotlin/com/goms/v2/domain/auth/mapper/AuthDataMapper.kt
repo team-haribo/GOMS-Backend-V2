@@ -9,7 +9,7 @@ import org.mapstruct.*
 @Mapper(
     componentModel = MappingConstants.ComponentModel.SPRING,
     injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE,
+    unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 interface AuthDataMapper {
 
