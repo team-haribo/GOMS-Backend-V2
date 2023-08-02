@@ -9,8 +9,10 @@ import com.goms.v2.domain.account.StudentNumber
 import com.goms.v2.domain.auth.dto.GAuthUserInfoDto
 import com.goms.v2.domain.auth.dto.request.SignInDto
 import com.goms.v2.domain.auth.dto.response.TokenDto
+import com.goms.v2.gloabl.event.SaveRefreshTokenEvent
 import com.goms.v2.repository.account.AccountRepository
 import mu.KotlinLogging
+import org.springframework.context.ApplicationEventPublisher
 import java.time.LocalDateTime
 import java.util.*
 
@@ -20,7 +22,8 @@ private val log = KotlinLogging.logger { }
 class SignInUseCase(
     private val accountRepository: AccountRepository,
     private val gAuthPort: GAuthPort,
-    private val tokenPort: TokenPort
+    private val tokenPort: TokenPort,
+    private val publisher: ApplicationEventPublisher
 ) {
 
     fun execute(dto: SignInDto): TokenDto {
@@ -30,10 +33,14 @@ class SignInUseCase(
         log.info { "GAuth email is ${gAuthInfo.email}" }
         val account = accountRepository.findByEmail(gAuthInfo.email) ?: saveAccount(gAuthInfo)
 
-        return tokenPort.generateToken(
+        val token = tokenPort.generateToken(
             account.idx,
             account.authority
         )
+
+        publishSaveRefreshToken(token, account)
+
+        return token
     }
 
     private fun saveAccount(gAuthUserInfoDto: GAuthUserInfoDto): Account {
@@ -52,6 +59,15 @@ class SignInUseCase(
         )
         accountRepository.save(account)
         return account
+    }
+
+    private fun publishSaveRefreshToken(token: TokenDto, account: Account) {
+        val saveRefreshTokenEvent = SaveRefreshTokenEvent(
+            refreshToken = token.refreshToken,
+            accountIdx = account.idx,
+            expiredAt = token.refreshTokenExp
+        )
+        publisher.publishEvent(saveRefreshTokenEvent)
     }
 
 }
