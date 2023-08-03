@@ -34,7 +34,7 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         if: ${{ success() }}
         with:
-          title: ✅GOMS Server CI success ✅
+          title: ✅ GOMS Server CI success ✅
           webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
           color: 00FF00
 
