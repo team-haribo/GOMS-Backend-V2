@@ -7,5 +7,6 @@ import java.util.*
 interface TokenPort {
 
     fun generateToken(accountIdx: UUID, authority: Authority): TokenDto
+    fun parseRefreshToken(refreshToken: String): String?
 
 }
