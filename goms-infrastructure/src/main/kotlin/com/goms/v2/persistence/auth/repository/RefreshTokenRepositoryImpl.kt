@@ -20,7 +20,7 @@ class RefreshTokenRepositoryImpl(
     override fun findByIdOrNull(refreshToken: String): RefreshToken =
         refreshTokenMapper.toDomain(refreshTokenJpaRepository.findByIdOrNull(refreshToken))
 
-    override fun deleteByRefreshToken(refreshToken: String) {
+    override fun deleteById(refreshToken: String) {
         refreshTokenJpaRepository.deleteById(refreshToken)
     }
 

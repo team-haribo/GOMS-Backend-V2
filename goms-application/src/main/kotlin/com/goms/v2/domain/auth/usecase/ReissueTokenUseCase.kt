@@ -29,7 +29,7 @@ class ReissueTokenUseCase(
             ?: throw AccountNotFoundException()
         val token = tokenPort.generateToken(refreshTokenDomain.accountIdx, account.authority)
         publishReissueRefreshToken(token, account)
-        refreshTokenRepository.deleteByRefreshToken(parsedRefreshToken)
+        refreshTokenRepository.deleteById(parsedRefreshToken)
 
         return token
     }

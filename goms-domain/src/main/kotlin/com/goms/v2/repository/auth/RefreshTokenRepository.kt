@@ -6,6 +6,6 @@ interface RefreshTokenRepository {
 
     fun save(refreshToken: RefreshToken)
     fun findByIdOrNull(refreshToken: String): RefreshToken?
-    fun deleteByRefreshToken(refreshToken: String)
+    fun deleteById(refreshToken: String)
 
 }
