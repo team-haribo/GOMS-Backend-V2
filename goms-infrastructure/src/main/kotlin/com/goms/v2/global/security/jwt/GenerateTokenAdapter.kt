@@ -8,7 +8,6 @@ import com.goms.v2.global.security.jwt.common.properties.JwtProperties
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.stereotype.Component
-import java.time.LocalDateTime
 import java.util.*
 
 @Component
@@ -22,8 +21,8 @@ class GenerateTokenAdapter(
         TokenDto(
             accessToken = generateAccessToken(accountIdx, authority),
             refreshToken = generateRefreshToken(accountIdx),
-            accessTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.accessExp.toLong()),
-            refreshTokenExp = LocalDateTime.now().plusSeconds(jwtExpTimeProperties.refreshExp.toLong()),
+            accessTokenExp = jwtExpTimeProperties.accessExp,
+            refreshTokenExp = jwtExpTimeProperties.refreshExp,
             authority = authority
         )
 

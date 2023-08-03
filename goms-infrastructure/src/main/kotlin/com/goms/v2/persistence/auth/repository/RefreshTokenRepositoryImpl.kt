@@ -17,7 +17,7 @@ class RefreshTokenRepositoryImpl(
         refreshTokenJpaRepository.save(refreshTokenEntity)
     }
 
-    override fun findByIdOrNull(refreshToken: String): RefreshToken =
+    override fun findByIdOrNull(refreshToken: String): RefreshToken? =
         refreshTokenMapper.toDomain(refreshTokenJpaRepository.findByIdOrNull(refreshToken))
 
     override fun deleteById(refreshToken: String) {
