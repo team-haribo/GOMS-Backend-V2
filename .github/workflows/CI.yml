@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -30,18 +30,18 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build --no-daemon
 
-      - name: GOMS Backend CI success Discord Notification
+      - name: GOMS Server CI success Discord Notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ success() }}
         with:
-          title: ✅ GOMS-Backend-CI 성공! ✅
-          webhook: ${{ secrets.DISCORD_WEBHOOK_CI_BOT }}
+          title: ✅GOMS Server CI success ✅
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
           color: 00FF00
 
-      - name: GOMS Backend CI Discord Notification
+      - name: GOMS Server CI failed Discord Notification
         uses: sarisia/actions-status-discord@v1
         if: ${{ failure() }}
         with:
           title: ❌ GOMS Server CI failed ❌
-          webhook: ${{ secrets.DISCORD_WEBHOOK_CI_BOT }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
           color: FF0000
