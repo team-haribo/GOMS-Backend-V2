@@ -1,5 +1,6 @@
 package com.goms.v2.domain.auth
 
+import com.goms.v2.domain.auth.converter.AuthDataConverter
 import com.goms.v2.domain.auth.dto.request.SignInHttpRequest
 import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
 import com.goms.v2.domain.auth.mapper.AuthDataMapper
@@ -18,6 +19,7 @@ import javax.validation.Valid
 @RequestMapping("api/v1/auth")
 class AuthController(
     private val authDataMapper: AuthDataMapper,
+    private val authDataConverter: AuthDataConverter,
     private val signInUseCase: SignInUseCase,
     private val reissueTokenUseCase: ReissueTokenUseCase
 ) {
@@ -25,11 +27,11 @@ class AuthController(
     @PostMapping("/signin")
     fun signIn(@RequestBody @Valid signInHttpRequest: SignInHttpRequest): ResponseEntity<TokenHttpResponse> =
         signInUseCase.execute(authDataMapper.toDto(signInHttpRequest))
-            .let { ResponseEntity.ok(authDataMapper.toResponse(it)) }
+            .let { ResponseEntity.ok(authDataConverter.toResponse(it)) }
 
     @PatchMapping
     fun reissue(@RequestHeader refreshToken: String): ResponseEntity<TokenHttpResponse> =
         reissueTokenUseCase.execute(refreshToken)
-            .let { ResponseEntity.ok(authDataMapper.toResponse(it)) }
+            .let { ResponseEntity.ok(authDataConverter.toResponse(it)) }
 
 }
