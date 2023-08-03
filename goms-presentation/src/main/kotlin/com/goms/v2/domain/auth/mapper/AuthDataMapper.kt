@@ -5,7 +5,6 @@ import com.goms.v2.domain.auth.dto.request.SignInHttpRequest
 import com.goms.v2.domain.auth.dto.response.TokenDto
 import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
 import org.mapstruct.*
-import java.time.LocalDateTime
 
 @Mapper(
     componentModel = MappingConstants.ComponentModel.SPRING,
@@ -16,13 +15,10 @@ interface AuthDataMapper {
 
     fun toDto(signInHttpRequest: SignInHttpRequest?): SignInDto
 
-    fun toResponse(tokeInDto: TokenDto): TokenHttpResponse =
-        TokenHttpResponse(
-            accessToken = tokeInDto.accessToken,
-            refreshToken = tokeInDto.refreshToken,
-            accessTokenExp = LocalDateTime.now().plusSeconds(tokeInDto.accessTokenExp.toLong()),
-            refreshTokenExp = LocalDateTime.now().plusSeconds(tokeInDto.refreshTokenExp.toLong()),
-            authority = tokeInDto.authority
-        )
+    @Mappings(
+        Mapping(target = "accessTokenExp", expression = "java(LocalDateTime.now().plusSeconds(tokenDto.getAccessTokenExp()))"),
+        Mapping(target = "refreshTokenExp", expression = "java(LocalDateTime.now().plusSeconds(tokenDto.getRefreshTokenExp()))")
+    )
+    fun toResponse(tokenDto: TokenDto): TokenHttpResponse
 
 }
