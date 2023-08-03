@@ -3,9 +3,9 @@ package com.goms.v2.thirdparty.gauth
 import com.goms.v2.domain.auth.dto.GAuthTokenDto
 import com.goms.v2.domain.auth.dto.GAuthUserInfoDto
 import com.goms.v2.domain.auth.exception.*
-import com.goms.v2.domain.auth.exception.gauth.ExpiredGAuthCodeException
-import com.goms.v2.domain.auth.exception.gauth.GAuthSecretMismatchException
-import com.goms.v2.domain.auth.exception.gauth.GAuthServiceNotFoundException
+import com.goms.v2.domain.auth.exception.ExpiredGAuthCodeException
+import com.goms.v2.domain.auth.exception.GAuthSecretMismatchException
+import com.goms.v2.domain.auth.exception.GAuthServiceNotFoundException
 import com.goms.v2.domain.auth.spi.GAuthPort
 import com.goms.v2.gloabl.exception.exception.GomsException
 import com.goms.v2.thirdparty.gauth.property.GAuthProperties
