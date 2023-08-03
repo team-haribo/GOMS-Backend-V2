@@ -5,5 +5,7 @@ import com.goms.v2.domain.auth.RefreshToken
 interface RefreshTokenRepository {
 
     fun save(refreshToken: RefreshToken)
+    fun findByIdOrNull(refreshToken: String): RefreshToken?
+    fun deleteByRefreshToken(refreshToken: String)
 
 }
