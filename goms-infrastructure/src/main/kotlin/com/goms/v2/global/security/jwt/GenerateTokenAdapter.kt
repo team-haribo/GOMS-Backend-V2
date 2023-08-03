@@ -13,7 +13,6 @@ import java.util.*
 @Component
 class GenerateTokenAdapter(
     private val jwtProperties: JwtProperties,
-    private val jwtParser: JwtParser,
     private val jwtExpTimeProperties: JwtExpTimeProperties
 ): TokenPort {
 
@@ -25,9 +24,6 @@ class GenerateTokenAdapter(
             refreshTokenExp = jwtExpTimeProperties.refreshExp,
             authority = authority
         )
-
-    override fun parseRefreshToken(refreshToken: String): String? =
-        jwtParser.parseRefreshToken(refreshToken)
 
     private fun generateAccessToken(accountIdx: UUID, authority: Authority): String =
         Jwts.builder()
