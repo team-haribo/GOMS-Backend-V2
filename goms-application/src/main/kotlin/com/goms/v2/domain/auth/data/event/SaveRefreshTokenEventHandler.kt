@@ -1,4 +1,4 @@
-package com.goms.v2.gloabl.event
+package com.goms.v2.domain.auth.data.event
 
 import com.goms.v2.domain.auth.RefreshToken
 import com.goms.v2.repository.auth.RefreshTokenRepository

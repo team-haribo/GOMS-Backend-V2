@@ -1,7 +1,7 @@
 package com.goms.v2.domain.auth.spi
 
-import com.goms.v2.domain.auth.dto.GAuthTokenDto
-import com.goms.v2.domain.auth.dto.GAuthUserInfoDto
+import com.goms.v2.domain.auth.data.dto.GAuthTokenDto
+import com.goms.v2.domain.auth.data.dto.GAuthUserInfoDto
 
 interface GAuthPort {
 

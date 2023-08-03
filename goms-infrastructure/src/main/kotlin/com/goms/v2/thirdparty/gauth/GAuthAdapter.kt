@@ -1,7 +1,7 @@
 package com.goms.v2.thirdparty.gauth
 
-import com.goms.v2.domain.auth.dto.GAuthTokenDto
-import com.goms.v2.domain.auth.dto.GAuthUserInfoDto
+import com.goms.v2.domain.auth.data.dto.GAuthTokenDto
+import com.goms.v2.domain.auth.data.dto.GAuthUserInfoDto
 import com.goms.v2.domain.auth.exception.*
 import com.goms.v2.domain.auth.exception.ExpiredGAuthCodeException
 import com.goms.v2.domain.auth.exception.GAuthSecretMismatchException

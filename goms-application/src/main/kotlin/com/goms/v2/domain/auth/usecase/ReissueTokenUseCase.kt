@@ -3,7 +3,7 @@ package com.goms.v2.domain.auth.usecase
 import com.goms.v2.common.annotation.UseCaseWithTransaction
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.auth.RefreshToken
-import com.goms.v2.domain.auth.dto.response.TokenDto
+import com.goms.v2.domain.auth.data.response.TokenDto
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.domain.auth.exception.ExpiredRefreshTokenException
 import com.goms.v2.domain.auth.exception.InvalidTokenTypeException
