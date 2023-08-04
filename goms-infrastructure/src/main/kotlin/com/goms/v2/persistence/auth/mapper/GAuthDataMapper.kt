@@ -1,11 +1,9 @@
 package com.goms.v2.persistence.auth.mapper
 
-import com.goms.v2.domain.auth.data.dto.GAuthExceptionDto
 import com.goms.v2.domain.auth.data.dto.GAuthTokenDto
 import com.goms.v2.domain.auth.data.dto.GAuthUserInfoDto
 import gauth.GAuthToken
 import gauth.GAuthUserInfo
-import gauth.exception.GAuthException
 import org.mapstruct.*
 
 @Mapper(
@@ -17,6 +15,5 @@ interface GAuthDataMapper {
 
     fun toDto(gAuthUserInfo: GAuthUserInfo): GAuthUserInfoDto
     fun toDto(gAuthToken: GAuthToken): GAuthTokenDto
-    fun toDto(gAuthException: GAuthException): GAuthExceptionDto
 
 }
