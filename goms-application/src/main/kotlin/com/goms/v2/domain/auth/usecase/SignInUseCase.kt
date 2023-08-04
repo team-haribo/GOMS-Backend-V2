@@ -6,10 +6,10 @@ import com.goms.v2.domain.auth.spi.TokenPort
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber
-import com.goms.v2.domain.auth.dto.GAuthUserInfoDto
-import com.goms.v2.domain.auth.dto.request.SignInDto
-import com.goms.v2.domain.auth.dto.response.TokenDto
-import com.goms.v2.gloabl.event.SaveRefreshTokenEvent
+import com.goms.v2.domain.auth.data.dto.GAuthUserInfoDto
+import com.goms.v2.domain.auth.data.dto.SignInDto
+import com.goms.v2.domain.auth.data.dto.TokenDto
+import com.goms.v2.domain.auth.data.event.SaveRefreshTokenEvent
 import com.goms.v2.repository.account.AccountRepository
 import mu.KotlinLogging
 import org.springframework.context.ApplicationEventPublisher

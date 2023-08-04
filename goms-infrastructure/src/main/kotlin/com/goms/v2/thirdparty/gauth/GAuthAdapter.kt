@@ -1,8 +1,11 @@
 package com.goms.v2.thirdparty.gauth
 
-import com.goms.v2.domain.auth.dto.GAuthTokenDto
-import com.goms.v2.domain.auth.dto.GAuthUserInfoDto
+import com.goms.v2.domain.auth.data.dto.GAuthTokenDto
+import com.goms.v2.domain.auth.data.dto.GAuthUserInfoDto
 import com.goms.v2.domain.auth.exception.*
+import com.goms.v2.domain.auth.exception.ExpiredGAuthCodeException
+import com.goms.v2.domain.auth.exception.GAuthSecretMismatchException
+import com.goms.v2.domain.auth.exception.GAuthServiceNotFoundException
 import com.goms.v2.domain.auth.spi.GAuthPort
 import com.goms.v2.gloabl.exception.exception.GomsException
 import com.goms.v2.thirdparty.gauth.property.GAuthProperties
@@ -43,9 +46,9 @@ class GAuthAdapter(
 
     private fun gAuthExceptionHandler(error: GAuthException): GomsException {
         return when (error.code) {
-            400 -> SecretMismatchException()
-            401 -> ExpiredCodeException()
-            404 -> ServiceNotFoundException()
+            400 -> GAuthSecretMismatchException()
+            401 -> ExpiredGAuthCodeException()
+            404 -> GAuthServiceNotFoundException()
             else -> InternalServerErrorException()
         }
     }

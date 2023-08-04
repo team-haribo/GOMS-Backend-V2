@@ -1,8 +1,6 @@
-package com.goms.v2.global.event
+package com.goms.v2.domain.auth.data.event
 
 import com.goms.v2.domain.auth.RefreshToken
-import com.goms.v2.gloabl.event.SaveRefreshTokenEvent
-import com.goms.v2.global.security.jwt.common.properties.JwtExpTimeProperties
 import com.goms.v2.repository.auth.RefreshTokenRepository
 import mu.KotlinLogging
 import org.springframework.stereotype.Component
@@ -14,7 +12,6 @@ private val log = KotlinLogging.logger {  }
 @Component
 class SaveRefreshTokenEventHandler(
     private val refreshTokenRepository: RefreshTokenRepository,
-    private val jwtExpTimeProperties: JwtExpTimeProperties
 ) {
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
@@ -24,7 +21,7 @@ class SaveRefreshTokenEventHandler(
         val refreshToken = RefreshToken(
             refreshToken = saveRefreshTokenEvent.refreshToken,
             accountIdx = saveRefreshTokenEvent.accountIdx,
-            expiredAt = jwtExpTimeProperties.refreshExp
+            expiredAt = saveRefreshTokenEvent.expiredAt
         )
 
         refreshTokenRepository.save(refreshToken)
