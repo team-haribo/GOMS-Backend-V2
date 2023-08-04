@@ -45,14 +45,17 @@ class ReissueTokenUseCaseTest: BehaviorSpec({
             Then("토큰이 재발급 되어야 한다.") {
                 verify(exactly = 1) { tokenPort.generateToken(account.idx, account.authority) }
             }
+
             Then("기존의 토큰이 삭제 되어야 한다.") {
                 verify(exactly = 1) { refreshTokenRepository.deleteById(parsedRefreshToken)}
             }
+
             Then("result와 tokenDto는 같아야한다.") {
                 result shouldBe tokenDto
             }
         }
-        When("유효하지 않는 토큰으로 요청하면") {
+
+        When("유효하지 않는 토큰 타입으로 요청하면") {
             every { tokenParserPort.parseRefreshToken(refreshToken) } returns null
 
             Then("InvalidTokenTypeException이 터저야 한다.") {
@@ -61,6 +64,7 @@ class ReissueTokenUseCaseTest: BehaviorSpec({
                 }
             }
         }
+
         When("만료된 토큰으로 요청하면") {
             every { tokenParserPort.parseRefreshToken(refreshToken) } returns parsedRefreshToken
             every { refreshTokenRepository.findByIdOrNull(parsedRefreshToken) } returns null
@@ -71,6 +75,7 @@ class ReissueTokenUseCaseTest: BehaviorSpec({
                 }
             }
         }
+
         When("계정을 찾을 수 없으면") {
             every { tokenParserPort.parseRefreshToken(refreshToken) } returns parsedRefreshToken
             every { refreshTokenRepository.findByIdOrNull(parsedRefreshToken) } returns refreshTokenDomain
