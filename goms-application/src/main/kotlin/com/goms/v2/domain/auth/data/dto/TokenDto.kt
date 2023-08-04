@@ -1,4 +1,4 @@
-package com.goms.v2.domain.auth.data.response
+package com.goms.v2.domain.auth.data.dto
 
 import com.goms.v2.domain.account.Authority
 

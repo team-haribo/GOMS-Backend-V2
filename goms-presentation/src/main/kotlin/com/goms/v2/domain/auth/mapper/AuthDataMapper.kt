@@ -1,8 +1,8 @@
 package com.goms.v2.domain.auth.mapper
 
-import com.goms.v2.domain.auth.data.request.SignInDto
+import com.goms.v2.domain.auth.data.dto.SignInDto
 import com.goms.v2.domain.auth.dto.request.SignInHttpRequest
-import com.goms.v2.domain.auth.data.response.TokenDto
+import com.goms.v2.domain.auth.data.dto.TokenDto
 import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
 import org.mapstruct.*
 

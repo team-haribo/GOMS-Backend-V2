@@ -7,8 +7,8 @@ import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber
 import com.goms.v2.domain.auth.data.dto.GAuthUserInfoDto
-import com.goms.v2.domain.auth.data.request.SignInDto
-import com.goms.v2.domain.auth.data.response.TokenDto
+import com.goms.v2.domain.auth.data.dto.SignInDto
+import com.goms.v2.domain.auth.data.dto.TokenDto
 import com.goms.v2.domain.auth.data.event.SaveRefreshTokenEvent
 import com.goms.v2.repository.account.AccountRepository
 import mu.KotlinLogging
