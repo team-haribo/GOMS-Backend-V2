@@ -1,4 +1,4 @@
-package com.goms.v2.persistence.auth.mapper
+package com.goms.v2.thirdparty.gauth.mapper
 
 import com.goms.v2.domain.auth.data.dto.GAuthTokenDto
 import com.goms.v2.domain.auth.data.dto.GAuthUserInfoDto
