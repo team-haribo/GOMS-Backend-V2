@@ -13,12 +13,12 @@ class SendEmailUseCase(
 ) {
 
     fun execute(emailDto: EmailDto) {
-        val authKey = generateCertificationNumber(9999)
+        val authKey = generateAuthKey(9999)
         if (!emailAuthRepository.existByEmail(emailDto.email)) throw AccountNotFoundException()
         emailPort.sendEmail(emailDto.email, authKey)
     }
 
-    fun generateCertificationNumber(number: Int = 9999) = (0..number).random()
+    private fun generateAuthKey(number: Int = 9999) = (0..number).random()
         .toString()
         .padStart(number.toString().length, '0')
 
