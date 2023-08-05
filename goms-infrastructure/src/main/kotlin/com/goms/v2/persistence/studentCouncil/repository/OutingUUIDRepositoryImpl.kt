@@ -10,7 +10,7 @@ import java.util.UUID
 class OutingUUIDRepositoryImpl(
     private val outingUUIDJpaRepository: OutingUUIDJpaRepository,
     private val outingUUIDMapper: OutingUUIDMapper
-) : OutingUUIDRepository {
+): OutingUUIDRepository {
 
     override fun save(outingUUID: OutingUUID): UUID {
         val outingUUIDEntity = outingUUIDMapper.toEntity(outingUUID)

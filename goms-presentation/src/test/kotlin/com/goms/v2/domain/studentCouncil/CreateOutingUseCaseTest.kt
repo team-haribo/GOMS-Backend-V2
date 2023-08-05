@@ -11,7 +11,7 @@ import io.mockk.mockk
 import io.mockk.verify
 import java.util.*
 
-class CreateOutingUseCaseTest : BehaviorSpec({
+class CreateOutingUseCaseTest: BehaviorSpec({
     val outingUUIDRepository = mockk<OutingUUIDRepository>()
     val outingUUIDExpTimeProperties = mockk<OutingUUIDExpTimeProperties>(relaxed = true)
     val createOutingUseCase = CreateOutingUseCase(outingUUIDRepository, outingUUIDExpTimeProperties)
