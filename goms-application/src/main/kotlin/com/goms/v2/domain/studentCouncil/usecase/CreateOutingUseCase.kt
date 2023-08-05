@@ -8,18 +8,18 @@ import java.util.*
 
 @UseCaseWithTransaction
 class CreateOutingUseCase(
-	private val outingUUIDRepository: OutingUUIDRepository,
-	private val outingUUIDExpTimeProperties: OutingUUIDExpTimeProperties
+    private val outingUUIDRepository: OutingUUIDRepository,
+    private val outingUUIDExpTimeProperties: OutingUUIDExpTimeProperties
 ) {
 
-	fun execute(): UUID {
-		val outingUUID = OutingUUID(
-			outingUUID = UUID.randomUUID(),
-			expiredAt = outingUUIDExpTimeProperties.expiredAt
-		)
+    fun execute(): UUID {
+        val outingUUID = OutingUUID(
+            outingUUID = UUID.randomUUID(),
+            expiredAt = outingUUIDExpTimeProperties.expiredAt
+        )
 
-		return outingUUIDRepository.save(outingUUID)
-	}
+        return outingUUIDRepository.save(outingUUID)
+    }
 
 
 }
