@@ -1,4 +1,4 @@
-package com.goms.v2.persistence.email.port
+package com.goms.v2.persistence.email.adapter
 
 import com.goms.v2.domain.email.EmailAuth
 import com.goms.v2.domain.email.exception.EmailSendFailException
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 import javax.mail.MessagingException
 
 @Component
-class EmailPortAdapter(
+class EmailAdapter(
     private val mailSender: JavaMailSender,
     private val emailAuthRepository: EmailAuthRepository
 ): EmailPort {
