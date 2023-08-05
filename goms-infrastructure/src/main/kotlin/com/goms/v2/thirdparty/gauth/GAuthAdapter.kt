@@ -9,7 +9,7 @@ import com.goms.v2.domain.auth.exception.GAuthServiceNotFoundException
 import com.goms.v2.domain.auth.spi.GAuthPort
 import com.goms.v2.gloabl.exception.exception.GomsException
 import com.goms.v2.thirdparty.gauth.property.GAuthProperties
-import com.goms.v2.persistence.auth.mapper.GAuthDataMapper
+import com.goms.v2.thirdparty.gauth.mapper.GAuthDataMapper
 import gauth.GAuth
 import gauth.exception.GAuthException
 import org.springframework.stereotype.Component
