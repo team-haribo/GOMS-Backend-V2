@@ -18,6 +18,18 @@ spring:
       hibernate:
         format_sql: true
 
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+            required: 'true'
+          auth: 'true'
+    host: ${EMAIL_HOST}
+    username: ${EMAIL_NAME}
+    password: ${EMAIL_PASSWORD}
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
