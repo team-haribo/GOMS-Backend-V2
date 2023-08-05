@@ -24,6 +24,9 @@ dependencies {
     implementation(Dependencies.TRANSACTION)
     implementation(Dependencies.SPRING_WEB)
 
+    /* email */
+    implementation(Dependencies.EMAIL)
+
     /* mapstruct */
     implementation(Dependencies.MAP_STRUCT)
     kapt(Dependencies.MAP_STRUCT_PROCESSOR)
