@@ -1,6 +1,6 @@
 package com.goms.v2.domain.email.spi
 
-interface EmailPort {
+interface JavaMailSendPort {
 
     fun sendEmail(email: String, authKey: String)
 

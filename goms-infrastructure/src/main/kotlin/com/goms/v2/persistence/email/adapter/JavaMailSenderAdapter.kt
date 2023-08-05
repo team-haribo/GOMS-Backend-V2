@@ -3,7 +3,7 @@ package com.goms.v2.persistence.email.adapter
 import com.goms.v2.domain.email.EmailAuth
 import com.goms.v2.domain.email.exception.EmailSendFailException
 import com.goms.v2.domain.email.exception.ManyEmailRequestException
-import com.goms.v2.domain.email.spi.EmailPort
+import com.goms.v2.domain.email.spi.JavaMailSendPort
 import com.goms.v2.repository.email.EmailAuthRepository
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component
 import javax.mail.MessagingException
 
 @Component
-class EmailAdapter(
+class JavaMailSenderAdapter(
     private val mailSender: JavaMailSender,
     private val emailAuthRepository: EmailAuthRepository
-): EmailPort {
+): JavaMailSendPort {
 
     @Async
     override fun sendEmail(email: String, authKey: String) {
