@@ -21,4 +21,5 @@ class CreateOutingUseCase(
 		return outingUUIDRepository.save(outingUUID)
 	}
 
+
 }
