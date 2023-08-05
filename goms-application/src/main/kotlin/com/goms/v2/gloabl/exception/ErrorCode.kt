@@ -23,7 +23,6 @@ enum class ErrorCode(
 	NOT_VERIFY_EMAIL("인증되지 않은 이메일 입니다", HttpStatus.UNAUTHORIZED),
 	MAIL_SEND_FAIL("이메일 요청에 실패하셨습니다", HttpStatus.BAD_REQUEST),
 
-
 	// ACCOUNT
 	ACCOUNT_NOT_FOUND("계정을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
 

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component
 @Component
 interface EmailAuthMapper {
 
-
     fun toEntity(emailAuth: EmailAuth): EmailAuthRedisEntity
 
     fun toDomain(emailAuthRedisEntity: EmailAuthRedisEntity?): EmailAuth?
