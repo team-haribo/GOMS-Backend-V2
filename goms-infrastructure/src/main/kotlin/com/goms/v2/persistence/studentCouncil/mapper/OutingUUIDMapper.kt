@@ -1,7 +1,7 @@
 package com.goms.v2.persistence.studentCouncil.mapper
 
 import com.goms.v2.domain.studentCouncil.OutingUUID
-import com.goms.v2.persistence.studentCouncil.entity.OutingUUIDJpaEntity
+import com.goms.v2.persistence.studentCouncil.entity.OutingUUIDRedisEntity
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.MappingConstants
@@ -14,6 +14,6 @@ import org.mapstruct.ReportingPolicy
 )
 interface OutingUUIDMapper {
 
-	fun toEntity(outingUUID: OutingUUID): OutingUUIDJpaEntity
+	fun toEntity(outingUUID: OutingUUID): OutingUUIDRedisEntity
 
 }

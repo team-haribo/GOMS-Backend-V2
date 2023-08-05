@@ -7,7 +7,7 @@ import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 @RedisHash("outing_uuid")
-data class OutingUUIDJpaEntity(
+data class OutingUUIDRedisEntity(
 	@Id
 	val outingUUID: UUID,
 
