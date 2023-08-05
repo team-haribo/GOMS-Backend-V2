@@ -20,6 +20,6 @@ class EmailAuthController(
     @PostMapping("send")
     fun sendEmail(@RequestBody sendEmailHttpRequest: SendEmailHttpRequest): ResponseEntity<Void> =
         sendEmailUseCase.execute(emailAuthDataMapper.toDto(sendEmailHttpRequest))
-            .let { return ResponseEntity.status(HttpStatus.OK).build() }
+            .let { ResponseEntity.status(HttpStatus.OK).build() }
 
 }

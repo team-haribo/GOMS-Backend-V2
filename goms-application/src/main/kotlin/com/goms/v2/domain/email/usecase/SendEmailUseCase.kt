@@ -18,7 +18,6 @@ class SendEmailUseCase(
     private val emailAuthRepository: EmailAuthRepository
 ) {
 
-    @Async
     fun execute(emailRequestDto: EmailRequestDto) {
         val authKey = generateCertificationNumber(9999)
         if (!validationEmail(emailRequestDto.email)) throw AccountNotFoundException()
