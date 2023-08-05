@@ -1,5 +1,5 @@
 package com.goms.v2.domain.email.data.dto
 
-data class EmailRequestDto(
+data class EmailDto(
     val email: String
 )
