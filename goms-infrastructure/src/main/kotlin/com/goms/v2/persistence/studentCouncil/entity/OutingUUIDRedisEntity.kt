@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit
 
 @RedisHash("outing_uuid")
 data class OutingUUIDRedisEntity(
-	@Id
-	val outingUUID: UUID,
+    @Id
+    val outingUUID: UUID,
 
-	@TimeToLive(unit = TimeUnit.SECONDS)
-	val expiredAt: Int
+    @TimeToLive(unit = TimeUnit.SECONDS)
+    val expiredAt: Int
 )

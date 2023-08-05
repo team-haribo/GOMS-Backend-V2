@@ -6,5 +6,5 @@ import org.springframework.boot.context.properties.ConstructorBinding
 @ConstructorBinding
 @ConfigurationProperties("outing")
 class OutingUUIDExpTimeProperties(
-	val expiredAt: Int
+    val expiredAt: Int
 )

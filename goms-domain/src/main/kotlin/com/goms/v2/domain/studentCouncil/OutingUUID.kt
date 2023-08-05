@@ -5,6 +5,6 @@ import java.util.UUID
 
 @RootAggregate
 data class OutingUUID(
-	val outingUUID: UUID,
-	val expiredAt: Int
+    val outingUUID: UUID,
+    val expiredAt: Int
 )

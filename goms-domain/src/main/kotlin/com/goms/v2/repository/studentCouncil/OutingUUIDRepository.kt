@@ -5,6 +5,6 @@ import java.util.UUID
 
 interface OutingUUIDRepository {
 
-	fun save(outingUUID: OutingUUID): UUID
+    fun save(outingUUID: OutingUUID): UUID
 
 }

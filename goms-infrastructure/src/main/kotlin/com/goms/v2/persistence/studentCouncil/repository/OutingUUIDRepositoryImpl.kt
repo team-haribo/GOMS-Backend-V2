@@ -8,13 +8,13 @@ import java.util.UUID
 
 @Repository
 class OutingUUIDRepositoryImpl(
-	private val outingUUIDJpaRepository: OutingUUIDJpaRepository,
-	private val outingUUIDMapper: OutingUUIDMapper
-): OutingUUIDRepository {
+    private val outingUUIDJpaRepository: OutingUUIDJpaRepository,
+    private val outingUUIDMapper: OutingUUIDMapper
+) : OutingUUIDRepository {
 
-	override fun save(outingUUID: OutingUUID): UUID {
-		val outingUUIDEntity = outingUUIDMapper.toEntity(outingUUID)
-		return outingUUIDJpaRepository.save(outingUUIDEntity).outingUUID
-	}
+    override fun save(outingUUID: OutingUUID): UUID {
+        val outingUUIDEntity = outingUUIDMapper.toEntity(outingUUID)
+        return outingUUIDJpaRepository.save(outingUUIDEntity).outingUUID
+    }
 
 }

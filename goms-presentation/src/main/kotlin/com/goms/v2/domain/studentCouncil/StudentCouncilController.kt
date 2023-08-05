@@ -10,11 +10,11 @@ import java.util.UUID
 @RestController
 @RequestMapping("/api/v1/student-council")
 class StudentCouncilController(
-	private val createOutingUseCase: CreateOutingUseCase
+    private val createOutingUseCase: CreateOutingUseCase
 ) {
 
-	@PostMapping("outing")
-	fun createOuting(): ResponseEntity<Map<String, UUID>> =
-		createOutingUseCase.execute()
-			.let { ResponseEntity.ok(mapOf("outingUUID" to it)) }
+    @PostMapping("outing")
+    fun createOuting(): ResponseEntity<Map<String, UUID>> =
+        createOutingUseCase.execute()
+            .let { ResponseEntity.ok(mapOf("outingUUID" to it)) }
 }

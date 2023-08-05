@@ -11,26 +11,26 @@ import io.mockk.mockk
 import io.mockk.verify
 import java.util.*
 
-class CreateOutingUseCaseTest: BehaviorSpec({
-	val outingUUIDRepository = mockk<OutingUUIDRepository>()
-	val outingUUIDExpTimeProperties = mockk<OutingUUIDExpTimeProperties>(relaxed = true)
-	val createOutingUseCase = CreateOutingUseCase(outingUUIDRepository, outingUUIDExpTimeProperties)
+class CreateOutingUseCaseTest : BehaviorSpec({
+    val outingUUIDRepository = mockk<OutingUUIDRepository>()
+    val outingUUIDExpTimeProperties = mockk<OutingUUIDExpTimeProperties>(relaxed = true)
+    val createOutingUseCase = CreateOutingUseCase(outingUUIDRepository, outingUUIDExpTimeProperties)
 
-	Given("outingUUID가 주어질때") {
-		val outingUUID = AnyValueObjectGenerator.anyValueObject<OutingUUID>("outingUUID" to UUID.randomUUID())
+    Given("outingUUID가 주어질때") {
+        val outingUUID = AnyValueObjectGenerator.anyValueObject<OutingUUID>("outingUUID" to UUID.randomUUID())
 
-		every { outingUUIDRepository.save(any()) } returns outingUUID.outingUUID
+        every { outingUUIDRepository.save(any()) } returns outingUUID.outingUUID
 
-		When("외출 식별자 저장 요청을 하면") {
-			val result = createOutingUseCase.execute()
+        When("외출 식별자 저장 요청을 하면") {
+            val result = createOutingUseCase.execute()
 
-			Then("외출 UUID는 redis에 저장되어야 한다.") {
-				verify(exactly = 1) { outingUUIDRepository.save(any()) }
-			}
+            Then("외출 UUID는 redis에 저장되어야 한다.") {
+                verify(exactly = 1) { outingUUIDRepository.save(any()) }
+            }
 
-			Then("result와 outingUUID는 같아야 한다.") {
-				result shouldBe outingUUID.outingUUID
-			}
-		}
-	}
+            Then("result와 outingUUID는 같아야 한다.") {
+                result shouldBe outingUUID.outingUUID
+            }
+        }
+    }
 })

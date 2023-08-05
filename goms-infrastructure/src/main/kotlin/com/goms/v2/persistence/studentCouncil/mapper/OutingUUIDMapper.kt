@@ -8,12 +8,12 @@ import org.mapstruct.MappingConstants
 import org.mapstruct.ReportingPolicy
 
 @Mapper(
-	componentModel = MappingConstants.ComponentModel.SPRING,
-	injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-	unmappedSourcePolicy = ReportingPolicy.IGNORE
+    componentModel = MappingConstants.ComponentModel.SPRING,
+    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+    unmappedSourcePolicy = ReportingPolicy.IGNORE
 )
 interface OutingUUIDMapper {
 
-	fun toEntity(outingUUID: OutingUUID): OutingUUIDRedisEntity
+    fun toEntity(outingUUID: OutingUUID): OutingUUIDRedisEntity
 
 }
