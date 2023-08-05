@@ -8,7 +8,7 @@ import org.springframework.data.redis.core.RedisHash
 data class EmailAuthRedisEntity(
     @Id
     val email: String,
-    val randomValue: String,
+    val authCode: String,
     val authentication: Boolean,
     @ColumnDefault("0")
     val attemptCount: Int,

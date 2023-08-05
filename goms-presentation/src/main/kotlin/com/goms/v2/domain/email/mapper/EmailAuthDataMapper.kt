@@ -1,6 +1,6 @@
 package com.goms.v2.domain.email.mapper
 
-import com.goms.v2.domain.email.data.dto.EmailRequestDto
+import com.goms.v2.domain.email.data.dto.EmailDto
 import com.goms.v2.domain.email.dto.request.SendEmailHttpRequest
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
@@ -16,6 +16,6 @@ import org.springframework.stereotype.Component
 @Component
 interface EmailAuthDataMapper {
 
-    fun toDto(sendEmailHttpRequest: SendEmailHttpRequest): EmailRequestDto
+    fun toDto(sendEmailHttpRequest: SendEmailHttpRequest): EmailDto
 
 }

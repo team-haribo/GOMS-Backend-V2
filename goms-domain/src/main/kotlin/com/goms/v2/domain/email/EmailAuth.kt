@@ -5,18 +5,18 @@ import com.goms.v2.common.annotation.RootAggregate
 @RootAggregate
 data class EmailAuth(
     val email: String,
-    var randomValue: String,
-    var authentication: Boolean,
+    var authCode: String,
+    var isAuthentication: Boolean,
     var attemptCount: Int,
     val expiredAt: Int
 ) {
 
-    fun updateAuthentication(authentication: Boolean) {
-        this.authentication = authentication
+    fun updateAuthentication(isAuthentication: Boolean) {
+        this.isAuthentication = isAuthentication
     }
 
-    fun updateRandomValue(randomValue: String) {
-        this.randomValue = randomValue
+    fun updateAuthKey(authCode: String) {
+        this.authCode = authCode
     }
 
     fun increaseAttemptCount() {
