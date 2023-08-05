@@ -6,5 +6,6 @@ interface EmailAuthRepository {
 
     fun save(emailAuth: EmailAuth)
     fun findByIdOrNull(email: String): EmailAuth?
+    fun existByEmail(email: String): Boolean
 
 }

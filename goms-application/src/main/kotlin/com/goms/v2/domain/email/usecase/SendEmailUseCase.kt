@@ -1,6 +1,7 @@
 package com.goms.v2.domain.email.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithTransaction
+import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.domain.email.EmailAuth
 import com.goms.v2.domain.email.data.dto.EmailRequestDto
 import com.goms.v2.domain.email.exception.EmailSendFailException
@@ -20,6 +21,7 @@ class SendEmailUseCase(
     @Async
     fun execute(emailRequestDto: EmailRequestDto) {
         val authKey = generateCertificationNumber(9999)
+        if (!validationEmail(emailRequestDto.email)) throw AccountNotFoundException()
         sendEmail(emailRequestDto.email, authKey)
     }
 
@@ -48,6 +50,9 @@ class SendEmailUseCase(
         }
 
     }
+
+    fun validationEmail(email: String): Boolean =
+        emailAuthRepository.existByEmail(email)
 
     fun generateCertificationNumber(number: Int = 9999) = (0..number).random()
         .toString()
