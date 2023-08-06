@@ -16,6 +16,9 @@ dependencies {
     /* web */
     implementation(Dependencies.SPRING_WEB)
 
+    /* kotlin */
+    implementation(Dependencies.JACKSON_MODULE)
+
     /* validation */
     implementation(Dependencies.VALIDATION)
 

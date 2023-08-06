@@ -1,7 +1,5 @@
 package com.goms.v2.domain.email.dto.request
 
-import com.fasterxml.jackson.annotation.JsonCreator
-
-data class SendEmailHttpRequest @JsonCreator constructor(
+data class SendEmailHttpRequest(
     val email: String
 )
