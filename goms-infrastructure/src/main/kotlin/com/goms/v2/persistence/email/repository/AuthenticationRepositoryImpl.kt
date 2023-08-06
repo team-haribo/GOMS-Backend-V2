@@ -17,14 +17,10 @@ class AuthenticationRepositoryImpl(
             .let { authenticationRedisRepository.save(it) }
     }
 
-    override fun findByEmail(email: String): Authentication =
-        authenticationRedisRepository.findByEmail(email)
-            .let { authenticationMapper.toDomain(it) }
-
     override fun existByEmail(email: String): Boolean =
         authenticationRedisRepository.existsById(email)
 
-    override fun findByIdOrNull(email: String): Authentication =
+    override fun findByIdOrNull(email: String): Authentication? =
         authenticationRedisRepository.findByIdOrNull(email)
             .let { authenticationMapper.toDomain(it) }
 

@@ -34,7 +34,7 @@ class SendEmailUseCase(
 
     private fun saveAuthentication(email: String) {
         val authentication = authenticationRepository.findByIdOrNull(email)
-        if(authentication.attemptCount >= 5) {
+        if(authentication!!.attemptCount >= 5) {
             throw ManyEmailRequestException()
         }
         authentication.certified()
@@ -43,7 +43,12 @@ class SendEmailUseCase(
     }
 
     private fun createAuthentication(email: String) {
-        val authentication = Authentication(email,1,true,300)
+        val authentication = Authentication(
+            email = email,
+            attemptCount = 1,
+            isAuthentication = true,
+            expiredAt = 300
+        )
         authenticationRepository.save(authentication)
     }
 
@@ -52,7 +57,11 @@ class SendEmailUseCase(
             throw AccountNotFoundException()
         }
         val authCodeDomain = authCodeRepository.findByIdOrNull(emailDto.email)
-            ?: AuthCode(emailDto.email,authCode,300)
+            ?: AuthCode(
+                email = emailDto.email,
+                authCode = authCode,
+                expiredAt = 300
+            )
         authCodeDomain.updateAuthCode(authCode)
         authCodeRepository.save(authCodeDomain)
     }
