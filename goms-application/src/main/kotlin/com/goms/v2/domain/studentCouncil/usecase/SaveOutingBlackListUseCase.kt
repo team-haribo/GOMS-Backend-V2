@@ -15,7 +15,10 @@ class SaveOutingBlackListUseCase(
 
     fun execute(accountIdx: UUID) {
         val account = accountRepository.findByIdOrNull(accountIdx) ?: throw AccountNotFoundException()
-        val outingBlackList = OutingBlackList(accountIdx = account.idx, expiredAt = 604800)
+        val outingBlackList = OutingBlackList(
+            accountIdx = account.idx,
+            expiredAt = 604800
+        )
         outingBlacklistRepository.save(outingBlackList)
     }
 
