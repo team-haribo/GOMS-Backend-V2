@@ -26,7 +26,7 @@ class SendEmailUseCase(
             if(authentication.attemptCount > 5) {
                 throw ManyEmailRequestException()
             }
-            authentication.updateAuthentication(true)
+            authentication.certified()
             authentication.increaseAttemptCount()
             authenticationRepository.save(authentication)
         }

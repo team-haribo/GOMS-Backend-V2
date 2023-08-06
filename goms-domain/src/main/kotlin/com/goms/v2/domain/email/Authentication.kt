@@ -10,8 +10,8 @@ data class Authentication(
     val expiredAt: Int
 ) {
 
-    fun updateAuthentication(isAuthentication: Boolean) {
-        this.isAuthentication = isAuthentication
+    fun certified() {
+        this.isAuthentication = true
     }
 
     fun increaseAttemptCount() {
