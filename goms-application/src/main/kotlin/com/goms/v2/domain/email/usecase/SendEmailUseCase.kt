@@ -21,17 +21,33 @@ class SendEmailUseCase(
 
     fun execute(emailDto: EmailDto) {
         val isExistsAuthentication = authenticationRepository.existByEmail(emailDto.email)
-        if (isExistsAuthentication) {
-            val authentication = authenticationRepository.findByIdOrNull(emailDto.email)
-            if(authentication.attemptCount > 5) {
-                throw ManyEmailRequestException()
-            }
-            authentication.certified()
-            authentication.increaseAttemptCount()
-            authenticationRepository.save(authentication)
-        }
-
+        if (isExistsAuthentication) saveAuthentication(emailDto.email)
+        if (!isExistsAuthentication) createAuthentication(emailDto.email)
         val authCode = generateAuthKey(9999)
+        saveAuthCodeRepository(emailDto, authCode)
+        emailSendPort.sendEmail(emailDto.email, authCode)
+    }
+
+    private fun generateAuthKey(number: Int = 9999) = (0..number).random()
+        .toString()
+        .padStart(number.toString().length, '0')
+
+    private fun saveAuthentication(email: String) {
+        val authentication = authenticationRepository.findByIdOrNull(email)
+        if(authentication.attemptCount >= 5) {
+            throw ManyEmailRequestException()
+        }
+        authentication.certified()
+        authentication.increaseAttemptCount()
+        authenticationRepository.save(authentication)
+    }
+
+    private fun createAuthentication(email: String) {
+        val authentication = Authentication(email,1,true,300)
+        authenticationRepository.save(authentication)
+    }
+
+    private fun saveAuthCodeRepository(emailDto: EmailDto, authCode: String) {
         if (!accountRepository.existsByEmail(emailDto.email)) {
             throw AccountNotFoundException()
         }
@@ -39,17 +55,6 @@ class SendEmailUseCase(
             ?: AuthCode(emailDto.email,authCode,300)
         authCodeDomain.updateAuthCode(authCode)
         authCodeRepository.save(authCodeDomain)
-
-        emailSendPort.sendEmail(emailDto.email, authCode)
-        if (!isExistsAuthentication) {
-            val authentication = Authentication(emailDto.email,0,true,300)
-            authenticationRepository.save(authentication)
-        }
-
     }
-
-    private fun generateAuthKey(number: Int = 9999) = (0..number).random()
-        .toString()
-        .padStart(number.toString().length, '0')
 
 }
