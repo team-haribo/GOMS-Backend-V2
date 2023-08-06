@@ -1,16 +1,15 @@
 package com.goms.v2.persistence.email.entity
 
-import org.hibernate.annotations.ColumnDefault
 import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash
+import org.springframework.data.redis.core.TimeToLive
+import java.util.concurrent.TimeUnit
 
-@RedisHash("email_auth")
-data class EmailAuthRedisEntity(
+@RedisHash("auth_code")
+data class AuthCodeRedisEntity(
     @Id
     val email: String,
     val authCode: String,
-    val authentication: Boolean,
-    @ColumnDefault("0")
-    val attemptCount: Int,
+    @TimeToLive(unit = TimeUnit.SECONDS)
     val expiredAt: Int
 )
