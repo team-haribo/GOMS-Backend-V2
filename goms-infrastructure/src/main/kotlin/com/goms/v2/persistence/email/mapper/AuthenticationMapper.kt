@@ -1,7 +1,7 @@
 package com.goms.v2.persistence.email.mapper
 
-import com.goms.v2.domain.email.EmailAuth
-import com.goms.v2.persistence.email.entity.EmailAuthRedisEntity
+import com.goms.v2.domain.email.Authentication
+import com.goms.v2.persistence.email.entity.AuthenticationRedisEntity
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.MappingConstants
@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component
     unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 @Component
-interface EmailAuthMapper {
+interface AuthenticationMapper {
 
-    fun toEntity(emailAuth: EmailAuth): EmailAuthRedisEntity
-    fun toDomain(emailAuthRedisEntity: EmailAuthRedisEntity?): EmailAuth?
+    fun toEntity(authentication: Authentication): AuthenticationRedisEntity
+    fun toDomain(authenticationRedisEntity: AuthenticationRedisEntity?): Authentication
 
 }
