@@ -25,6 +25,9 @@ dependencies {
     /* gauth */
     implementation(Dependencies.GAUTH)
 
+    /* email */
+    implementation(Dependencies.EMAIL)
+
     /* redis */
     implementation(Dependencies.REDIS)
 

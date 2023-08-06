@@ -26,4 +26,7 @@ class AccountRepositoryImpl(
         accountJpaRepository.findByEmail(email)
             .let { accountMapper.toDomain(it) }
 
+    override fun existsByEmail(email: String): Boolean =
+        accountJpaRepository.existsByEmail(email)
+
 }
