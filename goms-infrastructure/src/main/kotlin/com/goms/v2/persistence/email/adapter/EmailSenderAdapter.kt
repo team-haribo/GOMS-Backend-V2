@@ -1,7 +1,7 @@
 package com.goms.v2.persistence.email.adapter
 
 import com.goms.v2.domain.email.exception.EmailSendFailException
-import com.goms.v2.domain.email.spi.JavaMailSendPort
+import com.goms.v2.domain.email.spi.EmailSendPort
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.scheduling.annotation.Async
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component
 import javax.mail.MessagingException
 
 @Component
-class JavaMailSenderAdapter(
+class EmailSenderAdapter(
     private val mailSender: JavaMailSender,
-): JavaMailSendPort {
+): EmailSendPort {
 
     @Async
     override fun sendEmail(email: String, authCode: String) {

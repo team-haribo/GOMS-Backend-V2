@@ -6,14 +6,14 @@ import com.goms.v2.domain.email.AuthCode
 import com.goms.v2.domain.email.Authentication
 import com.goms.v2.domain.email.data.dto.EmailDto
 import com.goms.v2.domain.email.exception.ManyEmailRequestException
-import com.goms.v2.domain.email.spi.JavaMailSendPort
+import com.goms.v2.domain.email.spi.EmailSendPort
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.email.AuthCodeRepository
 import com.goms.v2.repository.email.AuthenticationRepository
 
 @UseCaseWithTransaction
 class SendEmailUseCase(
-    private val javaMailSendPort: JavaMailSendPort,
+    private val emailSendPort: EmailSendPort,
     private val accountRepository: AccountRepository,
     private val authCodeRepository: AuthCodeRepository,
     private val authenticationRepository: AuthenticationRepository
@@ -40,7 +40,7 @@ class SendEmailUseCase(
         authCodeDomain.updateAuthCode(authCode)
         authCodeRepository.save(authCodeDomain)
 
-        javaMailSendPort.sendEmail(emailDto.email, authCode)
+        emailSendPort.sendEmail(emailDto.email, authCode)
         if (!isExistsAuthentication) {
             val authentication = Authentication(emailDto.email,0,true,300)
             authenticationRepository.save(authentication)
