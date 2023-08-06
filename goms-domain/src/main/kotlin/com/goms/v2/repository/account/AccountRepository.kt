@@ -6,9 +6,8 @@ import java.util.UUID
 interface AccountRepository {
 
     fun save(account: Account)
-
     fun findByIdOrNull(accountIdx: UUID): Account?
-
     fun findByEmail(email: String): Account?
+    fun existsByEmail(email: String): Boolean
 
 }
