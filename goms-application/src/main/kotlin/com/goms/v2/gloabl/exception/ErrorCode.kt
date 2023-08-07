@@ -31,7 +31,6 @@ enum class ErrorCode(
 	// AUTHENTICATION
 	AUTHENTICATION_NOT_FOUND("인증되지 않은 사용자 입니다.", HttpStatus.NOT_FOUND),
 
-
 	// ACCOUNT
 	ACCOUNT_NOT_FOUND("계정을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
 

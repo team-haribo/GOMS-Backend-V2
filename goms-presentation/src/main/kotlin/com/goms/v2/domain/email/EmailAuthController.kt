@@ -29,6 +29,6 @@ class EmailAuthController(
     @GetMapping("verify")
     fun verifyAuthCode(@RequestParam email: String,@RequestParam authCode: String): ResponseEntity<Void> =
         verifyAuthCodeUseCase.execute(email, authCode)
-            .let { ResponseEntity.status(HttpStatus.OK).build() }
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
 }
