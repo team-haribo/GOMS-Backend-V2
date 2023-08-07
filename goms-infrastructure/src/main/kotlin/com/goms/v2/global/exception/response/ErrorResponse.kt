@@ -1,4 +1,4 @@
-package com.goms.v2.gloabl.exception.response
+package com.goms.v2.global.exception.response
 
 data class ErrorResponse(
 	val message: String?,

@@ -1,9 +1,9 @@
 package com.goms.v2.global.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.goms.v2.gloabl.exception.ErrorCode
-import com.goms.v2.gloabl.exception.exception.GomsException
-import com.goms.v2.gloabl.exception.response.ErrorResponse
+import com.goms.v2.common.exception.ErrorCode
+import com.goms.v2.common.exception.GomsException
+import com.goms.v2.global.exception.response.ErrorResponse
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.JwtException
 import org.springframework.web.filter.OncePerRequestFilter
@@ -30,10 +30,10 @@ class ExceptionHandlerFilter: OncePerRequestFilter() {
     }
 
     private fun exceptionToResponse(errorCode: ErrorCode, response: HttpServletResponse) {
-        response.status = errorCode.status.value()
+        response.status = errorCode.status
         response.contentType = "application/json"
         response.characterEncoding = "utf-8"
-        val errorResponse = ErrorResponse(errorCode.message, errorCode.status.value())
+        val errorResponse = ErrorResponse(errorCode.message, errorCode.status)
         val errorResponseToJson = ObjectMapper().writeValueAsString(errorResponse)
         response.writer.write(errorResponseToJson)
     }

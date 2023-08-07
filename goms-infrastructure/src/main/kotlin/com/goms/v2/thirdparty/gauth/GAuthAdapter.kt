@@ -7,7 +7,7 @@ import com.goms.v2.domain.auth.exception.ExpiredGAuthCodeException
 import com.goms.v2.domain.auth.exception.GAuthSecretMismatchException
 import com.goms.v2.domain.auth.exception.GAuthServiceNotFoundException
 import com.goms.v2.domain.auth.spi.GAuthPort
-import com.goms.v2.gloabl.exception.exception.GomsException
+import com.goms.v2.common.exception.GomsException
 import com.goms.v2.thirdparty.gauth.property.GAuthProperties
 import com.goms.v2.thirdparty.gauth.mapper.GAuthDataMapper
 import gauth.GAuth
