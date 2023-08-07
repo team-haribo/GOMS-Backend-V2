@@ -1,5 +1,5 @@
 object PluginVersions {
-    const val SPRING_VERSION = "2.7.5"
+    const val SPRING_BOOT_VERSION = "2.7.5"
     const val DEPENDENCY_MANAGER_VERSION = "1.1.0"
     const val JVM_VERSION = "1.7.22"
     const val SPRING_PLUGIN_VERSION = "1.7.22"
