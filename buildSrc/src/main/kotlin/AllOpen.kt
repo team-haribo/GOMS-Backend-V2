@@ -7,4 +7,7 @@ object AllOpen {
 
     /* embeddable */
     const val EMBEDDABLE = "javax.persistence.Embeddable"
+
+    /* usecase */
+    const val USECASE_WIHT_TRANSACTION = "com.goms.v2.common.annotation.UseCaseWithTransaction"
 }
