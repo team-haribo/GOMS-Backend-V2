@@ -23,6 +23,14 @@ enum class ErrorCode(
 	NOT_VERIFY_EMAIL("인증되지 않은 이메일 입니다.", HttpStatus.UNAUTHORIZED),
 	MAIL_SEND_FAIL("이메일 요청에 실패하셨습니다.", HttpStatus.BAD_REQUEST),
 
+	// AUTH CODE
+	AUTH_CODE_NOT_FOUND("인증 코드를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
+	AUTH_CODE_NOT_MATCH("인증 코드가 일치 하지 않습니다.", HttpStatus.BAD_REQUEST),
+	TOO_MANY_AUTH_CODE_REQUEST("인증 코드 확인 요청을 5번 초과 한 사용자 입니다.", HttpStatus.TOO_MANY_REQUESTS),
+
+	// AUTHENTICATION
+	AUTHENTICATION_NOT_FOUND("인증되지 않은 사용자 입니다.", HttpStatus.NOT_FOUND),
+
 	// ACCOUNT
 	ACCOUNT_NOT_FOUND("계정을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
 

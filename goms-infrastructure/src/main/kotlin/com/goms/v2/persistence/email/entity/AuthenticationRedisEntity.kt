@@ -10,6 +10,7 @@ data class AuthenticationRedisEntity(
     @Id
     val email: String,
     val attemptCount: Int,
+    val authCodeCount: Int,
     val isAuthentication: Boolean,
     @TimeToLive(unit = TimeUnit.SECONDS)
     val expiredAt: Int

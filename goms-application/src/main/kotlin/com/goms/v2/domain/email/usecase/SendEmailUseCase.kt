@@ -37,7 +37,6 @@ class SendEmailUseCase(
         if(authentication!!.attemptCount >= 5) {
             throw ManyEmailRequestException()
         }
-        authentication.certified()
         authentication.increaseAttemptCount()
         authenticationRepository.save(authentication)
     }
@@ -46,7 +45,8 @@ class SendEmailUseCase(
         val authentication = Authentication(
             email = email,
             attemptCount = 1,
-            isAuthentication = true,
+            authCodeCount = 0,
+            isAuthentication = false,
             expiredAt = 300
         )
         authenticationRepository.save(authentication)
