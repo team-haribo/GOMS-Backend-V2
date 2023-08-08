@@ -6,7 +6,6 @@ import java.util.UUID
 interface OutingBlackListRepository {
 
     fun save(outingBlacklist: OutingBlackList)
-
     fun deleteById(accountIdx: UUID)
 
 }
