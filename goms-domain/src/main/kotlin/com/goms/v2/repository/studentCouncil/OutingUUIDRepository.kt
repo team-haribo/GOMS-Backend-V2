@@ -7,4 +7,6 @@ interface OutingUUIDRepository {
 
     fun save(outingUUID: OutingUUID): UUID
 
+    fun existsById(outingUUID: UUID): Boolean
+
 }
