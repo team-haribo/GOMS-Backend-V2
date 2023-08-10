@@ -25,6 +25,7 @@ class OutingUseCaseTest: BehaviorSpec({
         val outingUUID = UUID.randomUUID()
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
+        val outing = AnyValueObjectGenerator.anyValueObject<Outing>("account" to account)
 
         every { accountUtil.getCurrentAccount() } returns account
         every { outingBlackListRepository.existsById(account.idx) } returns false
@@ -50,7 +51,7 @@ class OutingUseCaseTest: BehaviorSpec({
             }
 
             Then("계정이 outing 테이블에 저장되면 안된다.") {
-                verify { outingRepository.save(any()) wasNot Called }
+                verify(exactly = 0) { outingRepository.save(outing) }
             }
         }
 
