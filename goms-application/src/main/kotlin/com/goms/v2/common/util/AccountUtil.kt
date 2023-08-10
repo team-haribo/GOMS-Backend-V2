@@ -4,6 +4,6 @@ import com.goms.v2.domain.account.Account
 
 interface AccountUtil {
 
-    fun getCurrentAccount(): Account
+    fun getCurrentAccountIdx(): Account
 
 }
