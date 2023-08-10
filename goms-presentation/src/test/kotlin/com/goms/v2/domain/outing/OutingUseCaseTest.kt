@@ -3,9 +3,11 @@ package com.goms.v2.domain.outing
 import com.goms.v2.common.AnyValueObjectGenerator
 import com.goms.v2.common.util.AccountUtil
 import com.goms.v2.domain.account.Account
+import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.domain.outing.exception.BlackListNotAllowOutingException
 import com.goms.v2.domain.outing.exception.OutingUUIDUnverifiedException
 import com.goms.v2.domain.outing.usecase.OutingUseCase
+import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
 import com.goms.v2.repository.outing.OutingRepository
 import com.goms.v2.repository.studentCouncil.OutingUUIDRepository
@@ -18,8 +20,15 @@ class OutingUseCaseTest: BehaviorSpec({
     val outingRepository = mockk<OutingRepository>()
     val outingBlackListRepository = mockk<OutingBlackListRepository>()
     val outingUUIDRepository = mockk<OutingUUIDRepository>()
+    val accountRepository = mockk<AccountRepository>()
     val accountUtil = mockk<AccountUtil>()
-    val outingUseCase = OutingUseCase(outingRepository, outingBlackListRepository, outingUUIDRepository, accountUtil)
+    val outingUseCase = OutingUseCase(
+        outingRepository,
+        outingBlackListRepository,
+        outingUUIDRepository,
+        accountRepository,
+        accountUtil
+    )
 
     Given("outingUUID가 주어질때") {
         val outingUUID = UUID.randomUUID()
@@ -27,7 +36,8 @@ class OutingUseCaseTest: BehaviorSpec({
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
         val outing = AnyValueObjectGenerator.anyValueObject<Outing>("account" to account)
 
-        every { accountUtil.getCurrentAccount() } returns account
+        every { accountUtil.getCurrentAccountIdx() } returns account.idx
+        every { accountRepository.findByIdOrNull(account.idx) ?: throw AccountNotFoundException() } returns account
         every { outingBlackListRepository.existsById(account.idx) } returns false
         every { outingRepository.existsByAccount(account) } returns false
         every { outingUUIDRepository.existsById(outingUUID) } returns true
