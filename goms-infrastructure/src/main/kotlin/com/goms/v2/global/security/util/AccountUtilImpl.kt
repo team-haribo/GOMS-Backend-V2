@@ -7,6 +7,7 @@ import java.util.UUID
 
 @Component
 class AccountUtilImpl: AccountUtil {
+
     override fun getCurrentAccountIdx(): UUID =
         UUID.fromString(SecurityContextHolder.getContext().authentication.name)
 
