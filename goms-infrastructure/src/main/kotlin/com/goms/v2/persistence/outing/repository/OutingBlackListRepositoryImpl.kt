@@ -21,4 +21,8 @@ class OutingBlackListRepositoryImpl(
         outingBlacklistJpaRepository.deleteById(accountIdx)
     }
 
+    override fun existsById(accountIdx: UUID): Boolean {
+        return outingBlacklistJpaRepository.existsById(accountIdx)
+    }
+
 }

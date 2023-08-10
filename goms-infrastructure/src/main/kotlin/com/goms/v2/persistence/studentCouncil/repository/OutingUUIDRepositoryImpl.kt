@@ -17,4 +17,8 @@ class OutingUUIDRepositoryImpl(
         return outingUUIDJpaRepository.save(outingUUIDEntity).outingUUID
     }
 
+    override fun existsById(outingUUID: UUID): Boolean {
+        return outingUUIDJpaRepository.existsById(outingUUID)
+    }
+
 }
