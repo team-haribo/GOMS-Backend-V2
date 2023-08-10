@@ -6,7 +6,6 @@ import java.util.UUID
 interface OutingUUIDRepository {
 
     fun save(outingUUID: OutingUUID): UUID
-
     fun existsById(outingUUID: UUID): Boolean
 
 }
