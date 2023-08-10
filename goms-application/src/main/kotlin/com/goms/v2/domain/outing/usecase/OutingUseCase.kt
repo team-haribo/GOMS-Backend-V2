@@ -2,9 +2,11 @@ package com.goms.v2.domain.outing.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithTransaction
 import com.goms.v2.common.util.AccountUtil
+import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.domain.outing.Outing
 import com.goms.v2.domain.outing.exception.BlackListNotAllowOutingException
 import com.goms.v2.domain.outing.exception.OutingUUIDUnverifiedException
+import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
 import com.goms.v2.repository.outing.OutingRepository
 import com.goms.v2.repository.studentCouncil.OutingUUIDRepository
@@ -16,11 +18,13 @@ class OutingUseCase(
     private val outingRepository: OutingRepository,
     private val outingBlackListRepository: OutingBlackListRepository,
     private val outingUUIDRepository: OutingUUIDRepository,
+    private val accountRepository: AccountRepository,
     private val accountUtil: AccountUtil
 ) {
 
     fun execute(outingUUID: UUID) {
-        val account = accountUtil.getCurrentAccount()
+        val accountIdx = accountUtil.getCurrentAccountIdx()
+        val account = accountRepository.findByIdOrNull(accountIdx) ?: throw AccountNotFoundException()
 
         if (outingBlackListRepository.existsById(account.idx)) {
             throw BlackListNotAllowOutingException()
