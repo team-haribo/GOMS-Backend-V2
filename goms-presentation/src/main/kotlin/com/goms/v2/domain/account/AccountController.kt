@@ -19,6 +19,6 @@ class AccountController(
     @GetMapping("profile")
     fun queryProfile(): ResponseEntity<ProfileHttpResponse> =
         queryAccountProfileUseCase.execute()
-            .let { ResponseEntity.ok(accountDataMapper.toEntity(it)) }
+            .let { ResponseEntity.ok(accountDataMapper.toResponse(it)) }
 
 }
