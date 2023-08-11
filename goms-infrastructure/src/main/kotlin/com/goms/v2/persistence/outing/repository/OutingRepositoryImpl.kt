@@ -29,4 +29,8 @@ class OutingRepositoryImpl(
         return outingJpaRepository.existsByAccount(accountEntity)
     }
 
+    override fun findAllByOrderByCreatedTimeDesc(): List<Outing> =
+        outingJpaRepository.findAllByOrderByCreatedTimeDesc()
+            .map { outingMapper.toDomain(it) }
+
 }

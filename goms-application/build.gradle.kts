@@ -21,4 +21,5 @@ dependencies {
 
 allOpen {
     annotation(AllOpen.USECASE_WIHT_TRANSACTION)
+    annotation(AllOpen.USECASE_WIHT_READONLY_TRANSACTION)
 }

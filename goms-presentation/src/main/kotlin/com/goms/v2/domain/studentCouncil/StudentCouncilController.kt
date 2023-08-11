@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
 @RestController
-@RequestMapping("/api/v1/student-council")
+@RequestMapping("/api/v2/student-council")
 class StudentCouncilController(
     private val createOutingUseCase: CreateOutingUseCase,
     private val saveOutingBlackListUseCase: SaveOutingBlackListUseCase,

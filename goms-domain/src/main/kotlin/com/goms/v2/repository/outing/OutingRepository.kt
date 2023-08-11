@@ -9,5 +9,6 @@ interface OutingRepository {
     fun save(outing: Outing)
     fun deleteByAccountIdx(accountIdx: UUID)
     fun existsByAccount(account: Account): Boolean
+    fun findAllByOrderByCreatedTimeDesc(): List<Outing>
 
 }
