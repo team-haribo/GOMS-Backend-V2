@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("api/v1/email")
+@RequestMapping("api/v2/email")
 class EmailAuthController(
     private val emailAuthDataMapper: EmailAuthDataMapper,
     private val sendEmailUseCase: SendEmailUseCase,
