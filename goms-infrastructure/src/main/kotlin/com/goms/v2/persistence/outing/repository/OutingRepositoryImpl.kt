@@ -33,4 +33,7 @@ class OutingRepositoryImpl(
         outingJpaRepository.findAllByOrderByCreatedTimeDesc()
             .map { outingMapper.toDomain(it) }
 
+    override fun count(): Long =
+        outingJpaRepository.count()
+
 }

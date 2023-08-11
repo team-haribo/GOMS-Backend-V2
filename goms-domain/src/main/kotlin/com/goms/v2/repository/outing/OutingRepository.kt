@@ -10,5 +10,6 @@ interface OutingRepository {
     fun deleteByAccountIdx(accountIdx: UUID)
     fun existsByAccount(account: Account): Boolean
     fun findAllByOrderByCreatedTimeDesc(): List<Outing>
+    fun count(): Long
 
 }
