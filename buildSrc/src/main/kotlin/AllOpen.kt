@@ -10,4 +10,5 @@ object AllOpen {
 
     /* usecase */
     const val USECASE_WIHT_TRANSACTION = "com.goms.v2.common.annotation.UseCaseWithTransaction"
+    const val USECASE_WIHT_READONLY_TRANSACTION = "com.goms.v2.common.annotation.UseCaseWithReadOnlyTransaction"
 }
