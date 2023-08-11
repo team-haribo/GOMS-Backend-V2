@@ -5,7 +5,7 @@ import com.goms.v2.persistence.account.entity.AccountJpaEntity
 import java.time.LocalDate
 import javax.persistence.*
 
-@Entity
+@Entity(name = "late")
 class LateJpaEntity (
     @Column(name = "late_idx")
     override val idx: Long,
