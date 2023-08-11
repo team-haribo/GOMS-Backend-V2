@@ -2,6 +2,7 @@ package com.goms.v2.common
 
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber
+import com.goms.v2.domain.account.data.dto.StudentNumberDto
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -60,6 +61,7 @@ object AnyValueObjectGenerator {
 
             Authority::class -> Authority.ROLE_STUDENT
             StudentNumber::class -> StudentNumber(0,0,0)
+            StudentNumberDto::class -> StudentNumberDto(0,0,0)
 
             else -> {
                 throw IllegalArgumentException(
