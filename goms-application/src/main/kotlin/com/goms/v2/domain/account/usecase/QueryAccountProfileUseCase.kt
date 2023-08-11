@@ -21,8 +21,9 @@ class QueryAccountProfileUseCase(
 
     fun execute(): ProfileDto {
         val accountIdx = accountUtil.getCurrentAccountIdx()
-        val lateCount = lateRepository.countByAccountIdx(accountIdx)
         val account = accountRepository.findByIdOrNull(accountIdx) ?: throw AccountNotFoundException()
+        val lateCount = lateRepository.countByAccountIdx(accountIdx)
+
         return ProfileDto(
             accountIdx = account.idx,
             name = account.name,
