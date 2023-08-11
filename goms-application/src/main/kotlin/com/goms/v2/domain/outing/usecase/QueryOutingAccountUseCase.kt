@@ -11,7 +11,7 @@ class QueryOutingAccountUseCase(
 ) {
 
     fun execute(): List<OutingAccountDto> {
-        val outing = outingRepository.queryAllByOrderByCreatedTimeDesc()
+        val outing = outingRepository.findAllByOrderByCreatedTimeDesc()
 
         return outing.map {
             OutingAccountDto(
