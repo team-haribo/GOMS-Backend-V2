@@ -1,9 +1,11 @@
 package com.goms.v2.domain.outing
 
 import com.goms.v2.domain.outing.dto.response.OutingAccountHttpResponse
+import com.goms.v2.domain.outing.dto.response.OutingCountHttpResponse
 import com.goms.v2.domain.outing.mapper.OutingDataMapper
 import com.goms.v2.domain.outing.usecase.OutingUseCase
 import com.goms.v2.domain.outing.usecase.QueryOutingAccountUseCase
+import com.goms.v2.domain.outing.usecase.QueryOutingCountUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -14,7 +16,8 @@ import java.util.UUID
 class OutingController(
     private val outingDataMapper: OutingDataMapper,
     private val outingUseCase: OutingUseCase,
-    private val queryOutingAccountUseCase: QueryOutingAccountUseCase
+    private val queryOutingAccountUseCase: QueryOutingAccountUseCase,
+    private val queryOutingCountUseCase: QueryOutingCountUseCase
 ) {
 
     @PostMapping("{outingUUID}")
@@ -26,6 +29,12 @@ class OutingController(
     fun queryOutingAccount(): ResponseEntity<List<OutingAccountHttpResponse>> =
         queryOutingAccountUseCase.execute()
             .map { outingDataMapper.toResponse(it) }
+            .let { ResponseEntity.ok(it) }
+
+    @GetMapping("count")
+    fun queryOutingCount(): ResponseEntity<OutingCountHttpResponse> =
+        queryOutingCountUseCase.execute()
+            .let { outingDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
 }

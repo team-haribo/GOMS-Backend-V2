@@ -2,6 +2,7 @@ package com.goms.v2.domain.outing.mapper
 
 import com.goms.v2.domain.outing.data.dto.OutingAccountDto
 import com.goms.v2.domain.outing.dto.response.OutingAccountHttpResponse
+import com.goms.v2.domain.outing.dto.response.OutingCountHttpResponse
 import org.mapstruct.*
 
 @Mapper(
@@ -17,5 +18,6 @@ interface OutingDataMapper {
         Mapping(target = "studentNum.number", source = "studentNum.number")
     )
     fun toResponse(outingAccountDto: OutingAccountDto): OutingAccountHttpResponse
+    fun toResponse(outingCount: Long?): OutingCountHttpResponse
 
 }
