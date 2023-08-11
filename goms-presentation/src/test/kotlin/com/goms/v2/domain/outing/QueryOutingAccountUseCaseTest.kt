@@ -23,7 +23,7 @@ class QueryOutingAccountUseCaseTest: BehaviorSpec({
         val outing = AnyValueObjectGenerator.anyValueObject<Outing>("account" to account, "createdTime" to createdTime)
         val outingAccountDto = AnyValueObjectGenerator.anyValueObject<OutingAccountDto>("accountIdx" to accountIdx, "createdTime" to createdTime)
 
-        every { outingRepository.queryAllByOrderByCreatedTimeDesc() } returns listOf(outing)
+        every { outingRepository.findAllByOrderByCreatedTimeDesc() } returns listOf(outing)
 
         When("외출자 목록 요청을 하면") {
             val result = queryOutingAccountUseCase.execute()
