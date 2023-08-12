@@ -36,4 +36,12 @@ class OutingRepositoryImpl(
     override fun count(): Long =
         outingJpaRepository.count()
 
+    override fun findAll(): List<Outing> =
+        outingJpaRepository.findAll()
+            .map { outingMapper.toDomain(it) }
+
+    override fun queryByAccountNameContaining(name: String): List<Outing> =
+        outingJpaRepository.findByAccountNameContaining(name)
+            .map { outingMapper.toDomain(it) }
+
 }
