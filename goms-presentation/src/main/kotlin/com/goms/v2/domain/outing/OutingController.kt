@@ -16,7 +16,8 @@ class OutingController(
     private val outingUseCase: OutingUseCase,
     private val queryOutingAccountUseCase: QueryOutingAccountUseCase,
     private val queryOutingCountUseCase: QueryOutingCountUseCase,
-    private val searchOutingAccountUseCase: SearchOutingAccountUseCase
+    private val searchOutingAccountUseCase: SearchOutingAccountUseCase,
+    private val validateOutingTimeUseCase: ValidateOutingTimeUseCase
 ) {
 
     @PostMapping("{outingUUID}")
@@ -41,5 +42,10 @@ class OutingController(
         searchOutingAccountUseCase.execute(name)
             .map { outingDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it)}
+
+    @GetMapping("validation")
+    fun validateOuting(): ResponseEntity<Map<String, Boolean>> =
+        validateOutingTimeUseCase.execute()
+            .let { ResponseEntity.ok(mapOf("isOuting" to it)) }
 
 }
