@@ -10,6 +10,12 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
+}
+
 dependencies {
     /* impl */
     implementation(project(":goms-domain"))
@@ -21,6 +27,10 @@ dependencies {
 
     /* jpa */
     implementation(Dependencies.SPRING_DATA_JPA)
+
+    /* queryDsl */
+    implementation(Dependencies.QUERYDSL)
+    kapt(Dependencies.QUERYDSL_PROCESSOR)
 
     /* gauth */
     implementation(Dependencies.GAUTH)
@@ -38,10 +48,6 @@ dependencies {
 
     // security
     implementation(Dependencies.SPRING_SECURITY)
-
-    /* queryDsl */
-    implementation(Dependencies.QUERYDSL)
-    kapt(Dependencies.QUERYDSL_PROCESSOR)
 
     /* database */
     runtimeOnly(Dependencies.MYSQL_CONNECTOR)
