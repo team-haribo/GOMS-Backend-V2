@@ -12,6 +12,6 @@ interface OutingRepository {
     fun findAllByOrderByCreatedTimeDesc(): List<Outing>
     fun count(): Long
     fun findAll(): List<Outing>
-    fun queryByAccountNameContaining(name: String): List<Outing>
+    fun findByAccountNameContaining(name: String?): List<Outing>
 
 }
