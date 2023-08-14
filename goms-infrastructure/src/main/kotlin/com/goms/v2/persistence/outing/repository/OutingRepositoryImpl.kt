@@ -51,6 +51,10 @@ class OutingRepositoryImpl(
             .fetch()
             .map { outingMapper.toDomain(it) }
 
+    override fun deleteAll() {
+        outingJpaRepository.deleteAll()
+    }
+
     private fun usernameEq(name: String?): BooleanExpression? {
         if (name == null) return null
         return outingJpaEntity.account.name.containsIgnoreCase(name)
