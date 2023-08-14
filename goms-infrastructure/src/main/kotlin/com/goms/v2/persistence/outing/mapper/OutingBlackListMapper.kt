@@ -16,4 +16,6 @@ interface OutingBlackListMapper {
 
     fun toEntity(outingBlacklist: OutingBlackList): OutingBlackListRedisEntity
 
+    fun toDomain(outingBlackListRedisEntity: OutingBlackListRedisEntity): OutingBlackList
+
 }
