@@ -11,7 +11,7 @@ class DeleteOutingStudentsUseCaseTest: BehaviorSpec({
     val outingRepository = mockk<OutingRepository>()
     val deleteOutingStudentsUseCase = DeleteOutingStudentsUseCase(outingRepository)
 
-    Given("외출자 테이블에 컬럼들이 남아있을때") {
+    Given("외출자 테이블에 레코드들이 남아있을때") {
 
         every { outingRepository.deleteAll() } returns Unit
 
