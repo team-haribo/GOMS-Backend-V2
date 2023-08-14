@@ -5,7 +5,7 @@ import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.data.dto.StudentNumberDto
 import com.goms.v2.domain.outing.OutingBlackList
-import com.goms.v2.domain.studentCouncil.data.dto.AllAccountDto
+import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.usecase.QueryAllAccountUseCase
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
@@ -24,7 +24,7 @@ class QueryAllAccountUseCaseTest: BehaviorSpec({
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
         val allAccountDto =
-            AllAccountDto(
+            AccountDto(
                 accountIdx = accountIdx,
                 name = account.name,
                 studentNum = StudentNumberDto(0,0, 0),

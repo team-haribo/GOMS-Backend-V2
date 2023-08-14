@@ -1,6 +1,6 @@
 package com.goms.v2.domain.studentCouncil.mapper
 
-import com.goms.v2.domain.studentCouncil.data.dto.AllAccountDto
+import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
 import org.mapstruct.*
 
@@ -16,6 +16,6 @@ interface StudentCouncilDataMapper {
         Mapping(target = "studentNum.classNum", source = "studentNum.classNum"),
         Mapping(target = "studentNum.number", source = "studentNum.number")
     )
-    fun toResponse(allAccountDto: AllAccountDto): AllAccountHttpResponse
+    fun toResponse(accountDto: AccountDto): AllAccountHttpResponse
 
 }

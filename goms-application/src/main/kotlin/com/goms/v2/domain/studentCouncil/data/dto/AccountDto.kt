@@ -4,7 +4,7 @@ import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.data.dto.StudentNumberDto
 import java.util.UUID
 
-data class AllAccountDto(
+data class AccountDto(
     val accountIdx: UUID,
     val name: String,
     val studentNum: StudentNumberDto,
