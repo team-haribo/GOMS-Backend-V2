@@ -25,4 +25,8 @@ class OutingBlackListRepositoryImpl(
         return outingBlacklistJpaRepository.existsById(accountIdx)
     }
 
+    override fun findAll(): List<OutingBlackList> =
+        outingBlacklistJpaRepository.findAll()
+            .map { outingBlacklistMapper.toDomain(it) }
+
 }

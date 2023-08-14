@@ -9,5 +9,6 @@ interface AccountRepository {
     fun findByIdOrNull(accountIdx: UUID): Account?
     fun findByEmail(email: String): Account?
     fun existsByEmail(email: String): Boolean
+    fun findAllOrderByStudentNum(): List<Account>
 
 }
