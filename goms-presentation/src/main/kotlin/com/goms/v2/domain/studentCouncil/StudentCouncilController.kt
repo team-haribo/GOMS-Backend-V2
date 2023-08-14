@@ -1,11 +1,15 @@
 package com.goms.v2.domain.studentCouncil
 
+import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
+import com.goms.v2.domain.studentCouncil.mapper.StudentCouncilDataMapper
 import com.goms.v2.domain.studentCouncil.usecase.CreateOutingUseCase
 import com.goms.v2.domain.studentCouncil.usecase.DeleteOutingBlacklistUseCase
+import com.goms.v2.domain.studentCouncil.usecase.QueryAllAccountUseCase
 import com.goms.v2.domain.studentCouncil.usecase.SaveOutingBlackListUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -17,7 +21,9 @@ import java.util.UUID
 class StudentCouncilController(
     private val createOutingUseCase: CreateOutingUseCase,
     private val saveOutingBlackListUseCase: SaveOutingBlackListUseCase,
-    private val deleteOutingBlacklistUseCase: DeleteOutingBlacklistUseCase
+    private val deleteOutingBlacklistUseCase: DeleteOutingBlacklistUseCase,
+    private val queryAllAccountUseCase: QueryAllAccountUseCase,
+    private val studentCouncilDataMapper: StudentCouncilDataMapper
 ) {
 
     @PostMapping("outing")
@@ -34,5 +40,11 @@ class StudentCouncilController(
     fun deleteBlackList(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
         deleteOutingBlacklistUseCase.execute(accountIdx)
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
+
+    @GetMapping("account")
+    fun queryAllAccount(): ResponseEntity<List<AllAccountHttpResponse>> =
+        queryAllAccountUseCase.execute()
+            .map { studentCouncilDataMapper.toResponse(it) }
+            .let { ResponseEntity.ok(it) }
 
 }
