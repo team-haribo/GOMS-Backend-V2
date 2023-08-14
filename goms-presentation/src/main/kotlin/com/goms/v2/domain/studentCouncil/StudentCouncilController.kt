@@ -41,7 +41,7 @@ class StudentCouncilController(
         deleteOutingBlacklistUseCase.execute(accountIdx)
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
-    @GetMapping("account")
+    @GetMapping("accounts")
     fun queryAllAccount(): ResponseEntity<List<AllAccountHttpResponse>> =
         queryAllAccountUseCase.execute()
             .map { studentCouncilDataMapper.toResponse(it) }
