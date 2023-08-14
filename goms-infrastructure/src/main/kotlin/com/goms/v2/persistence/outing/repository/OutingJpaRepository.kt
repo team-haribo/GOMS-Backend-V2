@@ -10,6 +10,5 @@ interface OutingJpaRepository: CrudRepository<OutingJpaEntity, Long> {
     fun deleteByAccountIdx(accountIdx: UUID)
     fun existsByAccount(account: AccountJpaEntity): Boolean
     fun findAllByOrderByCreatedTimeDesc(): List<OutingJpaEntity>
-    fun findByAccountNameContaining(name: String): List<OutingJpaEntity>
 
 }
