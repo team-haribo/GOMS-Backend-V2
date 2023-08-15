@@ -13,5 +13,6 @@ interface OutingRepository {
     fun count(): Long
     fun findAll(): List<Outing>
     fun findByAccountNameContaining(name: String?): List<Outing>
+    fun deleteAll()
 
 }

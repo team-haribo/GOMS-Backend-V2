@@ -9,5 +9,6 @@ interface OutingBlackListRepository {
     fun deleteById(accountIdx: UUID)
     fun existsById(accountIdx: UUID): Boolean
     fun findAll(): List<OutingBlackList>
+    fun saveAll(outingBlackList: List<OutingBlackList>)
 
 }

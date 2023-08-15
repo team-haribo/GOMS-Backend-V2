@@ -29,4 +29,10 @@ class OutingBlackListRepositoryImpl(
         outingBlacklistJpaRepository.findAll()
             .map { outingBlacklistMapper.toDomain(it) }
 
+    override fun saveAll(outingBlackList: List<OutingBlackList>) {
+        outingBlackList
+            .map { outingBlacklistMapper.toEntity(it) }
+            .let { outingBlacklistJpaRepository.saveAll(it) }
+    }
+
 }
