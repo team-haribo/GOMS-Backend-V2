@@ -12,7 +12,7 @@ import io.mockk.mockk
 import java.time.LocalTime
 import java.util.*
 
-class SearchOutingUseCaseTest: BehaviorSpec({
+class SearchOutingAccountUseCaseTest: BehaviorSpec({
 
     val outingRepository = mockk<OutingRepository>()
     val searchOutingAccountUseCase = SearchOutingAccountUseCase(outingRepository)
