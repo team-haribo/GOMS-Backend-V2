@@ -14,3 +14,7 @@ data class Account(
     var authority: Authority,
     val createdTime: LocalDateTime
 )
+
+fun Account.updateAuthority(newAuthority: Authority) {
+    authority = newAuthority
+}
