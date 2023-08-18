@@ -15,7 +15,7 @@ class QueryLateRankUseCaseTest: BehaviorSpec({
     val lateRepository = mockk<LateRepository>()
     val queryLateRankUseCase = QueryLateRankUseCase(lateRepository)
 
-    Given("지각 랭킹을 보고 싶을때") {
+    Given("지각 랭킹이 있을때") {
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
         val late = AnyValueObjectGenerator.anyValueObject<Late>("account" to account)
