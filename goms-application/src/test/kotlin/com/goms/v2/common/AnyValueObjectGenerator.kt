@@ -3,6 +3,7 @@ package com.goms.v2.common
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber
 import com.goms.v2.domain.account.data.dto.StudentNumberDto
+import com.goms.v2.domain.auth.data.event.SaveRefreshTokenEvent
 import com.goms.v2.domain.late.data.dto.LateRankDto
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -68,6 +69,11 @@ object AnyValueObjectGenerator {
                 String(),
                 StudentNumberDto(0,0,0),
                 String()
+            )
+            SaveRefreshTokenEvent::class -> SaveRefreshTokenEvent(
+                String(),
+                UUID.randomUUID(),
+                0
             )
 
             else -> {
