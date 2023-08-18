@@ -7,5 +7,6 @@ interface LateRepository {
 
     fun countByAccountIdx(accountIdx: UUID): Long
     fun saveAll(lateList: List<Late>)
+    fun findTop3ByOrderByAccountDesc(): List<Late>
 
 }

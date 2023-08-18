@@ -3,6 +3,7 @@ package com.goms.v2.common
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber
 import com.goms.v2.domain.account.data.dto.StudentNumberDto
+import com.goms.v2.domain.late.data.dto.LateRankDto
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -62,6 +63,12 @@ object AnyValueObjectGenerator {
             Authority::class -> Authority.ROLE_STUDENT
             StudentNumber::class -> StudentNumber(0,0,0)
             StudentNumberDto::class -> StudentNumberDto(0,0,0)
+            LateRankDto::class -> LateRankDto(
+                UUID.randomUUID(),
+                String(),
+                StudentNumberDto(0,0,0),
+                String()
+            )
 
             else -> {
                 throw IllegalArgumentException(
