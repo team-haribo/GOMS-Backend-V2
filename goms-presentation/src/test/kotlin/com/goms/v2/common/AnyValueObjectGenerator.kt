@@ -63,25 +63,37 @@ object AnyValueObjectGenerator {
             HashSet::class -> HashSet<Any>()
 
             Authority::class -> Authority.ROLE_STUDENT
-            StudentNumber::class -> StudentNumber(0,0,0)
-            StudentNumberDto::class -> StudentNumberDto(0,0,0)
+            StudentNumber::class -> StudentNumber(
+                grade = 0,
+                classNum = 0,
+                number = 0
+            )
+            StudentNumberDto::class -> StudentNumberDto(
+                grade = 0,
+                classNum = 0,
+                number = 0
+            )
             LateRankDto::class -> LateRankDto(
-                UUID.randomUUID(),
-                String(),
-                StudentNumberDto(0,0,0),
-                String()
+                accountIdx = UUID.randomUUID(),
+                name = String(),
+                studentNum = StudentNumberDto(
+                    grade = 0,
+                    classNum = 0,
+                    number = 0
+                ),
+                profileUrl = String()
             )
             SaveRefreshTokenEvent::class -> SaveRefreshTokenEvent(
-                String(),
-                UUID.randomUUID(),
-                0
+                refreshToken = String(),
+                accountIdx = UUID.randomUUID(),
+                expiredAt = 0
             )
             TokenHttpResponse::class -> TokenHttpResponse(
-                String(),
-                String(),
-                LocalDateTime.now(),
-                LocalDateTime.now(),
-                Authority.ROLE_STUDENT
+                accessToken = String(),
+                refreshToken = String(),
+                accessTokenExp = LocalDateTime.now(),
+                refreshTokenExp = LocalDateTime.now(),
+                authority = Authority.ROLE_STUDENT
             )
 
             else -> {
