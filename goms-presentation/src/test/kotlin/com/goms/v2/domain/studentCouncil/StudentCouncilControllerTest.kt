@@ -37,7 +37,7 @@ class StudentCouncilControllerTest: DescribeSpec({
         mockMvc = MockMvcBuilders.standaloneSetup(studentCouncilController).build()
     }
 
-    describe("PATCH : /api/v2/student-council/authority") {
+    describe("/api/v2/student-council/authority 으로 PATCH 요청을 했을때") {
         val url = "/api/v2/student-council/authority"
 
         context("유효한 요청이 전달 되면") {
@@ -46,7 +46,7 @@ class StudentCouncilControllerTest: DescribeSpec({
             every { grantAuthorityUseCase.execute(GrantAuthorityDto(grantAuthorityHttpRequest.accountIdx, grantAuthorityHttpRequest.authority)) } returns Unit
             val jsonRequestBody = jacksonObjectMapper().writeValueAsString(grantAuthorityHttpRequest)
 
-            it("205 응답") {
+            it("205 status code를 응답해야한다.") {
                 mockMvc.perform(
                     patch(url)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -55,7 +55,6 @@ class StudentCouncilControllerTest: DescribeSpec({
                     .andExpect(status().`is`(205))
             }
         }
-
     }
 
 })
