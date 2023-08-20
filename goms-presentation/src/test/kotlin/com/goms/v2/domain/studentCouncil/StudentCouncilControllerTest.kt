@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import java.util.*
 
-class StudentCouncilControllerTest : DescribeSpec({
+class StudentCouncilControllerTest: DescribeSpec({
     lateinit var mockMvc: MockMvc
     val createOutingUseCase = mockk<CreateOutingUseCase>()
     val saveOutingBlackListUseCase = mockk<SaveOutingBlackListUseCase>()
