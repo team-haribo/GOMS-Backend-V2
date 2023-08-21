@@ -16,9 +16,10 @@ class AccountRepositoryImpl(
     private val queryFactory: JPAQueryFactory
 ): AccountRepository {
 
-    override fun save(account: Account) {
+    override fun save(account: Account): Account {
         val accountEntity = accountMapper.toEntity(account)
         accountJpaRepository.save(accountEntity)
+        return account
     }
 
     override fun findByIdOrNull(accountIdx: UUID) =
