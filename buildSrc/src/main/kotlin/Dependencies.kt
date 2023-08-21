@@ -11,6 +11,7 @@ object Dependencies {
     const val VALIDATION = "org.springframework.boot:spring-boot-starter-validation"
     const val SPRING_SECURITY = "org.springframework.boot:spring-boot-starter-security"
     const val SPRING_WEB = "org.springframework.boot:spring-boot-starter-web"
+    const val SPRING_BOOT_STARTER = "org.springframework.boot:spring-boot-starter"
     const val TRANSACTION = "org.springframework:spring-tx:${DependenciesVersions.SPRING_TRANSACTION}"
     const val CONFIGURATION_PROCESSOR = "org.springframework.boot:spring-boot-configuration-processor"
 
@@ -39,6 +40,7 @@ object Dependencies {
     const val SPRING_TEST = "org.springframework.boot:spring-boot-starter-test:${DependenciesVersions.SPRING_TEST}"
     const val MOCKK = "io.mockk:mockk:${DependenciesVersions.MOCKK}"
     const val KOTEST_RUNNER = "io.kotest:kotest-runner-junit5:${DependenciesVersions.KOTEST_JUNIT}"
+    const val MOCKITOKOTLIN2 = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
     const val KOTEST_EXTENSION = "io.kotest.extensions:kotest-extensions-spring:${DependenciesVersions.KOTEST_EXTENSION}"
     const val KOTEST_ASSERTIONS = "io.kotest:kotest-assertions-core:${DependenciesVersions.KOTEST_ASSERTIONS}"
 
@@ -50,4 +52,5 @@ object Dependencies {
     /** code generator **/
     const val MAP_STRUCT = "org.mapstruct:mapstruct:${DependenciesVersions.MAP_STRUCT_VERSION}"
     const val MAP_STRUCT_PROCESSOR = "org.mapstruct:mapstruct-processor:${DependenciesVersions.MAP_STRUCT_VERSION}"
+
 }
