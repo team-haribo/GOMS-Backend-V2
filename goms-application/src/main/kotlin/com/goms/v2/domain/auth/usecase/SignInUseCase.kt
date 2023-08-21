@@ -57,8 +57,7 @@ class SignInUseCase(
             authority = Authority.ROLE_STUDENT,
             createdTime = LocalDateTime.now()
         )
-        accountRepository.save(account)
-        return account
+        return accountRepository.save(account)
     }
 
     private fun publishSaveRefreshToken(token: TokenDto, account: Account) {

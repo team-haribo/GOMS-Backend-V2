@@ -24,7 +24,7 @@ class GrantAuthorityUseCaseTest: BehaviorSpec({
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
 
         every { accountRepository.findByIdOrNull(account.idx) } returns account
-        every { accountRepository.save(any()) } returns Unit
+        every { accountRepository.save(any()) } returns account
 
         When("권한 수정 요청을 하면") {
             grantAuthorityUseCase.execute(grantAuthorityDto)
