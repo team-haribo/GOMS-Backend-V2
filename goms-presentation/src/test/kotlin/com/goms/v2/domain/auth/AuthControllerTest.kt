@@ -37,7 +37,7 @@ class AuthControllerTest: DescribeSpec({
         mockMvc = MockMvcBuilders.standaloneSetup(authController).build()
     }
 
-    describe("POST : /api/v2/auth/signin") {
+    describe("api/v2/auth/signin 으로 post 요청을 했을때") {
         val url = "/api/v2/auth/signin"
 
         context("유효한 요청이 전달 되면") {
@@ -83,7 +83,7 @@ class AuthControllerTest: DescribeSpec({
             }
         }
     }
-    describe("PATCH : /api/v2/auth") {
+    describe("/api/v2/auth 으로 patch 요청을 했을때") {
         val url = "/api/v2/auth"
 
         context("유효한 요청이 전달 되면") {
