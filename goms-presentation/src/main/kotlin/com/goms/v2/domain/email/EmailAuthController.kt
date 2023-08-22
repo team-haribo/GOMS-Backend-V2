@@ -1,5 +1,7 @@
 package com.goms.v2.domain.email
 
+import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
+import com.goms.v2.domain.auth.mapper.AuthDataMapper
 import com.goms.v2.domain.email.dto.request.SendEmailHttpRequest
 import com.goms.v2.domain.email.mapper.EmailAuthDataMapper
 import com.goms.v2.domain.email.usecase.SendEmailUseCase
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("api/v2/email")
 class EmailAuthController(
     private val emailAuthDataMapper: EmailAuthDataMapper,
+    private val authDataMapper: AuthDataMapper,
     private val sendEmailUseCase: SendEmailUseCase,
     private val verifyAuthCodeUseCase: VerifyAuthCodeUseCase
 ) {
@@ -27,8 +30,8 @@ class EmailAuthController(
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @GetMapping("verify")
-    fun verifyAuthCode(@RequestParam email: String,@RequestParam authCode: String): ResponseEntity<Void> =
+    fun verifyAuthCode(@RequestParam email: String,@RequestParam authCode: String): ResponseEntity<TokenHttpResponse> =
         verifyAuthCodeUseCase.execute(email, authCode)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .let { ResponseEntity.ok(authDataMapper.toResponse(it)) }
 
 }
