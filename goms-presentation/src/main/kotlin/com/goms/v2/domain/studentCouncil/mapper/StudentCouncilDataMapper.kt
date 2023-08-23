@@ -22,4 +22,11 @@ interface StudentCouncilDataMapper {
 
     fun toDto(request: GrantAuthorityHttpRequest): GrantAuthorityDto
 
+    @Mappings(
+        Mapping(target = "studentNum.grade", source = "studentNum.grade"),
+        Mapping(target = "studentNum.classNum", source = "studentNum.classNum"),
+        Mapping(target = "studentNum.number", source = "studentNum.number")
+    )
+    fun toResponse(dto: List<AccountDto>): List<AllAccountHttpResponse>
+
 }
