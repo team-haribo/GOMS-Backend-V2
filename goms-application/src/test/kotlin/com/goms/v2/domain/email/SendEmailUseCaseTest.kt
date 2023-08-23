@@ -39,7 +39,7 @@ class SendEmailUseCaseTest: BehaviorSpec({
         every { authCodeRepository.save(any()) } returns Unit
         every { emailSendPort.sendEmail(any(), any()) } returns Unit
 
-        When("권한이 있는 사용자 이면") {
+        When("이미 email 발송을 요청한 사용자이면") {
             val isExistsAuthentication = authenticationRepository.existByEmail(emailDto.email)
             sendEmailUseCase.execute(emailDto)
 
@@ -60,7 +60,7 @@ class SendEmailUseCaseTest: BehaviorSpec({
             }
         }
 
-        When("권한이 없는 사용자 이면") {
+        When("아직 email 발송을 하지 않은 사용자면") {
             every { authenticationRepository.existByEmail(emailDto.email) } returns false
             val isExistsAuthentication = authenticationRepository.existByEmail(emailDto.email)
             sendEmailUseCase.execute(emailDto)
