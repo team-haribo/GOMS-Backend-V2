@@ -21,12 +21,9 @@ class ReissueTokenUseCase(
 ) {
 
     fun execute(refreshToken: String): TokenDto {
-        val parsedRefreshToken = tokenParserPort.parseRefreshToken(refreshToken)
-            ?: throw InvalidTokenTypeException()
-        val refreshTokenDomain = refreshTokenRepository.findByIdOrNull(parsedRefreshToken)
-            ?: throw ExpiredRefreshTokenException()
-        val account = accountRepository.findByIdOrNull(refreshTokenDomain.accountIdx)
-            ?: throw AccountNotFoundException()
+        val parsedRefreshToken = tokenParserPort.parseRefreshToken(refreshToken) ?: throw InvalidTokenTypeException()
+        val refreshTokenDomain = refreshTokenRepository.findByIdOrNull(parsedRefreshToken) ?: throw ExpiredRefreshTokenException()
+        val account = accountRepository.findByIdOrNull(refreshTokenDomain.accountIdx) ?: throw AccountNotFoundException()
         val token = tokenPort.generateToken(refreshTokenDomain.accountIdx, account.authority)
         saveRefreshToken(token, account)
         refreshTokenRepository.deleteById(parsedRefreshToken)
