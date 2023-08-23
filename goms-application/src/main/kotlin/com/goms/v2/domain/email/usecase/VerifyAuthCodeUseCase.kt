@@ -2,8 +2,8 @@ package com.goms.v2.domain.email.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithTransaction
 import com.goms.v2.domain.account.Account
-import com.goms.v2.domain.auth.RefreshToken
 import com.goms.v2.domain.auth.data.dto.TokenDto
+import com.goms.v2.domain.auth.data.event.SaveRefreshTokenEvent
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.domain.auth.spi.TokenPort
 import com.goms.v2.domain.email.exception.AuthCodeNotFoundException
@@ -11,17 +11,17 @@ import com.goms.v2.domain.email.exception.AuthCodeNotMatchException
 import com.goms.v2.domain.email.exception.AuthenticationNotFoundException
 import com.goms.v2.domain.email.exception.TooManyAuthCodeRequestException
 import com.goms.v2.repository.account.AccountRepository
-import com.goms.v2.repository.auth.RefreshTokenRepository
 import com.goms.v2.repository.email.AuthCodeRepository
 import com.goms.v2.repository.email.AuthenticationRepository
+import org.springframework.context.ApplicationEventPublisher
 
 @UseCaseWithTransaction
 class VerifyAuthCodeUseCase(
     private val accountRepository: AccountRepository,
     private val authCodeRepository: AuthCodeRepository,
     private val authenticationRepository: AuthenticationRepository,
-    private val refreshTokenRepository: RefreshTokenRepository,
-    private val tokenPort: TokenPort
+    private val tokenPort: TokenPort,
+    private val publisher: ApplicationEventPublisher
 ) {
 
     fun execute(email:String, authCode: String): TokenDto {
@@ -37,7 +37,7 @@ class VerifyAuthCodeUseCase(
         }
 
         val token = tokenPort.generateToken(account.idx, account.authority)
-        saveRefreshToken(token, account)
+        publishSaveRefreshToken(token, account)
 
         authenticationDomain.certified()
         authenticationRepository.save(authenticationDomain)
@@ -45,14 +45,13 @@ class VerifyAuthCodeUseCase(
         return token
     }
 
-    private fun saveRefreshToken(token: TokenDto, account: Account) {
-        val saveRefreshToken = RefreshToken(
+    private fun publishSaveRefreshToken(token: TokenDto, account: Account) {
+        val saveRefreshTokenEvent = SaveRefreshTokenEvent(
             refreshToken = token.refreshToken,
             accountIdx = account.idx,
             expiredAt = token.refreshTokenExp
         )
-
-        refreshTokenRepository.save(saveRefreshToken)
+        publisher.publishEvent(saveRefreshTokenEvent)
     }
     
 }
