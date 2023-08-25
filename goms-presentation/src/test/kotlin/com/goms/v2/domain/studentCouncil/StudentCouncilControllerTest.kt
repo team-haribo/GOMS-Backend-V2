@@ -6,6 +6,7 @@ import com.goms.v2.domain.account.data.dto.StudentNumberDto
 import com.goms.v2.domain.account.dto.response.StudentNumHttpResponse
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.GrantAuthorityDto
+import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
 import com.goms.v2.domain.studentCouncil.dto.request.GrantAuthorityHttpRequest
 import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
 import com.goms.v2.domain.studentCouncil.mapper.StudentCouncilDataMapper
@@ -78,6 +79,15 @@ class StudentCouncilControllerTest: DescribeSpec({
             val authority = Authority.ROLE_STUDENT
             val isBlackList = true
 
+            val searchAccountDto = SearchAccountDto(
+                grade = 0,
+                classNum = 0,
+                name = "",
+                authority = Authority.ROLE_STUDENT,
+                isBlackList = true
+            )
+
+
             val requestParam = LinkedMultiValueMap<String, String>()
             requestParam.add("grade", "0")
             requestParam.add("classNum", "0")
@@ -103,7 +113,8 @@ class StudentCouncilControllerTest: DescribeSpec({
                 isBlackList = true
             )
 
-            every { searchAccountUseCase.execute(grade, classNum, name, authority, isBlackList) } returns listOf(accountDto)
+            every { studentCouncilDataMapper.toDto(grade, classNum, name, authority, isBlackList) } returns searchAccountDto
+            every { searchAccountUseCase.execute(searchAccountDto) } returns listOf(accountDto)
             every { studentCouncilDataMapper.toResponse(listOf(accountDto)) } returns listOf(allAccountHttpResponse)
 
             it("List<AllAccountHttpResponse>를 응답해야한다.") {

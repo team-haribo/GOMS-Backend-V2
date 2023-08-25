@@ -65,7 +65,8 @@ class StudentCouncilController(
         @RequestParam(required = false) authority: Authority?,
         @RequestParam(required = false) isBlackList: Boolean?
     ): ResponseEntity<List<AllAccountHttpResponse>> =
-        searchAccountUseCase.execute(grade, classNum, name, authority, isBlackList)
+        studentCouncilDataMapper.toDto(grade, classNum, name, authority, isBlackList)
+            .let { searchAccountUseCase.execute(it) }
             .let { studentCouncilDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 
