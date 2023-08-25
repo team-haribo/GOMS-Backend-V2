@@ -103,4 +103,27 @@ class OutingControllerTest: DescribeSpec({
             }
         }
     }
+
+    describe("api/v2/outing/count로 get 요청 했을때") {
+        val url = "/api/v2/outing/count"
+        val count = 0L
+
+        context("유효한 요청이 전달 되면") {
+            val outingCountHttpResponse = OutingCountHttpResponse(outingCount = count)
+
+            every { queryOutingCountUseCase.execute() } returns count
+            every { outingDataMapper.toResponse(count) } returns outingCountHttpResponse
+
+            it("OutingCountHttpResponse를 반환한다.") {
+                mockMvc.perform(
+                    get(url)
+                )
+                    .andExpect(status().`is`(200))
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(jsonPath("$.outingCount").value(outingCountHttpResponse.outingCount))
+                    .andDo(MockMvcResultHandlers.print())
+            }
+        }
+    }
+
 })
