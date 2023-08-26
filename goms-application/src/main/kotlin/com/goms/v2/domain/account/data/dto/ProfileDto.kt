@@ -4,7 +4,6 @@ import com.goms.v2.domain.account.Authority
 import java.util.*
 
 data class ProfileDto(
-    val accountIdx: UUID,
     val name: String,
     val studentNum: StudentNumberDto,
     val authority: Authority,

@@ -25,7 +25,6 @@ class QueryAccountProfileUseCase(
         val lateCount = lateRepository.countByAccountIdx(accountIdx)
 
         return ProfileDto(
-            accountIdx = account.idx,
             name = account.name,
             studentNum = StudentNumberDto(
                 account.studentNumber.grade,

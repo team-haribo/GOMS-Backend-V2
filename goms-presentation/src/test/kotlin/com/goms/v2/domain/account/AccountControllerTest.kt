@@ -34,9 +34,7 @@ class AccountControllerTest: DescribeSpec({
 
     describe("api/v2/account/profile로 get 요청을 했을때") {
         val url = "/api/v2/account/profile"
-        val accountIdx = UUID.randomUUID()
         val profileDto = ProfileDto(
-            accountIdx = accountIdx,
             name = "김경수",
             studentNum = StudentNumberDto(
                 grade = 2,
@@ -50,7 +48,6 @@ class AccountControllerTest: DescribeSpec({
             isBlackList = false
         )
         val profileHttpResponse = ProfileHttpResponse(
-            accountIdx = accountIdx,
             name = "김경수",
             studentNum = StudentNumHttpResponse(
                 grade = 2,
@@ -74,7 +71,6 @@ class AccountControllerTest: DescribeSpec({
                 )
                     .andExpect(status().`is`(200))
                     .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(jsonPath("$.accountIdx").value(profileHttpResponse.accountIdx.toString()))
                     .andExpect(jsonPath("$.name").value(profileHttpResponse.name))
                     .andExpect(jsonPath("$.studentNum.grade").value(profileHttpResponse.studentNum.grade))
                     .andExpect(jsonPath("$.studentNum.classNum").value(profileHttpResponse.studentNum.classNum))
