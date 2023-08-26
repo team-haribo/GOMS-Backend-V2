@@ -37,6 +37,8 @@ class SecurityConfig(
             // /auth
             .mvcMatchers(HttpMethod.POST, "/api/v2/auth/signin").permitAll()
             .mvcMatchers(HttpMethod.PATCH, "/api/v2/auth").permitAll()
+            .mvcMatchers(HttpMethod.POST, "/api/v2/auth/email/send").permitAll()
+            .mvcMatchers(HttpMethod.GET, "/api/v2/auth/email/verify").permitAll()
 
             // /account
             .mvcMatchers(HttpMethod.GET, "/api/v2/account/profile").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)

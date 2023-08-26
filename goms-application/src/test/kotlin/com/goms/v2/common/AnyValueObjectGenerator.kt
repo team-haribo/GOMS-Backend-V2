@@ -4,7 +4,7 @@ import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber
 import com.goms.v2.domain.account.data.dto.StudentNumberDto
 import com.goms.v2.domain.auth.data.event.SaveRefreshTokenEvent
-import com.goms.v2.domain.email.data.dto.EmailDto
+import com.goms.v2.domain.auth.data.dto.EmailDto
 import com.goms.v2.domain.late.data.dto.LateRankDto
 import java.time.LocalDate
 import java.time.LocalDateTime
