@@ -26,7 +26,7 @@ class QueryAccountProfileUseCaseTest: BehaviorSpec({
     Given("계정이 주어질때") {
         val email = "test@test.com"
         val account = AnyValueObjectGenerator.anyValueObject<Account>("email" to email)
-        val profileDto = AnyValueObjectGenerator.anyValueObject<ProfileDto>("accountIdx" to account.idx)
+        val profileDto = AnyValueObjectGenerator.anyValueObject<ProfileDto>("name" to account.name)
 
         every { accountUtil.getCurrentAccountIdx() } returns account.idx
         every { lateRepository.countByAccountIdx(account.idx) } returns 0
