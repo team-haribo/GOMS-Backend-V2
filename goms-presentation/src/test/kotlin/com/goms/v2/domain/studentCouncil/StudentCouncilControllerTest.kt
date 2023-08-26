@@ -118,6 +118,50 @@ class StudentCouncilControllerTest: DescribeSpec({
         }
     }
 
+    describe("/api/v2/student-council/accounts 으로 GET 요청을 했을때") {
+        val url = "/api/v2/student-council/accounts"
+
+        context("유효한 요청이 전달 되면") {
+            val accountIdx = UUID.randomUUID()
+            val accountDto = AccountDto(
+                accountIdx = accountIdx,
+                name = "",
+                studentNum = StudentNumberDto(0, 0, 0),
+                profileUrl = "",
+                authority = Authority.ROLE_STUDENT,
+                isBlackList = true
+            )
+            val allAccountHttpResponse = AllAccountHttpResponse(
+                accountIdx = accountIdx,
+                name = "",
+                studentNum = StudentNumHttpResponse(0 , 0, 0),
+                profileUrl = "",
+                authority = Authority.ROLE_STUDENT,
+                isBlackList = true
+            )
+            every { queryAllAccountUseCase.execute() } returns listOf(accountDto)
+            every { studentCouncilDataMapper.toResponse(accountDto) } returns allAccountHttpResponse
+
+            it("List<AllAccountResponse>를 응답해야한다.") {
+                mockMvc.perform(
+                    get(url)
+                )
+                    .andExpectAll(
+                        status().isOk,
+                        jsonPath("$[0].accountIdx").value(allAccountHttpResponse.accountIdx.toString()),
+                        jsonPath("$[0].name").value(allAccountHttpResponse.name),
+                        jsonPath("$[0].studentNum.grade").value(allAccountHttpResponse.studentNum.grade),
+                        jsonPath("$[0].studentNum.classNum").value(allAccountHttpResponse.studentNum.classNum),
+                        jsonPath("$[0].studentNum.number").value(allAccountHttpResponse.studentNum.number),
+                        jsonPath("$[0].profileUrl").value(allAccountHttpResponse.profileUrl),
+                        jsonPath("$[0].authority").value(allAccountHttpResponse.authority.toString()),
+                        jsonPath("$[0].isBlackList").value(allAccountHttpResponse.isBlackList.toString())
+                    )
+                    .andDo(MockMvcResultHandlers.print())
+            }
+        }
+    }
+
     describe("/api/v2/student-council/search 으로 GET 요청을 했을때") {
         val url = "/api/v2/student-council/search"
 
