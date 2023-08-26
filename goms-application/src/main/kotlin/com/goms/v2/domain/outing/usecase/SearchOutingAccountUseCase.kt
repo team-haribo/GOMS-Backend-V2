@@ -10,9 +10,8 @@ class SearchOutingAccountUseCase(
     private val outingRepository: OutingRepository
 ) {
 
-    fun execute(name: String?): List<OutingAccountDto> {
-
-        return outingRepository.findByAccountNameContaining(name)
+    fun execute(name: String?): List<OutingAccountDto> =
+        outingRepository.findByAccountNameContaining(name)
             .map {
                 OutingAccountDto(
                     accountIdx = it.account.idx,
@@ -26,6 +25,4 @@ class SearchOutingAccountUseCase(
                     createdTime = it.createdTime
                 )
             }
-    }
-
 }
