@@ -16,8 +16,7 @@ import io.mockk.every
 import io.mockk.mockk
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -47,6 +46,26 @@ class StudentCouncilControllerTest: DescribeSpec({
     beforeTest {
         mockMvc = MockMvcBuilders.standaloneSetup(studentCouncilController).build()
     }
+
+    describe("/api/v2/student-council/outing 으로 POST 요청을 했을때")  {
+        val url = "/api/v2/student-council/outing"
+
+        context("유효한 요청이 전달 되면") {
+            val outingUUID = UUID.randomUUID()
+            every { createOutingUseCase.execute() } returns outingUUID
+
+            it("outingUUID를 응답해야 한다.") {
+                mockMvc.perform(
+                    post(url)
+                )
+                    .andExpectAll(
+                        status().isOk,
+                        jsonPath("outingUUID").value(outingUUID.toString())
+                    )
+            }
+        }
+    }
+
 
     describe("/api/v2/student-council/authority 으로 PATCH 요청을 했을때") {
         val url = "/api/v2/student-council/authority"
