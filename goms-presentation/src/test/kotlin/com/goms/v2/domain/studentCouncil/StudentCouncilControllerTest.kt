@@ -82,6 +82,22 @@ class StudentCouncilControllerTest: DescribeSpec({
         }
     }
 
+    describe("/api/v2/student-council/black-list/{accountIdx} 으로 DELETE 요청을 했을때") {
+        val url = "/api/v2/student-council/black-list/{accountIdx}"
+
+        context("유효한 요청이 전달 되면") {
+            val accountIdx = UUID.randomUUID()
+            every { deleteOutingBlackListUseCase.execute(accountIdx) } returns Unit
+
+            it("205 status code를 응답해야한다.") {
+                mockMvc.perform(
+                    delete(url, accountIdx)
+                )
+                    .andExpect(status().`is`(205))
+            }
+        }
+    }
+
     describe("/api/v2/student-council/authority 으로 PATCH 요청을 했을때") {
         val url = "/api/v2/student-council/authority"
 
