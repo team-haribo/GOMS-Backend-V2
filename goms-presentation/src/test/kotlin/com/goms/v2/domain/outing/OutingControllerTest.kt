@@ -174,4 +174,22 @@ class OutingControllerTest: DescribeSpec({
             }
         }
     }
+
+    describe("api/v2/outing/validation을 get으로 요청 했을때") {
+        val url = "/api/v2/outing/validation"
+
+        context("유효한 요청이 전달 되면") {
+
+            every { validateOutingTimeUseCase.execute() } returns true
+
+            it("isOuting to value가 반환한다.") {
+                mockMvc.perform(
+                    get(url)
+                )
+                    .andExpect(status().`is`(200))
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(jsonPath("$.isOuting").value(true))
+            }
+        }
+    }
 })
