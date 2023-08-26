@@ -126,4 +126,52 @@ class OutingControllerTest: DescribeSpec({
         }
     }
 
+    describe("api/v2/outing/search로 get 요청 했을때") {
+        val url = "/api/v2/outing/search"
+        val accountUUID = UUID.randomUUID()
+
+        context("유효한 요청이 전달 되면") {
+            val outingAccountDto = OutingAccountDto(
+                accountIdx = accountUUID,
+                name = "김경수",
+                studentNum = StudentNumberDto(
+                    grade = 2,
+                    classNum = 4,
+                    number = 2
+                ),
+                profileUrl = null,
+                createdTime = LocalTime.now()
+            )
+            val outingAccountHttpResponse = OutingAccountHttpResponse(
+                accountIdx = accountUUID,
+                name = "김경수",
+                studentNum = StudentNumHttpResponse(
+                    grade = 2,
+                    classNum = 4,
+                    number = 2
+                ),
+                profileUrl = null,
+                createdTime = ""
+            )
+
+            every { searchOutingAccountUseCase.execute(null) } returns listOf(outingAccountDto)
+            every { outingDataMapper.toResponse(outingAccountDto) } returns outingAccountHttpResponse
+
+            it("OutingAccountHttpResponse를 반환한다.") {
+                mockMvc.perform(
+                    get(url)
+                )
+                    .andExpect(status().`is`(200))
+                    .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(jsonPath("$[0].accountIdx").value(outingAccountHttpResponse.accountIdx.toString()))
+                    .andExpect(jsonPath("$[0].name").value(outingAccountHttpResponse.name))
+                    .andExpect(jsonPath("$[0].studentNum.grade").value(outingAccountHttpResponse.studentNum.grade))
+                    .andExpect(jsonPath("$[0].studentNum.classNum").value(outingAccountHttpResponse.studentNum.classNum))
+                    .andExpect(jsonPath("$[0].studentNum.number").value(outingAccountHttpResponse.studentNum.number))
+                    .andExpect(jsonPath("$[0].profileUrl").value(outingAccountHttpResponse.profileUrl))
+                    .andExpect(jsonPath("$[0].createdTime").value(outingAccountHttpResponse.createdTime))
+                    .andDo(MockMvcResultHandlers.print())
+            }
+        }
+    }
 })
