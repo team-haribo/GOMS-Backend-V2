@@ -7,7 +7,7 @@ import com.goms.v2.domain.auth.data.dto.TokenDto
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.domain.auth.exception.ExpiredRefreshTokenException
 import com.goms.v2.domain.auth.exception.InvalidTokenTypeException
-import com.goms.v2.domain.auth.spi.TokenParserPort
+import com.goms.v2.domain.auth.spi.TokenParsePort
 import com.goms.v2.domain.auth.spi.TokenPort
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.auth.RefreshTokenRepository
@@ -17,11 +17,11 @@ class ReissueTokenUseCase(
     private val refreshTokenRepository: RefreshTokenRepository,
     private val accountRepository: AccountRepository,
     private val tokenPort: TokenPort,
-    private val tokenParserPort: TokenParserPort
+    private val tokenParsePort: TokenParsePort
 ) {
 
     fun execute(refreshToken: String): TokenDto {
-        val parsedRefreshToken = tokenParserPort.parseRefreshToken(refreshToken) ?: throw InvalidTokenTypeException()
+        val parsedRefreshToken = tokenParsePort.parseRefreshToken(refreshToken) ?: throw InvalidTokenTypeException()
         val refreshTokenDomain = refreshTokenRepository.findByIdOrNull(parsedRefreshToken) ?: throw ExpiredRefreshTokenException()
         val account = accountRepository.findByIdOrNull(refreshTokenDomain.accountIdx) ?: throw AccountNotFoundException()
         val token = tokenPort.generateToken(refreshTokenDomain.accountIdx, account.authority)

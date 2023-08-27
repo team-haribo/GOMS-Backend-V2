@@ -6,7 +6,7 @@ import com.goms.v2.domain.auth.data.dto.TokenDto
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.domain.auth.exception.ExpiredRefreshTokenException
 import com.goms.v2.domain.auth.exception.InvalidTokenTypeException
-import com.goms.v2.domain.auth.spi.TokenParserPort
+import com.goms.v2.domain.auth.spi.TokenParsePort
 import com.goms.v2.domain.auth.spi.TokenPort
 import com.goms.v2.domain.auth.usecase.ReissueTokenUseCase
 import com.goms.v2.repository.account.AccountRepository
@@ -22,8 +22,8 @@ class ReissueTokenUseCaseTest: BehaviorSpec({
     val refreshTokenRepository = mockk<RefreshTokenRepository>()
     val accountRepository = mockk<AccountRepository>()
     val tokenPort = mockk<TokenPort>()
-    val tokenParserPort = mockk<TokenParserPort>()
-    val reissueTokenUseCase = ReissueTokenUseCase(refreshTokenRepository, accountRepository, tokenPort, tokenParserPort)
+    val tokenParsePort = mockk<TokenParsePort>()
+    val reissueTokenUseCase = ReissueTokenUseCase(refreshTokenRepository, accountRepository, tokenPort, tokenParsePort)
 
     Given("refreshToken이 주어졌을때") {
         val refreshToken = "Bearer test refreshToken"
@@ -32,7 +32,7 @@ class ReissueTokenUseCaseTest: BehaviorSpec({
         val refreshTokenDomain = AnyValueObjectGenerator.anyValueObject<RefreshToken>("refreshToken" to parsedRefreshToken)
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to refreshTokenDomain.accountIdx)
 
-        every { tokenParserPort.parseRefreshToken(refreshToken) } returns parsedRefreshToken
+        every { tokenParsePort.parseRefreshToken(refreshToken) } returns parsedRefreshToken
         every { refreshTokenRepository.findByIdOrNull(parsedRefreshToken) } returns refreshTokenDomain
         every { accountRepository.findByIdOrNull(refreshTokenDomain.accountIdx) } returns account
         every { tokenPort.generateToken(refreshTokenDomain.accountIdx, account.authority) } returns tokenDto
@@ -56,7 +56,7 @@ class ReissueTokenUseCaseTest: BehaviorSpec({
         }
 
         When("유효하지 않는 토큰 타입으로 요청하면") {
-            every { tokenParserPort.parseRefreshToken(refreshToken) } returns null
+            every { tokenParsePort.parseRefreshToken(refreshToken) } returns null
 
             Then("InvalidTokenTypeException이 터저야 한다.") {
                 shouldThrow<InvalidTokenTypeException> {
@@ -66,7 +66,7 @@ class ReissueTokenUseCaseTest: BehaviorSpec({
         }
 
         When("만료된 토큰으로 요청하면") {
-            every { tokenParserPort.parseRefreshToken(refreshToken) } returns parsedRefreshToken
+            every { tokenParsePort.parseRefreshToken(refreshToken) } returns parsedRefreshToken
             every { refreshTokenRepository.findByIdOrNull(parsedRefreshToken) } returns null
 
             Then("ExpiredRefreshTokenException이 터져야 한다.") {
@@ -77,7 +77,7 @@ class ReissueTokenUseCaseTest: BehaviorSpec({
         }
 
         When("계정을 찾을 수 없으면") {
-            every { tokenParserPort.parseRefreshToken(refreshToken) } returns parsedRefreshToken
+            every { tokenParsePort.parseRefreshToken(refreshToken) } returns parsedRefreshToken
             every { refreshTokenRepository.findByIdOrNull(parsedRefreshToken) } returns refreshTokenDomain
             every { accountRepository.findByIdOrNull(refreshTokenDomain.accountIdx) } returns null
 
