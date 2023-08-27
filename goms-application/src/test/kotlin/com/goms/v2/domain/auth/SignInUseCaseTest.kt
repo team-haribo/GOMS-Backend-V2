@@ -8,7 +8,7 @@ import com.goms.v2.domain.auth.data.dto.GAuthUserInfoDto
 import com.goms.v2.domain.auth.data.dto.SignInDto
 import com.goms.v2.domain.auth.data.dto.TokenDto
 import com.goms.v2.domain.auth.data.event.SaveRefreshTokenEvent
-import com.goms.v2.domain.auth.spi.GAuthPort
+import com.goms.v2.domain.auth.spi.OAuthPort
 import com.goms.v2.domain.auth.spi.TokenPort
 import com.goms.v2.domain.auth.usecase.SignInUseCase
 import com.goms.v2.repository.account.AccountRepository
@@ -20,10 +20,10 @@ import java.util.*
 
 class SignInUseCaseTest: BehaviorSpec({
     val accountRepository = mockk<AccountRepository>()
-    val gAuthPort = mockk<GAuthPort>()
+    val oAuthPort = mockk<OAuthPort>()
     val tokenPort = mockk<TokenPort>()
     val publisher = mockk<ApplicationEventPublisher>()
-    val signInUseCase = SignInUseCase(accountRepository, gAuthPort, tokenPort, publisher)
+    val signInUseCase = SignInUseCase(accountRepository, oAuthPort, tokenPort, publisher)
 
     Given("SignInDto 가 주어졌을때") {
         val code = "test GAuthCode"
@@ -37,8 +37,8 @@ class SignInUseCaseTest: BehaviorSpec({
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to uuid, "email" to email, "authority" to Authority.ROLE_STUDENT)
         val tokenDto = AnyValueObjectGenerator.anyValueObject<TokenDto>("accessToken" to accessToken)
 
-        every { gAuthPort.receiveGAuthToken(signInDto.code) } returns gAuthToken
-        every { gAuthPort.receiveUserInfo(gAuthToken.accessToken) } returns gAuthInfo
+        every { oAuthPort.receiveGAuthToken(signInDto.code) } returns gAuthToken
+        every { oAuthPort.receiveUserInfo(gAuthToken.accessToken) } returns gAuthInfo
         every { accountRepository.findByEmail(gAuthInfo.email) } returns null
         every { accountRepository.save(any()) } returns account
         every { tokenPort.generateToken(account.idx,account.authority) } returns tokenDto
