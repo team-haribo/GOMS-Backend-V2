@@ -1,11 +1,11 @@
 package com.goms.v2.domain.auth.spi
 
-import com.goms.v2.domain.auth.data.dto.GAuthTokenDto
-import com.goms.v2.domain.auth.data.dto.GAuthUserInfoDto
+import com.goms.v2.domain.auth.data.dto.OAuthTokenDto
+import com.goms.v2.domain.auth.data.dto.OAuthUserInfoDto
 
 interface OAuthPort {
 
-    fun receiveGAuthToken(code: String): GAuthTokenDto
-    fun receiveUserInfo(accessToken: String): GAuthUserInfoDto
+    fun receiveOAuthToken(code: String): OAuthTokenDto
+    fun receiveUserInfo(accessToken: String): OAuthUserInfoDto
 
 }

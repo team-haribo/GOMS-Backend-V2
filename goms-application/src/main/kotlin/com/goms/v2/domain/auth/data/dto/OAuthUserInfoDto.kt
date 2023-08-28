@@ -1,6 +1,6 @@
 package com.goms.v2.domain.auth.data.dto
 
-data class GAuthUserInfoDto(
+data class OAuthUserInfoDto(
     val email: String,
     val name: String,
     val grade: Int,

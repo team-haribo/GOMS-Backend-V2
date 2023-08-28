@@ -1,7 +1,7 @@
 package com.goms.v2.thirdparty.gauth.mapper
 
-import com.goms.v2.domain.auth.data.dto.GAuthTokenDto
-import com.goms.v2.domain.auth.data.dto.GAuthUserInfoDto
+import com.goms.v2.domain.auth.data.dto.OAuthTokenDto
+import com.goms.v2.domain.auth.data.dto.OAuthUserInfoDto
 import gauth.GAuthToken
 import gauth.GAuthUserInfo
 import org.mapstruct.*
@@ -13,7 +13,7 @@ import org.mapstruct.*
 )
 interface GAuthDataMapper {
 
-    fun toDto(gAuthUserInfo: GAuthUserInfo): GAuthUserInfoDto
-    fun toDto(gAuthToken: GAuthToken): GAuthTokenDto
+    fun toDto(gAuthUserInfo: GAuthUserInfo): OAuthUserInfoDto
+    fun toDto(gAuthToken: GAuthToken): OAuthTokenDto
 
 }

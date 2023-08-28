@@ -6,7 +6,7 @@ import com.goms.v2.domain.auth.spi.TokenPort
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.Authority
 import com.goms.v2.domain.account.StudentNumber
-import com.goms.v2.domain.auth.data.dto.GAuthUserInfoDto
+import com.goms.v2.domain.auth.data.dto.OAuthUserInfoDto
 import com.goms.v2.domain.auth.data.dto.SignInDto
 import com.goms.v2.domain.auth.data.dto.TokenDto
 import com.goms.v2.domain.auth.data.event.SaveRefreshTokenEvent
@@ -27,7 +27,7 @@ class SignInUseCase(
 ) {
 
     fun execute(dto: SignInDto): TokenDto {
-        val gAuthToken = oAuthPort.receiveGAuthToken(dto.code)
+        val gAuthToken = oAuthPort.receiveOAuthToken(dto.code)
         log.info { "GAuth Token is ${gAuthToken.accessToken}" }
         val gAuthInfo = oAuthPort.receiveUserInfo(gAuthToken.accessToken)
         log.info { "GAuth email is ${gAuthInfo.email}" }
@@ -43,17 +43,17 @@ class SignInUseCase(
         return token
     }
 
-    private fun saveAccount(gAuthUserInfoDto: GAuthUserInfoDto): Account {
+    private fun saveAccount(oAuthUserInfoDto: OAuthUserInfoDto): Account {
         val account = Account(
             idx = UUID.randomUUID(),
-            email = gAuthUserInfoDto.email,
-            name = gAuthUserInfoDto.name,
+            email = oAuthUserInfoDto.email,
+            name = oAuthUserInfoDto.name,
             studentNumber = StudentNumber(
-                grade = gAuthUserInfoDto.grade,
-                classNum = gAuthUserInfoDto.classNum,
-                number = gAuthUserInfoDto.num
+                grade = oAuthUserInfoDto.grade,
+                classNum = oAuthUserInfoDto.classNum,
+                number = oAuthUserInfoDto.num
             ),
-            profileUrl = gAuthUserInfoDto.profileUrl,
+            profileUrl = oAuthUserInfoDto.profileUrl,
             authority = Authority.ROLE_STUDENT,
             createdTime = LocalDateTime.now()
         )
