@@ -20,9 +20,10 @@ class SendEmailUseCase(
 ) {
 
     fun execute(emailDto: EmailDto) {
-        val isExistsAuthentication = authenticationRepository.existByEmail(emailDto.email)
-        if (isExistsAuthentication) saveAuthentication(emailDto.email)
-        if (!isExistsAuthentication) createAuthentication(emailDto.email)
+        val account = accountRepository.findByEmail(emailDto.email) ?: throw AccountNotFoundException()
+        val isExistsAuthentication = authenticationRepository.existByEmail(account.email)
+        if (isExistsAuthentication) saveAuthentication(account.email)
+        if (!isExistsAuthentication) createAuthentication(account.email)
         val authCode = generateAuthKey(9999)
         saveAuthCode(emailDto, authCode)
         emailSendPort.sendEmail(emailDto.email, authCode)
