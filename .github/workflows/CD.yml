@@ -1,0 +1,75 @@
+name: CD to cloudtype
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN }}
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: teamgoms0516/goms-backend-v2
+          stage: main
+          yaml: >
+            name: goms-backend-v2
+
+            app: java@11
+
+            options:
+              ports: 8080
+              start: java -jar -Dspring.profiles.active=prod
+                goms-infrastructure/build/libs/goms-infrastructure-0.0.1-SNAPSHOT.jar
+              includes: goms-infrastructure
+              env:
+                - name: DB_DRIVER
+                  value: org.mariadb.jdbc.Driver
+                - name: DB_URL
+                  value: jdbc:mariadb://mariadb:3306/goms_v2_prod?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+                - name: DB_USERNAME
+                  value: root
+                - name: DB_PASSWORD
+                  value: ${{ secrets.DB_PASSWORD }}
+                - name: REDIS_HOST
+                  value: ${{ secrets.REDIS_HOST }}
+                - name: REDIS_PORT
+                  value: ${{ secrets.REDIS_PORT }}
+                - name: DB_PLATFORM
+                  value: org.hibernate.dialect.MySQL8Dialect
+                - name: JPA_DDL_AUTO
+                  value: update
+                - name: EMAIL_HOST
+                  value: ${{ secrets.EMAIL_HOST }}
+                - name: EMAIL_NAME
+                  value: ${{ secrets.EMAIL_NAME }}
+                - name: EMAIL_PASSWORD
+                  value: ${{ secrets.EMAIL_PASSWORD }}
+                - name: JWT_ACCESS_SECRET
+                  value: ${{ secrets.JWT_ACCESS_SECRET }}
+                - name: JWT_REFRESH_SECRET
+                  value: ${{ secrets.JWT_REFRESH_SECRET }}
+                - name: JWT_ACCESS_EXP
+                  value: "1800"
+                - name: JWT_REFRESH_EXP
+                  value: "604800"
+                - name: GAUTH_CLIENTID
+                  value: ${{ secrets.GAUTH_CLIENTID }}
+                - name: CLIENT_SECRET
+                  value: ${{ secrets.CLIENT_SECRET }}
+                - name: REDIRECT_URI
+                  value: ${{ secrets.REDIRECT_URI }}
+                - name: OUTING_EXP
+                  value: "1800"
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
