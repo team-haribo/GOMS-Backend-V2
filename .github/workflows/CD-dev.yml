@@ -58,9 +58,9 @@ jobs:
                 - name: JWT_REFRESH_SECRET
                   value: ${{ secrets.JWT_REFRESH_SECRET }}
                 - name: JWT_ACCESS_EXP
-                  value: "1800"
+                  value: ${{ secrets.JWT_ACCESS_EXP }}
                 - name: JWT_REFRESH_EXP
-                  value: "604800"
+                  value: ${{ secrets.JWT_REFRESH_EXP }}
                 - name: GAUTH_CLIENTID
                   value: ${{ secrets.GAUTH_CLIENTID }}
                 - name: CLIENT_SECRET
@@ -68,7 +68,7 @@ jobs:
                 - name: REDIRECT_URI
                   value: ${{ secrets.REDIRECT_URI }}
                 - name: OUTING_EXP
-                  value: "1800"
+                  value: ${{ secrets.OUTING_EXP }}
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
