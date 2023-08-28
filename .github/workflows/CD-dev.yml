@@ -34,7 +34,7 @@ jobs:
                 - name: DB_DRIVER
                   value: org.mariadb.jdbc.Driver
                 - name: DB_URL
-                  value: jdbc:mariadb://mariadb:3306/goms_v2_prod?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false
+                  value: ${{ secrets.DB_URL }}
                 - name: DB_USERNAME
                   value: root
                 - name: DB_PASSWORD
