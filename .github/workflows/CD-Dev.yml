@@ -46,7 +46,7 @@ jobs:
                 - name: DB_PLATFORM
                   value: org.hibernate.dialect.MySQL8Dialect
                 - name: JPA_DDL_AUTO
-                  value: update
+                  value: ${{ secrets.JPA_DDL_AUTO }}
                 - name: EMAIL_HOST
                   value: ${{ secrets.EMAIL_HOST }}
                 - name: EMAIL_NAME
