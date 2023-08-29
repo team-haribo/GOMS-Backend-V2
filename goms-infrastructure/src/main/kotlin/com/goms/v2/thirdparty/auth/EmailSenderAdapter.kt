@@ -1,4 +1,4 @@
-package com.goms.v2.persistence.auth.adapter
+package com.goms.v2.thirdparty.auth
 
 import com.goms.v2.domain.auth.exception.EmailSendFailException
 import com.goms.v2.domain.auth.spi.EmailSendPort
