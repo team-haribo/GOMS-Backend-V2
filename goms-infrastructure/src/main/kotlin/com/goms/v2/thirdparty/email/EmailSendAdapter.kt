@@ -1,4 +1,4 @@
-package com.goms.v2.thirdparty.auth
+package com.goms.v2.thirdparty.email
 
 import com.goms.v2.domain.auth.exception.EmailSendFailException
 import com.goms.v2.domain.auth.spi.EmailSendPort
