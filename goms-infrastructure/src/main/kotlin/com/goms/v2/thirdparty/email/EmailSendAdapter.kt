@@ -1,4 +1,4 @@
-package com.goms.v2.persistence.auth.adapter
+package com.goms.v2.thirdparty.email
 
 import com.goms.v2.domain.auth.exception.EmailSendFailException
 import com.goms.v2.domain.auth.spi.EmailSendPort
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 import javax.mail.MessagingException
 
 @Component
-class EmailSenderAdapter(
+class EmailSendAdapter(
     private val mailSender: JavaMailSender,
 ): EmailSendPort {
 
