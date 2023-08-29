@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 import javax.mail.MessagingException
 
 @Component
-class EmailSenderAdapter(
+class EmailSendAdapter(
     private val mailSender: JavaMailSender,
 ): EmailSendPort {
 
