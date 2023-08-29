@@ -1,4 +1,4 @@
-package com.goms.v2.domain.health
+package com.goms.v2.domain
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
