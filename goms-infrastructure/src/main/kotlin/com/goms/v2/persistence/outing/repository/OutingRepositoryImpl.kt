@@ -2,6 +2,7 @@ package com.goms.v2.persistence.outing.repository
 
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.outing.Outing
+import com.goms.v2.persistence.account.entity.QAccountJpaEntity.accountJpaEntity
 import com.goms.v2.persistence.account.mapper.AccountMapper
 import com.goms.v2.persistence.outing.entity.QOutingJpaEntity.outingJpaEntity
 import com.goms.v2.persistence.outing.mapper.OutingMapper
@@ -41,7 +42,9 @@ class OutingRepositoryImpl(
         outingJpaRepository.count()
 
     override fun findAll(): List<Outing> =
-        outingJpaRepository.findAll()
+        queryFactory.selectFrom(outingJpaEntity)
+            .leftJoin(outingJpaEntity.account, accountJpaEntity).fetchJoin()
+            .fetch()
             .map { outingMapper.toDomain(it) }
 
     override fun findByAccountNameContaining(name: String?): List<Outing> =
