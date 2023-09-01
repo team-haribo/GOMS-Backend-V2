@@ -48,3 +48,6 @@ gauth:
 
 outing:
   expiredAt: 1800
+
+fcm:
+  fileUrl: ${FCM_FILE_URL}
