@@ -9,6 +9,7 @@ import com.goms.v2.repository.late.LateRepository
 import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
+import java.time.LocalDate
 import java.util.*
 
 @Repository
@@ -55,5 +56,8 @@ class LateRepositoryImpl(
             .orderBy(lateJpaEntity.account.idx.count().desc())
             .limit(3)
             .fetch()
+
+    override fun countByOneWeekAgoLate(oneWeekAgo: LocalDate): Long =
+        lateJpaRepository.countByOneWeekAgoLate(oneWeekAgo)
 
 }
