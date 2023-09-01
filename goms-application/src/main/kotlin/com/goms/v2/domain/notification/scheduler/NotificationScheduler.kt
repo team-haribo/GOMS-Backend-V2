@@ -10,10 +10,10 @@ class NotificationScheduler(
     private val sendNotificationUseCase: SendNotificationUseCase
 ) {
 
-    @Scheduled(cron = "0 20 18 ? * 3") // 매주 수요일 6시 20분에 외출 여부 디스코드를 보낸다.
+    @Scheduled(cron = "0 20 18 ? * 3") // 매주 수요일 6시 20분에 외출 여부 notification을 보낸다.
     fun sendNotificationAtBeforeOuting() = sendNotificationUseCase.execute(NotificationType.BEFORE_OUTING)
 
-    @Scheduled(cron = "0 20 19 ? * 3") // 매주 수요일 7시 20분에 외출 여부 디스코드를 보낸다.
+    @Scheduled(cron = "0 20 19 ? * 3") // 매주 수요일 7시 20분에 외출 여부 notification을 보낸다.
     fun sendNotificationAtAfterOuting() = sendNotificationUseCase.execute(NotificationType.AFTER_OUTING)
 
 }
