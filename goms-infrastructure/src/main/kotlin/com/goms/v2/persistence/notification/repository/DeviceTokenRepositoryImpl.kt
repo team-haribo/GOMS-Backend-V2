@@ -5,7 +5,7 @@ import com.goms.v2.persistence.notification.mapper.DeviceTokenMapper
 import com.goms.v2.repository.notification.DeviceTokenRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
-import java.util.UUID
+import java.util.*
 
 @Component
 class DeviceTokenRepositoryImpl(
@@ -20,7 +20,6 @@ class DeviceTokenRepositoryImpl(
 
     override fun findAll(): List<DeviceToken> {
         val deviceTokenEntityList = deviceTokenJpaRepository.findAll().filterNotNull()
-        println(deviceTokenJpaRepository.findAll())
         return deviceTokenEntityList.map { deviceTokenMapper.toDomain(it) }
     }
 
