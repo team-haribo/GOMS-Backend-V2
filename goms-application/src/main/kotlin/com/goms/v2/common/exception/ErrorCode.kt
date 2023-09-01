@@ -40,6 +40,9 @@ enum class ErrorCode(
 
 	// OUTING
 	BLACKLIST_NOT_ALLOW_OUTING("블랙리스트인 학생은 외출을 할 수 없습니다.", ErrorStatus.BAD_REQUEST),
-	OUTING_UUID_UNVERIFIED("검증되지 않은 외출 식별자 입니다.", ErrorStatus.BAD_REQUEST)
+	OUTING_UUID_UNVERIFIED("검증되지 않은 외출 식별자 입니다.", ErrorStatus.BAD_REQUEST),
+
+	// NOTIFICATION
+	DEVICE_TOKEN_NOT_FOUND("device token이 존재하지 않은 사용자 입니다.", ErrorStatus.NOT_FOUND)
 
 }
