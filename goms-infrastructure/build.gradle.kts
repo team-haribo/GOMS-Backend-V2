@@ -59,6 +59,9 @@ dependencies {
     implementation(Dependencies.MAP_STRUCT)
     kapt(Dependencies.MAP_STRUCT_PROCESSOR)
     kaptTest(Dependencies.MAP_STRUCT_PROCESSOR)
+
+    /* fcm */
+    implementation(Dependencies.FCM)
 }
 
 allOpen {
