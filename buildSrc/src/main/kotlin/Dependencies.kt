@@ -49,8 +49,10 @@ object Dependencies {
     const val JWT_IMPL = "io.jsonwebtoken:jjwt-impl:${DependenciesVersions.JWT_VERSION}"
     const val JWT_JACKSON = "io.jsonwebtoken:jjwt-jackson:${DependenciesVersions.JWT_VERSION}"
 
-    /** code generator **/
+    /* map struct */
     const val MAP_STRUCT = "org.mapstruct:mapstruct:${DependenciesVersions.MAP_STRUCT_VERSION}"
     const val MAP_STRUCT_PROCESSOR = "org.mapstruct:mapstruct-processor:${DependenciesVersions.MAP_STRUCT_VERSION}"
 
+    /* fcm */
+    const val FCM = "com.google.firebase:firebase-admin:${DependenciesVersions.FCM_VERSION}"
 }
