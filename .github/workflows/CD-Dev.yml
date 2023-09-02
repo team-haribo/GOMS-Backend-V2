@@ -72,6 +72,8 @@ jobs:
                   value: ${{ secrets.REDIRECT_URI }}
                 - name: OUTING_EXP
                   value: ${{ secrets.OUTING_EXP }}
+                - name: FCM_FILE_URL
+                  value: ${{ secrets.FCM_FILE_URL }}
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
