@@ -6,14 +6,17 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Connect deploy key
         uses: cloudtype-github-actions/connect@v1
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
           ghtoken: ${{ secrets.GHP_TOKEN }}
+
       - name: Deploy
         uses: cloudtype-github-actions/deploy@v1
         with:
@@ -69,7 +72,25 @@ jobs:
                   value: ${{ secrets.REDIRECT_URI }}
                 - name: OUTING_EXP
                   value: ${{ secrets.OUTING_EXP }}
+                - name: FCM_FILE_URL
+                  value: ${{ secrets.FCM_FILE_URL }}
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
                 ref: ${{ github.ref }}
+
+      - name: GOMS Backend-V2 CD-Dev success Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ success() }}
+        with:
+          title: 🎉 GOMS V2 Develop Server CD success 🎉
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
+          color: 00FF00
+
+      - name: GOMS Backend-V2 CD-Dev failure Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: ${{ failure() }}
+        with:
+          title: ❌ GOMS V2 Develop Server CD failed ❌
+          webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
+          color: FF0000
