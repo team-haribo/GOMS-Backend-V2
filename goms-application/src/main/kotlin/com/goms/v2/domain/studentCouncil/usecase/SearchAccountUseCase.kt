@@ -15,12 +15,12 @@ class SearchAccountUseCase(
 ) {
 
     fun execute(dto: SearchAccountDto): List<AccountDto> {
-        val outingBlackLIstIdx = outingBlackListRepository.findAll().map { it.accountIdx }
+        val outingBlackListIdx = outingBlackListRepository.findAll().map { it.accountIdx }
 
         return accountRepository.findAccountByStudentInfo(dto.grade, dto.classNum, dto.name, dto.authority).stream().asSequence()
             .filter {
-                if (dto.isBlackList != null && dto.isBlackList) outingBlackLIstIdx.contains(it.idx)
-                else if (dto.isBlackList != null) outingBlackLIstIdx.contains(it.idx).not()
+                if (dto.isBlackList != null && dto.isBlackList) outingBlackListIdx.contains(it.idx)
+                else if (dto.isBlackList != null) outingBlackListIdx.contains(it.idx).not()
                 else true
             }.map {
                 AccountDto(
@@ -29,7 +29,7 @@ class SearchAccountUseCase(
                     studentNum = StudentNumberDto(it.studentNumber.grade, it.studentNumber.classNum, it.studentNumber.number),
                     profileUrl = it.profileUrl,
                     authority = it.authority,
-                    isBlackList = outingBlackLIstIdx.contains(it.idx)
+                    isBlackList = outingBlackListIdx.contains(it.idx)
                 )
             }.toList()
     }
