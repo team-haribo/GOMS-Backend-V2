@@ -18,7 +18,8 @@ interface StudentCouncilDataMapper {
     @Mappings(
         Mapping(target = "studentNum.grade", source = "studentNum.grade"),
         Mapping(target = "studentNum.classNum", source = "studentNum.classNum"),
-        Mapping(target = "studentNum.number", source = "studentNum.number")
+        Mapping(target = "studentNum.number", source = "studentNum.number"),
+        Mapping(target = "isBlackList", source = "blackList")
     )
     fun toResponse(accountDto: AccountDto): AllAccountHttpResponse
 
@@ -27,7 +28,8 @@ interface StudentCouncilDataMapper {
     @Mappings(
         Mapping(target = "studentNum.grade", source = "studentNum.grade"),
         Mapping(target = "studentNum.classNum", source = "studentNum.classNum"),
-        Mapping(target = "studentNum.number", source = "studentNum.number")
+        Mapping(target = "studentNum.number", source = "studentNum.number"),
+        Mapping(target = "isBlackList", source = "blackList")
     )
     fun toResponse(dto: List<AccountDto>): List<AllAccountHttpResponse>
 

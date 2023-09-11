@@ -14,7 +14,9 @@ interface AccountDataMapper {
     @Mappings(
         Mapping(target = "studentNum.grade", source = "studentNum.grade"),
         Mapping(target = "studentNum.classNum", source = "studentNum.classNum"),
-        Mapping(target = "studentNum.number", source = "studentNum.number")
+        Mapping(target = "studentNum.number", source = "studentNum.number"),
+        Mapping(target = "isOuting", source = "outing"),
+        Mapping(target = "isBlackList", source = "blackList")
     )
     fun toResponse(profileDto: ProfileDto): ProfileHttpResponse
 
