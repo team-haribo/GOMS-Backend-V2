@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    active: prod
   datasource:
     driver-class-name: ${DB_DRIVER}
     url: ${DB_URL}
