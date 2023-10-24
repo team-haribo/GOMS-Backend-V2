@@ -9,6 +9,6 @@ class HealthCheckController {
 
     @GetMapping
     fun healthCheck(): ResponseEntity<Map<String, String>> =
-        ResponseEntity.ok(mapOf("message" to "Goms server running"))
+        ResponseEntity.ok(mapOf("message" to "Goms-V2 server running"))
 
 }
