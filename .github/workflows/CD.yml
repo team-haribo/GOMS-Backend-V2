@@ -18,7 +18,7 @@ jobs:
         uses: cloudtype-github-actions/deploy@v1
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          project: sk62628504/goms-backend-v2
+          project: ${{ secrets.PROJECT_EMAIL }}/goms-backend-v2
           stage: main
           yaml: >
             name: goms-backend-v2
