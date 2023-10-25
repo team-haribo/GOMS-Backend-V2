@@ -41,7 +41,7 @@ jobs:
                 - name: DB_URL
                   value: ${{ secrets.DB_URL }}
                 - name: DB_USERNAME
-                  value: ${{ secrets.DB_URERNAME }}
+                  value: ${{ secrets.DB_USERNAME }}
                 - name: DISCORD_WEBHOOK_BOT
                   value: ${{ secrets.DISCORD_WEBHOOK_B }}
                 - name: EMAIL_HOST
@@ -49,7 +49,7 @@ jobs:
                 - name: EMAIL_NAME
                   value: ${{ secrets.EMAIL_NAME }}
                 - name: EMAIL_PASSWORD
-                  value: ${{ EMAIL_PASSWORD }}
+                  value: ${{ secrets.EMAIL_PASSWORD }}
                 - name: FCM_FILE_URL
                   value: ${{ secrets.FCM_FILE_URL }}
                 - name: GAUTH_CLIENTID
