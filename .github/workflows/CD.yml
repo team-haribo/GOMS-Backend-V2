@@ -1,4 +1,4 @@
-name: GOMS-V2-CD
+name: CD
 on:
   push:
     branches:
@@ -18,7 +18,7 @@ jobs:
         uses: cloudtype-github-actions/deploy@v1
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          project: sk62628504/goms-backend-v2
+          project: gyeongsu/goms-backend-v2
           stage: main
           yaml: >
             name: goms-backend-v2
@@ -43,7 +43,7 @@ jobs:
                 - name: DB_USERNAME
                   value: ${{ secrets.DB_USERNAME }}
                 - name: DISCORD_WEBHOOK_BOT
-                  value: ${{ secrets.DISCORD_WEBHOOK_B }}
+                  value: ${{ secrets.DISCORD_WEBHOOK_BOT }}
                 - name: EMAIL_HOST
                   value: ${{ secrets.EMAIL_HOST }}
                 - name: EMAIL_NAME
@@ -78,7 +78,7 @@ jobs:
                 url: git@github.com:${{ github.repository }}.git
                 ref: ${{ github.ref }}
             
-            - name: GOMS Backend-V2 CD-Dev success Discord Notification
+            - name: GOMS Backend-V2 CD success Discord Notification
               uses: sarisia/actions-status-discord@v1
               if: ${{ success() }}
               with:
@@ -86,7 +86,7 @@ jobs:
                 webhook: ${{ secrets.DISCORD_WEBHOOK_BOT }}
                 color: 00FF00
 
-            - name: GOMS Backend-V2 CD-Dev failure Discord Notification
+            - name: GOMS Backend-V2 CD failure Discord Notification
               uses: sarisia/actions-status-discord@v1
               if: ${{ failure() }}
               with:
