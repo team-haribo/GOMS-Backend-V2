@@ -1,7 +1,6 @@
 package com.goms.v2.domain.account.data.dto
 
 import com.goms.v2.domain.account.Authority
-import java.util.*
 
 data class ProfileDto(
     val name: String,
