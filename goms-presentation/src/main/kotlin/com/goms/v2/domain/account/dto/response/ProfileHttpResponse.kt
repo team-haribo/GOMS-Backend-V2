@@ -1,7 +1,6 @@
 package com.goms.v2.domain.account.dto.response
 
 import com.goms.v2.domain.account.Authority
-import java.util.*
 
 data class ProfileHttpResponse(
     val name: String,
