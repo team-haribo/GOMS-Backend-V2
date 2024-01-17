@@ -1,7 +1,6 @@
 package com.goms.v2.domain.late.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithReadOnlyTransaction
-import com.goms.v2.domain.account.data.dto.StudentNumberDto
 import com.goms.v2.domain.late.data.dto.LateRankDto
 import com.goms.v2.repository.late.LateRepository
 
@@ -16,11 +15,8 @@ class QueryLateRankUseCase(
             LateRankDto(
                 accountIdx = it.account.idx,
                 name = it.account.name,
-                studentNum = StudentNumberDto(
-                    grade = it.account.studentNumber.grade,
-                    classNum = it.account.studentNumber.classNum,
-                    number = it.account.studentNumber.number
-                ),
+                grade = it.account.grade,
+                gender = it.account.gender,
                 profileUrl = it.account.profileUrl
             )
         }

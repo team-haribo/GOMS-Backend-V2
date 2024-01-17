@@ -1,7 +1,6 @@
 package com.goms.v2.domain.outing
 
-import com.goms.v2.domain.account.data.dto.StudentNumberDto
-import com.goms.v2.domain.account.dto.response.StudentNumHttpResponse
+import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.outing.data.dto.OutingAccountDto
 import com.goms.v2.domain.outing.dto.response.OutingAccountHttpResponse
 import com.goms.v2.domain.outing.dto.response.OutingCountHttpResponse
@@ -63,24 +62,18 @@ class OutingControllerTest: DescribeSpec({
             val outingAccountDto = OutingAccountDto(
                 accountIdx = accountUUID,
                 name = "김경수",
-                studentNum = StudentNumberDto(
-                    grade = 2,
-                    classNum = 4,
-                    number = 2
-                ),
+                grade = 6,
+                gender = Gender.MAN,
                 profileUrl = null,
                 createdTime = LocalTime.now()
             )
             val outingAccountHttpResponse = OutingAccountHttpResponse(
                 accountIdx = accountUUID,
                 name = "김경수",
-                studentNum = StudentNumHttpResponse(
-                    grade = 2,
-                    classNum = 4,
-                    number = 2
-                ),
+                grade = 6,
+                gender = Gender.MAN,
                 profileUrl = null,
-                createdTime = ""
+                createdTime = LocalTime.now()
             )
 
             every { queryOutingAccountUseCase.execute() } returns listOf(outingAccountDto)
@@ -94,9 +87,8 @@ class OutingControllerTest: DescribeSpec({
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                     .andExpect(jsonPath("$[0].accountIdx").value(outingAccountHttpResponse.accountIdx.toString()))
                     .andExpect(jsonPath("$[0].name").value(outingAccountHttpResponse.name))
-                    .andExpect(jsonPath("$[0].studentNum.grade").value(outingAccountHttpResponse.studentNum.grade))
-                    .andExpect(jsonPath("$[0].studentNum.classNum").value(outingAccountHttpResponse.studentNum.classNum))
-                    .andExpect(jsonPath("$[0].studentNum.number").value(outingAccountHttpResponse.studentNum.number))
+                    .andExpect(jsonPath("$[0].grade").value(outingAccountHttpResponse.grade))
+                    .andExpect(jsonPath("$[0].gender").value(outingAccountHttpResponse.gender))
                     .andExpect(jsonPath("$[0].profileUrl").value(outingAccountHttpResponse.profileUrl))
                     .andExpect(jsonPath("$[0].createdTime").value(outingAccountHttpResponse.createdTime))
                     .andDo(MockMvcResultHandlers.print())
@@ -134,24 +126,18 @@ class OutingControllerTest: DescribeSpec({
             val outingAccountDto = OutingAccountDto(
                 accountIdx = accountUUID,
                 name = "김경수",
-                studentNum = StudentNumberDto(
-                    grade = 2,
-                    classNum = 4,
-                    number = 2
-                ),
+                grade = 6,
+                gender = Gender.MAN,
                 profileUrl = null,
                 createdTime = LocalTime.now()
             )
             val outingAccountHttpResponse = OutingAccountHttpResponse(
                 accountIdx = accountUUID,
                 name = "김경수",
-                studentNum = StudentNumHttpResponse(
-                    grade = 2,
-                    classNum = 4,
-                    number = 2
-                ),
+                grade = 6,
+                gender = Gender.MAN,
                 profileUrl = null,
-                createdTime = ""
+                createdTime = LocalTime.now()
             )
 
             every { searchOutingAccountUseCase.execute(null) } returns listOf(outingAccountDto)
@@ -165,9 +151,8 @@ class OutingControllerTest: DescribeSpec({
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                     .andExpect(jsonPath("$[0].accountIdx").value(outingAccountHttpResponse.accountIdx.toString()))
                     .andExpect(jsonPath("$[0].name").value(outingAccountHttpResponse.name))
-                    .andExpect(jsonPath("$[0].studentNum.grade").value(outingAccountHttpResponse.studentNum.grade))
-                    .andExpect(jsonPath("$[0].studentNum.classNum").value(outingAccountHttpResponse.studentNum.classNum))
-                    .andExpect(jsonPath("$[0].studentNum.number").value(outingAccountHttpResponse.studentNum.number))
+                    .andExpect(jsonPath("$[0].grade").value(outingAccountHttpResponse.grade))
+                    .andExpect(jsonPath("$[0].gender").value(outingAccountHttpResponse.gender))
                     .andExpect(jsonPath("$[0].profileUrl").value(outingAccountHttpResponse.profileUrl))
                     .andExpect(jsonPath("$[0].createdTime").value(outingAccountHttpResponse.createdTime))
                     .andDo(MockMvcResultHandlers.print())

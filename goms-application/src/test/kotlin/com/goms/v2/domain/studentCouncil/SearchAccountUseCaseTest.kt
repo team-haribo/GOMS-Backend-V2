@@ -2,8 +2,8 @@ package com.goms.v2.domain.studentCouncil
 
 import com.goms.v2.common.AnyValueObjectGenerator
 import com.goms.v2.domain.account.Account
-import com.goms.v2.domain.account.Authority
-import com.goms.v2.domain.account.data.dto.StudentNumberDto
+import com.goms.v2.domain.account.constant.Authority
+import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.outing.OutingBlackList
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
@@ -24,7 +24,7 @@ class SearchAccountUseCaseTest: BehaviorSpec({
     Given("계정 검색 키워드가 주어질때") {
         val searchAccountDto = SearchAccountDto(
             grade = 0,
-            classNum = 0,
+            gender = Gender.MAN,
             name = "",
             authority = Authority.ROLE_STUDENT,
             isBlackList = true
@@ -34,14 +34,15 @@ class SearchAccountUseCaseTest: BehaviorSpec({
         val accountDto = AccountDto(
             accountIdx = accountIdx,
             name = "",
-            studentNum = StudentNumberDto(0, 0, 0),
+            grade = 6,
+            gender = Gender.MAN,
             profileUrl = "",
             authority = Authority.ROLE_STUDENT,
             isBlackList = true
         )
         val outingBlackList = AnyValueObjectGenerator.anyValueObject<OutingBlackList>("accountIdx" to account.idx)
 
-        every { accountRepository.findAccountByStudentInfo(searchAccountDto.grade, searchAccountDto.classNum, searchAccountDto.name, searchAccountDto.authority) } returns listOf(account)
+        every { accountRepository.findAccountByStudentInfo(searchAccountDto.grade, searchAccountDto.gender, searchAccountDto.name, searchAccountDto.authority) } returns listOf(account)
         every { outingBlackListRepository.findAll() } returns listOf(outingBlackList)
 
         When("계정 검색 요청을 하면") {

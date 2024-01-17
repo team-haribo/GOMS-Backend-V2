@@ -1,12 +1,14 @@
 package com.goms.v2.domain.outing.dto.response
 
-import com.goms.v2.domain.account.dto.response.StudentNumHttpResponse
+import com.goms.v2.domain.account.constant.Gender
+import java.time.LocalTime
 import java.util.*
 
 data class OutingAccountHttpResponse(
     val accountIdx: UUID,
     val name: String,
-    val studentNum: StudentNumHttpResponse,
+    val grade: Int,
+    val gender: Gender,
     val profileUrl: String?,
-    val createdTime: String
+    val createdTime: LocalTime
 )

@@ -1,6 +1,7 @@
 package com.goms.v2.persistence.account.entity
 
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
+import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.persistence.BaseUUIDEntity
 import java.time.LocalDateTime
 import java.util.*
@@ -13,13 +14,20 @@ class AccountJpaEntity(
     override val idx: UUID,
 
     @Column(nullable = false, length = 40)
-    val email: String,
+    val phoneNumber: String,
 
-    @Embedded
-    val studentNumber: StudentNumberEntity,
+    @Column(nullable = false, length = 20)
+    val password: String,
+
+    @Column(nullable = false)
+    val grade: Int,
 
     @Column(nullable = false, length = 10)
     val name: String,
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    val gender: Gender,
 
     @Column(nullable = true, columnDefinition = "TEXT")
     val profileUrl: String?,

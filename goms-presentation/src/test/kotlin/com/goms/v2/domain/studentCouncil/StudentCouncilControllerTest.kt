@@ -1,9 +1,8 @@
 package com.goms.v2.domain.studentCouncil
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.goms.v2.domain.account.Authority
-import com.goms.v2.domain.account.data.dto.StudentNumberDto
-import com.goms.v2.domain.account.dto.response.StudentNumHttpResponse
+import com.goms.v2.domain.account.constant.Authority
+import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.GrantAuthorityDto
 import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
@@ -126,7 +125,8 @@ class StudentCouncilControllerTest: DescribeSpec({
             val accountDto = AccountDto(
                 accountIdx = accountIdx,
                 name = "",
-                studentNum = StudentNumberDto(0, 0, 0),
+                grade = 6,
+                gender = Gender.MAN,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
                 isBlackList = true
@@ -134,7 +134,8 @@ class StudentCouncilControllerTest: DescribeSpec({
             val allAccountHttpResponse = AllAccountHttpResponse(
                 accountIdx = accountIdx,
                 name = "",
-                studentNum = StudentNumHttpResponse(0 , 0, 0),
+                grade = 6,
+                gender = Gender.MAN,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
                 isBlackList = true
@@ -150,9 +151,8 @@ class StudentCouncilControllerTest: DescribeSpec({
                         status().isOk,
                         jsonPath("$[0].accountIdx").value(allAccountHttpResponse.accountIdx.toString()),
                         jsonPath("$[0].name").value(allAccountHttpResponse.name),
-                        jsonPath("$[0].studentNum.grade").value(allAccountHttpResponse.studentNum.grade),
-                        jsonPath("$[0].studentNum.classNum").value(allAccountHttpResponse.studentNum.classNum),
-                        jsonPath("$[0].studentNum.number").value(allAccountHttpResponse.studentNum.number),
+                        jsonPath("$[0].grade").value(allAccountHttpResponse.grade),
+                        jsonPath("$[0].gender").value(allAccountHttpResponse.gender),
                         jsonPath("$[0].profileUrl").value(allAccountHttpResponse.profileUrl),
                         jsonPath("$[0].authority").value(allAccountHttpResponse.authority.toString()),
                         jsonPath("$[0].isBlackList").value(allAccountHttpResponse.isBlackList.toString())
@@ -168,14 +168,14 @@ class StudentCouncilControllerTest: DescribeSpec({
         context("유효한 요청이 전달 되면") {
             val accountIdx = UUID.randomUUID()
             val grade = 0
-            val classNum = 0
+            val gender = Gender.MAN
             val name = ""
             val authority = Authority.ROLE_STUDENT
             val isBlackList = true
 
             val searchAccountDto = SearchAccountDto(
                 grade = 0,
-                classNum = 0,
+                gender = Gender.MAN,
                 name = "",
                 authority = Authority.ROLE_STUDENT,
                 isBlackList = true
@@ -192,7 +192,8 @@ class StudentCouncilControllerTest: DescribeSpec({
             val accountDto = AccountDto(
                 accountIdx = accountIdx,
                 name = "",
-                studentNum = StudentNumberDto(0, 0, 0),
+                grade = 6,
+                gender = Gender.MAN,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
                 isBlackList = true
@@ -201,13 +202,14 @@ class StudentCouncilControllerTest: DescribeSpec({
             val allAccountHttpResponse = AllAccountHttpResponse(
                 accountIdx = accountIdx,
                 name = "",
-                studentNum = StudentNumHttpResponse(0, 0, 0),
+                grade = 6,
+                gender = Gender.MAN,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
                 isBlackList = true
             )
 
-            every { studentCouncilDataMapper.toDto(grade, classNum, name, authority, isBlackList) } returns searchAccountDto
+            every { studentCouncilDataMapper.toDto(grade, gender , name, authority, isBlackList) } returns searchAccountDto
             every { searchAccountUseCase.execute(searchAccountDto) } returns listOf(accountDto)
             every { studentCouncilDataMapper.toResponse(listOf(accountDto)) } returns listOf(allAccountHttpResponse)
 
@@ -221,9 +223,8 @@ class StudentCouncilControllerTest: DescribeSpec({
                         status().isOk,
                         jsonPath("$[0].accountIdx").value(allAccountHttpResponse.accountIdx.toString()),
                         jsonPath("$[0].name").value(allAccountHttpResponse.name),
-                        jsonPath("$[0].studentNum.grade").value(allAccountHttpResponse.studentNum.grade),
-                        jsonPath("$[0].studentNum.classNum").value(allAccountHttpResponse.studentNum.classNum),
-                        jsonPath("$[0].studentNum.number").value(allAccountHttpResponse.studentNum.number),
+                        jsonPath("$[0].grade").value(allAccountHttpResponse.grade),
+                        jsonPath("$[0].gender").value(allAccountHttpResponse.gender),
                         jsonPath("$[0].profileUrl").value(allAccountHttpResponse.profileUrl),
                         jsonPath("$[0].authority").value(allAccountHttpResponse.authority.toString()),
                         jsonPath("$[0].isBlackList").value(allAccountHttpResponse.isBlackList.toString())
