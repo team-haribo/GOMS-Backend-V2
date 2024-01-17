@@ -1,6 +1,6 @@
 package com.goms.v2.global.security.principal
 
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails

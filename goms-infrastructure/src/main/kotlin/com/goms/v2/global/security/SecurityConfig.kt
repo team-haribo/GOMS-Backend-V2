@@ -1,6 +1,6 @@
 package com.goms.v2.global.security
 
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.global.filter.config.FilterConfig
 import com.goms.v2.global.security.handler.CustomAccessDeniedHandler
 import com.goms.v2.global.security.handler.CustomAuthenticationEntryPoint

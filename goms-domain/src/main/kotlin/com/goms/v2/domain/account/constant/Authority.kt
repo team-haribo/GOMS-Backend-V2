@@ -1,4 +1,4 @@
-package com.goms.v2.domain.account
+package com.goms.v2.domain.account.constant
 
 import com.goms.v2.common.annotation.Aggregate
 

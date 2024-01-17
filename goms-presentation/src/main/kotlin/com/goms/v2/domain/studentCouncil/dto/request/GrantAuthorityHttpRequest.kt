@@ -1,6 +1,6 @@
 package com.goms.v2.domain.studentCouncil.dto.request
 
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
 import org.jetbrains.annotations.NotNull
 import java.util.UUID
 

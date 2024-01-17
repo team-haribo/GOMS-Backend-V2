@@ -1,6 +1,6 @@
 package com.goms.v2.global.security.jwt
 
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.global.security.jwt.common.exception.InvalidTokenException
 import com.goms.v2.global.security.jwt.common.properties.JwtProperties
 import com.goms.v2.global.security.principal.StudentCouncilDetailsService
