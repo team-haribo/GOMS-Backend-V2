@@ -32,9 +32,6 @@ dependencies {
     implementation(Dependencies.QUERYDSL)
     kapt(Dependencies.QUERYDSL_PROCESSOR)
 
-    /* gauth */
-    implementation(Dependencies.GAUTH)
-
     /* email */
     implementation(Dependencies.EMAIL)
 
