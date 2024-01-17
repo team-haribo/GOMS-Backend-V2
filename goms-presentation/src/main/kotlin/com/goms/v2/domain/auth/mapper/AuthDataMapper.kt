@@ -1,24 +1,21 @@
 package com.goms.v2.domain.auth.mapper
 
-import com.goms.v2.domain.auth.data.dto.SignInDto
-import com.goms.v2.domain.auth.dto.request.SignInHttpRequest
 import com.goms.v2.domain.auth.data.dto.TokenDto
 import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
 import org.mapstruct.*
+import org.springframework.stereotype.Component
+import java.time.LocalDateTime
 
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE
-)
-interface AuthDataMapper {
+@Component
+class AuthDataMapper {
 
-    fun toDto(signInHttpRequest: SignInHttpRequest?): SignInDto
-
-    @Mappings(
-        Mapping(target = "accessTokenExp", expression = "java(LocalDateTime.now().plusSeconds(tokenDto.getAccessTokenExp()))"),
-        Mapping(target = "refreshTokenExp", expression = "java(LocalDateTime.now().plusSeconds(tokenDto.getRefreshTokenExp()))")
-    )
-    fun toResponse(tokenDto: TokenDto): TokenHttpResponse
+    fun toResponse(tokenDto: TokenDto) =
+        TokenHttpResponse(
+            accessToken = tokenDto.accessToken,
+            refreshToken = tokenDto.refreshToken,
+            accessTokenExp = LocalDateTime.now().plusSeconds(tokenDto.accessTokenExp.toLong()),
+            refreshTokenExp = LocalDateTime.now().plusSeconds(tokenDto.refreshTokenExp.toLong()),
+            authority = tokenDto.authority
+        )
 
 }

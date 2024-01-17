@@ -6,14 +6,15 @@ import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.MappingConstants
 import org.mapstruct.ReportingPolicy
+import org.springframework.stereotype.Component
 
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedSourcePolicy = ReportingPolicy.IGNORE
-)
-interface OutingUUIDMapper {
+@Component
+class OutingUUIDMapper {
 
-    fun toEntity(outingUUID: OutingUUID): OutingUUIDRedisEntity
+    fun toEntity(outingUUID: OutingUUID) =
+        OutingUUIDRedisEntity(
+            outingUUID = outingUUID.outingUUID,
+            expiredAt = outingUUID.expiredAt
+        )
 
 }

@@ -2,27 +2,37 @@ package com.goms.v2.persistence.account.mapper
 
 import com.goms.v2.domain.account.Account
 import com.goms.v2.persistence.account.entity.AccountJpaEntity
-import org.mapstruct.*
+import org.springframework.stereotype.Component
 
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.WARN
-)
-interface AccountMapper {
+@Component
+class AccountMapper {
 
-    @Mappings(
-        Mapping(target = "studentNumber.grade", source = "studentNumber.grade"),
-        Mapping(target = "studentNumber.classNum", source = "studentNumber.classNum"),
-        Mapping(target = "studentNumber.number", source = "studentNumber.number")
-    )
-    fun toDomain(accountJpaEntity: AccountJpaEntity?): Account
+    fun toDomain(entity: AccountJpaEntity?): Account? =
+        entity?.let {
+            Account(
+                idx = entity.idx,
+                phoneNumber = entity.phoneNumber,
+                password = entity.password,
+                grade = entity.grade,
+                gender = entity.gender,
+                name = entity.name,
+                profileUrl = entity.profileUrl,
+                authority = entity.authority,
+                createdTime = entity.createdTime
+            )
+        }
 
-    @Mappings(
-        Mapping(target = "studentNumber.grade", source = "studentNumber.grade"),
-        Mapping(target = "studentNumber.classNum", source = "studentNumber.classNum"),
-        Mapping(target = "studentNumber.number", source = "studentNumber.number")
-    )
-    fun toEntity(account: Account): AccountJpaEntity
+    fun toEntity(domain: Account): AccountJpaEntity =
+        AccountJpaEntity(
+            idx = domain.idx,
+            phoneNumber = domain.phoneNumber,
+            password = domain.password,
+            grade = domain.grade,
+            gender = domain.gender,
+            name = domain.name,
+            profileUrl = domain.profileUrl,
+            authority = domain.authority,
+            createdTime = domain.createdTime
+        )
 
 }
