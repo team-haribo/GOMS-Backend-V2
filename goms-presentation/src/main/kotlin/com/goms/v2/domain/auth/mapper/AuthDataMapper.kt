@@ -1,8 +1,9 @@
 package com.goms.v2.domain.auth.mapper
 
+import com.goms.v2.domain.auth.data.dto.SignUpDto
 import com.goms.v2.domain.auth.data.dto.TokenDto
+import com.goms.v2.domain.auth.dto.request.SignUpHttpRequest
 import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
-import org.mapstruct.*
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
@@ -16,6 +17,15 @@ class AuthDataMapper {
             accessTokenExp = LocalDateTime.now().plusSeconds(tokenDto.accessTokenExp.toLong()),
             refreshTokenExp = LocalDateTime.now().plusSeconds(tokenDto.refreshTokenExp.toLong()),
             authority = tokenDto.authority
+        )
+
+    fun toDto(signUpHttpRequest: SignUpHttpRequest) =
+        SignUpDto(
+            phoneNumber = signUpHttpRequest.phoneNumber,
+            password = signUpHttpRequest.password,
+            name = signUpHttpRequest.name,
+            grade = signUpHttpRequest.grade,
+            gender = signUpHttpRequest.gender
         )
 
 }
