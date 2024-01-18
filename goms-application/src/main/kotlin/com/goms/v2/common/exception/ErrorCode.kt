@@ -20,7 +20,10 @@ enum class ErrorCode(
 	AUTH_CODE_NOT_FOUND("인증 코드를 찾을 수 없습니다.", ErrorStatus.NOT_FOUND),
 	AUTH_CODE_NOT_MATCH("인증 코드가 일치 하지 않습니다.", ErrorStatus.BAD_REQUEST),
 	TOO_MANY_AUTH_CODE_REQUEST("인증 코드 확인 요청을 5번 초과 한 사용자 입니다.", ErrorStatus.TOO_MANY_REQUESTS),
+
+	// AUTH
 	ALREADY_EXIST_EMAIL("이미 존재하는 이메일입니다.", ErrorStatus.CONFLICT),
+	PASSWORD_NOT_MATCH("일치하지 않는 비밀번호입니다.", ErrorStatus.BAD_REQUEST),
 
 	// AUTHENTICATION
 	AUTHENTICATION_NOT_FOUND("인증되지 않은 사용자 입니다.", ErrorStatus.NOT_FOUND),
