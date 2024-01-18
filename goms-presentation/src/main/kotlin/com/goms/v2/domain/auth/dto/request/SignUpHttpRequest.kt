@@ -1,17 +1,21 @@
 package com.goms.v2.domain.auth.dto.request
 
 import com.goms.v2.domain.account.constant.Gender
-import org.jetbrains.annotations.NotNull
+import com.goms.v2.domain.account.constant.Major
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Pattern
 
 data class SignUpHttpRequest(
-    @field:NotNull
-    val phoneNumber: String,
-    @field:NotNull
+    @field:NotBlank
+    val email: String,
+    @field:NotBlank
+    @field:Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#\$%^&*?~])[a-zA-Z0-9!@#\$%^&*?~]{6,15}\$")
     val password: String,
-    @field:NotNull
+    @field:NotBlank
     val name: String,
     @field:NotNull
-    val grade: Int,
+    val major: Major,
     @field:NotNull
     val gender: Gender
 )

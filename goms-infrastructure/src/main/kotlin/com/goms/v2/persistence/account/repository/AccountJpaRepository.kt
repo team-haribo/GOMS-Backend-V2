@@ -6,7 +6,7 @@ import java.util.UUID
 
 interface AccountJpaRepository: CrudRepository<AccountJpaEntity, UUID> {
 
-    fun findByPhoneNumber(email: String): AccountJpaEntity?
-    fun existsByPhoneNumber(email: String): Boolean
+    fun findByEmail(email: String): AccountJpaEntity?
+    fun existsByEmail(email: String): Boolean
 
 }

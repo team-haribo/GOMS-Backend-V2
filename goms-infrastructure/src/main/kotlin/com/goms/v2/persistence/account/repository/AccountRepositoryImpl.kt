@@ -29,12 +29,12 @@ class AccountRepositoryImpl(
         accountJpaRepository.findByIdOrNull(accountIdx)
             .let { accountMapper.toDomain(it) }
 
-    override fun findByPhoneNumber(phoneNumber: String) =
-        accountJpaRepository.findByPhoneNumber(phoneNumber)
+    override fun findByEmail(email: String) =
+        accountJpaRepository.findByEmail(email)
             .let { accountMapper.toDomain(it) }
 
-    override fun existsByPhoneNumber(phoneNumber: String): Boolean =
-        accountJpaRepository.existsByPhoneNumber(phoneNumber)
+    override fun existsByEmail(email: String): Boolean =
+        accountJpaRepository.existsByEmail(email)
 
     override fun findAll() =
         accountJpaRepository.findAll()

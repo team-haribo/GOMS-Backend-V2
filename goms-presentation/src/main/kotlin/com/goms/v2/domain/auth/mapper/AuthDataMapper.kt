@@ -21,10 +21,10 @@ class AuthDataMapper {
 
     fun toDto(signUpHttpRequest: SignUpHttpRequest) =
         SignUpDto(
-            phoneNumber = signUpHttpRequest.phoneNumber,
+            email = signUpHttpRequest.email,
             password = signUpHttpRequest.password,
             name = signUpHttpRequest.name,
-            grade = signUpHttpRequest.grade,
+            major = signUpHttpRequest.major,
             gender = signUpHttpRequest.gender
         )
 
