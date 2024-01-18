@@ -52,11 +52,6 @@ dependencies {
     implementation(Dependencies.SPRING_REDIS)
     implementation(Dependencies.MARIA_DB)
 
-    /* mapstruct */
-    implementation(Dependencies.MAP_STRUCT)
-    kapt(Dependencies.MAP_STRUCT_PROCESSOR)
-    kaptTest(Dependencies.MAP_STRUCT_PROCESSOR)
-
     /* fcm */
     implementation(Dependencies.FCM)
 }
