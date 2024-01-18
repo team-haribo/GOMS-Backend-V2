@@ -16,7 +16,7 @@ class AccountJpaEntity(
     @Column(nullable = false, length = 40)
     val phoneNumber: String,
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
     val password: String,
 
     @Column(nullable = false)
