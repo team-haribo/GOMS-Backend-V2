@@ -17,6 +17,7 @@ class QueryOutingAccountUseCase(
                 accountIdx = it.account.idx,
                 name = it.account.name,
                 grade = it.account.grade,
+                major = it.account.major,
                 gender = it.account.gender,
                 profileUrl = it.account.profileUrl,
                 createdTime = it.createdTime

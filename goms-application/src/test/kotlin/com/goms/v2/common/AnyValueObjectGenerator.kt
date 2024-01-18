@@ -2,6 +2,7 @@ package com.goms.v2.common
 
 import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.auth.data.event.SaveRefreshTokenEvent
 import com.goms.v2.domain.late.data.dto.LateRankDto
 import java.time.LocalDate
@@ -65,6 +66,7 @@ object AnyValueObjectGenerator {
                 UUID.randomUUID(),
                 String(),
                 2,
+                Major.SMART_IOT,
                 Gender.MAN,
                 String()
             )

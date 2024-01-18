@@ -1,6 +1,7 @@
 package com.goms.v2.domain.outing
 
 import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.outing.data.dto.OutingAccountDto
 import com.goms.v2.domain.outing.dto.response.OutingAccountHttpResponse
 import com.goms.v2.domain.outing.dto.response.OutingCountHttpResponse
@@ -63,6 +64,7 @@ class OutingControllerTest: DescribeSpec({
                 accountIdx = accountUUID,
                 name = "김경수",
                 grade = 6,
+                major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
                 createdTime = LocalTime.now()
@@ -71,6 +73,7 @@ class OutingControllerTest: DescribeSpec({
                 accountIdx = accountUUID,
                 name = "김경수",
                 grade = 6,
+                major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
                 createdTime = LocalTime.now()
@@ -127,6 +130,7 @@ class OutingControllerTest: DescribeSpec({
                 accountIdx = accountUUID,
                 name = "김경수",
                 grade = 6,
+                major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
                 createdTime = LocalTime.now()
@@ -135,6 +139,7 @@ class OutingControllerTest: DescribeSpec({
                 accountIdx = accountUUID,
                 name = "김경수",
                 grade = 6,
+                major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
                 createdTime = LocalTime.now()
