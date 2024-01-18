@@ -2,7 +2,6 @@ package com.goms.v2.domain.late.mapper
 
 import com.goms.v2.domain.late.data.dto.LateRankDto
 import com.goms.v2.domain.late.dto.LateRankHttpResponse
-import org.mapstruct.*
 import org.springframework.stereotype.Component
 
 @Component

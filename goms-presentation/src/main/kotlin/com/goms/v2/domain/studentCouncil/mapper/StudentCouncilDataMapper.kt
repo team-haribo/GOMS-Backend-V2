@@ -7,7 +7,6 @@ import com.goms.v2.domain.studentCouncil.data.dto.GrantAuthorityDto
 import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
 import com.goms.v2.domain.studentCouncil.dto.request.GrantAuthorityHttpRequest
 import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
-import org.mapstruct.*
 import org.springframework.stereotype.Component
 
 @Component

@@ -3,7 +3,6 @@ package com.goms.v2.persistence.late.mapper
 import com.goms.v2.domain.late.Late
 import com.goms.v2.persistence.account.mapper.AccountMapper
 import com.goms.v2.persistence.late.entity.LateJpaEntity
-import org.mapstruct.*
 import org.springframework.stereotype.Component
 
 @Component

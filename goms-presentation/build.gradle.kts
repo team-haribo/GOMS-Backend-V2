@@ -22,11 +22,6 @@ dependencies {
     /* validation */
     implementation(Dependencies.VALIDATION)
 
-    /* mapstruct */
-    implementation(Dependencies.MAP_STRUCT)
-    kapt(Dependencies.MAP_STRUCT_PROCESSOR)
-    kaptTest(Dependencies.MAP_STRUCT_PROCESSOR)
-
     /* test */
     implementation(Dependencies.SPRING_BOOT_STARTER)
     implementation(Dependencies.MOCKITOKOTLIN2)

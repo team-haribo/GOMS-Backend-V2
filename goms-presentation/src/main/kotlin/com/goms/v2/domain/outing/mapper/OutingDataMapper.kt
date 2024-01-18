@@ -3,7 +3,6 @@ package com.goms.v2.domain.outing.mapper
 import com.goms.v2.domain.outing.data.dto.OutingAccountDto
 import com.goms.v2.domain.outing.dto.response.OutingAccountHttpResponse
 import com.goms.v2.domain.outing.dto.response.OutingCountHttpResponse
-import org.mapstruct.*
 import org.springframework.stereotype.Component
 
 @Component
@@ -18,6 +17,7 @@ class OutingDataMapper {
             profileUrl = outingAccountDto.profileUrl,
             createdTime = outingAccountDto.createdTime
         )
+
     fun toResponse(outingCount: Long) =
         OutingCountHttpResponse(
             outingCount = outingCount
