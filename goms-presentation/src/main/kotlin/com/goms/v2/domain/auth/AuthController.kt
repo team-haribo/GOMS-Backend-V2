@@ -1,9 +1,11 @@
 package com.goms.v2.domain.auth
 
+import com.goms.v2.domain.auth.dto.request.SignInHttpRequest
 import com.goms.v2.domain.auth.dto.request.SignUpHttpRequest
 import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
 import com.goms.v2.domain.auth.mapper.AuthDataMapper
 import com.goms.v2.domain.auth.usecase.ReissueTokenUseCase
+import com.goms.v2.domain.auth.usecase.SignInUseCase
 import com.goms.v2.domain.auth.usecase.SignUpUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -15,6 +17,7 @@ import javax.validation.Valid
 class AuthController(
     private val authDataMapper: AuthDataMapper,
     private val signUpUseCase: SignUpUseCase,
+    private val signInUseCase: SignInUseCase,
     private val reissueTokenUseCase: ReissueTokenUseCase,
 ) {
 
@@ -22,6 +25,12 @@ class AuthController(
     fun signUp(@RequestBody @Valid signUpHttpRequest: SignUpHttpRequest): ResponseEntity<Void> =
         signUpUseCase.execute(authDataMapper.toDto(signUpHttpRequest))
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+
+    @PostMapping("signin")
+    fun signIn(@RequestBody @Valid signInHttpRequest: SignInHttpRequest): ResponseEntity<TokenHttpResponse> =
+        signInUseCase.execute(authDataMapper.toDto(signInHttpRequest))
+            .let { ResponseEntity.ok(authDataMapper.toResponse(it)) }
+
 
     @PatchMapping
     fun reissue(@RequestHeader refreshToken: String): ResponseEntity<TokenHttpResponse> =
