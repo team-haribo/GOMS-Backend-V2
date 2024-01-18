@@ -1,6 +1,7 @@
 package com.goms.v2.domain.late
 
 import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.late.data.dto.LateRankDto
 import com.goms.v2.domain.late.dto.LateRankHttpResponse
 import com.goms.v2.domain.late.mapper.LateDataMapper
@@ -33,6 +34,7 @@ class LateControllerTest: DescribeSpec({
                 accountIdx = accountIdx,
                 name = "",
                 grade = 6,
+                major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = ""
             )
@@ -40,6 +42,7 @@ class LateControllerTest: DescribeSpec({
                 accountIdx = accountIdx,
                 name = "",
                 grade = 6,
+                major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = ""
             )

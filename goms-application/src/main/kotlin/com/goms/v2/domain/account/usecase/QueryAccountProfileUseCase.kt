@@ -26,6 +26,7 @@ class QueryAccountProfileUseCase(
         return ProfileDto(
             name = account.name,
             grade = account.grade,
+            major = account.major,
             gender = account.gender,
             authority = account.authority,
             profileUrl = account.profileUrl,

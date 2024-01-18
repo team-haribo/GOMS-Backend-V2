@@ -2,6 +2,7 @@ package com.goms.v2.domain.account
 
 import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.account.data.dto.ProfileDto
 import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
 import com.goms.v2.domain.account.mapper.AccountDataMapper
@@ -37,6 +38,7 @@ class AccountControllerTest: DescribeSpec({
             name = "김경수",
             grade = 6,
             gender = Gender.MAN,
+            major = Major.SMART_IOT,
             authority = Authority.ROLE_STUDENT,
             profileUrl = null,
             lateCount = 0,
@@ -47,6 +49,7 @@ class AccountControllerTest: DescribeSpec({
             name = "김경수",
             grade = 6,
             gender = Gender.MAN,
+            major = Major.SMART_IOT,
             authority = Authority.ROLE_STUDENT,
             profileUrl = null,
             lateCount = 0,

@@ -13,6 +13,7 @@ class OutingDataMapper {
             accountIdx = outingAccountDto.accountIdx,
             name = outingAccountDto.name,
             grade = outingAccountDto.grade,
+            major = outingAccountDto.major,
             gender = outingAccountDto.gender,
             profileUrl = outingAccountDto.profileUrl,
             createdTime = outingAccountDto.createdTime

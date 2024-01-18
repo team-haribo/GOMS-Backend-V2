@@ -12,6 +12,7 @@ class AccountDataMapper {
             name = profileDto.name,
             grade = profileDto.grade,
             gender = profileDto.gender,
+            major = profileDto.major,
             authority = profileDto.authority,
             profileUrl = profileDto.profileUrl,
             lateCount = profileDto.lateCount,

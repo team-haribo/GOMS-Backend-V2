@@ -12,6 +12,7 @@ class LateDataMapper {
             accountIdx = lateRankDto.accountIdx,
             name = lateRankDto.name,
             grade = lateRankDto.grade,
+            major = lateRankDto.major,
             gender = lateRankDto.gender,
             profileUrl = lateRankDto.profileUrl
         )
