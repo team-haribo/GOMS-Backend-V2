@@ -36,9 +36,11 @@ class LateRepositoryImpl(
                     Projections.constructor(
                         Account::class.java,
                         lateJpaEntity.account.idx,
-                        lateJpaEntity.account.phoneNumber,
+                        lateJpaEntity.account.email,
+                        lateJpaEntity.account.password,
                         lateJpaEntity.account.grade,
                         lateJpaEntity.account.gender,
+                        lateJpaEntity.account.major,
                         lateJpaEntity.account.name,
                         lateJpaEntity.account.profileUrl,
                         lateJpaEntity.account.authority,
