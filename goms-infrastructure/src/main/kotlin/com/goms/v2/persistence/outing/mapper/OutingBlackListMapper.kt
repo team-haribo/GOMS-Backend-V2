@@ -2,19 +2,21 @@ package com.goms.v2.persistence.outing.mapper
 
 import com.goms.v2.domain.outing.OutingBlackList
 import com.goms.v2.persistence.outing.entity.OutingBlackListRedisEntity
-import org.mapstruct.InjectionStrategy
-import org.mapstruct.Mapper
-import org.mapstruct.MappingConstants
-import org.mapstruct.ReportingPolicy
+import org.springframework.stereotype.Component
 
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE
-)
-interface OutingBlackListMapper {
+@Component
+class OutingBlackListMapper {
 
-    fun toEntity(outingBlacklist: OutingBlackList): OutingBlackListRedisEntity
-    fun toDomain(outingBlackListRedisEntity: OutingBlackListRedisEntity): OutingBlackList
+    fun toEntity(outingBlacklist: OutingBlackList) =
+        OutingBlackListRedisEntity(
+            accountIdx = outingBlacklist.accountIdx,
+            expiredAt = outingBlacklist.expiredAt
+        )
+
+    fun toDomain(outingBlackListRedisEntity: OutingBlackListRedisEntity) =
+        OutingBlackList(
+            accountIdx = outingBlackListRedisEntity.accountIdx,
+            expiredAt = outingBlackListRedisEntity.expiredAt
+        )
 
 }

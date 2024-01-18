@@ -2,8 +2,7 @@ package com.goms.v2.domain.studentCouncil
 
 import com.goms.v2.common.AnyValueObjectGenerator
 import com.goms.v2.domain.account.Account
-import com.goms.v2.domain.account.Authority
-import com.goms.v2.domain.account.data.dto.StudentNumberDto
+import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.outing.OutingBlackList
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.usecase.QueryAllAccountUseCase
@@ -27,7 +26,8 @@ class QueryAllAccountUseCaseTest: BehaviorSpec({
             AccountDto(
                 accountIdx = accountIdx,
                 name = account.name,
-                studentNum = StudentNumberDto(0,0, 0),
+                grade = account.grade,
+                gender = account.gender,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
                 isBlackList = true

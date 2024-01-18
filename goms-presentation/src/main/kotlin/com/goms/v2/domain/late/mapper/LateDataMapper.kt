@@ -2,20 +2,18 @@ package com.goms.v2.domain.late.mapper
 
 import com.goms.v2.domain.late.data.dto.LateRankDto
 import com.goms.v2.domain.late.dto.LateRankHttpResponse
-import org.mapstruct.*
+import org.springframework.stereotype.Component
 
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.WARN
-)
-interface LateDataMapper {
+@Component
+class LateDataMapper {
 
-    @Mappings(
-        Mapping(target = "studentNum.grade", source = "studentNum.grade"),
-        Mapping(target = "studentNum.classNum", source = "studentNum.classNum"),
-        Mapping(target = "studentNum.number", source = "studentNum.number")
-    )
-    fun toResponse(lateRankDto: LateRankDto): LateRankHttpResponse
+    fun toResponse(lateRankDto: LateRankDto) =
+        LateRankHttpResponse(
+            accountIdx = lateRankDto.accountIdx,
+            name = lateRankDto.name,
+            grade = lateRankDto.grade,
+            gender = lateRankDto.gender,
+            profileUrl = lateRankDto.profileUrl
+        )
 
 }

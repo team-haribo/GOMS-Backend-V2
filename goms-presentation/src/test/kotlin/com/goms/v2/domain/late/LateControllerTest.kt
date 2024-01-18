@@ -1,7 +1,6 @@
 package com.goms.v2.domain.late
 
-import com.goms.v2.domain.account.data.dto.StudentNumberDto
-import com.goms.v2.domain.account.dto.response.StudentNumHttpResponse
+import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.late.data.dto.LateRankDto
 import com.goms.v2.domain.late.dto.LateRankHttpResponse
 import com.goms.v2.domain.late.mapper.LateDataMapper
@@ -33,13 +32,15 @@ class LateControllerTest: DescribeSpec({
             val lateRankDto = LateRankDto(
                 accountIdx = accountIdx,
                 name = "",
-                studentNum = StudentNumberDto(0, 0, 0),
+                grade = 6,
+                gender = Gender.MAN,
                 profileUrl = ""
             )
             val lateRankHttpResponse = LateRankHttpResponse(
                 accountIdx = accountIdx,
                 name = "",
-                studentNum = StudentNumHttpResponse(0, 0, 0),
+                grade = 6,
+                gender = Gender.MAN,
                 profileUrl = ""
             )
             every { queryLateRankUseCase.execute() } returns listOf(lateRankDto)
@@ -53,9 +54,8 @@ class LateControllerTest: DescribeSpec({
                         MockMvcResultMatchers.status().isOk,
                         MockMvcResultMatchers.jsonPath("$[0].accountIdx").value(lateRankHttpResponse.accountIdx.toString()),
                         MockMvcResultMatchers.jsonPath("$[0].name").value(lateRankHttpResponse.name),
-                        MockMvcResultMatchers.jsonPath("$[0].studentNum.grade").value(lateRankHttpResponse.studentNum.grade),
-                        MockMvcResultMatchers.jsonPath("$[0].studentNum.classNum").value(lateRankHttpResponse.studentNum.classNum),
-                        MockMvcResultMatchers.jsonPath("$[0].studentNum.number").value(lateRankHttpResponse.studentNum.number),
+                        MockMvcResultMatchers.jsonPath("$[0].grade").value(lateRankHttpResponse.grade),
+                        MockMvcResultMatchers.jsonPath("$[0].gender").value(lateRankHttpResponse.gender),
                         MockMvcResultMatchers.jsonPath("$[0].profileUrl").value(lateRankHttpResponse.profileUrl)
                     )
             }

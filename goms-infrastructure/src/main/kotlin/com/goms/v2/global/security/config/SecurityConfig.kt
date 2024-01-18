@@ -1,6 +1,6 @@
-package com.goms.v2.global.security
+package com.goms.v2.global.security.config
 
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.global.filter.config.FilterConfig
 import com.goms.v2.global.security.handler.CustomAccessDeniedHandler
 import com.goms.v2.global.security.handler.CustomAuthenticationEntryPoint
@@ -35,10 +35,9 @@ class SecurityConfig(
     private fun authorizeHttpRequests(http: HttpSecurity) {
         http.authorizeRequests()
             // /auth
+            .mvcMatchers(HttpMethod.POST, "/api/v2/auth/signup").permitAll()
             .mvcMatchers(HttpMethod.POST, "/api/v2/auth/signin").permitAll()
             .mvcMatchers(HttpMethod.PATCH, "/api/v2/auth").permitAll()
-            .mvcMatchers(HttpMethod.POST, "/api/v2/auth/email/send").permitAll()
-            .mvcMatchers(HttpMethod.GET, "/api/v2/auth/email/verify").permitAll()
 
             // /account
             .mvcMatchers(HttpMethod.GET, "/api/v2/account/profile").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)

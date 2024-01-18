@@ -1,7 +1,8 @@
 package com.goms.v2.persistence.account.repository
 
 import com.goms.v2.domain.account.Account
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
+import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.persistence.account.entity.QAccountJpaEntity.accountJpaEntity
 import com.goms.v2.persistence.account.mapper.AccountMapper
 import com.goms.v2.repository.account.AccountRepository
@@ -35,17 +36,19 @@ class AccountRepositoryImpl(
     override fun existsByEmail(email: String): Boolean =
         accountJpaRepository.existsByEmail(email)
 
+    override fun findAll() =
+        accountJpaRepository.findAll()
+            .map { accountMapper.toDomain(it)!! }
+
     override fun findAllOrderByStudentNum(): List<Account> =
         queryFactory.selectFrom(accountJpaEntity)
-            .orderBy(accountJpaEntity.studentNumber.number.asc())
-            .orderBy(accountJpaEntity.studentNumber.classNum.asc())
-            .orderBy(accountJpaEntity.studentNumber.grade.asc())
+            .orderBy(accountJpaEntity.gender.asc())
             .fetch()
-            .map { accountMapper.toDomain(it) }
+            .map { accountMapper.toDomain(it)!! }
 
     override fun findAccountByStudentInfo(
         grade: Int?,
-        classNum: Int?,
+        gender: Gender?,
         name: String?,
         authority: Authority?
     ): List<Account> =
@@ -53,24 +56,16 @@ class AccountRepositoryImpl(
             .selectFrom(accountJpaEntity)
             .where(
                 eqGrade(grade),
-                eqClassNum(classNum),
                 likeName(name),
                 eqAuthority(authority)
             )
-            .orderBy(accountJpaEntity.studentNumber.grade.asc())
-            .orderBy(accountJpaEntity.studentNumber.classNum.asc())
-            .orderBy(accountJpaEntity.studentNumber.number.asc())
+            .orderBy(accountJpaEntity.grade.asc())
             .fetch()
-            .map { accountMapper.toDomain(it) }
+            .map { accountMapper.toDomain(it)!! }
 
     private fun eqGrade(grade: Int?): BooleanExpression? {
         if (grade == null) return null
-        return accountJpaEntity.studentNumber.grade.eq(grade)
-    }
-
-    private fun eqClassNum(classNum: Int?): BooleanExpression? {
-        if (classNum == null) return null
-        return accountJpaEntity.studentNumber.classNum.eq(classNum)
+        return accountJpaEntity.grade.eq(grade)
     }
 
     private fun likeName(name: String?): BooleanExpression? {

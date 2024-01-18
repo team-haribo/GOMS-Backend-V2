@@ -1,9 +1,9 @@
 package com.goms.v2.domain.account
 
+import com.goms.v2.domain.account.constant.Authority
+import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.account.data.dto.ProfileDto
-import com.goms.v2.domain.account.data.dto.StudentNumberDto
 import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
-import com.goms.v2.domain.account.dto.response.StudentNumHttpResponse
 import com.goms.v2.domain.account.mapper.AccountDataMapper
 import com.goms.v2.domain.account.usecase.QueryAccountProfileUseCase
 import io.kotest.core.spec.style.DescribeSpec
@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import java.util.*
 
 class AccountControllerTest: DescribeSpec({
     lateinit var mockMvc: MockMvc
@@ -36,11 +35,8 @@ class AccountControllerTest: DescribeSpec({
         val url = "/api/v2/account/profile"
         val profileDto = ProfileDto(
             name = "김경수",
-            studentNum = StudentNumberDto(
-                grade = 2,
-                classNum = 4,
-                number = 2
-            ),
+            grade = 6,
+            gender = Gender.MAN,
             authority = Authority.ROLE_STUDENT,
             profileUrl = null,
             lateCount = 0,
@@ -49,11 +45,8 @@ class AccountControllerTest: DescribeSpec({
         )
         val profileHttpResponse = ProfileHttpResponse(
             name = "김경수",
-            studentNum = StudentNumHttpResponse(
-                grade = 2,
-                classNum = 4,
-                number = 2
-            ),
+            grade = 6,
+            gender = Gender.MAN,
             authority = Authority.ROLE_STUDENT,
             profileUrl = null,
             lateCount = 0,
@@ -72,9 +65,8 @@ class AccountControllerTest: DescribeSpec({
                     .andExpect(status().`is`(200))
                     .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                     .andExpect(jsonPath("$.name").value(profileHttpResponse.name))
-                    .andExpect(jsonPath("$.studentNum.grade").value(profileHttpResponse.studentNum.grade))
-                    .andExpect(jsonPath("$.studentNum.classNum").value(profileHttpResponse.studentNum.classNum))
-                    .andExpect(jsonPath("$.studentNum.number").value(profileHttpResponse.studentNum.number))
+                    .andExpect(jsonPath("$.grade").value(profileHttpResponse.grade))
+                    .andExpect(jsonPath("$.gender").value(profileHttpResponse.gender))
                     .andExpect(jsonPath("$.authority").value(profileHttpResponse.authority.toString()))
                     .andExpect(jsonPath("$.profileUrl").value(profileHttpResponse.profileUrl))
                     .andExpect(jsonPath("$.lateCount").value(profileHttpResponse.lateCount))

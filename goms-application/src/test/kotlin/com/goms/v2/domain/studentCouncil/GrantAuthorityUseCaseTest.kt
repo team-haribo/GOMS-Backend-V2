@@ -2,7 +2,7 @@ package com.goms.v2.domain.studentCouncil
 
 import com.goms.v2.common.AnyValueObjectGenerator
 import com.goms.v2.domain.account.Account
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.domain.studentCouncil.data.dto.GrantAuthorityDto
 import com.goms.v2.domain.studentCouncil.usecase.GrantAuthorityUseCase

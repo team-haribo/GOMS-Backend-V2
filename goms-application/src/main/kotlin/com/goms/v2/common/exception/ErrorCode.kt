@@ -8,11 +8,6 @@ enum class ErrorCode(
 	// GOMS
 	GOMS_SERVER_ERROR("GOMS 서버 오류 입니다.", ErrorStatus.INTERNAL_SERVER_ERROR),
 
-	// GAUTH
-	GAUTH_SECRET_MISMATCH("클라이언트 시크릿 값이 일치하지 않습니다.", ErrorStatus.BAD_REQUEST),
-	EXPIRED_GAUTH_CODE("만료된 코드입니다.", ErrorStatus.UNAUTHORIZED),
-	GAUTH_SERVICE_NOT_FOUND("서비스를 찾지 못했습니다.", ErrorStatus.NOT_FOUND),
-
 	// EMAIL
 	DUPLICATE_EMAIL("중복된 이메일 입니다.", ErrorStatus.CONFLICT),
 	MANY_REQUEST_EMAIL("이메일 요청이 5번을 초과했습니다.", ErrorStatus.TOO_MANY_REQUESTS),
@@ -25,6 +20,7 @@ enum class ErrorCode(
 	AUTH_CODE_NOT_FOUND("인증 코드를 찾을 수 없습니다.", ErrorStatus.NOT_FOUND),
 	AUTH_CODE_NOT_MATCH("인증 코드가 일치 하지 않습니다.", ErrorStatus.BAD_REQUEST),
 	TOO_MANY_AUTH_CODE_REQUEST("인증 코드 확인 요청을 5번 초과 한 사용자 입니다.", ErrorStatus.TOO_MANY_REQUESTS),
+	ALREADY_EXIST_EMAIL("이미 존재하는 이메일입니다.", ErrorStatus.CONFLICT),
 
 	// AUTHENTICATION
 	AUTHENTICATION_NOT_FOUND("인증되지 않은 사용자 입니다.", ErrorStatus.NOT_FOUND),

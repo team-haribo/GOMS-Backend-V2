@@ -1,11 +1,10 @@
 package com.goms.v2.persistence.late.repository
 
 import com.goms.v2.domain.account.Account
-import com.goms.v2.domain.account.StudentNumber
 import com.goms.v2.domain.late.Late
-import com.goms.v2.persistence.late.entity.QLateJpaEntity.lateJpaEntity
 import com.goms.v2.persistence.late.mapper.LateMapper
 import com.goms.v2.repository.late.LateRepository
+import com.goms.v2.persistence.late.entity.QLateJpaEntity.lateJpaEntity
 import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
@@ -38,12 +37,10 @@ class LateRepositoryImpl(
                         Account::class.java,
                         lateJpaEntity.account.idx,
                         lateJpaEntity.account.email,
-                        Projections.constructor(
-                            StudentNumber::class.java,
-                            lateJpaEntity.account.studentNumber.grade,
-                            lateJpaEntity.account.studentNumber.classNum,
-                            lateJpaEntity.account.studentNumber.number
-                        ),
+                        lateJpaEntity.account.password,
+                        lateJpaEntity.account.grade,
+                        lateJpaEntity.account.gender,
+                        lateJpaEntity.account.major,
                         lateJpaEntity.account.name,
                         lateJpaEntity.account.profileUrl,
                         lateJpaEntity.account.authority,

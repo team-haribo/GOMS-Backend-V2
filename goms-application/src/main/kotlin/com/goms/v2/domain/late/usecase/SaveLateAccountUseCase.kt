@@ -27,11 +27,11 @@ class SaveLateAccountUseCase(
         outingList.forEach {
             lateList.add(
                 Late(
-                    idx = -1,
+                   idx = -1,
                     account = it.account,
-                    createdTime = LocalDate.now()
-                )
-            )
+                   createdTime = LocalDate.now()
+               )
+           )
             outingBlackList.add(
                 OutingBlackList(
                     accountIdx = it.account.idx,

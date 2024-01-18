@@ -1,6 +1,7 @@
 package com.goms.v2.domain.studentCouncil
 
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
+import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.studentCouncil.dto.request.GrantAuthorityHttpRequest
 import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
 import com.goms.v2.domain.studentCouncil.mapper.StudentCouncilDataMapper
@@ -60,12 +61,12 @@ class StudentCouncilController(
     @GetMapping("search")
     fun searchAccount(
         @RequestParam(required = false) grade: Int?,
-        @RequestParam(required = false) classNum: Int?,
+        @RequestParam(required = false) gender: Gender,
         @RequestParam(required = false) name: String?,
         @RequestParam(required = false) authority: Authority?,
         @RequestParam(required = false) isBlackList: Boolean?
     ): ResponseEntity<List<AllAccountHttpResponse>> =
-        studentCouncilDataMapper.toDto(grade, classNum, name, authority, isBlackList)
+        studentCouncilDataMapper.toDto(grade, gender, name, authority, isBlackList)
             .let { searchAccountUseCase.execute(it) }
             .let { studentCouncilDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }

@@ -1,7 +1,7 @@
 package com.goms.v2.domain.auth.dto.response
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
 import java.time.LocalDateTime
 
 data class TokenHttpResponse(

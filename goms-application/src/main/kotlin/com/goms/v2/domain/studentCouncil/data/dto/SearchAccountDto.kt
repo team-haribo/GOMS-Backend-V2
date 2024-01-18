@@ -1,10 +1,11 @@
 package com.goms.v2.domain.studentCouncil.data.dto
 
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
+import com.goms.v2.domain.account.constant.Gender
 
 data class SearchAccountDto(
     val grade: Int?,
-    val classNum: Int?,
+    val gender: Gender,
     val name: String?,
     val authority: Authority?,
     val isBlackList: Boolean?

@@ -1,44 +1,59 @@
 package com.goms.v2.domain.studentCouncil.mapper
 
-import com.goms.v2.domain.account.Authority
+import com.goms.v2.domain.account.constant.Authority
+import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.GrantAuthorityDto
 import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
 import com.goms.v2.domain.studentCouncil.dto.request.GrantAuthorityHttpRequest
 import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
-import org.mapstruct.*
+import org.springframework.stereotype.Component
 
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.WARN
-)
-interface StudentCouncilDataMapper {
+@Component
+class StudentCouncilDataMapper {
 
-    @Mappings(
-        Mapping(target = "studentNum.grade", source = "studentNum.grade"),
-        Mapping(target = "studentNum.classNum", source = "studentNum.classNum"),
-        Mapping(target = "studentNum.number", source = "studentNum.number"),
-        Mapping(target = "isBlackList", source = "blackList")
-    )
-    fun toResponse(accountDto: AccountDto): AllAccountHttpResponse
+    fun toResponse(accountDto: AccountDto) =
+        AllAccountHttpResponse(
+            accountIdx = accountDto.accountIdx,
+            name = accountDto.name,
+            grade = accountDto.grade,
+            gender = accountDto.gender,
+            profileUrl = accountDto.profileUrl,
+            authority = accountDto.authority,
+            isBlackList = accountDto.isBlackList
+        )
 
-    fun toDto(request: GrantAuthorityHttpRequest): GrantAuthorityDto
+    fun toDto(request: GrantAuthorityHttpRequest) =
+        GrantAuthorityDto(
+            accountIdx = request.accountIdx,
+            authority = request.authority
+        )
 
-    @Mappings(
-        Mapping(target = "studentNum.grade", source = "studentNum.grade"),
-        Mapping(target = "studentNum.classNum", source = "studentNum.classNum"),
-        Mapping(target = "studentNum.number", source = "studentNum.number"),
-        Mapping(target = "isBlackList", source = "blackList")
-    )
-    fun toResponse(dto: List<AccountDto>): List<AllAccountHttpResponse>
+    fun toResponse(dto: List<AccountDto>) =
+        dto.map {
+            AllAccountHttpResponse(
+                accountIdx = it.accountIdx,
+                name = it.name,
+                grade = it.grade,
+                gender = it.gender,
+                profileUrl = it.profileUrl,
+                authority = it.authority,
+                isBlackList = it.isBlackList
+            )
+        }
 
     fun toDto(
         grade: Int?,
-        classNum: Int?,
+        gender: Gender,
         name: String?,
         authority: Authority?,
         isBlackList: Boolean?
-    ): SearchAccountDto
+    ) = SearchAccountDto(
+            grade = grade,
+            gender = gender,
+            name = name,
+            authority = authority,
+            isBlackList = isBlackList
+        )
 
 }

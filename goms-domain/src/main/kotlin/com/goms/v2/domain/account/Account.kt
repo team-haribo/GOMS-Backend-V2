@@ -1,6 +1,9 @@
 package com.goms.v2.domain.account
 
 import com.goms.v2.common.annotation.RootAggregate
+import com.goms.v2.domain.account.constant.Authority
+import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import java.time.LocalDateTime
 import java.util.*
 
@@ -8,7 +11,10 @@ import java.util.*
 data class Account(
     val idx: UUID,
     val email: String,
-    val studentNumber: StudentNumber,
+    val password: String,
+    val grade: Int,
+    val gender: Gender,
+    val major: Major,
     val name: String,
     val profileUrl: String?,
     var authority: Authority,

@@ -3,21 +3,24 @@ package com.goms.v2.domain.outing.mapper
 import com.goms.v2.domain.outing.data.dto.OutingAccountDto
 import com.goms.v2.domain.outing.dto.response.OutingAccountHttpResponse
 import com.goms.v2.domain.outing.dto.response.OutingCountHttpResponse
-import org.mapstruct.*
+import org.springframework.stereotype.Component
 
-@Mapper(
-    componentModel = MappingConstants.ComponentModel.SPRING,
-    injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    unmappedTargetPolicy = ReportingPolicy.WARN
-)
-interface OutingDataMapper {
+@Component
+class OutingDataMapper {
 
-    @Mappings(
-        Mapping(target = "studentNum.grade", source = "studentNum.grade"),
-        Mapping(target = "studentNum.classNum", source = "studentNum.classNum"),
-        Mapping(target = "studentNum.number", source = "studentNum.number")
-    )
-    fun toResponse(outingAccountDto: OutingAccountDto): OutingAccountHttpResponse
-    fun toResponse(outingCount: Long?): OutingCountHttpResponse
+    fun toResponse(outingAccountDto: OutingAccountDto) =
+        OutingAccountHttpResponse(
+            accountIdx = outingAccountDto.accountIdx,
+            name = outingAccountDto.name,
+            grade = outingAccountDto.grade,
+            gender = outingAccountDto.gender,
+            profileUrl = outingAccountDto.profileUrl,
+            createdTime = outingAccountDto.createdTime
+        )
+
+    fun toResponse(outingCount: Long) =
+        OutingCountHttpResponse(
+            outingCount = outingCount
+        )
 
 }
