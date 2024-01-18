@@ -3,6 +3,7 @@ package com.goms.v2.domain.auth
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.auth.data.dto.SignUpDto
 import com.goms.v2.domain.auth.data.dto.TokenDto
 import com.goms.v2.domain.auth.dto.request.SignUpHttpRequest
@@ -43,17 +44,17 @@ class AuthControllerTest: DescribeSpec({
 
         context("회원가입 요청이 전달 되면") {
             val signUpHttpRequest = SignUpHttpRequest(
-                phoneNumber = "01012345678",
-                password = "111111111",
+                email = "s22039@gsm.hs.kr",
+                password = "gomstest1234!",
                 name = "김경수",
-                grade = 6,
+                major = Major.SMART_IOT,
                 gender = Gender.MAN
             )
             val signUpDto = SignUpDto(
-                phoneNumber = "01012345678",
-                password = "111111111",
+                email = "s22039@gsm.hs.kr",
+                password = "gomstest1234!",
                 name = "김경수",
-                grade = 6,
+                major = Major.SMART_IOT,
                 gender = Gender.MAN
             )
 
