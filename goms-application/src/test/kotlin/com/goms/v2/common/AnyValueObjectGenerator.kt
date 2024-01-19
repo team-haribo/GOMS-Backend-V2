@@ -62,6 +62,8 @@ object AnyValueObjectGenerator {
             HashSet::class -> HashSet<Any>()
 
             Authority::class -> Authority.ROLE_STUDENT
+            Gender::class -> Gender.MAN
+            Major::class -> Major.SMART_IOT
             LateRankDto::class -> LateRankDto(
                 UUID.randomUUID(),
                 String(),
