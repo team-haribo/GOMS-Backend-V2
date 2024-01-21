@@ -1,10 +1,10 @@
 package com.goms.v2.domain.auth
 
+import com.goms.v2.common.AnyValueObjectGenerator
+import com.goms.v2.common.util.AuthenticationValidator
 import com.goms.v2.domain.account.Account
-import com.goms.v2.domain.account.constant.Authority
-import com.goms.v2.domain.account.constant.Gender
-import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.auth.data.dto.SignUpDto
+import com.goms.v2.domain.auth.data.event.DeleteAuthenticationEvent
 import com.goms.v2.domain.auth.exception.AlreadyExistEmailException
 import com.goms.v2.domain.auth.spi.PasswordEncoderPort
 import com.goms.v2.domain.auth.usecase.SignUpUseCase
@@ -14,37 +14,26 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import java.time.LocalDateTime
-import java.util.*
+import org.springframework.context.ApplicationEventPublisher
 
 class SignUpUseCaseTest: BehaviorSpec({
     val accountRepository = mockk<AccountRepository>()
     val passwordEncoderPort = mockk<PasswordEncoderPort>()
-    val signUpUseCase = SignUpUseCase(accountRepository, passwordEncoderPort)
+    val authenticationValidator = mockk<AuthenticationValidator>()
+    val publisher = mockk<ApplicationEventPublisher>()
+    val signUpUseCase = SignUpUseCase(accountRepository, passwordEncoderPort, authenticationValidator, publisher)
 
     Given("SignUpDto 가 주어질때") {
         val encodePassword = "encodePassword"
-        val signUpDto = SignUpDto(
-            email = "s22039@gsm.hs.kr",
-            password = "gomstest1234!",
-            name = "김경수",
-            gender = Gender.MAN,
-            major = Major.SMART_IOT
-        )
-        val account = Account(
-            idx = UUID.randomUUID(),
-            email = "s22039@gsm.hs.kr",
-            password = "gomstest1234!",
-            name = "김경수",
-            grade = 6,
-            gender = Gender.MAN,
-            major = Major.SMART_IOT,
-            profileUrl = null,
-            authority = Authority.ROLE_STUDENT,
-            createdTime = LocalDateTime.now()
-        )
+        val email = "s22039@gsm.hs.kr"
+        val authentication = AnyValueObjectGenerator.anyValueObject<Authentication>("email" to email)
+        val account = AnyValueObjectGenerator.anyValueObject<Account>("email" to email)
+        val signUpDto = AnyValueObjectGenerator.anyValueObject<SignUpDto>("email" to email)
+        val deleteAuthenticationEvent = AnyValueObjectGenerator.anyValueObject<DeleteAuthenticationEvent>("authentication" to authentication)
 
         every { accountRepository.existsByEmail(signUpDto.email) } returns false
+        every { authenticationValidator.verifyAuthenticationByEmail(signUpDto.email) } returns authentication
+        every { publisher.publishEvent(deleteAuthenticationEvent) } returns Unit
         every { passwordEncoderPort.passwordEncode(signUpDto.password) } returns encodePassword
         every { accountRepository.save(any()) } returns account
 
