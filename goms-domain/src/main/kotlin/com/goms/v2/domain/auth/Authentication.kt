@@ -8,19 +8,27 @@ data class Authentication(
     var attemptCount: Int,
     var authCodeCount: Int,
     var isAuthentication: Boolean,
-    val expiredAt: Int
+    val expiredAt: Long
 ) {
 
-    fun certified() {
-        this.isAuthentication = true
+    companion object {
+        const val EXPIRED_AT = 7200L
     }
 
-    fun increaseAuthCodeCount() {
-        this.authCodeCount += 1
-    }
+    fun certified() =
+        this.copy(
+            isAuthentication = true
+        )
 
-    fun increaseAttemptCount() {
-        this.attemptCount += 1
-    }
+    fun increaseAuthCodeCount() =
+        this.copy(
+            authCodeCount = authCodeCount.inc()
+        )
+
+    fun increaseAttemptCount() =
+        this.copy(
+            attemptCount = attemptCount.inc()
+        )
+
 
 }
