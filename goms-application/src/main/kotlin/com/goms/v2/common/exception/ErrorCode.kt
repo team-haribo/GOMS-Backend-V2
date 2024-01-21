@@ -26,7 +26,7 @@ enum class ErrorCode(
 	PASSWORD_NOT_MATCH("일치하지 않는 비밀번호입니다.", ErrorStatus.BAD_REQUEST),
 
 	// AUTHENTICATION
-	AUTHENTICATION_NOT_FOUND("인증되지 않은 사용자 입니다.", ErrorStatus.NOT_FOUND),
+	AUTHENTICATION_NOT_FOUND("인증되지 않은 사용자 입니다.", ErrorStatus.UNAUTHORIZED),
 
 	// ACCOUNT
 	ACCOUNT_NOT_FOUND("계정을 찾을 수 없습니다.", ErrorStatus.NOT_FOUND),
