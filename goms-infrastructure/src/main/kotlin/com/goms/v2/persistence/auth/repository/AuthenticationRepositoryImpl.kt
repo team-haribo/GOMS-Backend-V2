@@ -13,8 +13,13 @@ class AuthenticationRepositoryImpl(
 ): AuthenticationRepository {
 
     override fun save(authentication: Authentication) {
-        val authCodeEntity = authenticationMapper.toEntity(authentication)
-        authenticationRedisRepository.save(authCodeEntity)
+        val authenticationEntity = authenticationMapper.toEntity(authentication)
+        authenticationRedisRepository.save(authenticationEntity)
+    }
+
+    override fun delete(authentication: Authentication) {
+        val authenticationEntity = authenticationMapper.toEntity(authentication)
+        authenticationRedisRepository.delete(authenticationEntity)
     }
 
     override fun existByEmail(email: String): Boolean {
