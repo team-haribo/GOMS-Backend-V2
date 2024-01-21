@@ -1,12 +1,12 @@
 package com.goms.v2.domain.auth
 
+import com.goms.v2.domain.auth.dto.request.SendAuthCodeHttpRequest
 import com.goms.v2.domain.auth.dto.request.SignInHttpRequest
 import com.goms.v2.domain.auth.dto.request.SignUpHttpRequest
 import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
+import com.goms.v2.domain.auth.mapper.AuthCodeDataMapper
 import com.goms.v2.domain.auth.mapper.AuthDataMapper
-import com.goms.v2.domain.auth.usecase.ReissueTokenUseCase
-import com.goms.v2.domain.auth.usecase.SignInUseCase
-import com.goms.v2.domain.auth.usecase.SignUpUseCase
+import com.goms.v2.domain.auth.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -16,9 +16,12 @@ import javax.validation.Valid
 @RequestMapping("api/v2/auth")
 class AuthController(
     private val authDataMapper: AuthDataMapper,
+    private val sendAuthCodeDataMapper: AuthCodeDataMapper,
     private val signUpUseCase: SignUpUseCase,
     private val signInUseCase: SignInUseCase,
     private val reissueTokenUseCase: ReissueTokenUseCase,
+    private val sendAuthCodeUseCase: SendAuthCodeUseCase,
+    private val verifyAuthCodeUseCase: VerifyAuthCodeUseCase,
 ) {
 
     @PostMapping("signup")
@@ -37,4 +40,12 @@ class AuthController(
         reissueTokenUseCase.execute(refreshToken)
             .let { ResponseEntity.ok(authDataMapper.toResponse(it)) }
 
-}
+    @PostMapping("email/send")
+    fun sendAuthCode(@RequestBody request: SendAuthCodeHttpRequest): ResponseEntity<Void> =
+        sendAuthCodeUseCase.execute(sendAuthCodeDataMapper.toDto(request))
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+
+    @GetMapping("/email/verify")
+    fun verifyAuthCode(@RequestParam email: String, @RequestParam authCode: String): ResponseEntity<Void> =
+        verifyAuthCodeUseCase.execute(email, authCode)
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }}
