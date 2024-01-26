@@ -18,7 +18,7 @@ class AccountJpaEntity(
     val email: String,
 
     @Column(nullable = false)
-    val password: String,
+    var password: String,
 
     @Column(nullable = false)
     val grade: Int,

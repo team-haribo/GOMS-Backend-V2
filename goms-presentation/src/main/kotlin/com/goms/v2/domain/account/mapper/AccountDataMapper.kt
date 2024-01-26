@@ -1,6 +1,8 @@
 package com.goms.v2.domain.account.mapper
 
+import com.goms.v2.domain.account.data.dto.PasswordDto
 import com.goms.v2.domain.account.data.dto.ProfileDto
+import com.goms.v2.domain.account.dto.request.UpdatePasswordRequest
 import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
 import org.springframework.stereotype.Component
 
@@ -18,6 +20,12 @@ class AccountDataMapper {
             lateCount = profileDto.lateCount,
             isOuting = profileDto.isOuting,
             isBlackList = profileDto.isBlackList
+        )
+
+    fun toDomain(updatePasswordRequest: UpdatePasswordRequest) =
+        PasswordDto(
+            email = updatePasswordRequest.email,
+            newPassword = updatePasswordRequest.newPassword
         )
 
 }

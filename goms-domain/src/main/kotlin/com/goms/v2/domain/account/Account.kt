@@ -11,7 +11,7 @@ import java.util.*
 data class Account(
     val idx: UUID,
     val email: String,
-    val password: String,
+    var password: String,
     val grade: Int,
     val gender: Gender,
     val major: Major,
@@ -23,4 +23,8 @@ data class Account(
 
 fun Account.updateAuthority(newAuthority: Authority) {
     authority = newAuthority
+}
+
+fun Account.updatePassword(newPassword: String) {
+    password = newPassword
 }
