@@ -24,6 +24,7 @@ enum class ErrorCode(
 	// AUTH
 	ALREADY_EXIST_EMAIL("이미 존재하는 이메일입니다.", ErrorStatus.CONFLICT),
 	PASSWORD_NOT_MATCH("일치하지 않는 비밀번호입니다.", ErrorStatus.BAD_REQUEST),
+	DUPLICATE_NEW_PASSWORD("이미 사용중인 비밀번호입니다.", ErrorStatus.BAD_REQUEST),
 
 	// AUTHENTICATION
 	AUTHENTICATION_NOT_FOUND("인증되지 않은 사용자 입니다.", ErrorStatus.UNAUTHORIZED),
