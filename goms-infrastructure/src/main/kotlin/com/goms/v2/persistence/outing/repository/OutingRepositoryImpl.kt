@@ -35,7 +35,10 @@ class OutingRepositoryImpl(
     }
 
     override fun findAllByOrderByCreatedTimeDesc(): List<Outing> =
-        outingJpaRepository.findAllByOrderByCreatedTimeDesc()
+        queryFactory.selectFrom(outingJpaEntity)
+            .leftJoin(outingJpaEntity.account, accountJpaEntity).fetchJoin()
+            .orderBy(outingJpaEntity.createdTime.desc())
+            .fetch()
             .map { outingMapper.toDomain(it)!! }
 
     override fun count(): Long =
