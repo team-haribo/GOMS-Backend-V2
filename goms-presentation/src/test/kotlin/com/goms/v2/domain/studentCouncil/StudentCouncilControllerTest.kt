@@ -32,6 +32,7 @@ class StudentCouncilControllerTest: DescribeSpec({
     val studentCouncilDataMapper = mockk<StudentCouncilDataMapper>()
     val grantAuthorityUseCase = mockk<GrantAuthorityUseCase>()
     val searchAccountUseCase = mockk<SearchAccountUseCase>()
+    val deleteOutingUseCase = mockk<DeleteOutingUseCase>()
     val studentCouncilController = StudentCouncilController(
         createOutingUseCase,
         saveOutingBlackListUseCase,
@@ -39,7 +40,8 @@ class StudentCouncilControllerTest: DescribeSpec({
         queryAllAccountUseCase,
         studentCouncilDataMapper,
         grantAuthorityUseCase,
-        searchAccountUseCase
+        searchAccountUseCase,
+        deleteOutingUseCase
     )
 
     beforeTest {
@@ -152,7 +154,7 @@ class StudentCouncilControllerTest: DescribeSpec({
                         jsonPath("$[0].accountIdx").value(allAccountHttpResponse.accountIdx.toString()),
                         jsonPath("$[0].name").value(allAccountHttpResponse.name),
                         jsonPath("$[0].grade").value(allAccountHttpResponse.grade),
-                        jsonPath("$[0].gender").value(allAccountHttpResponse.gender),
+                        jsonPath("$[0].gender").value(allAccountHttpResponse.gender.toString()),
                         jsonPath("$[0].profileUrl").value(allAccountHttpResponse.profileUrl),
                         jsonPath("$[0].authority").value(allAccountHttpResponse.authority.toString()),
                         jsonPath("$[0].isBlackList").value(allAccountHttpResponse.isBlackList.toString())
@@ -184,7 +186,7 @@ class StudentCouncilControllerTest: DescribeSpec({
 
             val requestParam = LinkedMultiValueMap<String, String>()
             requestParam.add("grade", "0")
-            requestParam.add("classNum", "0")
+            requestParam.add("gender", Gender.MAN.toString())
             requestParam.add("name", "")
             requestParam.add("authority", Authority.ROLE_STUDENT.toString())
             requestParam.add("isBlackList", true.toString())
@@ -224,12 +226,28 @@ class StudentCouncilControllerTest: DescribeSpec({
                         jsonPath("$[0].accountIdx").value(allAccountHttpResponse.accountIdx.toString()),
                         jsonPath("$[0].name").value(allAccountHttpResponse.name),
                         jsonPath("$[0].grade").value(allAccountHttpResponse.grade),
-                        jsonPath("$[0].gender").value(allAccountHttpResponse.gender),
+                        jsonPath("$[0].gender").value(allAccountHttpResponse.gender.toString()),
                         jsonPath("$[0].profileUrl").value(allAccountHttpResponse.profileUrl),
                         jsonPath("$[0].authority").value(allAccountHttpResponse.authority.toString()),
                         jsonPath("$[0].isBlackList").value(allAccountHttpResponse.isBlackList.toString())
                     )
                     .andDo(MockMvcResultHandlers.print())
+            }
+        }
+    }
+
+    describe("/api/v2/student-council/outing/{accountIdx} 으로 DELETE 요청을 했을때") {
+        val url = "/api/v2/student-council/outing/{accountIdx}"
+
+        context("유효한 요청이 전달 되면") {
+            val accountIdx = UUID.randomUUID()
+            every { deleteOutingUseCase.execute(accountIdx) } returns Unit
+
+            it("205 status code를 응답해야한다.") {
+                mockMvc.perform(
+                    delete(url, accountIdx)
+                )
+                    .andExpect(status().`is`(205))
             }
         }
     }
