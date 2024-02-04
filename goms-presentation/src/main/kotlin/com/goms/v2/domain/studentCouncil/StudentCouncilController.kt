@@ -86,6 +86,6 @@ class StudentCouncilController(
         @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) date: LocalDate
     ): ResponseEntity<List<LateAccountHttpResponse>> =
         getLateAccountUseCase.execute(date)
-            .map { studentCouncilDataMapper.toResponse(it) }
+            ?.map { studentCouncilDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 }
