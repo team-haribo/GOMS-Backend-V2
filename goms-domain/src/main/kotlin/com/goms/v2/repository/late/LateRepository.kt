@@ -10,6 +10,6 @@ interface LateRepository {
     fun saveAll(lateList: List<Late>)
     fun findTop3ByOrderByAccountDesc(): List<Late>
     fun countByOneWeekAgoLate(oneWeekAgo: LocalDate): Long
-    fun findAllByCreatedTime(date: LocalDate): List<Late>
+    fun findAllByCreatedTime(date: LocalDate): List<Late>?
 
 }

@@ -43,6 +43,9 @@ enum class ErrorCode(
 	OUTING_UUID_UNVERIFIED("검증되지 않은 외출 식별자 입니다.", ErrorStatus.BAD_REQUEST),
 
 	// NOTIFICATION
-	DEVICE_TOKEN_NOT_FOUND("device token이 존재하지 않은 사용자 입니다.", ErrorStatus.NOT_FOUND)
+	DEVICE_TOKEN_NOT_FOUND("device token이 존재하지 않은 사용자 입니다.", ErrorStatus.NOT_FOUND),
+
+	// LATE
+	LATECOMER_NOT_FOUND("지각자가 존재하지 않습니다.", ErrorStatus.NOT_FOUND)
 
 }

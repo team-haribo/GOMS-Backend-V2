@@ -1,6 +1,8 @@
 package com.goms.v2.domain.studentCouncil.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithReadOnlyTransaction
+import com.goms.v2.domain.auth.exception.AccountNotFoundException
+import com.goms.v2.domain.late.exception.LatecomerNotFoundException
 import com.goms.v2.domain.studentCouncil.data.dto.LateAccountDto
 import com.goms.v2.repository.late.LateRepository
 import java.time.LocalDate
@@ -9,8 +11,8 @@ import java.time.LocalDate
 class GetLateAccountUseCase(
     private val lateRepository: LateRepository
 ) {
-    fun execute(date: LocalDate): List<LateAccountDto> {
-        val lateAccounts = lateRepository.findAllByCreatedTime(date)
+    fun execute(date: LocalDate): List<LateAccountDto>? {
+        val lateAccounts = lateRepository.findAllByCreatedTime(date) ?: throw LatecomerNotFoundException()
 
         return lateAccounts.map {
             LateAccountDto(
