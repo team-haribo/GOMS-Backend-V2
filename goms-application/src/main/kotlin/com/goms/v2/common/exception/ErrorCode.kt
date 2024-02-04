@@ -46,6 +46,6 @@ enum class ErrorCode(
 	DEVICE_TOKEN_NOT_FOUND("device token이 존재하지 않은 사용자 입니다.", ErrorStatus.NOT_FOUND),
 
 	// LATE
-	LATECOMER_NOT_FOUND("지각자가 존재하지 않습니다.", ErrorStatus.NOT_FOUND)
+	LATE_ACCOUNT_NOT_FOUND("지각자가 존재하지 않습니다.", ErrorStatus.NOT_FOUND)
 
 }
