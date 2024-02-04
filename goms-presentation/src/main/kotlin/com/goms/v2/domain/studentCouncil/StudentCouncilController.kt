@@ -33,7 +33,7 @@ class StudentCouncilController(
     private val grantAuthorityUseCase: GrantAuthorityUseCase,
     private val searchAccountUseCase: SearchAccountUseCase,
     private val deleteOutingUseCase: DeleteOutingUseCase,
-    private val getsLatecomerAccountUseCase: GetsLatecomerAccountUseCase
+    private val getLateAccountUseCase: GetLateAccountUseCase
 ) {
 
     @PostMapping("outing")
@@ -82,10 +82,10 @@ class StudentCouncilController(
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
     @GetMapping("late")
-    fun getLatecomer(
+    fun getLateAccount(
         @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) date: LocalDate
     ): ResponseEntity<List<LateAccountHttpResponse>> =
-        getsLatecomerAccountUseCase.execute(date)
+        getLateAccountUseCase.execute(date)
             .map { studentCouncilDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
 }

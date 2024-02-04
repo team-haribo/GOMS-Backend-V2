@@ -6,7 +6,7 @@ import com.goms.v2.repository.late.LateRepository
 import java.time.LocalDate
 
 @UseCaseWithReadOnlyTransaction
-class GetsLatecomerAccountUseCase(
+class GetLateAccountUseCase(
     private val lateRepository: LateRepository
 ) {
     fun execute(date: LocalDate): List<LateAccountDto> {
