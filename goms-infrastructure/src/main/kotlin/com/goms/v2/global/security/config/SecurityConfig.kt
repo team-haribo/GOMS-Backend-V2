@@ -59,7 +59,7 @@ class SecurityConfig(
             .mvcMatchers(HttpMethod.PATCH, "/api/v2/student-council/authority").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.POST, "/api/v2/student-council/black-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.DELETE, "/api/v2/student-council/black-list/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
-//            .mvcMatchers(HttpMethod.DELETE, "/api/v2/student-council/outing/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
+            .mvcMatchers(HttpMethod.DELETE, "/api/v2/student-council/outing/{accountIdx}").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.GET, "/api/v2/student-council/late").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
 
             // /notification
