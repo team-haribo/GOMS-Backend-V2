@@ -4,9 +4,11 @@ import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.GrantAuthorityDto
+import com.goms.v2.domain.studentCouncil.data.dto.LateAccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
 import com.goms.v2.domain.studentCouncil.dto.request.GrantAuthorityHttpRequest
 import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
+import com.goms.v2.domain.studentCouncil.dto.response.LatecomerAccountResponse
 import org.springframework.stereotype.Component
 
 @Component
@@ -55,5 +57,17 @@ class StudentCouncilDataMapper {
             authority = authority,
             isBlackList = isBlackList
         )
+
+    fun toResponse(lateAccountDto: LateAccountDto) =
+        LatecomerAccountResponse(
+            accountIdx = lateAccountDto.accountIdx,
+            name = lateAccountDto.name,
+            grade = lateAccountDto.grade,
+            gender = lateAccountDto.gender,
+            major = lateAccountDto.major,
+            profileUrl = lateAccountDto.profileUrl,
+            createdTime = lateAccountDto.createdTime
+            )
+
 
 }
