@@ -83,7 +83,7 @@ class StudentCouncilController(
 
     @GetMapping("late")
     fun getLateAccount(
-        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) date: LocalDate
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) date: LocalDate
     ): ResponseEntity<List<LateAccountHttpResponse>> =
         getLateAccountUseCase.execute(date)
             ?.map { studentCouncilDataMapper.toResponse(it) }
