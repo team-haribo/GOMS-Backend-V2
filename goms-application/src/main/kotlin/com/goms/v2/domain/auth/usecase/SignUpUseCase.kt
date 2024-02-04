@@ -25,9 +25,9 @@ class SignUpUseCase(
         if (accountRepository.existsByEmail(signUpDto.email))
             throw AlreadyExistEmailException()
 
-//        val authentication = authenticationValidator.verifyAuthenticationByEmail(signUpDto.email)
-//        val deleteAuthenticationEvent = DeleteAuthenticationEvent(authentication)
-//        publisher.publishEvent(deleteAuthenticationEvent)
+        val authentication = authenticationValidator.verifyAuthenticationByEmail(signUpDto.email)
+        val deleteAuthenticationEvent = DeleteAuthenticationEvent(authentication)
+        publisher.publishEvent(deleteAuthenticationEvent)
 
         val account = Account(
             idx = UUID.randomUUID(),
