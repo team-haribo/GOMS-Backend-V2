@@ -8,7 +8,7 @@ import com.goms.v2.domain.studentCouncil.data.dto.LateAccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
 import com.goms.v2.domain.studentCouncil.dto.request.GrantAuthorityHttpRequest
 import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
-import com.goms.v2.domain.studentCouncil.dto.response.LatecomerAccountResponse
+import com.goms.v2.domain.studentCouncil.dto.response.LateAccountHttpResponse
 import org.springframework.stereotype.Component
 
 @Component
@@ -59,7 +59,7 @@ class StudentCouncilDataMapper {
         )
 
     fun toResponse(lateAccountDto: LateAccountDto) =
-        LatecomerAccountResponse(
+        LateAccountHttpResponse(
             accountIdx = lateAccountDto.accountIdx,
             name = lateAccountDto.name,
             grade = lateAccountDto.grade,

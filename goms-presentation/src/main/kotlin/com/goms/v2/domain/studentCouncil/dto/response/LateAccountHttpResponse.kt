@@ -5,7 +5,7 @@ import com.goms.v2.domain.account.constant.Major
 import java.time.LocalDate
 import java.util.UUID
 
-data class LatecomerAccountResponse(
+data class LateAccountHttpResponse(
     val accountIdx: UUID,
     val name: String,
     val grade: Int,

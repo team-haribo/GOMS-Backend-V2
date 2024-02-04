@@ -4,7 +4,7 @@ import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.studentCouncil.dto.request.GrantAuthorityHttpRequest
 import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
-import com.goms.v2.domain.studentCouncil.dto.response.LatecomerAccountResponse
+import com.goms.v2.domain.studentCouncil.dto.response.LateAccountHttpResponse
 import com.goms.v2.domain.studentCouncil.mapper.StudentCouncilDataMapper
 import com.goms.v2.domain.studentCouncil.usecase.*
 import org.springframework.format.annotation.DateTimeFormat
@@ -84,7 +84,7 @@ class StudentCouncilController(
     @GetMapping("late")
     fun getLatecomer(
         @RequestParam(required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) date: LocalDate
-    ): ResponseEntity<List<LatecomerAccountResponse>> =
+    ): ResponseEntity<List<LateAccountHttpResponse>> =
         getsLatecomerAccountUseCase.execute(date)
             .map { studentCouncilDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
