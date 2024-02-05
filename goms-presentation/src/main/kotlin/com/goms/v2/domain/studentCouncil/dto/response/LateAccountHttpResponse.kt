@@ -12,5 +12,4 @@ data class LateAccountHttpResponse(
     val gender: Gender,
     val major: Major,
     val profileUrl: String?,
-    val createdTime: LocalDate
 )

@@ -21,7 +21,6 @@ class GetLateAccountUseCase(
                 gender = it.account.gender,
                 major = it.account.major,
                 profileUrl = it.account.profileUrl,
-                createdTime = it.createdTime
             )
         }
     }

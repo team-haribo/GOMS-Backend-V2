@@ -12,5 +12,4 @@ data class LateAccountDto(
     val gender: Gender,
     val major: Major,
     val profileUrl: String?,
-    val createdTime: LocalDate
 )

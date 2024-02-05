@@ -66,7 +66,6 @@ class StudentCouncilDataMapper {
             gender = lateAccountDto.gender,
             major = lateAccountDto.major,
             profileUrl = lateAccountDto.profileUrl,
-            createdTime = lateAccountDto.createdTime
         )
 
 
