@@ -4,8 +4,10 @@ import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.studentCouncil.dto.request.GrantAuthorityHttpRequest
 import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
+import com.goms.v2.domain.studentCouncil.dto.response.LateAccountHttpResponse
 import com.goms.v2.domain.studentCouncil.mapper.StudentCouncilDataMapper
 import com.goms.v2.domain.studentCouncil.usecase.*
+import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDate
 import java.util.UUID
 
 @RestController
@@ -29,7 +32,8 @@ class StudentCouncilController(
     private val studentCouncilDataMapper: StudentCouncilDataMapper,
     private val grantAuthorityUseCase: GrantAuthorityUseCase,
     private val searchAccountUseCase: SearchAccountUseCase,
-    private val deleteOutingUseCase: DeleteOutingUseCase
+    private val deleteOutingUseCase: DeleteOutingUseCase,
+    private val getLateAccountUseCase: GetLateAccountUseCase
 ) {
 
     @PostMapping("outing")
@@ -76,4 +80,12 @@ class StudentCouncilController(
     fun deleteOuting(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
         deleteOutingUseCase.execute(accountIdx)
             .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
+
+    @GetMapping("late")
+    fun getLateAccount(
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) date: LocalDate
+    ): ResponseEntity<List<LateAccountHttpResponse>> =
+        getLateAccountUseCase.execute(date)
+            ?.map { studentCouncilDataMapper.toResponse(it) }
+            .let { ResponseEntity.ok(it) }
 }
