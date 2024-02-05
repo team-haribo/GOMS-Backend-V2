@@ -3,11 +3,14 @@ package com.goms.v2.domain.studentCouncil
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.GrantAuthorityDto
+import com.goms.v2.domain.studentCouncil.data.dto.LateAccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
 import com.goms.v2.domain.studentCouncil.dto.request.GrantAuthorityHttpRequest
 import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
+import com.goms.v2.domain.studentCouncil.dto.response.LateAccountHttpResponse
 import com.goms.v2.domain.studentCouncil.mapper.StudentCouncilDataMapper
 import com.goms.v2.domain.studentCouncil.usecase.*
 import io.kotest.core.spec.style.DescribeSpec
@@ -21,6 +24,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPat
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.util.LinkedMultiValueMap
+import java.time.LocalDate
 import java.util.*
 
 class StudentCouncilControllerTest: DescribeSpec({
@@ -33,6 +37,7 @@ class StudentCouncilControllerTest: DescribeSpec({
     val grantAuthorityUseCase = mockk<GrantAuthorityUseCase>()
     val searchAccountUseCase = mockk<SearchAccountUseCase>()
     val deleteOutingUseCase = mockk<DeleteOutingUseCase>()
+    val getLateAccountUseCase = mockk<GetLateAccountUseCase>()
     val studentCouncilController = StudentCouncilController(
         createOutingUseCase,
         saveOutingBlackListUseCase,
@@ -41,7 +46,8 @@ class StudentCouncilControllerTest: DescribeSpec({
         studentCouncilDataMapper,
         grantAuthorityUseCase,
         searchAccountUseCase,
-        deleteOutingUseCase
+        deleteOutingUseCase,
+        getLateAccountUseCase
     )
 
     beforeTest {
@@ -252,4 +258,51 @@ class StudentCouncilControllerTest: DescribeSpec({
         }
     }
 
+    describe("/api/v2/student-council/late 으로 GET 요청을 했을때") {
+        var url = "/api/v2/student-council/late"
+
+        context("유효한 요청이 전달되면 ") {
+            val localDate = LocalDate.parse("2024-02-04")
+            val accountIdx = UUID.randomUUID()
+            val lateAccountDto = LateAccountDto(
+                accountIdx = accountIdx,
+                name = "",
+                grade = 6,
+                gender = Gender.MAN,
+                major = Major.SMART_IOT,
+                profileUrl = "",
+            )
+            val lateAccountHttpResponse = LateAccountHttpResponse(
+                accountIdx = accountIdx,
+                name = "",
+                grade = 6,
+                gender = Gender.MAN,
+                major = Major.SMART_IOT,
+                profileUrl = ""
+            )
+
+            val requestParam = LinkedMultiValueMap<String, String>()
+            requestParam.add("date", "2024-02-04")
+
+            every { getLateAccountUseCase.execute(localDate) } returns listOf(lateAccountDto)
+            every { studentCouncilDataMapper.toResponse(lateAccountDto) } returns lateAccountHttpResponse
+
+            it ("List<LateAccountHttpResponse>를 반환한다.") {
+                mockMvc.perform(
+                    get(url)
+                        .params(requestParam)
+                )
+                    .andExpectAll(
+                        status().isOk,
+                        jsonPath("$[0].accountIdx").value(lateAccountHttpResponse.accountIdx.toString()),
+                        jsonPath("$[0].name").value(lateAccountHttpResponse.name),
+                        jsonPath("$[0].grade").value(lateAccountHttpResponse.grade),
+                        jsonPath("$[0].gender").value(lateAccountHttpResponse.gender.toString()),
+                        jsonPath("$[0].major").value(lateAccountHttpResponse.major.toString()),
+                        jsonPath("$[0].profileUrl").value(lateAccountHttpResponse.profileUrl)
+                    )
+                    .andDo(MockMvcResultHandlers.print())
+            }
+        }
+    }
 })
