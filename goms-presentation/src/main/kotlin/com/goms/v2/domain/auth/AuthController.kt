@@ -22,6 +22,7 @@ class AuthController(
     private val reissueTokenUseCase: ReissueTokenUseCase,
     private val sendAuthCodeUseCase: SendAuthCodeUseCase,
     private val verifyAuthCodeUseCase: VerifyAuthCodeUseCase,
+    private val logoutUseCase: LogoutUseCase
 ) {
 
     @PostMapping("signup")
@@ -48,4 +49,11 @@ class AuthController(
     @GetMapping("/email/verify")
     fun verifyAuthCode(@RequestParam email: String, @RequestParam authCode: String): ResponseEntity<Void> =
         verifyAuthCodeUseCase.execute(email, authCode)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }}
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+
+    @DeleteMapping("logout")
+    fun logout(@RequestHeader refreshToken: String): ResponseEntity<Void> =
+        logoutUseCase.execute(refreshToken)
+            .let { ResponseEntity.ok().build() }
+
+}
