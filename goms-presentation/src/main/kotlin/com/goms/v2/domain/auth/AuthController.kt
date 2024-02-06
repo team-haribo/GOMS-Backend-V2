@@ -51,7 +51,7 @@ class AuthController(
         verifyAuthCodeUseCase.execute(email, authCode)
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
-    @DeleteMapping("logout")
+    @DeleteMapping
     fun logout(@RequestHeader refreshToken: String): ResponseEntity<Void> =
         logoutUseCase.execute(refreshToken)
             .let { ResponseEntity.ok().build() }
