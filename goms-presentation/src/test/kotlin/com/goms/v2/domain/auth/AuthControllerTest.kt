@@ -37,6 +37,7 @@ class AuthControllerTest: DescribeSpec({
     val reissueTokenUseCase = mockk<ReissueTokenUseCase>()
     val sendAuthCodeUseCase = mockk<SendAuthCodeUseCase>()
     val verifyAuthCodeUseCase = mockk<VerifyAuthCodeUseCase>()
+    val logoutUseCase = mockk<LogoutUseCase>()
     val authController = AuthController(
         authDataMapper,
         authCodeDataMapper,
@@ -44,7 +45,8 @@ class AuthControllerTest: DescribeSpec({
         signInUseCase,
         reissueTokenUseCase,
         sendAuthCodeUseCase,
-        verifyAuthCodeUseCase
+        verifyAuthCodeUseCase,
+        logoutUseCase
     )
 
     beforeTest {
@@ -230,6 +232,24 @@ class AuthControllerTest: DescribeSpec({
                 )
                     .andExpect(status().`is`(204))
 
+            }
+        }
+    }
+
+    describe("/api/v2/auth 으로 delete 요청을 했을때") {
+        val url = "/api/v2/auth"
+
+        context("유효한 요청이 전달 되면") {
+            val refreshToken = "refreshToken"
+
+            every { logoutUseCase.execute(refreshToken) } returns Unit
+
+            it("200 상태코드를 반환한다.") {
+                mockMvc.perform(
+                    delete(url)
+                        .header("refreshToken", refreshToken)
+                )
+                    .andExpect(status().`is`(204))
             }
         }
     }
