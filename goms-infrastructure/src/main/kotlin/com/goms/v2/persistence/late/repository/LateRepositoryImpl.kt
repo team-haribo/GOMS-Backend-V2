@@ -58,8 +58,8 @@ class LateRepositoryImpl(
     override fun countByOneWeekAgoLate(oneWeekAgo: LocalDate): Long =
         lateJpaRepository.countByOneWeekAgoLate(oneWeekAgo)
 
-    override fun findAllByCreatedTime(date: LocalDate): List<Late>? =
+    override fun findAllByCreatedTime(date: LocalDate): List<Late> =
         lateJpaRepository.findAllByCreatedTime(date)
-            ?.map { lateMapper.toDomain(it)!! }
+            .map { lateMapper.toDomain(it)!! }
 
 }

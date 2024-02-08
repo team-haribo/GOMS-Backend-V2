@@ -10,20 +10,18 @@ import java.time.LocalDate
 class GetLateAccountUseCase(
     private val lateRepository: LateRepository
 ) {
-    fun execute(date: LocalDate): List<LateAccountDto>? {
-        val lateAccounts = lateRepository.findAllByCreatedTime(date) ?: throw LateAccountNotFound()
 
-        return lateAccounts.map {
-            LateAccountDto(
-                accountIdx = it.account.idx,
-                name = it.account.name,
-                grade = it.account.grade,
-                gender = it.account.gender,
-                major = it.account.major,
-                profileUrl = it.account.profileUrl,
-            )
-        }
-    }
-
+    fun execute(date: LocalDate): List<LateAccountDto> =
+        lateRepository.findAllByCreatedTime(date)
+            .map {
+                LateAccountDto(
+                    accountIdx = it.account.idx,
+                    name = it.account.name,
+                    grade = it.account.grade,
+                    gender = it.account.gender,
+                    major = it.account.major,
+                    profileUrl = it.account.profileUrl,
+                )
+            }
 
 }
