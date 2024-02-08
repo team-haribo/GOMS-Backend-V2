@@ -12,5 +12,5 @@ interface LateJpaRepository: CrudRepository<LateJpaEntity, UUID> {
     fun countByAccountIdx(accountIdx: UUID): Long
     @Query("select count(*) from late l where l.createdTime = :oneWeekAgo")
     fun countByOneWeekAgoLate(oneWeekAgo: LocalDate): Long
-    fun findAllByCreatedTime(date: LocalDate): List<LateJpaEntity>?
+    fun findAllByCreatedTime(date: LocalDate): List<LateJpaEntity>
 }
