@@ -13,8 +13,10 @@ class LogoutUseCase(
 ) {
 
     fun execute(refreshToken: String) {
-        val parsedRefreshToken = tokenParsePort.parseRefreshToken(refreshToken) ?: throw InvalidTokenTypeException()
-        val refreshTokenDomain = refreshTokenRepository.findByIdOrNull(parsedRefreshToken) ?: throw ExpiredRefreshTokenException()
+        val parsedRefreshToken = tokenParsePort.parseRefreshToken(refreshToken)
+            ?: throw InvalidTokenTypeException()
+        val refreshTokenDomain = refreshTokenRepository.findByIdOrNull(parsedRefreshToken)
+            ?: throw ExpiredRefreshTokenException()
         refreshTokenRepository.deleteById(refreshTokenDomain.refreshToken)
     }
 }
