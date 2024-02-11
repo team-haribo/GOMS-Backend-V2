@@ -28,3 +28,7 @@ fun Account.updateAuthority(newAuthority: Authority) {
 fun Account.updatePassword(newPassword: String) {
     password = newPassword
 }
+
+fun Account.updateProfileUrl(newProfileUrl: String) {
+    profileUrl = newProfileUrl
+}
