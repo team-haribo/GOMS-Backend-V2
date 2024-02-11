@@ -28,6 +28,7 @@ class QueryAllAccountUseCaseTest: BehaviorSpec({
                 name = account.name,
                 grade = account.grade,
                 gender = account.gender,
+                major = account.major,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
                 isBlackList = true
