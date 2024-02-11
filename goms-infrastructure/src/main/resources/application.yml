@@ -51,3 +51,16 @@ outing:
 
 fcm:
   fileUrl: ${FCM_FILE_URL}
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_ACCESS}
+      secret-key: ${AWS_SECRET}
+    region:
+      static: ${AWS_REGION}
+    s3:
+      bucket: ${AWS_BUCKET}
+    stack:
+      auto: false
+
