@@ -135,6 +135,7 @@ class StudentCouncilControllerTest: DescribeSpec({
                 name = "",
                 grade = 6,
                 gender = Gender.MAN,
+                major = Major.SMART_IOT,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
                 isBlackList = true
@@ -144,6 +145,7 @@ class StudentCouncilControllerTest: DescribeSpec({
                 name = "",
                 grade = 6,
                 gender = Gender.MAN,
+                major = Major.SMART_IOT,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
                 isBlackList = true
@@ -161,6 +163,7 @@ class StudentCouncilControllerTest: DescribeSpec({
                         jsonPath("$[0].name").value(allAccountHttpResponse.name),
                         jsonPath("$[0].grade").value(allAccountHttpResponse.grade),
                         jsonPath("$[0].gender").value(allAccountHttpResponse.gender.toString()),
+                        jsonPath("$[0].major").value(allAccountHttpResponse.major.toString()),
                         jsonPath("$[0].profileUrl").value(allAccountHttpResponse.profileUrl),
                         jsonPath("$[0].authority").value(allAccountHttpResponse.authority.toString()),
                         jsonPath("$[0].isBlackList").value(allAccountHttpResponse.isBlackList.toString())
@@ -202,6 +205,7 @@ class StudentCouncilControllerTest: DescribeSpec({
                 name = "",
                 grade = 6,
                 gender = Gender.MAN,
+                major = Major.SMART_IOT,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
                 isBlackList = true
@@ -212,6 +216,7 @@ class StudentCouncilControllerTest: DescribeSpec({
                 name = "",
                 grade = 6,
                 gender = Gender.MAN,
+                major = Major.SMART_IOT,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
                 isBlackList = true
@@ -233,6 +238,7 @@ class StudentCouncilControllerTest: DescribeSpec({
                         jsonPath("$[0].name").value(allAccountHttpResponse.name),
                         jsonPath("$[0].grade").value(allAccountHttpResponse.grade),
                         jsonPath("$[0].gender").value(allAccountHttpResponse.gender.toString()),
+                        jsonPath("$[0].major").value(allAccountHttpResponse.major.toString()),
                         jsonPath("$[0].profileUrl").value(allAccountHttpResponse.profileUrl),
                         jsonPath("$[0].authority").value(allAccountHttpResponse.authority.toString()),
                         jsonPath("$[0].isBlackList").value(allAccountHttpResponse.isBlackList.toString())

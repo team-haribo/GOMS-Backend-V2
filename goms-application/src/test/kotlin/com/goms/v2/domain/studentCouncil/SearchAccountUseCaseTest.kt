@@ -4,6 +4,7 @@ import com.goms.v2.common.AnyValueObjectGenerator
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.outing.OutingBlackList
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
@@ -36,6 +37,7 @@ class SearchAccountUseCaseTest: BehaviorSpec({
             name = "",
             grade = 6,
             gender = Gender.MAN,
+            major = Major.SMART_IOT,
             profileUrl = "",
             authority = Authority.ROLE_STUDENT,
             isBlackList = true

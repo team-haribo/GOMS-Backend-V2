@@ -27,6 +27,7 @@ class SearchAccountUseCase(
                     name = it.name,
                     grade = it.grade,
                     gender = it.gender,
+                    major = it.major,
                     profileUrl = it.profileUrl,
                     authority = it.authority,
                     isBlackList = outingBlackListIdx.contains(it.idx)

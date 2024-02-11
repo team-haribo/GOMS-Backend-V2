@@ -20,6 +20,7 @@ class StudentCouncilDataMapper {
             name = accountDto.name,
             grade = accountDto.grade,
             gender = accountDto.gender,
+            major = accountDto.major,
             profileUrl = accountDto.profileUrl,
             authority = accountDto.authority,
             isBlackList = accountDto.isBlackList
@@ -38,6 +39,7 @@ class StudentCouncilDataMapper {
                 name = it.name,
                 grade = it.grade,
                 gender = it.gender,
+                major = it.major,
                 profileUrl = it.profileUrl,
                 authority = it.authority,
                 isBlackList = it.isBlackList
