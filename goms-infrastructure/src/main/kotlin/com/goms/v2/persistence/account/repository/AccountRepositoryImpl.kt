@@ -3,6 +3,7 @@ package com.goms.v2.persistence.account.repository
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.persistence.account.entity.QAccountJpaEntity.accountJpaEntity
 import com.goms.v2.persistence.account.mapper.AccountMapper
 import com.goms.v2.repository.account.AccountRepository
@@ -50,13 +51,15 @@ class AccountRepositoryImpl(
         grade: Int?,
         gender: Gender?,
         name: String?,
-        authority: Authority?
+        authority: Authority?,
+        major: Major?
     ): List<Account> =
         queryFactory
             .selectFrom(accountJpaEntity)
             .where(
                 eqGrade(grade),
                 eqGender(gender),
+                eqMajor(major),
                 likeName(name),
                 eqAuthority(authority)
             )
@@ -82,6 +85,11 @@ class AccountRepositoryImpl(
     private fun eqGender(gender: Gender?): BooleanExpression? {
         if (gender == null) return null
         return accountJpaEntity.gender.eq(gender)
+    }
+
+    private fun eqMajor(major: Major?): BooleanExpression? {
+        if (major == null) return null
+        return accountJpaEntity.major.eq(major)
     }
 
 }

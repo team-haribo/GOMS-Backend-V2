@@ -3,6 +3,7 @@ package com.goms.v2.repository.account
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import java.util.UUID
 
 interface AccountRepository {
@@ -16,7 +17,8 @@ interface AccountRepository {
         grade: Int?,
         gender: Gender?,
         name: String?,
-        authority: Authority?
+        authority: Authority?,
+        major: Major?
     ): List<Account>
     fun findAll(): List<Account>
 
