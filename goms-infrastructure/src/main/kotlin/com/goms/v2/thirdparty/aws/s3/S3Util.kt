@@ -2,14 +2,14 @@ package com.goms.v2.thirdparty.aws.s3
 
 import com.amazonaws.services.s3.AmazonS3
 import com.amazonaws.services.s3.model.ObjectMetadata
-import com.goms.v2.domain.account.spi.S3UtillPort
+import com.goms.v2.domain.account.spi.S3UtilPort
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
 
 class S3Util(
         private val amazonS3: AmazonS3
-): S3UtillPort {
+): S3UtilPort {
 
     @Value("\${cloud.aws.s3.bucket}")
     private val bucket: String? = null
