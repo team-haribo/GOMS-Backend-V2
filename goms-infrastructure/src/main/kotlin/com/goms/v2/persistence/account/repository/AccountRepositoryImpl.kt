@@ -56,6 +56,7 @@ class AccountRepositoryImpl(
             .selectFrom(accountJpaEntity)
             .where(
                 eqGrade(grade),
+                eqGender(gender),
                 likeName(name),
                 eqAuthority(authority)
             )
@@ -76,6 +77,11 @@ class AccountRepositoryImpl(
     private fun eqAuthority(authority: Authority?): BooleanExpression? {
         if (authority == null) return null
         return accountJpaEntity.authority.eq(authority)
+    }
+
+    private fun eqGender(gender: Gender?): BooleanExpression? {
+        if (gender == null) return null
+        return accountJpaEntity.gender.eq(gender)
     }
 
 }

@@ -66,7 +66,7 @@ class StudentCouncilController(
     @GetMapping("search")
     fun searchAccount(
         @RequestParam(required = false) grade: Int?,
-        @RequestParam(required = false) gender: Gender,
+        @RequestParam(required = false) gender: Gender?,
         @RequestParam(required = false) name: String?,
         @RequestParam(required = false) authority: Authority?,
         @RequestParam(required = false) isBlackList: Boolean?

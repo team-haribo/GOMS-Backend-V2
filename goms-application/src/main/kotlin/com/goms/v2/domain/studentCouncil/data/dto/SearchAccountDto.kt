@@ -5,7 +5,7 @@ import com.goms.v2.domain.account.constant.Gender
 
 data class SearchAccountDto(
     val grade: Int?,
-    val gender: Gender,
+    val gender: Gender?,
     val name: String?,
     val authority: Authority?,
     val isBlackList: Boolean?
