@@ -48,7 +48,7 @@ class StudentCouncilDataMapper {
 
     fun toDto(
         grade: Int?,
-        gender: Gender,
+        gender: Gender?,
         name: String?,
         authority: Authority?,
         isBlackList: Boolean?
