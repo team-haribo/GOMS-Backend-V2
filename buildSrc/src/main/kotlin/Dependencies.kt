@@ -30,6 +30,9 @@ object Dependencies {
     const val REDIS = "org.springframework.data:spring-data-redis:${DependenciesVersions.REDIS_VERSION}"
     const val MARIA_DB = "org.mariadb.jdbc:mariadb-java-client:${DependenciesVersions.MARIA_DB_VERSION}"
 
+    /* aws */
+    const val AWS_STARTER =  "org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE"
+
     /* queryDsl */
     const val QUERYDSL = "com.querydsl:querydsl-jpa:${DependenciesVersions.QUERYDSL}"
     const val QUERYDSL_PROCESSOR = "com.querydsl:querydsl-apt:${DependenciesVersions.QUERYDSL}:jpa"
