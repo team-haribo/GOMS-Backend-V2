@@ -9,16 +9,16 @@ import java.util.*
 
 @RootAggregate
 data class Account(
-    val idx: UUID,
-    val email: String,
-    var password: String,
-    val grade: Int,
-    val gender: Gender,
-    val major: Major,
-    val name: String,
-    val profileUrl: String?,
-    var authority: Authority,
-    val createdTime: LocalDateTime
+        val idx: UUID,
+        val email: String,
+        var password: String,
+        val grade: Int,
+        val gender: Gender,
+        val major: Major,
+        val name: String,
+        var profileUrl: String?,
+        var authority: Authority,
+        val createdTime: LocalDateTime
 )
 
 fun Account.updateAuthority(newAuthority: Authority) {
