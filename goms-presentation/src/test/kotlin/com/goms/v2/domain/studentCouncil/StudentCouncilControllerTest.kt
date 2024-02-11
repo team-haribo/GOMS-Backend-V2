@@ -183,13 +183,15 @@ class StudentCouncilControllerTest: DescribeSpec({
             val name = ""
             val authority = Authority.ROLE_STUDENT
             val isBlackList = true
+            val major = Major.SMART_IOT
 
             val searchAccountDto = SearchAccountDto(
                 grade = 0,
                 gender = Gender.MAN,
                 name = "",
                 authority = Authority.ROLE_STUDENT,
-                isBlackList = true
+                isBlackList = true,
+                major = Major.SMART_IOT
             )
 
 
@@ -222,7 +224,7 @@ class StudentCouncilControllerTest: DescribeSpec({
                 isBlackList = true
             )
 
-            every { studentCouncilDataMapper.toDto(grade, gender , name, authority, isBlackList) } returns searchAccountDto
+            every { studentCouncilDataMapper.toDto(grade, gender , name, authority, isBlackList, major) } returns searchAccountDto
             every { searchAccountUseCase.execute(searchAccountDto) } returns listOf(accountDto)
             every { studentCouncilDataMapper.toResponse(listOf(accountDto)) } returns listOf(allAccountHttpResponse)
 

@@ -2,6 +2,7 @@ package com.goms.v2.domain.studentCouncil
 
 import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.studentCouncil.dto.request.GrantAuthorityHttpRequest
 import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
 import com.goms.v2.domain.studentCouncil.dto.response.LateAccountHttpResponse
@@ -69,9 +70,10 @@ class StudentCouncilController(
         @RequestParam(required = false) gender: Gender?,
         @RequestParam(required = false) name: String?,
         @RequestParam(required = false) authority: Authority?,
-        @RequestParam(required = false) isBlackList: Boolean?
+        @RequestParam(required = false) isBlackList: Boolean?,
+        @RequestParam(required = false) major: Major?
     ): ResponseEntity<List<AllAccountHttpResponse>> =
-        studentCouncilDataMapper.toDto(grade, gender, name, authority, isBlackList)
+        studentCouncilDataMapper.toDto(grade, gender, name, authority, isBlackList, major)
             .let { searchAccountUseCase.execute(it) }
             .let { studentCouncilDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }

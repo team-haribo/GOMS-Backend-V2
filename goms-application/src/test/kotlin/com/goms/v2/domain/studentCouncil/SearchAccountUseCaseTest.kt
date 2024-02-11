@@ -28,7 +28,8 @@ class SearchAccountUseCaseTest: BehaviorSpec({
             gender = Gender.MAN,
             name = "",
             authority = Authority.ROLE_STUDENT,
-            isBlackList = true
+            isBlackList = true,
+            major = Major.SMART_IOT
         )
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
@@ -44,7 +45,7 @@ class SearchAccountUseCaseTest: BehaviorSpec({
         )
         val outingBlackList = AnyValueObjectGenerator.anyValueObject<OutingBlackList>("accountIdx" to account.idx)
 
-        every { accountRepository.findAccountByStudentInfo(searchAccountDto.grade, searchAccountDto.gender, searchAccountDto.name, searchAccountDto.authority) } returns listOf(account)
+        every { accountRepository.findAccountByStudentInfo(searchAccountDto.grade, searchAccountDto.gender, searchAccountDto.name, searchAccountDto.authority, searchAccountDto.major) } returns listOf(account)
         every { outingBlackListRepository.findAll() } returns listOf(outingBlackList)
 
         When("계정 검색 요청을 하면") {

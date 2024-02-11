@@ -2,6 +2,7 @@ package com.goms.v2.domain.studentCouncil.mapper
 
 import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
+import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.GrantAuthorityDto
 import com.goms.v2.domain.studentCouncil.data.dto.LateAccountDto
@@ -51,13 +52,15 @@ class StudentCouncilDataMapper {
         gender: Gender?,
         name: String?,
         authority: Authority?,
-        isBlackList: Boolean?
+        isBlackList: Boolean?,
+        major: Major?
     ) = SearchAccountDto(
             grade = grade,
             gender = gender,
             name = name,
             authority = authority,
-            isBlackList = isBlackList
+            isBlackList = isBlackList,
+            major = major
         )
 
     fun toResponse(lateAccountDto: LateAccountDto) =

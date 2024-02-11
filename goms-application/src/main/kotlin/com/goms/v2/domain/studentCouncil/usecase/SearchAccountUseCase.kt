@@ -16,7 +16,7 @@ class SearchAccountUseCase(
     fun execute(dto: SearchAccountDto): List<AccountDto> {
         val outingBlackListIdx = outingBlackListRepository.findAll().map { it.accountIdx }
 
-        return accountRepository.findAccountByStudentInfo(dto.grade, dto.gender, dto.name, dto.authority).stream().asSequence()
+        return accountRepository.findAccountByStudentInfo(dto.grade, dto.gender, dto.name, dto.authority, dto.major).stream().asSequence()
             .filter {
                 if (dto.isBlackList != null && dto.isBlackList) outingBlackListIdx.contains(it.idx)
                 else if (dto.isBlackList != null) outingBlackListIdx.contains(it.idx).not()
