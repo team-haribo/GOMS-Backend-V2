@@ -12,6 +12,12 @@ private val log = KotlinLogging.logger {}
 @SpringBootApplication
 class GomsV2Application {
 
+    companion object {
+        init {
+            System.setProperty("com.amazonaws.sdk.disableEc2Metadata", "true")
+        }
+    }
+
     @PostConstruct
     fun applicationTimeZoneSetter() {
         val timeZone = TimeZone.getTimeZone("Asia/Seoul")
