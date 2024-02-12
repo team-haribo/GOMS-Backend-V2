@@ -31,7 +31,7 @@ object Dependencies {
     const val MARIA_DB = "org.mariadb.jdbc:mariadb-java-client:${DependenciesVersions.MARIA_DB_VERSION}"
 
     /* aws */
-    const val AWS_STARTER =  "org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE"
+    const val AWS_STARTER = "org.springframework.cloud:spring-cloud-starter-aws:${DependenciesVersions.AWS_STARTER}"
 
     /* queryDsl */
     const val QUERYDSL = "com.querydsl:querydsl-jpa:${DependenciesVersions.QUERYDSL}"
