@@ -28,6 +28,10 @@ dependencies {
     /* jpa */
     implementation(Dependencies.SPRING_DATA_JPA)
 
+    /* aws */
+    implementation(Dependencies.AWS_STARTER)
+
+
     /* queryDsl */
     implementation(Dependencies.QUERYDSL)
     kapt(Dependencies.QUERYDSL_PROCESSOR)

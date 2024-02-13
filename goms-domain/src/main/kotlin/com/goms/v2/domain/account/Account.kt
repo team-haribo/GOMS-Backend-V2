@@ -16,7 +16,7 @@ data class Account(
     val gender: Gender,
     val major: Major,
     val name: String,
-    val profileUrl: String?,
+    var profileUrl: String?,
     var authority: Authority,
     val createdTime: LocalDateTime
 )
@@ -27,4 +27,8 @@ fun Account.updateAuthority(newAuthority: Authority) {
 
 fun Account.updatePassword(newPassword: String) {
     password = newPassword
+}
+
+fun Account.updateProfileUrl(newProfileUrl: String) {
+    profileUrl = newProfileUrl
 }

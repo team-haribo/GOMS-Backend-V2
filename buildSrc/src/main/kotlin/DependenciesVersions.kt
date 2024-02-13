@@ -8,6 +8,7 @@ object DependenciesVersions {
     const val SPRING_TEST = "2.7.7"
     const val SERVLET_VERSION = "4.0.1"
     const val EMAIL = "2.6.7"
+    const val AWS_STARTER = "2.2.6.RELEASE"
     const val REDIS_VERSION = "2.7.2"
     const val MARIA_DB_VERSION = "2.1.2"
     const val JWT_VERSION = "0.11.5"

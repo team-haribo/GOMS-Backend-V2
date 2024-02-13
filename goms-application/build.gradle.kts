@@ -13,6 +13,8 @@ dependencies {
     /* spring */
     implementation(Dependencies.TRANSACTION)
 
+    implementation(Dependencies.SPRING_WEB_VERSION)
+
     /* mapstruct */
     implementation(Dependencies.MAP_STRUCT)
     kapt(Dependencies.MAP_STRUCT_PROCESSOR)

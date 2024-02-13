@@ -11,6 +11,7 @@ object Dependencies {
     const val VALIDATION = "org.springframework.boot:spring-boot-starter-validation"
     const val SPRING_SECURITY = "org.springframework.boot:spring-boot-starter-security"
     const val SPRING_WEB = "org.springframework.boot:spring-boot-starter-web"
+    const val SPRING_WEB_VERSION = "org.springframework.boot:spring-boot-starter-web:${PluginVersions.SPRING_BOOT_VERSION}"
     const val SPRING_BOOT_STARTER = "org.springframework.boot:spring-boot-starter"
     const val TRANSACTION = "org.springframework:spring-tx:${DependenciesVersions.SPRING_TRANSACTION}"
     const val CONFIGURATION_PROCESSOR = "org.springframework.boot:spring-boot-configuration-processor"
@@ -28,6 +29,9 @@ object Dependencies {
     const val SPRING_REDIS = "org.springframework.boot:spring-boot-starter-data-redis"
     const val REDIS = "org.springframework.data:spring-data-redis:${DependenciesVersions.REDIS_VERSION}"
     const val MARIA_DB = "org.mariadb.jdbc:mariadb-java-client:${DependenciesVersions.MARIA_DB_VERSION}"
+
+    /* aws */
+    const val AWS_STARTER = "org.springframework.cloud:spring-cloud-starter-aws:${DependenciesVersions.AWS_STARTER}"
 
     /* queryDsl */
     const val QUERYDSL = "com.querydsl:querydsl-jpa:${DependenciesVersions.QUERYDSL}"
