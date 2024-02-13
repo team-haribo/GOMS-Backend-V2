@@ -40,6 +40,6 @@ class AccountController(
     @PostMapping("image")
     fun uploadImage(@RequestPart("File") image: MultipartFile): ResponseEntity<Void> =
         uploadImageUseCase.execute(image)
-                .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+                .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
 }
