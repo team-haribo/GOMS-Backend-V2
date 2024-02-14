@@ -16,14 +16,17 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.every
 import io.mockk.mockk
 import org.springframework.http.MediaType
+import org.springframework.mock.web.MockMultipartFile
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import org.springframework.web.multipart.MultipartFile
+import java.io.FileInputStream
+import java.nio.charset.StandardCharsets
 
 class AccountControllerTest: DescribeSpec({
     lateinit var mockMvc: MockMvc
@@ -91,7 +94,6 @@ class AccountControllerTest: DescribeSpec({
 
     }
 
-
     describe("api/v2/account/new-password patch 요청을 했을때") {
         val url = "/api/v2/account/new-password"
 
@@ -117,6 +119,26 @@ class AccountControllerTest: DescribeSpec({
                         .content(jsonRequestBody)
                 )
                     .andExpect(status().`is`(204))
+            }
+        }
+    }
+
+    describe("api/v2/account/image로 post 요청을 했을때") {
+        val url = "/api/v2/account/image"
+
+        val imageBytes = "image content".toByteArray(StandardCharsets.UTF_8)
+        val image = MockMultipartFile("File", "image.png", "image/png", imageBytes)
+
+        context("유효한 요청이 전달 되면") {
+
+            every { uploadImageUseCase.execute(any()) } returns Unit
+
+            it("205 status code를 응답해야한다.") {
+                mockMvc.perform(
+                    multipart(url)
+                        .file(image)
+                )
+                    .andExpect(status().`is`(205))
             }
         }
     }
