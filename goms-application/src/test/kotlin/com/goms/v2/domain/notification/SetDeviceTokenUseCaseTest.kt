@@ -4,12 +4,9 @@ import com.goms.v2.common.AnyValueObjectGenerator
 import com.goms.v2.common.util.AccountUtil
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
-import com.goms.v2.domain.notification.spi.NotificationPort
 import com.goms.v2.domain.notification.usecase.SetDeviceTokenUseCase
 import com.goms.v2.repository.account.AccountRepository
-import com.goms.v2.repository.late.LateRepository
 import com.goms.v2.repository.notification.DeviceTokenRepository
-import com.goms.v2.repository.outing.OutingRepository
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
