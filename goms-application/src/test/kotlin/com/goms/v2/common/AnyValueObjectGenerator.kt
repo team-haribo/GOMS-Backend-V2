@@ -5,6 +5,7 @@ import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.auth.data.event.SaveRefreshTokenEvent
 import com.goms.v2.domain.late.data.dto.LateRankDto
+import com.goms.v2.domain.notification.Writer
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -64,6 +65,7 @@ object AnyValueObjectGenerator {
             Authority::class -> Authority.ROLE_STUDENT
             Gender::class -> Gender.MAN
             Major::class -> Major.SMART_IOT
+            Writer::class -> Writer.GOMS
             LateRankDto::class -> LateRankDto(
                 UUID.randomUUID(),
                 String(),
