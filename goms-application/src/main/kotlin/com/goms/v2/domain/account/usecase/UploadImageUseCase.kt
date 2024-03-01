@@ -13,23 +13,10 @@ import org.springframework.web.multipart.MultipartFile
 class UploadImageUseCase(
     private val accountRepository: AccountRepository,
     private val s3UtilPort: S3UtilPort,
-    private val accountUtil: AccountUtil
 ) {
 
     fun execute(image: MultipartFile) {
-        val accountIdx = accountUtil.getCurrentAccountIdx()
-        val account = accountRepository.findByIdOrNull(accountIdx) ?: throw AccountNotFoundException()
-
-        val list = listOf("jpg", "jpeg", "png", "gif")
-        val splitFile = image.originalFilename.toString().split(".")
-
-        if(splitFile.size < 2)
-            throw FileExtensionInvalidException()
-
-        val extension = splitFile[1].lowercase()
-
-        if(list.none { it == extension })
-            throw FileExtensionInvalidException()
+        val account = s3UtilPort.validImage(image)
 
         val imgURL = s3UtilPort.upload(image)
         account.updateProfileUrl(imgURL)
