@@ -6,4 +6,5 @@ import org.springframework.web.multipart.MultipartFile
 interface S3UtilPort {
     fun validImage(image: MultipartFile): Account
     fun upload(image: MultipartFile): String
+    fun deleteImage(url: String)
 }
