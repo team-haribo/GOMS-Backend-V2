@@ -4,6 +4,7 @@ import com.goms.v2.domain.account.dto.request.UpdatePasswordRequest
 import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
 import com.goms.v2.domain.account.mapper.AccountDataMapper
 import com.goms.v2.domain.account.usecase.QueryAccountProfileUseCase
+import com.goms.v2.domain.account.usecase.UpdateImageUseCase
 import com.goms.v2.domain.account.usecase.UpdatePasswordUseCase
 import com.goms.v2.domain.account.usecase.UploadImageUseCase
 import org.springframework.http.HttpStatus
@@ -24,7 +25,8 @@ class AccountController(
     private val accountDataMapper: AccountDataMapper,
     private val queryAccountProfileUseCase: QueryAccountProfileUseCase,
     private val updatePasswordUseCase: UpdatePasswordUseCase,
-    private val uploadImageUseCase: UploadImageUseCase
+    private val uploadImageUseCase: UploadImageUseCase,
+    private val updateImageUseCase: UpdateImageUseCase
 ) {
 
     @GetMapping("profile")
@@ -40,6 +42,11 @@ class AccountController(
     @PostMapping("image")
     fun uploadImage(@RequestPart("File") image: MultipartFile): ResponseEntity<Void> =
         uploadImageUseCase.execute(image)
+                .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
+
+    @PatchMapping("image")
+    fun updateImage(@RequestPart("File") image: MultipartFile): ResponseEntity<Void> =
+        updateImageUseCase.execute(image)
                 .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
 }
