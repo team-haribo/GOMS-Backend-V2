@@ -49,4 +49,8 @@ class S3UtilAdapter(
         return amazonS3.getUrl(bucket, profileName).toString()
     }
 
+    override fun deleteImage(url: String) {
+        val key = url.substringAfter("com/")
+        amazonS3.deleteObject(bucket, key)
+    }
 }
