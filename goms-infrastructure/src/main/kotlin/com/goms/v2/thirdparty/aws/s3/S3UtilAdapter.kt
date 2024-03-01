@@ -44,8 +44,8 @@ class S3UtilAdapter(
     override fun upload(image: MultipartFile): String {
         val profileName = "${bucket}/${UUID.randomUUID()}${image.originalFilename}"
         val metadata = ObjectMetadata()
-        metadata.contentLength = file.inputStream.available().toLong()
-        amazonS3.putObject(bucket, profileName, file.inputStream, metadata)
+        metadata.contentLength = image.inputStream.available().toLong()
+        amazonS3.putObject(bucket, profileName, image.inputStream, metadata)
         return amazonS3.getUrl(bucket, profileName).toString()
     }
 
