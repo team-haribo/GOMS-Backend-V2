@@ -32,3 +32,7 @@ fun Account.updatePassword(newPassword: String) {
 fun Account.updateProfileUrl(newProfileUrl: String) {
     profileUrl = newProfileUrl
 }
+
+fun Account.resetProfileUrl(deleteProfileUrl: String?) {
+    profileUrl = deleteProfileUrl
+}
