@@ -3,12 +3,10 @@ package com.goms.v2.domain.account
 import com.goms.v2.domain.account.dto.request.UpdatePasswordRequest
 import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
 import com.goms.v2.domain.account.mapper.AccountDataMapper
-import com.goms.v2.domain.account.usecase.QueryAccountProfileUseCase
-import com.goms.v2.domain.account.usecase.UpdateImageUseCase
-import com.goms.v2.domain.account.usecase.UpdatePasswordUseCase
-import com.goms.v2.domain.account.usecase.UploadImageUseCase
+import com.goms.v2.domain.account.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -26,7 +24,8 @@ class AccountController(
     private val queryAccountProfileUseCase: QueryAccountProfileUseCase,
     private val updatePasswordUseCase: UpdatePasswordUseCase,
     private val uploadImageUseCase: UploadImageUseCase,
-    private val updateImageUseCase: UpdateImageUseCase
+    private val updateImageUseCase: UpdateImageUseCase,
+    private val deleteImageUseCase: DeleteImageUseCase
 ) {
 
     @GetMapping("profile")
@@ -49,4 +48,8 @@ class AccountController(
         updateImageUseCase.execute(image)
                 .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
+    @DeleteMapping
+    fun deleteImage(): ResponseEntity<Void> =
+        deleteImageUseCase.execute()
+                .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }
