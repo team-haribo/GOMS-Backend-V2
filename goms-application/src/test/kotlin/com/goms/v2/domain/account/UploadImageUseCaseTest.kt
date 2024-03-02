@@ -18,8 +18,7 @@ import java.util.*
 class UploadImageUseCaseTest: BehaviorSpec({
     val accountRepository = mockk<AccountRepository>()
     val s3UtilPort = mockk<S3UtilPort>()
-    val accountUtil = mockk<AccountUtil>()
-    val uploadImageUseCase = UploadImageUseCase(accountRepository, s3UtilPort, accountUtil)
+    val uploadImageUseCase = UploadImageUseCase(accountRepository, s3UtilPort)
 
     Given("multipart image가 주어질 때") {
         val imageBytes = "image content".toByteArray(StandardCharsets.UTF_8)
@@ -29,9 +28,7 @@ class UploadImageUseCaseTest: BehaviorSpec({
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
 
-
-        every { accountUtil.getCurrentAccountIdx() } returns accountIdx
-        every { accountRepository.findByIdOrNull(accountIdx) } returns account
+        every { s3UtilPort.validImage(image) } returns account
         every { s3UtilPort.upload(image) } returns imageURL
         every { accountRepository.save(account) } returns account
 
