@@ -2,8 +2,9 @@ package com.goms.v2.domain.account.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithTransaction
 import com.goms.v2.common.util.AccountUtil
+import com.goms.v2.domain.account.exception.ProfileUrlNotExistException
+import com.goms.v2.domain.account.resetProfileUrl
 import com.goms.v2.domain.account.spi.S3UtilPort
-import com.goms.v2.domain.account.updateProfileUrl
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.repository.account.AccountRepository
 
@@ -21,8 +22,7 @@ class DeleteImageUseCase(
         if (account.profileUrl == null) throw ProfileUrlNotExistException()
 
         s3UtilPort.deleteImage(account.profileUrl.toString())
-        account.updateProfileUrl("")
-        accountRepository.save(account)
+        account.resetProfileUrl(null)
     }
 
 }
