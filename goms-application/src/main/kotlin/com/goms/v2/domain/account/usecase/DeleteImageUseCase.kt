@@ -18,6 +18,8 @@ class DeleteImageUseCase(
         val accountIdx = accountUtil.getCurrentAccountIdx()
         val account = accountRepository.findByIdOrNull(accountIdx) ?: throw AccountNotFoundException()
 
+        if (account.profileUrl == null) throw ProfileUrlNotExistException()
+
         s3UtilPort.deleteImage(account.profileUrl.toString())
         account.updateProfileUrl("")
         accountRepository.save(account)
