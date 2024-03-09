@@ -31,6 +31,7 @@ enum class ErrorCode(
 
 	// ACCOUNT
 	ACCOUNT_NOT_FOUND("계정을 찾을 수 없습니다.", ErrorStatus.NOT_FOUND),
+	NOT_EXIST_PROFILEURL("등록된 profileUrl이 존재하지 않습니다.", ErrorStatus.NOT_FOUND),
 
 	// TOKEN
 	INVALID_TOKEN("유효하지 않은 토큰입니다.", ErrorStatus.UNAUTHORIZED),
