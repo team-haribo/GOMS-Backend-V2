@@ -1,5 +1,6 @@
 package com.goms.v2.domain.account
 
+import com.goms.v2.domain.account.dto.request.ChangePasswordRequest
 import com.goms.v2.domain.account.dto.request.UpdatePasswordRequest
 import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
 import com.goms.v2.domain.account.mapper.AccountDataMapper
@@ -25,7 +26,8 @@ class AccountController(
     private val updatePasswordUseCase: UpdatePasswordUseCase,
     private val uploadImageUseCase: UploadImageUseCase,
     private val updateImageUseCase: UpdateImageUseCase,
-    private val deleteImageUseCase: DeleteImageUseCase
+    private val deleteImageUseCase: DeleteImageUseCase,
+    private val changePasswordUseCase: ChangePasswordUseCase
 ) {
 
     @GetMapping("profile")
@@ -52,4 +54,9 @@ class AccountController(
     fun deleteImage(): ResponseEntity<Void> =
         deleteImageUseCase.execute()
                 .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+
+    @PatchMapping("change-password")
+    fun changePassword(@RequestBody changePasswordRequest: ChangePasswordRequest): ResponseEntity<Void> =
+        changePasswordUseCase.execute(accountDataMapper.toDomain(changePasswordRequest))
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }
