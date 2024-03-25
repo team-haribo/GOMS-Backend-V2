@@ -1,7 +1,9 @@
 package com.goms.v2.domain.account.mapper
 
+import com.goms.v2.domain.account.data.dto.ChangePasswordDto
 import com.goms.v2.domain.account.data.dto.PasswordDto
 import com.goms.v2.domain.account.data.dto.ProfileDto
+import com.goms.v2.domain.account.dto.request.ChangePasswordRequest
 import com.goms.v2.domain.account.dto.request.UpdatePasswordRequest
 import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
 import org.springframework.stereotype.Component
@@ -26,6 +28,12 @@ class AccountDataMapper {
         PasswordDto(
             email = updatePasswordRequest.email,
             newPassword = updatePasswordRequest.newPassword
+        )
+
+    fun toDomain(changePasswordRequest: ChangePasswordRequest) =
+        ChangePasswordDto(
+            password = changePasswordRequest.password,
+            newPassword = changePasswordRequest.newPassword
         )
 
 }
