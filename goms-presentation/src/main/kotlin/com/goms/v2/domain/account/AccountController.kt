@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
+import javax.validation.Valid
 
 
 @RestController
@@ -56,7 +57,7 @@ class AccountController(
                 .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @PatchMapping("change-password")
-    fun changePassword(@RequestBody changePasswordRequest: ChangePasswordRequest): ResponseEntity<Void> =
+    fun changePassword(@RequestBody @Valid changePasswordRequest: ChangePasswordRequest): ResponseEntity<Void> =
         changePasswordUseCase.execute(accountDataMapper.toDomain(changePasswordRequest))
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }
