@@ -36,7 +36,7 @@ class AccountController(
             .let { ResponseEntity.ok(accountDataMapper.toResponse(it)) }
 
     @PatchMapping("new-password")
-    fun updatePassword(@RequestBody updatePasswordRequest: UpdatePasswordRequest): ResponseEntity<Void> =
+    fun updatePasswordAfterEmail(@RequestBody updatePasswordRequest: UpdatePasswordRequest): ResponseEntity<Void> =
         updatePasswordUseCase.execute(accountDataMapper.toDomain(updatePasswordRequest))
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
