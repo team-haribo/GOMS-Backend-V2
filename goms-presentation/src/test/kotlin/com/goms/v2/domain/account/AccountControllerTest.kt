@@ -34,13 +34,15 @@ class AccountControllerTest: DescribeSpec({
     val uploadImageUseCase = mockk<UploadImageUseCase>()
     val updateImageUseCase = mockk<UpdateImageUseCase>()
     val deleteImageUseCase = mockk<DeleteImageUseCase>()
+    val changePasswordUseCase = mockk<ChangePasswordUseCase>()
     val accountController = AccountController(
         accountDataMapper,
         queryAccountProfileUseCase,
         updatePasswordUseCase,
         uploadImageUseCase,
         updateImageUseCase,
-        deleteImageUseCase
+        deleteImageUseCase,
+        changePasswordUseCase
     )
 
     beforeTest {
