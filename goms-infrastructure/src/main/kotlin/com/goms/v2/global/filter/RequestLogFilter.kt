@@ -19,12 +19,7 @@ class RequestLogFilter: OncePerRequestFilter() {
         log.info("request method = ${request.method}")
         log.info("request url = ${request.requestURI}")
 
-        try {
-            filterChain.doFilter(request, response)
-        }
-        catch (e: Exception) {
-            e.printStackTrace()
-        }
+        filterChain.doFilter(request, response)
 
         log.info("response status = ${response.status}")
     }
