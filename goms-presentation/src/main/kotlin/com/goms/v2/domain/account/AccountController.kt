@@ -1,5 +1,6 @@
 package com.goms.v2.domain.account
 
+import com.goms.v2.domain.account.dto.request.ChangePasswordRequest
 import com.goms.v2.domain.account.dto.request.UpdatePasswordRequest
 import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
 import com.goms.v2.domain.account.mapper.AccountDataMapper
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
+import javax.validation.Valid
 
 
 @RestController
@@ -25,7 +27,8 @@ class AccountController(
     private val updatePasswordUseCase: UpdatePasswordUseCase,
     private val uploadImageUseCase: UploadImageUseCase,
     private val updateImageUseCase: UpdateImageUseCase,
-    private val deleteImageUseCase: DeleteImageUseCase
+    private val deleteImageUseCase: DeleteImageUseCase,
+    private val changePasswordUseCase: ChangePasswordUseCase
 ) {
 
     @GetMapping("profile")
@@ -34,7 +37,7 @@ class AccountController(
             .let { ResponseEntity.ok(accountDataMapper.toResponse(it)) }
 
     @PatchMapping("new-password")
-    fun updatePassword(@RequestBody updatePasswordRequest: UpdatePasswordRequest): ResponseEntity<Void> =
+    fun updatePasswordAfterEmail(@RequestBody updatePasswordRequest: UpdatePasswordRequest): ResponseEntity<Void> =
         updatePasswordUseCase.execute(accountDataMapper.toDomain(updatePasswordRequest))
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
@@ -52,4 +55,9 @@ class AccountController(
     fun deleteImage(): ResponseEntity<Void> =
         deleteImageUseCase.execute()
                 .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+
+    @PatchMapping("change-password")
+    fun changePassword(@RequestBody @Valid changePasswordRequest: ChangePasswordRequest): ResponseEntity<Void> =
+        changePasswordUseCase.execute(accountDataMapper.toDomain(changePasswordRequest))
+            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }
