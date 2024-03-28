@@ -23,7 +23,7 @@ class OutingController(
     @PostMapping("{outingUUID}")
     fun outing(@PathVariable outingUUID: UUID): ResponseEntity<Void> =
         outingUseCase.execute(outingUUID)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .run { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @GetMapping
     fun queryOutingAccount(): ResponseEntity<List<OutingAccountHttpResponse>> =

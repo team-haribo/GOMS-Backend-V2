@@ -28,7 +28,7 @@ class AuthController(
     @PostMapping("signup")
     fun signUp(@RequestBody @Valid signUpHttpRequest: SignUpHttpRequest): ResponseEntity<Void> =
         signUpUseCase.execute(authDataMapper.toDto(signUpHttpRequest))
-            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+            .run { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @PostMapping("signin")
     fun signIn(@RequestBody @Valid signInHttpRequest: SignInHttpRequest): ResponseEntity<TokenHttpResponse> =
@@ -44,16 +44,16 @@ class AuthController(
     @PostMapping("email/send")
     fun sendAuthCode(@RequestBody request: SendAuthCodeHttpRequest): ResponseEntity<Void> =
         sendAuthCodeUseCase.execute(sendAuthCodeDataMapper.toDto(request))
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .run { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @GetMapping("/email/verify")
     fun verifyAuthCode(@RequestParam email: String, @RequestParam authCode: String): ResponseEntity<Void> =
         verifyAuthCodeUseCase.execute(email, authCode)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .run { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @DeleteMapping
     fun logout(@RequestHeader refreshToken: String): ResponseEntity<Void> =
         logoutUseCase.execute(refreshToken)
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .run { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
 }

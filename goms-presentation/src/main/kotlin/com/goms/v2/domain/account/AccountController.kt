@@ -36,20 +36,20 @@ class AccountController(
     @PatchMapping("new-password")
     fun updatePassword(@RequestBody updatePasswordRequest: UpdatePasswordRequest): ResponseEntity<Void> =
         updatePasswordUseCase.execute(accountDataMapper.toDomain(updatePasswordRequest))
-            .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .run { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @PostMapping("image")
     fun uploadImage(@RequestPart("File") image: MultipartFile): ResponseEntity<Void> =
         uploadImageUseCase.execute(image)
-                .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
+            .run { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
     @PatchMapping("image")
     fun updateImage(@RequestPart("File") image: MultipartFile): ResponseEntity<Void> =
         updateImageUseCase.execute(image)
-                .let { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
+            .run { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 
     @DeleteMapping
     fun deleteImage(): ResponseEntity<Void> =
         deleteImageUseCase.execute()
-                .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+            .run { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }
