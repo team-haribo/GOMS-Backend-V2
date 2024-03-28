@@ -28,4 +28,8 @@ class DeviceTokenRepositoryImpl(
         return deviceTokenEntity?.let { deviceTokenMapper.toDomain(it) }
     }
 
+    override fun delete(deviceToken: DeviceToken) {
+        deviceTokenJpaRepository.delete(deviceTokenMapper.toEntity(deviceToken))
+    }
+
 }
