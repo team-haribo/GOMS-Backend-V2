@@ -8,5 +8,6 @@ interface DeviceTokenRepository {
     fun save(deviceToken: DeviceToken)
     fun findAll(): List<DeviceToken>
     fun findByIdxOrNull(accountIdx: UUID): DeviceToken?
+    fun delete(deviceToken: DeviceToken)
 
 }
