@@ -23,6 +23,8 @@ class DeleteImageUseCase(
 
         s3UtilPort.deleteImage(account.profileUrl.toString())
         account.resetProfileUrl(null)
+
+        accountRepository.save(account)
     }
 
 }
