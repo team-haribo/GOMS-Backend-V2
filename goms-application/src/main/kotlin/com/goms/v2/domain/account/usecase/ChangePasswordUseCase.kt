@@ -21,7 +21,7 @@ class ChangePasswordUseCase(
         val accountIdx = accountUtil.getCurrentAccountIdx()
         val account = accountRepository.findByIdOrNull(accountIdx) ?: throw AccountNotFoundException()
 
-        if (passwordEncoderPort.isPasswordMatch(changePasswordDto.password, account.password)) {
+        if (!passwordEncoderPort.isPasswordMatch(changePasswordDto.password, account.password)) {
             throw PasswordNotMatchException()
         }
 
