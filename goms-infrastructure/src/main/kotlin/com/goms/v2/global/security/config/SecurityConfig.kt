@@ -40,7 +40,7 @@ class SecurityConfig(
             .mvcMatchers(HttpMethod.PATCH, "/api/v2/auth").permitAll()
             .mvcMatchers(HttpMethod.POST, "/api/v2/auth/email/send").permitAll()
             .mvcMatchers(HttpMethod.GET, "/api/v2/auth/email/verify").permitAll()
-            .mvcMatchers(HttpMethod.DELETE, "/api/v2/auth").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
+            .mvcMatchers(HttpMethod.DELETE, "/api/v2/auth").permitAll()
 
             // /account
             .mvcMatchers(HttpMethod.GET, "/api/v2/account/profile").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
