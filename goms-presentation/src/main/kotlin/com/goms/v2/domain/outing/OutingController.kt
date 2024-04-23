@@ -38,7 +38,7 @@ class OutingController(
             .let { ResponseEntity.ok(it) }
 
     @GetMapping("search")
-    fun searchOutingAccount(name: String?): ResponseEntity<List<OutingAccountHttpResponse>> =
+    fun searchOutingAccount(@RequestParam(required = false) name: String?): ResponseEntity<List<OutingAccountHttpResponse>> =
         searchOutingAccountUseCase.execute(name)
             .map { outingDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it)}
