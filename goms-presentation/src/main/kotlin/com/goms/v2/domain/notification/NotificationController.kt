@@ -30,7 +30,6 @@ class NotificationController(
         deleteDeviceTokenUseCase.execute()
             .run { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
-
     @GetMapping("outing/before")
     fun beforeOutingTestApi(): ResponseEntity<Map<String, String>> =
         sendNotificationUseCase.execute(NotificationType.BEFORE_OUTING)

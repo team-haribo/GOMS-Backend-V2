@@ -14,9 +14,8 @@ enum class Topic(
     ),
 
     GROUNDED(
-        title = "오늘 수요 외출제 시행하지 않습니다.",
-        content = "저번주 외출제 지각생이 3명 이상이여서 외출제 없습니다. \n" +
-                "오늘 나가면 무단 외출로 간주합니다."
+        title = "외출제 금지",
+        content = "저번주 외출제 지각생이므로 외출 금지 대상입니다. \n"
     ),
 
     AFTER_OUTING(
