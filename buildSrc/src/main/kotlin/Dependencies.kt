@@ -15,6 +15,7 @@ object Dependencies {
     const val SPRING_BOOT_STARTER = "org.springframework.boot:spring-boot-starter"
     const val TRANSACTION = "org.springframework:spring-tx:${DependenciesVersions.SPRING_TRANSACTION}"
     const val CONFIGURATION_PROCESSOR = "org.springframework.boot:spring-boot-configuration-processor"
+    const val ACTUATOR = "org.springframework.boot:spring-boot-starter-actuator"
 
     /* gauth */
     const val GAUTH = "com.github.GSM-MSG:GAuth-SDK-Java:${DependenciesVersions.GAUTH_VERSION}"
@@ -59,4 +60,7 @@ object Dependencies {
 
     /* fcm */
     const val FCM = "com.google.firebase:firebase-admin:${DependenciesVersions.FCM_VERSION}"
+
+    /* prometheus */
+    const val PROMETHEUS = "io.micrometer:micrometer-registry-prometheus"
 }

@@ -58,6 +58,10 @@ dependencies {
 
     /* fcm */
     implementation(Dependencies.FCM)
+
+    /* monitoring */
+    implementation(Dependencies.ACTUATOR)
+    runtimeOnly(Dependencies.PROMETHEUS)
 }
 
 allOpen {
