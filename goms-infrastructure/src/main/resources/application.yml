@@ -70,3 +70,14 @@ logging:
       amazonaws:
         util:
           EC2MetadataUtils: error
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true
