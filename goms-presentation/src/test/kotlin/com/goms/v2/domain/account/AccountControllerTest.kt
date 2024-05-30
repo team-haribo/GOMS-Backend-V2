@@ -10,6 +10,7 @@ import com.goms.v2.domain.account.dto.request.UpdatePasswordRequest
 import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
 import com.goms.v2.domain.account.mapper.AccountDataMapper
 import com.goms.v2.domain.account.usecase.*
+import com.goms.v2.domain.auth.usecase.WithdrawUseCase
 import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -35,6 +36,7 @@ class AccountControllerTest: DescribeSpec({
     val updateImageUseCase = mockk<UpdateImageUseCase>()
     val deleteImageUseCase = mockk<DeleteImageUseCase>()
     val changePasswordUseCase = mockk<ChangePasswordUseCase>()
+    val withdrawUseCase = mockk<WithdrawUseCase>()
     val accountController = AccountController(
         accountDataMapper,
         queryAccountProfileUseCase,
@@ -42,7 +44,8 @@ class AccountControllerTest: DescribeSpec({
         uploadImageUseCase,
         updateImageUseCase,
         deleteImageUseCase,
-        changePasswordUseCase
+        changePasswordUseCase,
+        withdrawUseCase
     )
 
     beforeTest {

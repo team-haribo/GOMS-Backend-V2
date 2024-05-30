@@ -22,4 +22,6 @@ interface AccountRepository {
     ): List<Account>
     fun findAll(): List<Account>
 
+    fun delete(account: Account)
+
 }
