@@ -6,6 +6,8 @@ import com.goms.v2.domain.account.data.dto.ProfileDto
 import com.goms.v2.domain.account.dto.request.ChangePasswordRequest
 import com.goms.v2.domain.account.dto.request.UpdatePasswordRequest
 import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
+import com.goms.v2.domain.auth.data.dto.WithdrawDto
+import com.goms.v2.domain.auth.dto.request.WithdrawHttpRequest
 import org.springframework.stereotype.Component
 
 @Component
@@ -34,6 +36,11 @@ class AccountDataMapper {
         ChangePasswordDto(
             password = changePasswordRequest.password,
             newPassword = changePasswordRequest.newPassword
+        )
+
+    fun toDto(withdrawHttpRequest: WithdrawHttpRequest) =
+        WithdrawDto(
+            password = withdrawHttpRequest.password
         )
 
 }
