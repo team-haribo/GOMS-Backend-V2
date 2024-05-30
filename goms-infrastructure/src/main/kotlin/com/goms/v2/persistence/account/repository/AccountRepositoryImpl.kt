@@ -41,6 +41,11 @@ class AccountRepositoryImpl(
         accountJpaRepository.findAll()
             .map { accountMapper.toDomain(it)!! }
 
+    override fun delete(account: Account) {
+        val accountEntity = accountMapper.toEntity(account)
+        accountJpaRepository.delete(accountEntity)
+    }
+
     override fun findAllOrderByStudentNum(): List<Account> =
         queryFactory.selectFrom(accountJpaEntity)
             .orderBy(accountJpaEntity.gender.asc())
