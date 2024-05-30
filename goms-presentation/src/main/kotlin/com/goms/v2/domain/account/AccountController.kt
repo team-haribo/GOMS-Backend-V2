@@ -5,6 +5,8 @@ import com.goms.v2.domain.account.dto.request.UpdatePasswordRequest
 import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
 import com.goms.v2.domain.account.mapper.AccountDataMapper
 import com.goms.v2.domain.account.usecase.*
+import com.goms.v2.domain.auth.dto.request.WithdrawHttpRequest
+import com.goms.v2.domain.auth.usecase.WithdrawUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -28,7 +30,8 @@ class AccountController(
     private val uploadImageUseCase: UploadImageUseCase,
     private val updateImageUseCase: UpdateImageUseCase,
     private val deleteImageUseCase: DeleteImageUseCase,
-    private val changePasswordUseCase: ChangePasswordUseCase
+    private val changePasswordUseCase: ChangePasswordUseCase,
+    private val withdrawUseCase: WithdrawUseCase
 ) {
 
     @GetMapping("profile")
@@ -60,4 +63,9 @@ class AccountController(
     fun changePassword(@RequestBody @Valid changePasswordRequest: ChangePasswordRequest): ResponseEntity<Void> =
         changePasswordUseCase.execute(accountDataMapper.toDomain(changePasswordRequest))
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+
+    @DeleteMapping("withdraw")
+    fun withdraw(@RequestBody withdrawHttpRequest: WithdrawHttpRequest): ResponseEntity<Void> =
+        withdrawUseCase.execute(accountDataMapper.toDto(withdrawHttpRequest))
+            .run { ResponseEntity.status(HttpStatus.RESET_CONTENT).build() }
 }

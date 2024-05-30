@@ -47,6 +47,7 @@ class SecurityConfig(
             .mvcMatchers(HttpMethod.POST, "/api/v2/account/image").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.PATCH, "/api/v2/account/new-password").permitAll()
             .mvcMatchers(HttpMethod.PATCH, "/api/v2/account/change-password").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
+            .mvcMatchers(HttpMethod.DELETE, "/api/v2/account/withdraw").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
 
             // /outing
             .mvcMatchers(HttpMethod.POST, "/api/v2/outing/{outingUUID}").hasAnyAuthority(Authority.ROLE_STUDENT.name)
