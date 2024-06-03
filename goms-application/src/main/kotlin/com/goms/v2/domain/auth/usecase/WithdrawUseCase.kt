@@ -15,12 +15,12 @@ class WithdrawUseCase(
     private val passwordEncoderPort: PasswordEncoderPort
 ) {
 
-    fun execute(withdrawDto: WithdrawDto) {
+    fun execute(password: String) {
         val accountIdx = accountUtil.getCurrentAccountIdx()
         val account = accountRepository.findByIdOrNull(accountIdx)
             ?: throw AccountNotFoundException()
 
-        if (!passwordEncoderPort.isPasswordMatch(withdrawDto.password, account.password)) {
+        if (!passwordEncoderPort.isPasswordMatch(password, account.password)) {
             throw PasswordNotMatchException()
         }
 
