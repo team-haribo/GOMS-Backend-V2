@@ -4,6 +4,7 @@ import com.goms.v2.domain.auth.exception.EmailSendFailException
 import com.goms.v2.domain.auth.spi.EmailSendPort
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
 import javax.mail.MessagingException
 
@@ -12,6 +13,8 @@ class EmailSendAdapter(
     private val mailSender: JavaMailSender
 ): EmailSendPort {
 
+
+    @Async
     override fun sendEmail(email: String, authCode: String) {
         val subject = "GOMS 인증번호"
         val content = "GOMS 인증번호는 " + authCode + "입니다."
