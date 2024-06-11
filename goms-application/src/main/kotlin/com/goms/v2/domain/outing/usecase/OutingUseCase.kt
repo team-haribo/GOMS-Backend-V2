@@ -30,9 +30,9 @@ class OutingUseCase(
             throw BlackListNotAllowOutingException()
         }
 
-        if (!outingUUIDRepository.existsById(outingUUID)) {
-            throw OutingUUIDUnverifiedException()
-        }
+//        if (!outingUUIDRepository.existsById(outingUUID)) {
+//            throw OutingUUIDUnverifiedException()
+//        }
 
         when (outingRepository.existsByAccount(account)) {
             false -> outingRepository.save(Outing(
