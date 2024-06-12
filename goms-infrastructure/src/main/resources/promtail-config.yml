@@ -1,0 +1,22 @@
+positions:
+  filename: /tmp/positions.yaml # 동기화 작업을 이루기 위해 promtail이 읽은 마지막 로그 정보를 저장하는 곳
+
+clients:
+  - url: http://host.docker.internal:3100/loki/api/v1/push # push할 Loki의 주소
+
+scrape_configs:
+  - job_name: logback
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: logback_logs
+          __path__: ./logs/logback.log
+
+  - job_name: error
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: error_logs
+          __path__: ./logs/error.log # error 폴더 내에 log 파일들 모두 수집
