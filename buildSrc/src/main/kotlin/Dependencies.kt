@@ -7,6 +7,9 @@ object Dependencies {
     /* java servlet */
     const val JAVA_SERVLET = "javax.servlet:javax.servlet-api:${DependenciesVersions.SERVLET_VERSION}"
 
+    /* thymeleaf */
+    const val THYMELEAF = "org.springframework.boot:spring-boot-starter-thymeleaf"
+
     /* spring app */
     const val VALIDATION = "org.springframework.boot:spring-boot-starter-validation"
     const val SPRING_SECURITY = "org.springframework.boot:spring-boot-starter-security"

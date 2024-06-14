@@ -62,6 +62,11 @@ dependencies {
     /* monitoring */
     implementation(Dependencies.ACTUATOR)
     runtimeOnly(Dependencies.PROMETHEUS)
+
+    /* thymeleaf */
+    implementation(Dependencies.THYMELEAF)
+    implementation(kotlin("stdlib-jdk8"))
+
 }
 
 allOpen {
