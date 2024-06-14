@@ -29,6 +29,10 @@ class OutingRepositoryImpl(
         outingJpaRepository.deleteByAccountIdx(accountIdx)
     }
 
+    override fun deleteAllByAccountIdx(accountIdx: UUID) {
+        outingJpaRepository.deleteAllByAccountIdx(accountIdx)
+    }
+
     override fun existsByAccount(account: Account): Boolean {
         val accountEntity = accountMapper.toEntity(account)
         return outingJpaRepository.existsByAccount(accountEntity)

@@ -62,4 +62,8 @@ class LateRepositoryImpl(
         lateJpaRepository.findAllByCreatedTime(date)
             .map { lateMapper.toDomain(it)!! }
 
+    override fun deleteAllByAccountIdx(accountIdx: UUID) {
+        lateJpaRepository.deleteAllByAccountIdx(accountIdx)
+    }
+
 }

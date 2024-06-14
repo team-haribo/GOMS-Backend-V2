@@ -11,5 +11,6 @@ interface LateRepository {
     fun findTop3ByOrderByAccountDesc(): List<Late>
     fun countByOneWeekAgoLate(oneWeekAgo: LocalDate): Long
     fun findAllByCreatedTime(date: LocalDate): List<Late>
+    fun deleteAllByAccountIdx(accountIdx: UUID)
 
 }
