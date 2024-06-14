@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verification Code</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .email-container {
+      max-width: 480px;
+      margin: auto;
+      background-color: #ffffff;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      text-align: center;
+      background-color: #FFA600;
+      padding: 15px;
+      border-radius: 10px 10px 0 0;
+    }
+    .content {
+      text-align: center;
+      padding: 20px 10px;
+    }
+    .content h1 {
+      color: #FFA600;
+    }
+    .content p {
+      color: #666666;
+      line-height: 1.5;
+    }
+    .verification-code {
+      font-size: 22px;
+      font-weight: bold;
+      color: #FFA600;
+      margin: 20px 0;
+      background-color: #fff8e1;
+      padding: 10px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    .footer {
+      text-align: center;
+      color: #aaaaaa;
+      font-size: 12px;
+      padding: 5px 10px;
+      border-top: 1px solid #eeeeee;
+      margin-top: 20px;
+    }
+    .expiration {
+      text-align: center;
+      color: #928C8C;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="email-container">
+  <div class="header">
+    <img src="https://pocketmon-s3.s3.ap-northeast-2.amazonaws.com/goms+icon.png" alt="GOMS Logo" style="width: 110px; height: 110px;">
+  </div>
+  <div class="content">
+    <h1>인증번호를 확인해주세요</h1>
+    <p>안녕하세요,</p>
+    <p>아래의 인증번호를 입력하여 인증을 완료해주세요.</p>
+    <div class="verification-code" th:text="${authenticationCode}">1234</div>
+    <div class="expiration">
+      인증번호는 5분간 유효합니다.
+    </div>
+  </div>
+  <div class="footer">
+    <p>&copy; 2024 GOMS Team. All rights reserved.</p>
+  </div>
+</div>
+</body>
+</html>
