@@ -6,28 +6,43 @@ import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Component
-import javax.mail.MessagingException
+import org.thymeleaf.context.Context
+import org.thymeleaf.spring5.SpringTemplateEngine
 
 @Component
 class EmailSendAdapter(
-    private val mailSender: JavaMailSender
+    private val mailSender: JavaMailSender,
+    private val templateEngine: SpringTemplateEngine
 ): EmailSendPort {
 
+    companion object {
+        val EMAIL_SUBJECT = "GOMS 이메일 인증"
+    }
 
     @Async
     override fun sendEmail(email: String, authCode: String) {
-        val subject = "GOMS 인증번호"
-        val content = "GOMS 인증번호는 " + authCode + "입니다."
-        val mimeMessage = mailSender.createMimeMessage()
-        try {
-            val helper = MimeMessageHelper(mimeMessage, true, "utf-8")
-            helper.setTo(email)
-            helper.setSubject(subject)
-            helper.setText(content)
-            mailSender.send(mimeMessage)
-        } catch (e: MessagingException) {
+        val message = mailSender.createMimeMessage()
+        val helper = MimeMessageHelper(message, "utf-8")
+        helper.setTo(email)
+        helper.setSubject(EMAIL_SUBJECT)
+        val context = setContext(authCode)
+        helper.setText(context, true)
+
+        runCatching {
+            mailSender.send(message)
+        }.onFailure {
             throw EmailSendFailException()
         }
     }
+
+    private fun setContext(authCode: String): String {
+        val template = "certificationMailTemplate"
+        val context = Context()
+
+        context.setVariable("authenticationCode", authCode)
+
+        return templateEngine.process(template, context)
+    }
+
 
 }
