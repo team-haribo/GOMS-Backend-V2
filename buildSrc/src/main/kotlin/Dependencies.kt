@@ -41,6 +41,11 @@ object Dependencies {
     const val QUERYDSL = "com.querydsl:querydsl-jpa:${DependenciesVersions.QUERYDSL}"
     const val QUERYDSL_PROCESSOR = "com.querydsl:querydsl-apt:${DependenciesVersions.QUERYDSL}:jpa"
 
+    // kotlin
+    const val KOTLIN_JACKSON = "com.fasterxml.jackson.module:jackson-module-kotlin"
+    const val KOTLIN_STDLIB = "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+
     /* logging */
     const val LOGGING = "io.github.microutils:kotlin-logging-jvm:${DependenciesVersions.LOG_VERSION}"
 
