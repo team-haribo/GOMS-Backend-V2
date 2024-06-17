@@ -11,4 +11,6 @@ data class LateRankDto(
     val major: Major,
     val gender: Gender,
     val profileUrl: String?
-)
+){
+    constructor(): this(UUID.randomUUID(),"",0,Major.SMART_IOT,Gender.MAN,"")
+}

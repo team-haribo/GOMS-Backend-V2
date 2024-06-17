@@ -36,6 +36,12 @@ dependencies {
     implementation(Dependencies.QUERYDSL)
     kapt(Dependencies.QUERYDSL_PROCESSOR)
 
+    // kotlin
+    implementation(Dependencies.KOTLIN_JACKSON)
+    implementation(Dependencies.KOTLIN_REFLECT)
+    implementation(Dependencies.KOTLIN_STDLIB)
+
+
     /* email */
     implementation(Dependencies.EMAIL)
 
@@ -79,13 +85,6 @@ noArg {
     annotation(AllOpen.ENTITY)
     annotation(AllOpen.MAPPED_SUPERCLASS)
     annotation(AllOpen.EMBEDDABLE)
-}
-
-kapt {
-    arguments {
-        arg("mapstruct.defaultComponentModel", "spring")
-        arg("mapstruct.unmappedTargetPolicy", "ignore")
-    }
 }
 
 tasks.getByName<Jar>("jar") {
