@@ -12,7 +12,7 @@ data class Authentication(
 ) {
 
     companion object {
-        const val EXPIRED_AT = 7200L
+        const val EXPIRED_AT = 300L
     }
 
     fun certified() =
