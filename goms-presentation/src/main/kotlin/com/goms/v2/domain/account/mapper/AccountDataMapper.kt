@@ -22,8 +22,8 @@ class AccountDataMapper {
             authority = profileDto.authority,
             profileUrl = profileDto.profileUrl,
             lateCount = profileDto.lateCount,
-            isOuting = profileDto.isOuting,
-            isBlackList = profileDto.isBlackList
+            isOuting = profileDto.outing,
+            isBlackList = profileDto.blackList
         )
 
     fun toDomain(updatePasswordRequest: UpdatePasswordRequest) =

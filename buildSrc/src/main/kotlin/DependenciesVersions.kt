@@ -5,6 +5,7 @@ object DependenciesVersions {
     const val KOTEST_EXTENSION = "1.1.2"
     const val KOTEST_ASSERTIONS = "5.5.5"
     const val SPRING_TRANSACTION = "5.3.11"
+    const val JACKSON_CORE = "2.13.4"
     const val SPRING_TEST = "2.7.7"
     const val SERVLET_VERSION = "4.0.1"
     const val EMAIL = "2.6.7"

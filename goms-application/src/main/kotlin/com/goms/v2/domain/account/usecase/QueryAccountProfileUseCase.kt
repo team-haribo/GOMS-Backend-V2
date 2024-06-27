@@ -8,6 +8,7 @@ import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.late.LateRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
 import com.goms.v2.repository.outing.OutingRepository
+import org.springframework.cache.annotation.Cacheable
 
 @UseCaseWithTransaction
 class QueryAccountProfileUseCase(
@@ -18,6 +19,11 @@ class QueryAccountProfileUseCase(
     private val outingBlackListRepository: OutingBlackListRepository
 ) {
 
+    @Cacheable(
+        value = ["userProfiles"],
+        key = "#root.target.generateCacheKey()",
+        cacheManager = "contentCacheManager"
+    )
     fun execute(): ProfileDto {
         val accountIdx = accountUtil.getCurrentAccountIdx()
         val account = accountRepository.findByIdOrNull(accountIdx) ?: throw AccountNotFoundException()
@@ -31,9 +37,12 @@ class QueryAccountProfileUseCase(
             authority = account.authority,
             profileUrl = account.profileUrl,
             lateCount = lateCount,
-            isOuting = outingRepository.existsByAccount(account),
-            isBlackList = outingBlackListRepository.existsById(account.idx)
+            outing = outingRepository.existsByAccount(account),
+            blackList = outingBlackListRepository.existsById(account.idx)
         )
     }
+
+    fun generateCacheKey(): String =
+        accountUtil.getCurrentAccountIdx().toString()
 
 }
