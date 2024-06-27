@@ -18,6 +18,7 @@ dependencies {
 
     /* kotlin */
     implementation(Dependencies.JACKSON_MODULE)
+    implementation(Dependencies.JACKSON_CORE_MODULE)
 
     /* validation */
     implementation(Dependencies.VALIDATION)

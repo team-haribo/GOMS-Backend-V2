@@ -3,6 +3,7 @@ object Dependencies {
     const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect"
     const val KOTLIN_JDK = "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     const val JACKSON_MODULE = "com.fasterxml.jackson.module:jackson-module-kotlin"
+    const val JACKSON_CORE_MODULE = "com.fasterxml.jackson.core:jackson-annotations:${DependenciesVersions.JACKSON_CORE}"
 
     /* java servlet */
     const val JAVA_SERVLET = "javax.servlet:javax.servlet-api:${DependenciesVersions.SERVLET_VERSION}"

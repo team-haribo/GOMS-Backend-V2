@@ -43,7 +43,7 @@ class OutingRepositoryImpl(
             .leftJoin(outingJpaEntity.account, accountJpaEntity).fetchJoin()
             .orderBy(outingJpaEntity.createdTime.desc())
             .fetch()
-            .map { outingMapper.toDomain(it)!! }
+            .map { outingMapper.toDomain(it) }
 
     override fun count(): Long =
         outingJpaRepository.count()
