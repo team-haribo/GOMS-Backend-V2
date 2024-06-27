@@ -62,8 +62,8 @@ class AccountControllerTest: DescribeSpec({
             authority = Authority.ROLE_STUDENT,
             profileUrl = null,
             lateCount = 0,
-            isOuting = false,
-            isBlackList = false
+            outing = false,
+            blackList = false
         )
         val profileHttpResponse = ProfileHttpResponse(
             name = "김경수",
