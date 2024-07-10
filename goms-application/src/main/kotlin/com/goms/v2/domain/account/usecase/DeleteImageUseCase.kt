@@ -7,7 +7,6 @@ import com.goms.v2.domain.account.resetProfileUrl
 import com.goms.v2.domain.account.spi.S3UtilPort
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.repository.account.AccountRepository
-import org.springframework.cache.annotation.CacheEvict
 
 @UseCaseWithTransaction
 class DeleteImageUseCase(
@@ -16,11 +15,6 @@ class DeleteImageUseCase(
     private val accountUtil: AccountUtil
 ) {
 
-    @CacheEvict(
-        value = ["userProfiles"],
-        key = "#root.target.generateCacheKey()",
-        cacheManager = "contentCacheManager"
-    )
     fun execute() {
         val accountIdx = accountUtil.getCurrentAccountIdx()
         val account = accountRepository.findByIdOrNull(accountIdx) ?: throw AccountNotFoundException()
@@ -32,9 +26,5 @@ class DeleteImageUseCase(
 
         accountRepository.save(account)
     }
-
-    fun generateCacheKey(): String =
-        accountUtil.getCurrentAccountIdx().toString()
-
 
 }
