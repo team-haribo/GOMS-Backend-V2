@@ -18,8 +18,7 @@ class DeleteOutingUseCaseTest : BehaviorSpec({
 
     val accountRepository = mockk<AccountRepository>()
     val outingRepository = mockk<OutingRepository>()
-    val accountUtil = mockk<AccountUtil>()
-    val deleteOutingUseCase = DeleteOutingUseCase(accountRepository, outingRepository, accountUtil)
+    val deleteOutingUseCase = DeleteOutingUseCase(accountRepository, outingRepository)
 
     Given("accountIdx가 주어졌을때") {
         val accountIdx = UUID.randomUUID()
