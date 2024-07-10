@@ -1,7 +1,7 @@
 package com.goms.v2.thirdparty.email
 
 import com.goms.v2.domain.auth.exception.EmailSendFailException
-import com.goms.v2.domain.auth.spi.EmailSendPort
+import com.goms.v2.domain.auth.spi.NotificationSendPort
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.scheduling.annotation.Async
@@ -10,17 +10,17 @@ import org.thymeleaf.context.Context
 import org.thymeleaf.spring5.SpringTemplateEngine
 
 @Component
-class EmailSendAdapter(
+class MailSendAdapter(
     private val mailSender: JavaMailSender,
     private val templateEngine: SpringTemplateEngine
-): EmailSendPort {
+): NotificationSendPort {
 
     companion object {
         val EMAIL_SUBJECT = "GOMS 이메일 인증"
     }
 
     @Async
-    override fun sendEmail(email: String, authCode: String) {
+    override fun sendNotification(email: String, authCode: String) {
         val message = mailSender.createMimeMessage()
         val helper = MimeMessageHelper(message, "utf-8")
         helper.setTo(email)
