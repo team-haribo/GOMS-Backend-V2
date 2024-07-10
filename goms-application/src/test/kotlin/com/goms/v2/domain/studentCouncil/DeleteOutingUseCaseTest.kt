@@ -1,6 +1,7 @@
 package com.goms.v2.domain.studentCouncil
 
 import com.goms.v2.common.AnyValueObjectGenerator
+import com.goms.v2.common.util.AccountUtil
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.domain.studentCouncil.usecase.DeleteOutingUseCase
@@ -17,7 +18,8 @@ class DeleteOutingUseCaseTest : BehaviorSpec({
 
     val accountRepository = mockk<AccountRepository>()
     val outingRepository = mockk<OutingRepository>()
-    val deleteOutingUseCase = DeleteOutingUseCase(accountRepository, outingRepository)
+    val accountUtil = mockk<AccountUtil>()
+    val deleteOutingUseCase = DeleteOutingUseCase(accountRepository, outingRepository, accountUtil)
 
     Given("accountIdx가 주어졌을때") {
         val accountIdx = UUID.randomUUID()
