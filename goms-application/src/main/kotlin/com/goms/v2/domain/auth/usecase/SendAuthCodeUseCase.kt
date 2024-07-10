@@ -6,7 +6,7 @@ import com.goms.v2.domain.auth.Authentication
 import com.goms.v2.domain.auth.data.dto.SendAuthCodeDto
 import com.goms.v2.domain.auth.data.event.CreateAuthenticationEvent
 import com.goms.v2.domain.auth.exception.ManyEmailRequestException
-import com.goms.v2.domain.auth.spi.EmailSendPort
+import com.goms.v2.domain.auth.spi.NotificationSendPort
 import com.goms.v2.repository.auth.AuthCodeRepository
 import com.goms.v2.repository.auth.AuthenticationRepository
 import org.springframework.context.ApplicationEventPublisher
@@ -14,7 +14,7 @@ import java.util.*
 
 @UseCaseWithTransaction
 class SendAuthCodeUseCase(
-    private val emailSendPort: EmailSendPort,
+    private val notificationSendPort: NotificationSendPort,
     private val authenticationRepository: AuthenticationRepository,
     private val authCodeRepository: AuthCodeRepository,
     private val publisher: ApplicationEventPublisher
@@ -33,7 +33,7 @@ class SendAuthCodeUseCase(
         }
 
         val code = createCode()
-        emailSendPort.sendEmail(dto.email, code)
+        notificationSendPort.sendNotification(dto.email, code)
         val authCode = AuthCode(
             email = dto.email,
             authCode = code,
