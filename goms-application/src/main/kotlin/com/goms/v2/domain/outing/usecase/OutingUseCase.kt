@@ -10,7 +10,6 @@ import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
 import com.goms.v2.repository.outing.OutingRepository
 import com.goms.v2.repository.studentCouncil.OutingUUIDRepository
-import org.springframework.cache.annotation.CacheEvict
 import java.time.LocalTime
 import java.util.UUID
 
@@ -23,11 +22,6 @@ class OutingUseCase(
     private val accountUtil: AccountUtil
 ) {
 
-    @CacheEvict(
-        value = ["userProfiles"],
-        key = "#root.target.generateCacheKey()",
-        cacheManager = "contentCacheManager"
-    )
     fun execute(outingUUID: UUID) {
         val accountIdx = accountUtil.getCurrentAccountIdx()
         val account = accountRepository.findByIdOrNull(accountIdx) ?: throw AccountNotFoundException()
@@ -48,9 +42,5 @@ class OutingUseCase(
             true -> outingRepository.deleteByAccountIdx(account.idx)
         }
     }
-
-    fun generateCacheKey(): String =
-        accountUtil.getCurrentAccountIdx().toString()
-
 
 }
