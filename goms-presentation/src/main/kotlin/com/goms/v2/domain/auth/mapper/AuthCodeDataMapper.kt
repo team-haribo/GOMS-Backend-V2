@@ -9,7 +9,8 @@ class AuthCodeDataMapper {
 
     fun toDto(request: SendAuthCodeHttpRequest): SendAuthCodeDto =
         SendAuthCodeDto(
-            email = request.email
+            email = request.email,
+            emailStatus = request.emailStatus
         )
 
 }
