@@ -188,10 +188,12 @@ class AuthControllerTest: DescribeSpec({
 
         context("유효한 요청이 전달 되면") {
             val sendAuthCodeHttpRequest = SendAuthCodeHttpRequest(
-                email = "s22039@gsm.hs.kr"
+                email = "s22039@gsm.hs.kr",
+                emailStatus = EmailStatus.BEFORE_SIGNUP
             )
             val sendAuthCodeDto = SendAuthCodeDto(
-                email = "s22039@gsm.hs.kr"
+                email = "s22039@gsm.hs.kr",
+                emailStatus = EmailStatus.BEFORE_SIGNUP
             )
 
             every { authCodeDataMapper.toDto(sendAuthCodeHttpRequest) } returns sendAuthCodeDto
