@@ -28,7 +28,6 @@ class GlobalExceptionHandler {
 	fun handleHttpMessageNotReadableException(e: HttpMessageNotReadableException): ResponseEntity<HttpMessageNotReadableErrorResponse> =
 		ResponseEntity(ErrorResponse.of(e), HttpStatus.BAD_REQUEST)
 
-
 	@ExceptionHandler(DataIntegrityViolationException::class)
 	fun handleDataIntegrityViolationException(e: DataIntegrityViolationException): ResponseEntity<DataIntegrityViolationErrorResponse> {
 		return ResponseEntity(ErrorResponse.of(e), HttpStatus.BAD_REQUEST)
