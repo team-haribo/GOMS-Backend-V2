@@ -2,7 +2,6 @@ package com.goms.v2.persistence.late.repository
 
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.late.Late
-import com.goms.v2.persistence.late.entity.LateJpaEntity
 import com.goms.v2.persistence.late.mapper.LateMapper
 import com.goms.v2.repository.late.LateRepository
 import com.goms.v2.persistence.late.entity.QLateJpaEntity.lateJpaEntity
