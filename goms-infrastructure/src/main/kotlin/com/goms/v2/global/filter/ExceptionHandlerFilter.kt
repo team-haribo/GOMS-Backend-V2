@@ -30,11 +30,11 @@ class ExceptionHandlerFilter: OncePerRequestFilter() {
         }.onFailure { exception ->
             when(exception) {
                 is ExpiredJwtException -> {
-                    log.warn("ExpiredJwtException Exception Occurred - Message = {} | Status = {}", exception.message, ErrorStatus.UNAUTHORIZED)
+                    log.warn("ExpiredJwtException Exception Occurred - Message = {} | Status = {}", exception.message, ErrorCode.EXPIRED_TOKEN)
                     exceptionToResponse(ErrorResponse.of(ExpiredTokenException()), response)
                 }
                 is JwtException -> {
-                    log.warn("JwtException Exception Occurred - Message = {} | Status = {}", exception.message, ErrorStatus.UNAUTHORIZED)
+                    log.warn("JwtException Exception Occurred - Message = {} | Status = {}", exception.message, ErrorCode.INVALID_TOKEN)
                     exceptionToResponse(ErrorResponse.of(InvalidTokenException()), response)
                 }
                 is GomsException -> {

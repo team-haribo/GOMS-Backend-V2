@@ -8,6 +8,12 @@ enum class ErrorCode(
 	// GOMS
 	GOMS_SERVER_ERROR("GOMS 서버 오류 입니다.", ErrorStatus.INTERNAL_SERVER_ERROR),
 
+	/* INTERNAL */
+	BAD_REQUEST("잘못된 요청입니다.", ErrorStatus.BAD_REQUEST),
+	FORBIDDEN("FORBIDDEN", ErrorStatus.FORBIDDEN),
+	EXPIRED_TOKEN("토큰이 만료되었습니다.", ErrorStatus.UNAUTHORIZED),
+	NULL_EXCEPTION_MESSAGE("예외 객체가 null 입니다.", ErrorStatus.BAD_REQUEST),
+
 	// EMAIL
 	DUPLICATE_EMAIL("중복된 이메일 입니다.", ErrorStatus.CONFLICT),
 	MANY_REQUEST_EMAIL("이메일 요청이 5번을 초과했습니다.", ErrorStatus.TOO_MANY_REQUESTS),
