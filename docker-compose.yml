@@ -2,13 +2,12 @@ version: "3"
 
 services:
   mysql:
-    image: mysql:9.0.0
+    image: mysql:8.0.0
     container_name: goms-v2-mysql
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     command:
@@ -25,11 +24,15 @@ services:
       - "6379:6379"
 
   spring:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: kimgyeongsu/goms-server
     container_name: goms-v2-server
     ports:
       - 8080:8080
     depends_on:
       - mysql
       - redis
-
+    env_file:
+      - .env
