@@ -46,7 +46,7 @@ services:
         awslogs-stream: ${AWS_STREAM}
     env_file:
       - .env
-      -
+
 volumes:
   mysql_data:
   redis_data:
