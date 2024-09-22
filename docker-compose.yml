@@ -16,12 +16,16 @@ services:
       - "--collation-server=utf8mb4_unicode_ci"
     env_file:
       - .env
+    volumes:
+      - mysql_data:/var/lib/mysql
 
   redis:
     image: redis
     container_name: goms-v2-redis
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data
 
   spring:
     build:
@@ -42,3 +46,7 @@ services:
         awslogs-stream: ${AWS_STREAM}
     env_file:
       - .env
+      -
+volumes:
+  mysql_data:
+  redis_data:
