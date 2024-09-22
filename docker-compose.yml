@@ -34,5 +34,11 @@ services:
     depends_on:
       - mysql
       - redis
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: ${AWS_GROUP}
+        awslogs-region: ${AWS_REGION}
+        awslogs-stream: ${AWS_STREAM}
     env_file:
       - .env
