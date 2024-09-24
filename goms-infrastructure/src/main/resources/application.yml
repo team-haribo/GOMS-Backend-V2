@@ -66,6 +66,7 @@ cloud:
       static: ${AWS_REGION}
     s3:
       bucket: ${AWS_BUCKET}
+      bucketLog: ${AWS_LOG_BUCKET}
     stack:
       auto: false
 
