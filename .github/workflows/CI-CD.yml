@@ -1,4 +1,4 @@
-name: GOMS V2 CI / CD
+name: GOMS V2 CI
 
 on:
   push:
@@ -6,8 +6,11 @@ on:
   pull_request:
     branches: [ "main" , "develop" ]
 
+permissions: read-all
+
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -17,45 +20,13 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+          cache: gradle
 
-      ## Permission for Gradle
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+        run: chmod +x ./gradlew
 
-      ## Gradle build
       - name: Build with Gradle
-        run: ./gradlew bootJar
-
-      ## Dockerhub Login
-      - name: Login Dockerhub
-        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
-      ## Docker image build
-      - name: Build the Docker image
-        run: docker build --platform linux/amd64 -t ${{secrets.DOCKERHUB_USERNAME}}/goms-server .
-
-      ## Docker image push
-      - name: Docker Push
-        run: docker push ${{secrets.DOCKERHUB_USERNAME}}/goms-server
-
-      ## EC2 인스턴스에 접속하여 Docker Compose 작업 수행
-      - name: SSH into EC2 and run Docker Compose
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_PRIVATE_KEY }}
-          port: ${{ secrets.EC2_SSH_PORT }}
-          script: |
-            # Docker-Compose Down
-            cd GOMS-Backend-V2/
-            sudo docker-compose down || true
-            
-            # Docker-Compose Pull
-            sudo docker pull ${{ secrets.DOCKER_REPO }}/goms-server
-            
-            # Docker-Compose Up
-            sudo docker-compose up -d
-            
-            # Docker-Image Prune
-            sudo docker image prune -f
+        run: ./gradlew --build-cache clean build
