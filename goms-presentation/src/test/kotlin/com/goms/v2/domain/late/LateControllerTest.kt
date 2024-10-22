@@ -6,6 +6,7 @@ import com.goms.v2.domain.late.data.dto.LateRankDto
 import com.goms.v2.domain.late.dto.LateRankHttpResponse
 import com.goms.v2.domain.late.mapper.LateDataMapper
 import com.goms.v2.domain.late.usecase.QueryLateRankUseCase
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -16,6 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import java.util.UUID
 
 class LateControllerTest: DescribeSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     lateinit var mockMvc: MockMvc
     val lateDataMapper = mockk<LateDataMapper>()
     val queryLateRankUseCase = mockk<QueryLateRankUseCase>()
@@ -58,7 +60,7 @@ class LateControllerTest: DescribeSpec({
                         MockMvcResultMatchers.jsonPath("$[0].accountIdx").value(lateRankHttpResponse.accountIdx.toString()),
                         MockMvcResultMatchers.jsonPath("$[0].name").value(lateRankHttpResponse.name),
                         MockMvcResultMatchers.jsonPath("$[0].grade").value(lateRankHttpResponse.grade),
-                        MockMvcResultMatchers.jsonPath("$[0].gender").value(lateRankHttpResponse.gender),
+                        MockMvcResultMatchers.jsonPath("$[0].gender").value(lateRankHttpResponse.gender.toString()),
                         MockMvcResultMatchers.jsonPath("$[0].profileUrl").value(lateRankHttpResponse.profileUrl)
                     )
             }

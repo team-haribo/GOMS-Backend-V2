@@ -4,6 +4,7 @@ import com.goms.v2.common.AnyValueObjectGenerator
 import com.goms.v2.common.property.studentCouncil.OutingUUIDExpTimeProperties
 import com.goms.v2.domain.studentCouncil.usecase.CreateOutingUseCase
 import com.goms.v2.repository.studentCouncil.OutingUUIDRepository
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -12,6 +13,7 @@ import io.mockk.verify
 import java.util.*
 
 class CreateOutingUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val outingUUIDRepository = mockk<OutingUUIDRepository>()
     val outingUUIDExpTimeProperties = mockk<OutingUUIDExpTimeProperties>(relaxed = true)
     val createOutingUseCase = CreateOutingUseCase(outingUUIDRepository, outingUUIDExpTimeProperties)

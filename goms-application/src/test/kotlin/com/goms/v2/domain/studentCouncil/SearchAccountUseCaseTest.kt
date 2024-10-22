@@ -11,6 +11,7 @@ import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
 import com.goms.v2.domain.studentCouncil.usecase.SearchAccountUseCase
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -18,6 +19,7 @@ import io.mockk.mockk
 import java.util.UUID
 
 class SearchAccountUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val outingBlackListRepository = mockk<OutingBlackListRepository>()
     val searchAccountUseCase = SearchAccountUseCase(accountRepository, outingBlackListRepository)
@@ -36,7 +38,7 @@ class SearchAccountUseCaseTest: BehaviorSpec({
         val accountDto = AccountDto(
             accountIdx = accountIdx,
             name = "",
-            grade = 6,
+            grade = 0,
             gender = Gender.MAN,
             major = Major.SMART_IOT,
             profileUrl = "",

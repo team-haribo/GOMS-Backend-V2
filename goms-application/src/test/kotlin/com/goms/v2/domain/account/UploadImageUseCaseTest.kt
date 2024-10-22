@@ -1,12 +1,10 @@
 package com.goms.v2.domain.account
 
 import com.goms.v2.common.AnyValueObjectGenerator
-import com.goms.v2.common.util.AccountUtil
-import com.goms.v2.domain.account.exception.FileExtensionInvalidException
 import com.goms.v2.domain.account.spi.S3UtilPort
 import com.goms.v2.domain.account.usecase.UploadImageUseCase
 import com.goms.v2.repository.account.AccountRepository
-import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -16,6 +14,7 @@ import java.nio.charset.StandardCharsets
 import java.util.*
 
 class UploadImageUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val s3UtilPort = mockk<S3UtilPort>()
     val uploadImageUseCase = UploadImageUseCase(accountRepository, s3UtilPort)

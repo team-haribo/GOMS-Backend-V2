@@ -7,12 +7,14 @@ import com.goms.v2.domain.auth.spi.TokenParsePort
 import com.goms.v2.domain.auth.usecase.LogoutUseCase
 import com.goms.v2.repository.auth.RefreshTokenRepository
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 
 class LogOutUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val refreshTokenRepository = mockk<RefreshTokenRepository>()
     val tokenParsePort = mockk<TokenParsePort>()
     val logOutUseCase = LogoutUseCase(refreshTokenRepository, tokenParsePort)
@@ -42,7 +44,6 @@ class LogOutUseCaseTest: BehaviorSpec({
             }
         }
         When("만료된 토큰으로 요청하면") {
-            every { tokenParsePort.parseRefreshToken(refreshToken) } returns refreshToken
             every { refreshTokenRepository.findByIdOrNull(refreshToken) } returns null
 
             Then("ExpiredRefreshTokenException이 터져야 한다.") {

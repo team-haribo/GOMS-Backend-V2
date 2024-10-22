@@ -2,12 +2,14 @@ package com.goms.v2.domain.outing
 
 import com.goms.v2.domain.outing.usecase.QueryOutingCountUseCase
 import com.goms.v2.repository.outing.OutingRepository
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
 
 class QueryOutingCountUseCateTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val outingRepository = mockk<OutingRepository>()
     val queryOutingCountUseCase = QueryOutingCountUseCase(outingRepository)
 

@@ -13,6 +13,7 @@ import com.goms.v2.domain.studentCouncil.dto.response.AllAccountHttpResponse
 import com.goms.v2.domain.studentCouncil.dto.response.LateAccountHttpResponse
 import com.goms.v2.domain.studentCouncil.mapper.StudentCouncilDataMapper
 import com.goms.v2.domain.studentCouncil.usecase.*
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -28,6 +29,7 @@ import java.time.LocalDate
 import java.util.*
 
 class StudentCouncilControllerTest: DescribeSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     lateinit var mockMvc: MockMvc
     val createOutingUseCase = mockk<CreateOutingUseCase>()
     val saveOutingBlackListUseCase = mockk<SaveOutingBlackListUseCase>()
@@ -201,11 +203,12 @@ class StudentCouncilControllerTest: DescribeSpec({
             requestParam.add("name", "")
             requestParam.add("authority", Authority.ROLE_STUDENT.toString())
             requestParam.add("isBlackList", true.toString())
+            requestParam.add("major", Major.SMART_IOT.toString())
 
             val accountDto = AccountDto(
                 accountIdx = accountIdx,
                 name = "",
-                grade = 6,
+                grade = 0,
                 gender = Gender.MAN,
                 major = Major.SMART_IOT,
                 profileUrl = "",
@@ -216,7 +219,7 @@ class StudentCouncilControllerTest: DescribeSpec({
             val allAccountHttpResponse = AllAccountHttpResponse(
                 accountIdx = accountIdx,
                 name = "",
-                grade = 6,
+                grade = 0,
                 gender = Gender.MAN,
                 major = Major.SMART_IOT,
                 profileUrl = "",

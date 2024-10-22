@@ -8,6 +8,7 @@ import com.goms.v2.domain.studentCouncil.data.dto.GrantAuthorityDto
 import com.goms.v2.domain.studentCouncil.usecase.GrantAuthorityUseCase
 import com.goms.v2.repository.account.AccountRepository
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -15,6 +16,7 @@ import io.mockk.verify
 import java.util.UUID
 
 class GrantAuthorityUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val grantAuthorityUseCase = GrantAuthorityUseCase(accountRepository)
 

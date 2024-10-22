@@ -7,6 +7,7 @@ import com.goms.v2.domain.studentCouncil.usecase.SaveOutingBlackListUseCase
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -14,6 +15,7 @@ import io.mockk.verify
 import java.util.UUID
 
 class SaveOutingBlackListUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val outingBlackListRepository = mockk<OutingBlackListRepository>()
     val saveOutingBlackListUseCase = SaveOutingBlackListUseCase(accountRepository, outingBlackListRepository)

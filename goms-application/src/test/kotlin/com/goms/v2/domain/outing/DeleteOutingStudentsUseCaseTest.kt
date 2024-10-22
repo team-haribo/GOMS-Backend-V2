@@ -2,12 +2,14 @@ package com.goms.v2.domain.outing
 
 import com.goms.v2.domain.outing.usecase.DeleteOutingStudentsUseCase
 import com.goms.v2.repository.outing.OutingRepository
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 
 class DeleteOutingStudentsUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val outingRepository = mockk<OutingRepository>()
     val deleteOutingStudentsUseCase = DeleteOutingStudentsUseCase(outingRepository)
 
