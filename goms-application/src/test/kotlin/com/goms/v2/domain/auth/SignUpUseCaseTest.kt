@@ -10,6 +10,7 @@ import com.goms.v2.domain.auth.spi.PasswordEncoderPort
 import com.goms.v2.domain.auth.usecase.SignUpUseCase
 import com.goms.v2.repository.account.AccountRepository
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -17,6 +18,7 @@ import io.mockk.verify
 import org.springframework.context.ApplicationEventPublisher
 
 class SignUpUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val passwordEncoderPort = mockk<PasswordEncoderPort>()
     val authenticationValidator = mockk<AuthenticationValidator>()

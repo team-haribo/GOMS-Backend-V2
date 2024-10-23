@@ -15,6 +15,7 @@ import com.goms.v2.domain.auth.dto.response.TokenHttpResponse
 import com.goms.v2.domain.auth.mapper.AuthCodeDataMapper
 import com.goms.v2.domain.auth.mapper.AuthDataMapper
 import com.goms.v2.domain.auth.usecase.*
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -29,6 +30,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class AuthControllerTest: DescribeSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     lateinit var mockMvc: MockMvc
     val authDataMapper = mockk<AuthDataMapper>()
     val authCodeDataMapper = mockk<AuthCodeDataMapper>()

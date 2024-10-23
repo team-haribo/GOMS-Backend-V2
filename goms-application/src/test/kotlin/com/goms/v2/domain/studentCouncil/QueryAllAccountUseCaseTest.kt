@@ -8,6 +8,7 @@ import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.usecase.QueryAllAccountUseCase
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -15,6 +16,7 @@ import io.mockk.mockk
 import java.util.UUID
 
 class QueryAllAccountUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val outingBlackListRepository = mockk<OutingBlackListRepository>()
     val queryAllAccountUseCase = QueryAllAccountUseCase(accountRepository, outingBlackListRepository)

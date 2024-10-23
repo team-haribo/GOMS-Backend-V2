@@ -10,12 +10,14 @@ import com.goms.v2.repository.late.LateRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
 import com.goms.v2.repository.outing.OutingRepository
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
 
 class QueryAccountProfileUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val accountUtil = mockk<AccountUtil>()
     val lateRepository = mockk<LateRepository>()
     val outingRepository = mockk<OutingRepository>()

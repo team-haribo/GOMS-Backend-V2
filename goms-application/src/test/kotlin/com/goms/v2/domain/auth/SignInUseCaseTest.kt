@@ -12,6 +12,7 @@ import com.goms.v2.domain.auth.spi.TokenPort
 import com.goms.v2.domain.auth.usecase.SignInUseCase
 import com.goms.v2.repository.account.AccountRepository
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.*
@@ -19,7 +20,7 @@ import org.springframework.context.ApplicationEventPublisher
 import java.util.*
 
 class SignInUseCaseTest: BehaviorSpec({
-
+    isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val tokenPort = mockk<TokenPort>()
     val passwordEncoderPort = mockk<PasswordEncoderPort>()
@@ -59,7 +60,6 @@ class SignInUseCaseTest: BehaviorSpec({
             }
         }
         When("비밀번호가 일치하지 않으면") {
-            every { accountRepository.findByEmail(signInDto.email) } returns account
             every { passwordEncoderPort.isPasswordMatch(signInDto.password, account.password) } returns false
 
             Then("PasswordNotMatchException 이 터져야 합니다.") {

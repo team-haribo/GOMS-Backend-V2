@@ -12,6 +12,7 @@ import com.goms.v2.domain.auth.usecase.ReissueTokenUseCase
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.auth.RefreshTokenRepository
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -19,6 +20,7 @@ import io.mockk.mockk
 import io.mockk.verify
 
 class ReissueTokenUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val refreshTokenRepository = mockk<RefreshTokenRepository>()
     val accountRepository = mockk<AccountRepository>()
     val tokenPort = mockk<TokenPort>()
@@ -66,7 +68,6 @@ class ReissueTokenUseCaseTest: BehaviorSpec({
         }
 
         When("만료된 토큰으로 요청하면") {
-            every { tokenParsePort.parseRefreshToken(refreshToken) } returns parsedRefreshToken
             every { refreshTokenRepository.findByIdOrNull(parsedRefreshToken) } returns null
 
             Then("ExpiredRefreshTokenException이 터져야 한다.") {
@@ -77,8 +78,6 @@ class ReissueTokenUseCaseTest: BehaviorSpec({
         }
 
         When("계정을 찾을 수 없으면") {
-            every { tokenParsePort.parseRefreshToken(refreshToken) } returns parsedRefreshToken
-            every { refreshTokenRepository.findByIdOrNull(parsedRefreshToken) } returns refreshTokenDomain
             every { accountRepository.findByIdOrNull(refreshTokenDomain.accountIdx) } returns null
 
             Then("AccountNotFoundException이 터져야 한다.") {

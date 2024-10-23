@@ -12,11 +12,13 @@ import com.goms.v2.repository.outing.OutingBlackListRepository
 import com.goms.v2.repository.outing.OutingRepository
 import com.goms.v2.repository.studentCouncil.OutingUUIDRepository
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.*
 import java.util.UUID
 
 class OutingUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val outingRepository = mockk<OutingRepository>()
     val outingBlackListRepository = mockk<OutingBlackListRepository>()
     val outingUUIDRepository = mockk<OutingUUIDRepository>()
@@ -67,7 +69,6 @@ class OutingUseCaseTest: BehaviorSpec({
 
         When("외출 블랙리스트에 있는 학생이 외출할 경우") {
             every { outingBlackListRepository.existsById(account.idx) } returns true
-            every { outingRepository.existsByAccount(account) } returns false
 
             Then("BlackListNotAllowOutingException이 터져야 한다.") {
                 shouldThrow<BlackListNotAllowOutingException> {
@@ -77,9 +78,7 @@ class OutingUseCaseTest: BehaviorSpec({
         }
 
         When("틀린 외출 식별자로 요청한 경우") {
-            every { outingBlackListRepository.existsById(account.idx) } returns false
             every { outingUUIDRepository.existsById(outingUUID) } returns false
-            every { outingRepository.existsByAccount(account) } returns false
 
             Then("OutingUUIDUnverifiedException이 터져야 한다.") {
                 shouldThrow<OutingUUIDUnverifiedException> {

@@ -1,6 +1,7 @@
 package com.goms.v2.domain.outing
 
 import com.goms.v2.domain.outing.usecase.ValidateOutingTimeUseCase
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -10,7 +11,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 
 class ValidateOutingTimeUseCaseTest: BehaviorSpec({
-
+    isolationMode = IsolationMode.InstancePerLeaf
     val outingUseCase = ValidateOutingTimeUseCase()
 
     fun beforeTest() {

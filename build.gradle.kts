@@ -30,11 +30,13 @@ subprojects {
 		implementation(Dependencies.JAVA_SERVLET)
 
 		/* test */
-		implementation(Dependencies.SPRING_TEST)
-		implementation(Dependencies.MOCKK)
-		implementation(Dependencies.KOTEST_RUNNER)
-		implementation(Dependencies.KOTEST_EXTENSION)
-		implementation(Dependencies.KOTEST_ASSERTIONS)
+		testImplementation(Dependencies.SPRING_TEST) {
+			exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+		}
+		testImplementation(Dependencies.MOCKK)
+		testImplementation(Dependencies.KOTEST_RUNNER)
+		testImplementation(Dependencies.KOTEST_EXTENSION)
+		testImplementation(Dependencies.KOTEST_ASSERTIONS)
 	}
 }
 

@@ -6,6 +6,7 @@ import com.goms.v2.domain.late.Late
 import com.goms.v2.domain.studentCouncil.data.dto.LateAccountDto
 import com.goms.v2.domain.studentCouncil.usecase.GetLateAccountUseCase
 import com.goms.v2.repository.late.LateRepository
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -14,6 +15,7 @@ import java.time.LocalDate
 import java.util.*
 
 class GetLateAccountUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val lateRepository = mockk<LateRepository>()
     val getLateAccountUseCase = GetLateAccountUseCase(lateRepository)
 

@@ -1,13 +1,13 @@
 package com.goms.v2.domain.studentCouncil
 
 import com.goms.v2.common.AnyValueObjectGenerator
-import com.goms.v2.common.util.AccountUtil
 import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.domain.studentCouncil.usecase.DeleteOutingUseCase
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingRepository
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -15,7 +15,7 @@ import io.mockk.verify
 import java.util.*
 
 class DeleteOutingUseCaseTest : BehaviorSpec({
-
+    isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val outingRepository = mockk<OutingRepository>()
     val deleteOutingUseCase = DeleteOutingUseCase(accountRepository, outingRepository)

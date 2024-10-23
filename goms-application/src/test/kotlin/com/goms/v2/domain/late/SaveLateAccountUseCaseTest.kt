@@ -7,6 +7,7 @@ import com.goms.v2.domain.outing.Outing
 import com.goms.v2.repository.late.LateRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
 import com.goms.v2.repository.outing.OutingRepository
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -14,6 +15,7 @@ import io.mockk.verify
 import java.util.*
 
 class SaveLateAccountUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val outingRepository = mockk<OutingRepository>()
     val lateRepository = mockk<LateRepository>()
     val outingBlackListRepository = mockk<OutingBlackListRepository>()

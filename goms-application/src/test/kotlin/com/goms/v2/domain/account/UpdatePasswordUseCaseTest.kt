@@ -11,6 +11,7 @@ import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.domain.auth.spi.PasswordEncoderPort
 import com.goms.v2.repository.account.AccountRepository
 import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -18,6 +19,7 @@ import io.mockk.verify
 import org.springframework.context.ApplicationEventPublisher
 
 class UpdatePasswordUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val authenticationValidator = mockk<AuthenticationValidator>()
     val passwordEncoderPort = mockk<PasswordEncoderPort>()
@@ -58,7 +60,6 @@ class UpdatePasswordUseCaseTest: BehaviorSpec({
             }
         }
         When("이미 사용중인 비밀번호로 변경하면") {
-            every { accountRepository.findByEmail(passwordDto.email) } returns account
             every { passwordEncoderPort.isPasswordMatch(passwordDto.newPassword, account.password) } returns true
 
             Then("DuplicatedNewPasswordException 이 터져야 한다.") {

@@ -11,6 +11,7 @@ import com.goms.v2.domain.account.dto.response.ProfileHttpResponse
 import com.goms.v2.domain.account.mapper.AccountDataMapper
 import com.goms.v2.domain.account.usecase.*
 import com.goms.v2.domain.auth.usecase.WithdrawUseCase
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.every
 import io.mockk.mockk
@@ -23,11 +24,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import org.springframework.web.multipart.MultipartFile
-import java.io.FileInputStream
 import java.nio.charset.StandardCharsets
 
 class AccountControllerTest: DescribeSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     lateinit var mockMvc: MockMvc
     val accountDataMapper = mockk<AccountDataMapper>()
     val queryAccountProfileUseCase = mockk<QueryAccountProfileUseCase>()

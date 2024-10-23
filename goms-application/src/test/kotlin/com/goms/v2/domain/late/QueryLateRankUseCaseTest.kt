@@ -5,6 +5,7 @@ import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.late.data.dto.LateRankDto
 import com.goms.v2.domain.late.usecase.QueryLateRankUseCase
 import com.goms.v2.repository.late.LateRepository
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -12,6 +13,7 @@ import io.mockk.mockk
 import java.util.*
 
 class QueryLateRankUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val lateRepository = mockk<LateRepository>()
     val queryLateRankUseCase = QueryLateRankUseCase(lateRepository)
 

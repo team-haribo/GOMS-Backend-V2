@@ -5,6 +5,7 @@ import com.goms.v2.domain.account.Account
 import com.goms.v2.domain.outing.data.dto.OutingAccountDto
 import com.goms.v2.domain.outing.usecase.QueryOutingAccountUseCase
 import com.goms.v2.repository.outing.OutingRepository
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -13,6 +14,7 @@ import java.time.LocalTime
 import java.util.*
 
 class QueryOutingAccountUseCaseTest: BehaviorSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     val outingRepository = mockk<OutingRepository>()
     val queryOutingAccountUseCase = QueryOutingAccountUseCase(outingRepository)
 
