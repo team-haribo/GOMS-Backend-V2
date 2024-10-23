@@ -3,6 +3,7 @@ package com.goms.v2.common
 import com.goms.v2.domain.account.constant.Authority
 import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.account.constant.Major
+import com.goms.v2.domain.auth.EmailStatus
 import com.goms.v2.domain.auth.data.event.SaveRefreshTokenEvent
 import com.goms.v2.domain.late.data.dto.LateRankDto
 import java.time.LocalDate
@@ -15,7 +16,7 @@ import kotlin.reflect.full.primaryConstructor
 
 object AnyValueObjectGenerator {
 
-    inline fun <reified T : Any> anyValueObject(vararg pairs: Pair<String, Any>): T {
+    inline fun <reified T : Any> anyValueObject(vararg pairs: Pair<String, Any?>): T {
         val parameterMap = mutableMapOf(*pairs)
         val constructor = T::class.primaryConstructor!!
 
@@ -64,6 +65,7 @@ object AnyValueObjectGenerator {
             Authority::class -> Authority.ROLE_STUDENT
             Gender::class -> Gender.MAN
             Major::class -> Major.SMART_IOT
+            EmailStatus::class -> EmailStatus.BEFORE_SIGNUP
             LateRankDto::class -> LateRankDto(
                 UUID.randomUUID(),
                 String(),
