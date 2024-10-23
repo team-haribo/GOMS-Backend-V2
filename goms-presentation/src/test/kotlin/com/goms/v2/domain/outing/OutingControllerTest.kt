@@ -1,5 +1,8 @@
 package com.goms.v2.domain.outing
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.account.constant.Major
 import com.goms.v2.domain.outing.data.dto.OutingAccountDto
@@ -7,10 +10,12 @@ import com.goms.v2.domain.outing.dto.response.OutingAccountHttpResponse
 import com.goms.v2.domain.outing.dto.response.OutingCountHttpResponse
 import com.goms.v2.domain.outing.mapper.OutingDataMapper
 import com.goms.v2.domain.outing.usecase.*
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
 import io.mockk.every
 import io.mockk.mockk
 import org.springframework.http.MediaType
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
@@ -20,7 +25,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import java.time.LocalTime
 import java.util.*
 
-class OutingControllerTest: DescribeSpec({
+internal class OutingControllerTest: DescribeSpec({
+    isolationMode = IsolationMode.InstancePerLeaf
     lateinit var mockMvc: MockMvc
     val outingDataMapper = mockk<OutingDataMapper>()
     val outingUseCase = mockk<OutingUseCase>()
@@ -38,7 +44,13 @@ class OutingControllerTest: DescribeSpec({
     )
 
     beforeTest {
-        mockMvc = MockMvcBuilders.standaloneSetup(outingController).build()
+        val objectMapper = ObjectMapper().apply {
+            registerModule(JavaTimeModule())
+            disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+        }
+        mockMvc = MockMvcBuilders.standaloneSetup(outingController)
+            .setMessageConverters(MappingJackson2HttpMessageConverter(objectMapper))
+            .build()
     }
 
     describe("api/v2/outing/{outingUUID}로 post 요청을 했을때") {
@@ -91,9 +103,9 @@ class OutingControllerTest: DescribeSpec({
                     .andExpect(jsonPath("$[0].accountIdx").value(outingAccountHttpResponse.accountIdx.toString()))
                     .andExpect(jsonPath("$[0].name").value(outingAccountHttpResponse.name))
                     .andExpect(jsonPath("$[0].grade").value(outingAccountHttpResponse.grade))
-                    .andExpect(jsonPath("$[0].gender").value(outingAccountHttpResponse.gender))
+                    .andExpect(jsonPath("$[0].gender").value(outingAccountHttpResponse.gender.toString()))
                     .andExpect(jsonPath("$[0].profileUrl").value(outingAccountHttpResponse.profileUrl))
-                    .andExpect(jsonPath("$[0].createdTime").value(outingAccountHttpResponse.createdTime))
+                    .andExpect(jsonPath("$[0].createdTime").value(outingAccountHttpResponse.createdTime.toString()))
                     .andDo(MockMvcResultHandlers.print())
             }
         }
@@ -157,9 +169,9 @@ class OutingControllerTest: DescribeSpec({
                     .andExpect(jsonPath("$[0].accountIdx").value(outingAccountHttpResponse.accountIdx.toString()))
                     .andExpect(jsonPath("$[0].name").value(outingAccountHttpResponse.name))
                     .andExpect(jsonPath("$[0].grade").value(outingAccountHttpResponse.grade))
-                    .andExpect(jsonPath("$[0].gender").value(outingAccountHttpResponse.gender))
+                    .andExpect(jsonPath("$[0].gender").value(outingAccountHttpResponse.gender.toString()))
                     .andExpect(jsonPath("$[0].profileUrl").value(outingAccountHttpResponse.profileUrl))
-                    .andExpect(jsonPath("$[0].createdTime").value(outingAccountHttpResponse.createdTime))
+                    .andExpect(jsonPath("$[0].createdTime").value(outingAccountHttpResponse.createdTime.toString()))
                     .andDo(MockMvcResultHandlers.print())
             }
         }
