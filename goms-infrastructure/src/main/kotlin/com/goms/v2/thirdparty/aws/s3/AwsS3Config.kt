@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class AwsS3Config(
+open class AwsS3Config(
     private val awsProperties: AwsProperties
 ) {
 
@@ -21,8 +21,8 @@ class AwsS3Config(
     fun amazonS3(): AmazonS3 {
         val awsCredentials: AWSCredentials = BasicAWSCredentials(awsProperties.accessKey, awsProperties.secretKey)
         return AmazonS3ClientBuilder.standard()
-                .withRegion(region)
-                .withCredentials(AWSStaticCredentialsProvider(awsCredentials))
-                .build()
+            .withRegion(region)
+            .withCredentials(AWSStaticCredentialsProvider(awsCredentials))
+            .build()
     }
 }
