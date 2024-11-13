@@ -79,6 +79,7 @@ allOpen {
     annotation(AllOpen.ENTITY)
     annotation(AllOpen.MAPPED_SUPERCLASS)
     annotation(AllOpen.EMBEDDABLE)
+    annotation(AllOpen.CONFIGURATION)
 }
 
 noArg {

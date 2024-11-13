@@ -11,14 +11,15 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-open class AwsS3Config(
+class AwsS3Config(
     private val awsProperties: AwsProperties
 ) {
 
     @Value("\${cloud.aws.region.static}")
     private val region: String? = null
+
     @Bean
-    open fun amazonS3(): AmazonS3 {
+    fun amazonS3(): AmazonS3 {
         val awsCredentials: AWSCredentials = BasicAWSCredentials(awsProperties.accessKey, awsProperties.secretKey)
         return AmazonS3ClientBuilder.standard()
             .withRegion(region)
