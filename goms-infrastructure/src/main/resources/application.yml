@@ -52,7 +52,7 @@ gauth:
   redirectUri: ${REDIRECT_URI}
 
 outing:
-  expiredAt:  ${OUTING_EXP}
+  expiredAt: ${OUTING_EXP}
 
 fcm:
   fileUrl: ${FCM_FILE_URL}
@@ -90,4 +90,4 @@ server:
 
 discord:
   api:
-    token: sadifuhsafjakfhalsfhsdflshafdkjfhalkfhwhkvnalkjvnaljk
+    token: ${DISCORD_CLIENT_TOKEN}
