@@ -52,7 +52,7 @@ gauth:
   redirectUri: ${REDIRECT_URI}
 
 outing:
-  expiredAt:  ${OUTING_EXP}
+  expiredAt: ${OUTING_EXP}
 
 fcm:
   fileUrl: ${FCM_FILE_URL}
@@ -87,3 +87,7 @@ server:
   tomcat:
     mbeanregistry:
       enabled: true
+
+discord:
+  api:
+    token: ${DISCORD_CLIENT_TOKEN}
