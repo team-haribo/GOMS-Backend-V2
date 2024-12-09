@@ -55,6 +55,10 @@ class SecurityConfig(
             .mvcMatchers(HttpMethod.GET, "/api/v2/outing/count").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.GET, "/api/v2/outing/search").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
 
+            // /outing-date
+            .mvcMatchers(HttpMethod.POST, "/api/v2/outing-date/today").permitAll()
+            .mvcMatchers(HttpMethod.GET, "/api/v2/outing-date/today").permitAll()
+
             // /late
             .mvcMatchers(HttpMethod.GET, "/api/v2/late/rank").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
 

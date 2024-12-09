@@ -87,3 +87,7 @@ server:
   tomcat:
     mbeanregistry:
       enabled: true
+
+discord:
+  api:
+    token: sadifuhsafjakfhalsfhsdflshafdkjfhalkfhwhkvnalkjvnaljk
