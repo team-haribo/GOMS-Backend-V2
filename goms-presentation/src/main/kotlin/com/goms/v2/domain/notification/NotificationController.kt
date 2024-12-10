@@ -29,15 +29,4 @@ class NotificationController(
     fun deleteDeviceToken(): ResponseEntity<Void> =
         deleteDeviceTokenUseCase.execute()
             .run { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
-
-    @GetMapping("outing/before")
-    fun beforeOutingTestApi(): ResponseEntity<Map<String, String>> =
-        sendNotificationUseCase.execute(NotificationType.BEFORE_OUTING)
-            .run { ResponseEntity.ok(mapOf("message" to "success")) }
-
-    @GetMapping("outing/after")
-    fun afterOutingTestApi(): ResponseEntity<Map<String, String>> =
-        sendNotificationUseCase.execute(NotificationType.AFTER_OUTING)
-            .run { ResponseEntity.ok(mapOf("message" to "success")) }
-
 }

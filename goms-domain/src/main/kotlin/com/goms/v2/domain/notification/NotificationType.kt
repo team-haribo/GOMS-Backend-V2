@@ -4,7 +4,5 @@ import com.goms.v2.common.annotation.Aggregate
 
 @Aggregate
 enum class NotificationType {
-
-    BEFORE_OUTING, AFTER_OUTING
-
+    FIRST_NOTIFICATION, FINAL_NOTIFICATION
 }

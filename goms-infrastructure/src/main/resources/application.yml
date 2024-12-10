@@ -55,7 +55,7 @@ outing:
   expiredAt: ${OUTING_EXP}
 
 fcm:
-  fileUrl: ${FCM_FILE_URL}
+  credential: ${FCM_CREDENTIAL}
 
 cloud:
   aws:
