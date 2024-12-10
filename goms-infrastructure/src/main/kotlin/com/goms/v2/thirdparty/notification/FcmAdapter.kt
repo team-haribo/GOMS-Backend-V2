@@ -16,7 +16,7 @@ class FcmAdapter: NotificationPort {
         val message = getMulticastMassageBuilderByNotification(notification)
             .addAllTokens(deviceTokens)
             .build()
-        firebaseInstance.sendEachForMulticast(message)
+        firebaseInstance.sendMulticast(message)
     }
 
     private fun getMulticastMassageBuilderByNotification(notification: Notification) =
