@@ -25,6 +25,11 @@ class NotificationController(
         setDeviceTokenUseCase.execute(deviceToken)
             .run { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
+    @PostMapping("token/test")
+    fun sendTest(): ResponseEntity<Void> =
+        sendNotificationUseCase.execute(NotificationType.FIRST_NOTIFICATION)
+            .run { ResponseEntity.ok().build() }
+
     @DeleteMapping("token")
     fun deleteDeviceToken(): ResponseEntity<Void> =
         deleteDeviceTokenUseCase.execute()
