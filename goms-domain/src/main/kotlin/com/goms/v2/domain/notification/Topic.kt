@@ -8,20 +8,22 @@ enum class Topic(
     val content: String
 ) {
 
-    BEFORE_OUTING(
-        title = "오늘 수요 외출제 시행합니다!",
-        content = "꼭 나가기 전 후로 GOMS 앱을 통해 QR을 찍어주세요! \n"
+    FIRST_NOTIFICATION(
+        title = "[GOMS] 개발팀",
+        content = "✅ㅣ오늘 외출제 시행합니다!\n" +
+            "추가사항은 GSM 디스코드를 확인해주세요."
     ),
 
-    GROUNDED(
-        title = "외출제 금지",
-        content = "저번주 외출제 지각생이므로 외출 금지 대상입니다. \n"
+    FINAL_NOTIFICATION(
+        title = "[GOMS] 개발팀",
+        content = "⌛ㅣ잠시 후 외출제가 시작됩니다!\n" +
+            "신발을 꼭 착용해주세요. (크록스 X)"
     ),
 
-    AFTER_OUTING(
-        title = "금일 외출 시간이 5분 남았습니다.",
-        content = "외출중이신 분들은 빠르게 학교로 복귀해주세요\n! \n"
-    );
-
+    DENIED_NOTIFICATION(
+        title = "[GOMS] 개발팀",
+        content = "❌ㅣ오늘 외출제는 시행하지 않습니다!\n" +
+            "외출 시 무단 외출 처리됩니다."
+    ),
 }
 

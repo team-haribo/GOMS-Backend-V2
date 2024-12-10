@@ -6,5 +6,5 @@ import org.springframework.boot.context.properties.ConstructorBinding
 @ConstructorBinding
 @ConfigurationProperties("fcm")
 class FcmProperties(
-    val fileUrl: String
+    val credential: String
 )

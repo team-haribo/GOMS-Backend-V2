@@ -18,25 +18,15 @@ private val log = KotlinLogging.logger {  }
 class FcmConfig(
     private val fcmProperties: FcmProperties
 ) {
-
-    companion object {
-        const val PATH = "./credentials.json"
-    }
-
     @PostConstruct
     fun init() {
         log.info("init start")
         runCatching {
-            URL(fcmProperties.fileUrl).openStream().use {
-                Files.copy(it, Paths.get(PATH))
-                val file = File(PATH)
-                if (FirebaseApp.getApps().isEmpty()) {
-                    val options = FirebaseOptions.builder()
-                        .setCredentials(GoogleCredentials.fromStream(file.inputStream()))
-                        .build()
-                    FirebaseApp.initializeApp(options)
-                }
-                file.delete()
+            if (FirebaseApp.getApps().isEmpty()) {
+                val options = FirebaseOptions.builder()
+                    .setCredentials(GoogleCredentials.fromStream(fcmProperties.credential.byteInputStream()))
+                    .build()
+                FirebaseApp.initializeApp(options)
             }
         }.onFailure {
             it.printStackTrace()
