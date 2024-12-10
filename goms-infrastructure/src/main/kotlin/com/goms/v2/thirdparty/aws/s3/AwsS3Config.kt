@@ -17,12 +17,13 @@ class AwsS3Config(
 
     @Value("\${cloud.aws.region.static}")
     private val region: String? = null
+
     @Bean
     fun amazonS3(): AmazonS3 {
         val awsCredentials: AWSCredentials = BasicAWSCredentials(awsProperties.accessKey, awsProperties.secretKey)
         return AmazonS3ClientBuilder.standard()
-                .withRegion(region)
-                .withCredentials(AWSStaticCredentialsProvider(awsCredentials))
-                .build()
+            .withRegion(region)
+            .withCredentials(AWSStaticCredentialsProvider(awsCredentials))
+            .build()
     }
 }
