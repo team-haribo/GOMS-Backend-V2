@@ -24,10 +24,11 @@ class FcmConfig(
         log.info("init start")
         runCatching {
             val credentialStream = ByteArrayInputStream(fcmProperties.credential.toByteArray(Charsets.UTF_8))
+            val options = FirebaseOptions.builder()
+                .setCredentials(GoogleCredentials.fromStream(credentialStream))
+                .build()
+
             if (FirebaseApp.getApps().isEmpty()) {
-                val options = FirebaseOptions.builder()
-                    .setCredentials(GoogleCredentials.fromStream(credentialStream))
-                    .build()
                 FirebaseApp.initializeApp(options)
             }
         }.onFailure {
