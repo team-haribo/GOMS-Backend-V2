@@ -25,23 +25,16 @@ class SetTodayOutingUseCase(
 		val isExistDeniedOutingDate = deniedOutingDateRepository.existsByOutingDate(nowDate)
 
 		if(isExistDeniedOutingDate){
-			if(!setTodayOutingDto.outingStatus) throw DuplicatedOutingDateException()
-			else {
-				val newDeniedOutingDate = DeniedOutingDate(
-					idx = -1,
-					outingDate = LocalDate.now()
-				)
-				deniedOutingDateRepository.save(newDeniedOutingDate)
-			}
+			if(!setTodayOutingDto.outingStatus) deniedOutingDateRepository.deleteByOutingDate(nowDate)
+			else throw DuplicatedOutingDateException()
 		} else {
-			if(setTodayOutingDto.outingStatus) throw DuplicatedOutingDateException()
-			else {
+			if(setTodayOutingDto.outingStatus){
 				val newDeniedOutingDate = DeniedOutingDate(
 					idx = -1,
 					outingDate = LocalDate.now()
 				)
 				deniedOutingDateRepository.save(newDeniedOutingDate)
-			}
+			} else throw DuplicatedOutingDateException()
 		}
 	}
 
