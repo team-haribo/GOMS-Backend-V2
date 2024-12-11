@@ -6,6 +6,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import mu.KotlinLogging
 import org.springframework.context.annotation.Configuration
+import java.io.ByteArrayInputStream
 import java.io.File
 import java.net.URL
 import java.nio.file.Files
@@ -22,10 +23,13 @@ class FcmConfig(
     fun init() {
         log.info("init start")
         runCatching {
+            val options = FirebaseOptions.builder()
+                .setCredentials(GoogleCredentials.fromStream(
+                    fcmProperties.credential.byteInputStream(Charsets.UTF_8)
+                ))
+                .build()
+
             if (FirebaseApp.getApps().isEmpty()) {
-                val options = FirebaseOptions.builder()
-                    .setCredentials(GoogleCredentials.fromStream(fcmProperties.credential.byteInputStream()))
-                    .build()
                 FirebaseApp.initializeApp(options)
             }
         }.onFailure {

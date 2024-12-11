@@ -16,5 +16,8 @@ object DependenciesVersions {
     const val MAP_STRUCT_VERSION = "1.5.2.Final"
     const val GAUTH_VERSION = "v2.0.0"
     const val LOG_VERSION = "2.1.21"
-    const val FCM_VERSION = "8.1.0"
+    const val FCM_VERSION = "9.4.2"
+    const val APACHE_API_CLIENT_VERSION = "5.3.1"
+    const val APACHE_HTTP_2_VERSION = "5.3.1"
+    const val APACHE_HTTP_VERSION = "5.3.1"
 }
