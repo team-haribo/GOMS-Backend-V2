@@ -15,7 +15,7 @@ class SendNotificationUseCase(
 ) {
 
     fun execute(notificationType: NotificationType) {
-        val isExistTodayOutingDate = deniedOutingDateRepository.existsByOutingDate(LocalDate.now())
+        val isTodayDeniedOuting = deniedOutingDateRepository.existsByOutingDate(LocalDate.now())
 
         when (notificationType) {
             NotificationType.FIRST_NOTIFICATION -> {
@@ -23,9 +23,9 @@ class SendNotificationUseCase(
                     notificationPort.sendNotification(
                         deviceTokens = deviceTokenRepository.findAll().map { it.token },
                         notificationConfig = NotificationConfig(
-                                title = if(isExistTodayOutingDate) Topic.DENIED_NOTIFICATION.title
+                                title = if(isTodayDeniedOuting) Topic.DENIED_NOTIFICATION.title
                                     else Topic.FIRST_NOTIFICATION.title,
-                                content = if(isExistTodayOutingDate) Topic.DENIED_NOTIFICATION.content
+                                content = if(isTodayDeniedOuting) Topic.DENIED_NOTIFICATION.content
                                     else Topic.FIRST_NOTIFICATION.content,
                                 writer = Writer.GOMS
                             )
