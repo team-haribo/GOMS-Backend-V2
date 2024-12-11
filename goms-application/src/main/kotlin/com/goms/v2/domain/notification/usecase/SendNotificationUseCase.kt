@@ -36,7 +36,7 @@ class SendNotificationUseCase(
             }
 
             NotificationType.FINAL_NOTIFICATION -> {
-                if(!isExistTodayOutingDate){
+                if(!isTodayDeniedOuting){
                     runCatching {
                         notificationPort.sendNotification(
                             deviceTokens = deviceTokenRepository.findAll().map { it.token },
