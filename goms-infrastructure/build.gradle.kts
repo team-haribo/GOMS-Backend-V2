@@ -64,6 +64,9 @@ dependencies {
 
     /* fcm */
     implementation(Dependencies.FCM)
+    implementation(Dependencies.APACHE_API_CLIENT)
+    implementation(Dependencies.APACHE_HTTP_2)
+    implementation(Dependencies.APACHE_HTTP)
 
     /* monitoring */
     implementation(Dependencies.ACTUATOR)

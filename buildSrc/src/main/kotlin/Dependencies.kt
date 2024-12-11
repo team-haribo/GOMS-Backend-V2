@@ -69,6 +69,9 @@ object Dependencies {
 
     /* fcm */
     const val FCM = "com.google.firebase:firebase-admin:${DependenciesVersions.FCM_VERSION}"
+    const val APACHE_API_CLIENT = "org.apache.httpcomponents.client5:httpclient5:${DependenciesVersions.APACHE_API_CLIENT_VERSION}"
+    const val APACHE_HTTP_2 = "org.apache.httpcomponents.core5:httpcore5-h2:${DependenciesVersions.APACHE_HTTP_2_VERSION}"
+    const val APACHE_HTTP = "org.apache.httpcomponents.core5:httpcore5:${DependenciesVersions.APACHE_HTTP_VERSION}"
 
     /* prometheus */
     const val PROMETHEUS = "io.micrometer:micrometer-registry-prometheus"
