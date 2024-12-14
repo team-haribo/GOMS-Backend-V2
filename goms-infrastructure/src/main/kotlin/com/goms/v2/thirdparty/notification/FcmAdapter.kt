@@ -20,7 +20,13 @@ class FcmAdapter: NotificationPort {
 
         // iOS Sound
         val aps = Aps.builder()
-            .setSound("default")
+            .setSound(
+                CriticalSound.builder()
+                    .setVolume(1.0)
+                    .setName("default")
+                    .setCritical(true)
+                    .build()
+            )
             .build()
 
         val apnsConfig = ApnsConfig.builder()
@@ -40,6 +46,7 @@ class FcmAdapter: NotificationPort {
             .setNotification(notification)
             .addAllTokens(deviceTokens)
             .setApnsConfig(apnsConfig)
+            .
             .setAndroidConfig(androidConfig)
             .build()
 
