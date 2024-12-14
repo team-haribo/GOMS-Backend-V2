@@ -2,10 +2,9 @@ package com.goms.v2.thirdparty.notification
 
 import com.goms.v2.domain.notification.NotificationConfig
 import com.goms.v2.domain.notification.spi.NotificationPort
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.MulticastMessage
-import com.google.firebase.messaging.Notification
+import com.google.firebase.messaging.*
 import org.springframework.stereotype.Component
+
 
 @Component
 class FcmAdapter: NotificationPort {
@@ -19,9 +18,29 @@ class FcmAdapter: NotificationPort {
             .setBody(notificationConfig.content)
             .build()
 
+        // iOS Sound
+        val aps = Aps.builder()
+            .setSound("default")
+            .build()
+
+        val apnsConfig = ApnsConfig.builder()
+            .setAps(aps)
+            .build()
+
+        // Android Sound
+        val androidNotification = AndroidNotification.builder()
+            .setSound("default")
+            .build()
+
+        val androidConfig = AndroidConfig.builder()
+            .setNotification(androidNotification)
+            .build()
+
         val message: MulticastMessage = MulticastMessage.builder()
             .setNotification(notification)
             .addAllTokens(deviceTokens)
+            .setApnsConfig(apnsConfig)
+            .setAndroidConfig(androidConfig)
             .build()
 
         firebaseInstance.sendEachForMulticast(message)
