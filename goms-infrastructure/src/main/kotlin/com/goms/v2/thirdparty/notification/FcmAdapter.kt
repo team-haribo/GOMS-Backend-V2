@@ -46,7 +46,6 @@ class FcmAdapter: NotificationPort {
             .setNotification(notification)
             .addAllTokens(deviceTokens)
             .setApnsConfig(apnsConfig)
-            .
             .setAndroidConfig(androidConfig)
             .build()
 
