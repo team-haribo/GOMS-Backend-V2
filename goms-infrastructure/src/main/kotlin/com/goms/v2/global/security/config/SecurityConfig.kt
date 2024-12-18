@@ -74,7 +74,8 @@ class SecurityConfig(
             // /notification
             .mvcMatchers(HttpMethod.POST, "/api/v2/notification/token/{deviceToken}").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
             .mvcMatchers(HttpMethod.DELETE, "/api/v2/notification/token").hasAnyAuthority(Authority.ROLE_STUDENT.name, Authority.ROLE_STUDENT_COUNCIL.name)
-            .mvcMatchers(HttpMethod.POST, "/api/v2/notification/token/test").hasAnyAuthority(Authority.ROLE_STUDENT_COUNCIL.name)
+            .mvcMatchers(HttpMethod.POST, "/api/v2/notification/send").permitAll()
+            .mvcMatchers(HttpMethod.POST, "/api/v2/notification/send/{deviceToken}").permitAll()
             .mvcMatchers(HttpMethod.GET, "/api/v2/notification/outing/before").permitAll()
             .mvcMatchers(HttpMethod.GET, "/api/v2/notification/outing/after").permitAll()
 
