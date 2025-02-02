@@ -15,9 +15,8 @@ class QueryAllAccountUseCase(
 
     fun execute(): List<AccountDto> {
         val accountList = accountRepository.findAllOrderByStudentNum()
-        val outingBlackListIdx = outingBlackListRepository.findAll().map { it.accountIdx }
-
-        val outingMap = outingRepository.findAllOutingAccountIdx().associateWith { true }
+        val outingBlackListIdx = outingBlackListRepository.findAll().map { it.accountIdx }.toSet()
+        val outingSet = outingRepository.findAllOutingAccountIdx().toSet()
 
         return accountList.map {
             AccountDto(
@@ -26,10 +25,10 @@ class QueryAllAccountUseCase(
                 grade = it.grade,
                 gender = it.gender,
                 major = it.major,
-                profileUrl = it.profileUrl,
+                profileUrl = it.profileUrl ?: null,
                 authority = it.authority,
-                outing = outingMap[it.idx] == true,
-                isBlackList = outingBlackListIdx.contains(it.idx)
+                outing = it.idx in outingSet,
+                isBlackList = it.idx in outingBlackListIdx
             )
         }
     }

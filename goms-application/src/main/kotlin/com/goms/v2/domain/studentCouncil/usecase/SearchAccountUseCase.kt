@@ -16,22 +16,21 @@ class SearchAccountUseCase(
 
     fun execute(dto: SearchAccountDto): List<AccountDto> {
         val outingBlackListIdx = outingBlackListRepository.findAll().map { it.accountIdx }.toSet()
-        val outingMap = outingRepository.findAllOutingAccountIdx()
-            .associateWith { true }
+        val outingSet = outingRepository.findAllOutingAccountIdx().toSet()
 
         return accountRepository.findAccountByStudentInfo(dto.grade, dto.gender, dto.name, dto.authority, dto.major)
             .filter {
                 when (dto.isBlackList) {
-                    true -> outingBlackListIdx.contains(it.idx)
-                    false -> !outingBlackListIdx.contains(it.idx)
-                    else -> true  // isBlackList 쿼리파라미터가 없을 시 필터링 무조건 통과
+                    true -> it.idx in outingBlackListIdx
+                    false -> it.idx !in outingBlackListIdx
+                    else -> true
                 }
             }
             .filter {
-                when (dto.isOuting){
-                    true -> outingMap.contains(it.idx)
-                    false -> !outingMap.contains(it.idx)
-                    else -> true  // isOuting 쿼리파라미터가 없을 시 필터링 무조건 통과
+                when (dto.isOuting) {
+                    true -> it.idx in outingSet
+                    false -> it.idx !in outingSet
+                    else -> true
                 }
             }
             .map {
@@ -41,10 +40,10 @@ class SearchAccountUseCase(
                     grade = it.grade,
                     gender = it.gender,
                     major = it.major,
-                    profileUrl = it.profileUrl,
+                    profileUrl = it.profileUrl ?: null,
                     authority = it.authority,
-                    isBlackList = outingBlackListIdx.contains(it.idx),
-                    outing = outingMap[it.idx] == true
+                    isBlackList = it.idx in outingBlackListIdx,
+                    outing = it.idx in outingSet
                 )
             }
     }
