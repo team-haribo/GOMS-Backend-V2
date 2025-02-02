@@ -4,12 +4,14 @@ import com.goms.v2.common.annotation.UseCaseWithReadOnlyTransaction
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
 import com.goms.v2.repository.account.AccountRepository
+import com.goms.v2.repository.outing.OutingRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
 import kotlin.streams.asSequence
 
 @UseCaseWithReadOnlyTransaction
 class SearchAccountUseCase(
     private val accountRepository: AccountRepository,
+    private val outingRepository: OutingRepository,
     private val outingBlackListRepository: OutingBlackListRepository
 ) {
 
@@ -29,8 +31,8 @@ class SearchAccountUseCase(
                     gender = it.gender,
                     major = it.major,
                     profileUrl = it.profileUrl,
-                    authority = it.authority,
-                    isBlackList = outingBlackListIdx.contains(it.idx)
+                    authority = it.authority, isBlackList = outingBlackListIdx.contains(it.idx),
+                    outing = outingRepository.existsByAccount(it)
                 )
             }.toList()
     }
