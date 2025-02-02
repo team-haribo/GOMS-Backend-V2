@@ -4,6 +4,7 @@ import com.goms.v2.common.annotation.UseCaseWithReadOnlyTransaction
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
+import com.goms.v2.repository.outing.OutingRepository
 
 @UseCaseWithReadOnlyTransaction
 class QueryAllAccountUseCase(
