@@ -27,6 +27,13 @@ class SearchAccountUseCase(
                     else -> true  // isBlackList 쿼리파라미터가 없을 시 필터링 무조건 통과
                 }
             }
+            .filter {
+                when (dto.isOuting){
+                    true -> outingMap.contains(it.idx)
+                    false -> !outingMap.contains(it.idx)
+                    else -> true  // isOuting 쿼리파라미터가 없을 시 필터링 무조건 통과
+                }
+            }
             .map {
                 AccountDto(
                     accountIdx = it.idx,
