@@ -10,5 +10,4 @@ interface OutingJpaRepository: CrudRepository<OutingJpaEntity, Long> {
     fun deleteByAccountIdx(accountIdx: UUID)
     fun deleteAllByAccountIdx(accountIdx: UUID)
     fun existsByAccount(account: AccountJpaEntity): Boolean
-    fun existsByAccountIdx(accountIdx: UUID): Boolean
 }
