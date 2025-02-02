@@ -40,6 +40,7 @@ class StudentCouncilControllerTest: DescribeSpec({
     val searchAccountUseCase = mockk<SearchAccountUseCase>()
     val deleteOutingUseCase = mockk<DeleteOutingUseCase>()
     val getLateAccountUseCase = mockk<GetLateAccountUseCase>()
+    val forcingOutingUseCase = mockk<ForcingOutingUseCase>()
     val studentCouncilController = StudentCouncilController(
         createOutingUseCase,
         saveOutingBlackListUseCase,
@@ -49,7 +50,8 @@ class StudentCouncilControllerTest: DescribeSpec({
         grantAuthorityUseCase,
         searchAccountUseCase,
         deleteOutingUseCase,
-        getLateAccountUseCase
+        getLateAccountUseCase,
+        forcingOutingUseCase
     )
 
     beforeTest {
@@ -313,6 +315,22 @@ class StudentCouncilControllerTest: DescribeSpec({
                         jsonPath("$[0].profileUrl").value(lateAccountHttpResponse.profileUrl)
                     )
                     .andDo(MockMvcResultHandlers.print())
+            }
+        }
+    }
+
+    describe("/api/v2/student-council/outing/{outingIdx} 으로 POST 요청을 했을때") {
+        val url = "/api/v2/student-council/outing/{outingIdx}"
+
+        context("유효한 요청이 전달 되면") {
+            val outingIdx = UUID.randomUUID()
+            every { forcingOutingUseCase.execute(outingIdx) } returns Unit
+
+            it("201 status code를 응답해야한다.") {
+                mockMvc.perform(
+                    post(url, outingIdx)
+                )
+                    .andExpect(status().`is`(201))
             }
         }
     }
