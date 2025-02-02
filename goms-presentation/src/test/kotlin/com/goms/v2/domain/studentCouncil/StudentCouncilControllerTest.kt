@@ -142,7 +142,8 @@ class StudentCouncilControllerTest: DescribeSpec({
                 major = Major.SMART_IOT,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
-                isBlackList = true
+                isBlackList = true,
+                outing = false
             )
             val allAccountHttpResponse = AllAccountHttpResponse(
                 accountIdx = accountIdx,
@@ -152,7 +153,8 @@ class StudentCouncilControllerTest: DescribeSpec({
                 major = Major.SMART_IOT,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
-                isBlackList = true
+                isBlackList = true,
+                isOuting = false
             )
             every { queryAllAccountUseCase.execute() } returns listOf(accountDto)
             every { studentCouncilDataMapper.toResponse(accountDto) } returns allAccountHttpResponse
@@ -215,7 +217,8 @@ class StudentCouncilControllerTest: DescribeSpec({
                 major = Major.SMART_IOT,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
-                isBlackList = true
+                isBlackList = true,
+                outing = false
             )
 
             val allAccountHttpResponse = AllAccountHttpResponse(
@@ -226,7 +229,8 @@ class StudentCouncilControllerTest: DescribeSpec({
                 major = Major.SMART_IOT,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
-                isBlackList = true
+                isBlackList = true,
+                isOuting = false
             )
 
             every { studentCouncilDataMapper.toDto(grade, gender , name, authority, isBlackList, major) } returns searchAccountDto
