@@ -8,6 +8,7 @@ import com.goms.v2.repository.outing.OutingBlackListRepository
 @UseCaseWithReadOnlyTransaction
 class QueryAllAccountUseCase(
     private val accountRepository: AccountRepository,
+    private val outingRepository: OutingRepository,
     private val outingBlackListRepository: OutingBlackListRepository
 ) {
 
@@ -24,6 +25,7 @@ class QueryAllAccountUseCase(
                 major = it.major,
                 profileUrl = it.profileUrl,
                 authority = it.authority,
+                outing = outingRepository.existsByAccount(it),
                 isBlackList = outingBlackListIdx.contains(it.idx)
             )
         }
