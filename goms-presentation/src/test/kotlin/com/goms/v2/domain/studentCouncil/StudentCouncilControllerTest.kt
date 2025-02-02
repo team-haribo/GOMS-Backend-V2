@@ -179,7 +179,7 @@ class StudentCouncilControllerTest: DescribeSpec({
         }
     }
 
-    describe("/api/v2/student-council/search 으로 GET 요청을 했을때") {
+    describe("/api/v2/student-council/search 으로 GET 요청을 했을 때") {
         val url = "/api/v2/student-council/search"
 
         context("유효한 요청이 전달 되면") {
@@ -190,50 +190,54 @@ class StudentCouncilControllerTest: DescribeSpec({
             val authority = Authority.ROLE_STUDENT
             val isBlackList = true
             val major = Major.SMART_IOT
+            val isOuting = false
 
             val searchAccountDto = SearchAccountDto(
-                grade = 0,
-                gender = Gender.MAN,
-                name = "",
-                authority = Authority.ROLE_STUDENT,
-                isBlackList = true,
-                major = Major.SMART_IOT
+                grade = grade,
+                gender = gender,
+                name = name,
+                authority = authority,
+                isBlackList = isBlackList,
+                major = major,
+                isOuting = isOuting
             )
 
 
-            val requestParam = LinkedMultiValueMap<String, String>()
-            requestParam.add("grade", "0")
-            requestParam.add("gender", Gender.MAN.toString())
-            requestParam.add("name", "")
-            requestParam.add("authority", Authority.ROLE_STUDENT.toString())
-            requestParam.add("isBlackList", true.toString())
-            requestParam.add("major", Major.SMART_IOT.toString())
+            val requestParam = LinkedMultiValueMap<String, String>().apply {
+                add("grade", grade.toString())
+                add("gender", gender.toString())
+                add("name", name)
+                add("authority", authority.toString())
+                add("isBlackList", isBlackList.toString())
+                add("major", major.toString())
+                add("isOuting", isOuting.toString())
+            }
 
             val accountDto = AccountDto(
                 accountIdx = accountIdx,
-                name = "",
-                grade = 0,
-                gender = Gender.MAN,
-                major = Major.SMART_IOT,
+                name = name,
+                grade = grade,
+                gender = gender,
+                major = major,
                 profileUrl = "",
-                authority = Authority.ROLE_STUDENT,
-                isBlackList = true,
-                outing = false
+                authority = authority,
+                isBlackList = isBlackList,
+                outing = isOuting
             )
 
             val allAccountHttpResponse = AllAccountHttpResponse(
                 accountIdx = accountIdx,
-                name = "",
-                grade = 0,
-                gender = Gender.MAN,
-                major = Major.SMART_IOT,
+                name = name,
+                grade = grade,
+                gender = gender,
+                major = major,
                 profileUrl = "",
-                authority = Authority.ROLE_STUDENT,
-                isBlackList = true,
-                isOuting = false
+                authority = authority,
+                isBlackList = isBlackList,
+                isOuting = isOuting
             )
 
-            every { studentCouncilDataMapper.toDto(grade, gender , name, authority, isBlackList, major) } returns searchAccountDto
+            every { studentCouncilDataMapper.toDto(grade, gender, name, authority, isBlackList, major, isOuting) } returns searchAccountDto
             every { searchAccountUseCase.execute(searchAccountDto) } returns listOf(accountDto)
             every { studentCouncilDataMapper.toResponse(listOf(accountDto)) } returns listOf(allAccountHttpResponse)
 
@@ -252,7 +256,8 @@ class StudentCouncilControllerTest: DescribeSpec({
                         jsonPath("$[0].major").value(allAccountHttpResponse.major.toString()),
                         jsonPath("$[0].profileUrl").value(allAccountHttpResponse.profileUrl),
                         jsonPath("$[0].authority").value(allAccountHttpResponse.authority.toString()),
-                        jsonPath("$[0].isBlackList").value(allAccountHttpResponse.isBlackList.toString())
+                        jsonPath("$[0].isBlackList").value(allAccountHttpResponse.isBlackList.toString()),
+                        jsonPath("$[0].isOuting").value(allAccountHttpResponse.isOuting.toString()) // 추가된 검증
                     )
                     .andDo(MockMvcResultHandlers.print())
             }
