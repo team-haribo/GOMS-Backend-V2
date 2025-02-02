@@ -55,14 +55,16 @@ class StudentCouncilDataMapper {
         name: String?,
         authority: Authority?,
         isBlackList: Boolean?,
-        major: Major?
+        major: Major?,
+        isOuting: Boolean?
     ) = SearchAccountDto(
             grade = grade,
             gender = gender,
             name = name,
             authority = authority,
             isBlackList = isBlackList,
-            major = major
+            major = major,
+            isOuting = isOuting
         )
 
     fun toResponse(lateAccountDto: LateAccountDto) =
