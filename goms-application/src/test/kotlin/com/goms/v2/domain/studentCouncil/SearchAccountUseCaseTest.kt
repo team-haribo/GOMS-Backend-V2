@@ -23,7 +23,7 @@ class SearchAccountUseCaseTest: BehaviorSpec({
     isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val outingBlackListRepository = mockk<OutingBlackListRepository>()
-    val outingRepository = mockk< OutingRepository>()
+    val outingRepository = mockk<OutingRepository>()
     val searchAccountUseCase = SearchAccountUseCase(accountRepository, outingRepository, outingBlackListRepository)
 
     Given("계정 검색 키워드가 주어질때") {
@@ -52,6 +52,7 @@ class SearchAccountUseCaseTest: BehaviorSpec({
 
         every { accountRepository.findAccountByStudentInfo(searchAccountDto.grade, searchAccountDto.gender, searchAccountDto.name, searchAccountDto.authority, searchAccountDto.major) } returns listOf(account)
         every { outingBlackListRepository.findAll() } returns listOf(outingBlackList)
+        every { outingRepository.existsByAccount(any()) } returns false
 
         When("계정 검색 요청을 하면") {
             val result = searchAccountUseCase.execute(searchAccountDto)

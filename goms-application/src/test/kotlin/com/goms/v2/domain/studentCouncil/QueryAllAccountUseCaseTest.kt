@@ -23,7 +23,7 @@ class QueryAllAccountUseCaseTest : BehaviorSpec({
     val outingRepository = mockk<OutingRepository>()
     val queryAllAccountUseCase = QueryAllAccountUseCase(accountRepository, outingRepository, outingBlackListRepository)
 
-    Given("계졍이 주어질때") {
+    Given("계정이 주어질 때") {
         val accountIdx = UUID.randomUUID()
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
         val allAccountDto =
@@ -42,6 +42,7 @@ class QueryAllAccountUseCaseTest : BehaviorSpec({
 
         every { accountRepository.findAllOrderByStudentNum() } returns listOf(account)
         every { outingBlackListRepository.findAll() } returns listOf(outingBlackList)
+        every { outingRepository.existsByAccount(any()) } returns false
 
         When("모든 계정 조회 요청을 하면") {
             val result = queryAllAccountUseCase.execute()
