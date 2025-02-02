@@ -8,18 +8,20 @@ import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.usecase.QueryAllAccountUseCase
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
+import com.goms.v2.repository.outing.OutingRepository
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
-import java.util.UUID
+import java.util.*
 
-class QueryAllAccountUseCaseTest: BehaviorSpec({
+class QueryAllAccountUseCaseTest : BehaviorSpec({
     isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val outingBlackListRepository = mockk<OutingBlackListRepository>()
-    val queryAllAccountUseCase = QueryAllAccountUseCase(accountRepository, outingBlackListRepository)
+    val outingRepository = mockk<OutingRepository>()
+    val queryAllAccountUseCase = QueryAllAccountUseCase(accountRepository, outingRepository, outingBlackListRepository)
 
     Given("계졍이 주어질때") {
         val accountIdx = UUID.randomUUID()
@@ -33,7 +35,8 @@ class QueryAllAccountUseCaseTest: BehaviorSpec({
                 major = account.major,
                 profileUrl = "",
                 authority = Authority.ROLE_STUDENT,
-                isBlackList = true
+                isBlackList = true,
+                outing = false
             )
         val outingBlackList = AnyValueObjectGenerator.anyValueObject<OutingBlackList>("accountIdx" to accountIdx)
 

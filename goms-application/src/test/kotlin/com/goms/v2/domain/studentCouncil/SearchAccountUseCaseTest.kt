@@ -11,6 +11,7 @@ import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
 import com.goms.v2.domain.studentCouncil.usecase.SearchAccountUseCase
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
+import com.goms.v2.repository.outing.OutingRepository
 import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
@@ -22,7 +23,8 @@ class SearchAccountUseCaseTest: BehaviorSpec({
     isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val outingBlackListRepository = mockk<OutingBlackListRepository>()
-    val searchAccountUseCase = SearchAccountUseCase(accountRepository, outingBlackListRepository)
+    val outingRepository = mockk< OutingRepository>()
+    val searchAccountUseCase = SearchAccountUseCase(accountRepository, outingRepository, outingBlackListRepository)
 
     Given("계정 검색 키워드가 주어질때") {
         val searchAccountDto = SearchAccountDto(
@@ -43,7 +45,8 @@ class SearchAccountUseCaseTest: BehaviorSpec({
             major = Major.SMART_IOT,
             profileUrl = "",
             authority = Authority.ROLE_STUDENT,
-            isBlackList = true
+            isBlackList = true,
+            outing = false
         )
         val outingBlackList = AnyValueObjectGenerator.anyValueObject<OutingBlackList>("accountIdx" to account.idx)
 
