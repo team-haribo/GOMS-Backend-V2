@@ -34,7 +34,8 @@ class StudentCouncilController(
     private val grantAuthorityUseCase: GrantAuthorityUseCase,
     private val searchAccountUseCase: SearchAccountUseCase,
     private val deleteOutingUseCase: DeleteOutingUseCase,
-    private val getLateAccountUseCase: GetLateAccountUseCase
+    private val getLateAccountUseCase: GetLateAccountUseCase,
+    private val forcingOutingUseCase: ForcingOutingUseCase
 ) {
 
     @PostMapping("outing")
@@ -77,6 +78,11 @@ class StudentCouncilController(
             .let { searchAccountUseCase.execute(it) }
             .let { studentCouncilDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
+
+    @PostMapping("outing/{outingIdx}")
+    fun forceOuting(@PathVariable outingIdx: UUID): ResponseEntity<Void> =
+        forcingOutingUseCase.execute(outingIdx)
+            .run { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @DeleteMapping("outing/{accountIdx}")
     fun deleteOuting(@PathVariable accountIdx: UUID): ResponseEntity<Void> =
