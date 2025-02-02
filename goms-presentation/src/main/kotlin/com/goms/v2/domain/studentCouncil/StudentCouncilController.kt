@@ -72,9 +72,10 @@ class StudentCouncilController(
         @RequestParam(required = false) name: String?,
         @RequestParam(required = false) authority: Authority?,
         @RequestParam(required = false) isBlackList: Boolean?,
-        @RequestParam(required = false) major: Major?
+        @RequestParam(required = false) major: Major?,
+        @RequestParam(required = false) isOuting: Boolean?
     ): ResponseEntity<List<AllAccountHttpResponse>> =
-        studentCouncilDataMapper.toDto(grade, gender, name, authority, isBlackList, major)
+        studentCouncilDataMapper.toDto(grade, gender, name, authority, isBlackList, major, isOuting)
             .let { searchAccountUseCase.execute(it) }
             .let { studentCouncilDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
