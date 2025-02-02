@@ -4,9 +4,8 @@ import com.goms.v2.common.annotation.UseCaseWithReadOnlyTransaction
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.domain.studentCouncil.data.dto.SearchAccountDto
 import com.goms.v2.repository.account.AccountRepository
-import com.goms.v2.repository.outing.OutingRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
-import kotlin.streams.asSequence
+import com.goms.v2.repository.outing.OutingRepository
 
 @UseCaseWithReadOnlyTransaction
 class SearchAccountUseCase(
@@ -16,14 +15,19 @@ class SearchAccountUseCase(
 ) {
 
     fun execute(dto: SearchAccountDto): List<AccountDto> {
-        val outingBlackListIdx = outingBlackListRepository.findAll().map { it.accountIdx }
+        val outingBlackListIdx = outingBlackListRepository.findAll().map { it.accountIdx }.toSet()
+        val outingMap = outingRepository.findAllOutingAccountIdx()
+            .associateWith { true }
 
-        return accountRepository.findAccountByStudentInfo(dto.grade, dto.gender, dto.name, dto.authority, dto.major).stream().asSequence()
+        return accountRepository.findAccountByStudentInfo(dto.grade, dto.gender, dto.name, dto.authority, dto.major)
             .filter {
-                if (dto.isBlackList != null && dto.isBlackList) outingBlackListIdx.contains(it.idx)
-                else if (dto.isBlackList != null) outingBlackListIdx.contains(it.idx).not()
-                else true
-            }.map {
+                when (dto.isBlackList) {
+                    true -> outingBlackListIdx.contains(it.idx)
+                    false -> !outingBlackListIdx.contains(it.idx)
+                    else -> true  // isBlackList 쿼리파라미터가 없을 시 필터링 무조건 통과
+                }
+            }
+            .map {
                 AccountDto(
                     accountIdx = it.idx,
                     name = it.name,
@@ -31,10 +35,10 @@ class SearchAccountUseCase(
                     gender = it.gender,
                     major = it.major,
                     profileUrl = it.profileUrl,
-                    authority = it.authority, isBlackList = outingBlackListIdx.contains(it.idx),
-                    outing = outingRepository.existsByAccount(it)
+                    authority = it.authority,
+                    isBlackList = outingBlackListIdx.contains(it.idx),
+                    outing = outingMap[it.idx] == true
                 )
-            }.toList()
+            }
     }
-
 }

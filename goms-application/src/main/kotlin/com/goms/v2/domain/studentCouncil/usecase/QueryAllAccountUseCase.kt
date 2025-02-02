@@ -17,6 +17,8 @@ class QueryAllAccountUseCase(
         val accountList = accountRepository.findAllOrderByStudentNum()
         val outingBlackListIdx = outingBlackListRepository.findAll().map { it.accountIdx }
 
+        val outingMap = outingRepository.findAllOutingAccountIdx().associateWith { true }
+
         return accountList.map {
             AccountDto(
                 accountIdx = it.idx,
@@ -26,10 +28,9 @@ class QueryAllAccountUseCase(
                 major = it.major,
                 profileUrl = it.profileUrl,
                 authority = it.authority,
-                outing = outingRepository.existsByAccount(it),
+                outing = outingMap[it.idx] == true,
                 isBlackList = outingBlackListIdx.contains(it.idx)
             )
         }
     }
-
 }
