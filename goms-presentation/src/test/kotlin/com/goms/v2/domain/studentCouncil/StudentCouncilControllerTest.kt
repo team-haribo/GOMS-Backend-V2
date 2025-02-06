@@ -257,7 +257,7 @@ class StudentCouncilControllerTest: DescribeSpec({
                         jsonPath("$[0].profileUrl").value(allAccountHttpResponse.profileUrl),
                         jsonPath("$[0].authority").value(allAccountHttpResponse.authority.toString()),
                         jsonPath("$[0].isBlackList").value(allAccountHttpResponse.isBlackList.toString()),
-                        jsonPath("$[0].isOuting").value(allAccountHttpResponse.isOuting.toString()) // 추가된 검증
+                        jsonPath("$[0].isOuting").value(allAccountHttpResponse.isOuting.toString())
                     )
                     .andDo(MockMvcResultHandlers.print())
             }
