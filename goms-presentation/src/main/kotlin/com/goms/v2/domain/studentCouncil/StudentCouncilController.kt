@@ -34,7 +34,8 @@ class StudentCouncilController(
     private val grantAuthorityUseCase: GrantAuthorityUseCase,
     private val searchAccountUseCase: SearchAccountUseCase,
     private val deleteOutingUseCase: DeleteOutingUseCase,
-    private val getLateAccountUseCase: GetLateAccountUseCase
+    private val getLateAccountUseCase: GetLateAccountUseCase,
+    private val forcingOutingUseCase: ForcingOutingUseCase
 ) {
 
     @PostMapping("outing")
@@ -71,12 +72,18 @@ class StudentCouncilController(
         @RequestParam(required = false) name: String?,
         @RequestParam(required = false) authority: Authority?,
         @RequestParam(required = false) isBlackList: Boolean?,
-        @RequestParam(required = false) major: Major?
+        @RequestParam(required = false) major: Major?,
+        @RequestParam(required = false) isOuting: Boolean?
     ): ResponseEntity<List<AllAccountHttpResponse>> =
-        studentCouncilDataMapper.toDto(grade, gender, name, authority, isBlackList, major)
+        studentCouncilDataMapper.toDto(grade, gender, name, authority, isBlackList, major, isOuting)
             .let { searchAccountUseCase.execute(it) }
             .let { studentCouncilDataMapper.toResponse(it) }
             .let { ResponseEntity.ok(it) }
+
+    @PostMapping("outing/{outingIdx}")
+    fun forceOuting(@PathVariable outingIdx: UUID): ResponseEntity<Void> =
+        forcingOutingUseCase.execute(outingIdx)
+            .run { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @DeleteMapping("outing/{accountIdx}")
     fun deleteOuting(@PathVariable accountIdx: UUID): ResponseEntity<Void> =

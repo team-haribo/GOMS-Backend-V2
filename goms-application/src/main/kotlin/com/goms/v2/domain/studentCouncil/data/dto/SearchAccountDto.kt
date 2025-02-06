@@ -10,5 +10,6 @@ data class SearchAccountDto(
     val name: String?,
     val authority: Authority?,
     val isBlackList: Boolean?,
-    val major: Major?
+    val major: Major?,
+    val isOuting: Boolean?
 )

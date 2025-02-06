@@ -48,6 +48,7 @@ enum class ErrorCode(
 	// OUTING
 	BLACKLIST_NOT_ALLOW_OUTING("블랙리스트인 학생은 외출을 할 수 없습니다.", ErrorStatus.BAD_REQUEST),
 	OUTING_UUID_UNVERIFIED("검증되지 않은 외출 식별자 입니다.", ErrorStatus.BAD_REQUEST),
+	OUTING_ALREADY_EXIST("이미 외출 중인 사용자입니다.", ErrorStatus.CONFLICT),
 
 	// OUTING DATE
 	DUPLICATED_OUTING_DATE("현재 상태와 설정하려는 상태가 이미 동일합니다.", ErrorStatus.BAD_REQUEST),

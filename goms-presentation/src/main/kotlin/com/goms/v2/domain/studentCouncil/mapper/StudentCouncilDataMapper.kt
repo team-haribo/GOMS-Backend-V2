@@ -24,6 +24,7 @@ class StudentCouncilDataMapper {
             major = accountDto.major,
             profileUrl = accountDto.profileUrl,
             authority = accountDto.authority,
+            isOuting = accountDto.outing,
             isBlackList = accountDto.isBlackList
         )
 
@@ -43,6 +44,7 @@ class StudentCouncilDataMapper {
                 major = it.major,
                 profileUrl = it.profileUrl,
                 authority = it.authority,
+                isOuting = it.outing,
                 isBlackList = it.isBlackList
             )
         }
@@ -53,14 +55,16 @@ class StudentCouncilDataMapper {
         name: String?,
         authority: Authority?,
         isBlackList: Boolean?,
-        major: Major?
+        major: Major?,
+        isOuting: Boolean?
     ) = SearchAccountDto(
             grade = grade,
             gender = gender,
             name = name,
             authority = authority,
             isBlackList = isBlackList,
-            major = major
+            major = major,
+            isOuting = isOuting
         )
 
     fun toResponse(lateAccountDto: LateAccountDto) =

@@ -15,5 +15,5 @@ interface OutingRepository {
     fun findAll(): List<Outing>
     fun findByAccountNameContaining(name: String?): List<Outing>
     fun deleteAll()
-
+    fun findAllOutingAccountIdx(): List<UUID>
 }
