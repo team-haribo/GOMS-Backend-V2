@@ -27,7 +27,9 @@ class OutingBlackListRepositoryImpl(
 
     override fun findAll(): List<OutingBlackList> =
         outingBlacklistJpaRepository.findAll()
-            .map { outingBlacklistMapper.toDomain(it) }
+            ?.filterNotNull()
+            ?.map { outingBlacklistMapper.toDomain(it) }
+            ?: emptyList()
 
     override fun saveAll(outingBlackList: List<OutingBlackList>) {
         outingBlackList
