@@ -47,9 +47,9 @@ class SignUpUseCase(
 
     private fun extractGrade(email: String): Int? =
         when(email[2]) {
-            '2' -> 6
             '3' -> 7
             '4' -> 8
+            '5' -> 9
             else -> null
         }
 
