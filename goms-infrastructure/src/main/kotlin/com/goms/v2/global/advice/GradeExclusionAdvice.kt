@@ -80,28 +80,29 @@ class GradeExclusionAdvice : ResponseBodyAdvice<Any?> {
      */
     private fun filterGrade(body: Any?): Any? {
         return when (body) {
-            is List<*> -> body.filterNot { item ->
-                item is LateAccountHttpResponse || item is AllAccountHttpResponse || item is ProfileHttpResponse &&
-                        getGradeValue(item) == 6
-            }
-            is ProfileHttpResponse -> if (getGradeValue(body) == 6) null else body
-            else -> body
-        }
-    }
+            is List<*> -> {
+                body.filter { item ->
+                    when (item) {
+                        is LateAccountHttpResponse, is AllAccountHttpResponse, is ProfileHttpResponse -> {
+                            val gradeField = item.javaClass.getDeclaredField("grade")
+                            gradeField.isAccessible = true
+                            val gradeValue = gradeField.get(item) as? Int
+                            gradeValue != 6
+                        }
 
-    /**
-     * 객체에서 `grade` 필드 값을 가져옴
-     *
-     * @param obj 대상 객체
-     * @return `grade` 값 (없을 경우 `null`)
-     */
-    private fun getGradeValue(obj: Any): Int? {
-        return try {
-            val gradeField = obj.javaClass.getDeclaredField("grade")
-            gradeField.isAccessible = true
-            gradeField.get(obj) as? Int
-        } catch (e: NoSuchFieldException) {
-            null
+                        else -> true
+                    }
+                }
+            }
+
+            is ProfileHttpResponse -> {
+                val gradeField = body.javaClass.getDeclaredField("grade")
+                gradeField.isAccessible = true
+                val gradeValue = gradeField.get(body) as? Int
+                if (gradeValue == 6) null else body
+            }
+
+            else -> body
         }
     }
 }

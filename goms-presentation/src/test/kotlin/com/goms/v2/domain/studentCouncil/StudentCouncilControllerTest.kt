@@ -137,7 +137,7 @@ class StudentCouncilControllerTest: DescribeSpec({
             val accountDto = AccountDto(
                 accountIdx = accountIdx,
                 name = "",
-                grade = 6,
+                grade = 8,
                 gender = Gender.MAN,
                 major = Major.SMART_IOT,
                 profileUrl = "",
@@ -148,7 +148,7 @@ class StudentCouncilControllerTest: DescribeSpec({
             val allAccountHttpResponse = AllAccountHttpResponse(
                 accountIdx = accountIdx,
                 name = "",
-                grade = 6,
+                grade = 8,
                 gender = Gender.MAN,
                 major = Major.SMART_IOT,
                 profileUrl = "",
@@ -289,7 +289,7 @@ class StudentCouncilControllerTest: DescribeSpec({
             val lateAccountDto = LateAccountDto(
                 accountIdx = accountIdx,
                 name = "",
-                grade = 6,
+                grade = 8,
                 gender = Gender.MAN,
                 major = Major.SMART_IOT,
                 profileUrl = "",
@@ -297,7 +297,7 @@ class StudentCouncilControllerTest: DescribeSpec({
             val lateAccountHttpResponse = LateAccountHttpResponse(
                 accountIdx = accountIdx,
                 name = "",
-                grade = 6,
+                grade = 8,
                 gender = Gender.MAN,
                 major = Major.SMART_IOT,
                 profileUrl = ""
