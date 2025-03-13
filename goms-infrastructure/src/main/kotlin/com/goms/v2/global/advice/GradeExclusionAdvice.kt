@@ -17,6 +17,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice
  *
  * 컨트롤러의 응답 데이터를 가로채고, `LateAccountHttpResponse`, `AllAccountHttpResponse`, `ProfileHttpResponse`
  * 객체에서 `grade` 값이 `6`인 데이터를 제거한다.
+ *
+ * 6기 학생 데이터를 완전 삭제한다면 해당 클래스는 제거하고, `LateAccountHttpResponse`, `AllAccountHttpResponse`, `ProfileHttpResponse`
+ * 객체에서 `grade` 값이 `6`인 데이터를 제거하는 로직을 삭제한다.
  */
 @ControllerAdvice
 class GradeExclusionAdvice : ResponseBodyAdvice<Any?> {
