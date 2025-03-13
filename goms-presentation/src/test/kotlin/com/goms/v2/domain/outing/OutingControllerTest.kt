@@ -75,8 +75,8 @@ internal class OutingControllerTest: DescribeSpec({
         context("유효한 요청이 전달 되면") {
             val outingAccountDto = OutingAccountDto(
                 accountIdx = accountUUID,
-                name = "김경수",
-                grade = 6,
+                name = "김태은",
+                grade = 8,
                 major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
@@ -84,8 +84,8 @@ internal class OutingControllerTest: DescribeSpec({
             )
             val outingAccountHttpResponse = OutingAccountHttpResponse(
                 accountIdx = accountUUID,
-                name = "김경수",
-                grade = 6,
+                name = "김태은",
+                grade = 8,
                 major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
@@ -143,8 +143,8 @@ internal class OutingControllerTest: DescribeSpec({
         context("유효한 요청이 전달 되면") {
             val outingAccountDto = OutingAccountDto(
                 accountIdx = accountUUID,
-                name = "김경수",
-                grade = 6,
+                name = "김태은",
+                grade = 8,
                 major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
@@ -152,8 +152,8 @@ internal class OutingControllerTest: DescribeSpec({
             )
             val outingAccountHttpResponse = OutingAccountHttpResponse(
                 accountIdx = accountUUID,
-                name = "김경수",
-                grade = 6,
+                name = "김태은",
+                grade = 8,
                 major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
