@@ -35,7 +35,7 @@ class LateControllerTest: DescribeSpec({
             val lateRankDto = LateRankDto(
                 accountIdx = accountIdx,
                 name = "",
-                grade = 6,
+                grade = 8,
                 major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = ""
@@ -43,7 +43,7 @@ class LateControllerTest: DescribeSpec({
             val lateRankHttpResponse = LateRankHttpResponse(
                 accountIdx = accountIdx,
                 name = "",
-                grade = 6,
+                grade = 8,
                 major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = ""

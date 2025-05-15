@@ -45,12 +45,8 @@ class SignUpUseCase(
 
     }
 
-    private fun extractGrade(email: String): Int? =
-        when(email[2]) {
-            '2' -> 6
-            '3' -> 7
-            '4' -> 8
-            else -> null
-        }
-
+    private fun extractGrade(email: String): Int {
+        val admissionYear = email.substring(1, 3).toInt() + 2000
+        return admissionYear - 2017 + 1
+    }
 }

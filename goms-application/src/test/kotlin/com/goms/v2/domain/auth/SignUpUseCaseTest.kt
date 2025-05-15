@@ -27,7 +27,7 @@ class SignUpUseCaseTest: BehaviorSpec({
 
     Given("SignUpDto 가 주어질때") {
         val encodePassword = "encodePassword"
-        val email = "s22039@gsm.hs.kr"
+        val email = "s23039@gsm.hs.kr"
         val authentication = AnyValueObjectGenerator.anyValueObject<Authentication>("email" to email)
         val account = AnyValueObjectGenerator.anyValueObject<Account>("email" to email)
         val signUpDto = AnyValueObjectGenerator.anyValueObject<SignUpDto>("email" to email)

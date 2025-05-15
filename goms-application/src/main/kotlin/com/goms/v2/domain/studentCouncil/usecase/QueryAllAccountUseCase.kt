@@ -4,16 +4,19 @@ import com.goms.v2.common.annotation.UseCaseWithReadOnlyTransaction
 import com.goms.v2.domain.studentCouncil.data.dto.AccountDto
 import com.goms.v2.repository.account.AccountRepository
 import com.goms.v2.repository.outing.OutingBlackListRepository
+import com.goms.v2.repository.outing.OutingRepository
 
 @UseCaseWithReadOnlyTransaction
 class QueryAllAccountUseCase(
     private val accountRepository: AccountRepository,
+    private val outingRepository: OutingRepository,
     private val outingBlackListRepository: OutingBlackListRepository
 ) {
 
     fun execute(): List<AccountDto> {
         val accountList = accountRepository.findAllOrderByStudentNum()
-        val outingBlackListIdx = outingBlackListRepository.findAll().map { it.accountIdx }
+        val outingBlackListIdx = outingBlackListRepository.findAll().map { it.accountIdx }.toSet()
+        val outingSet = outingRepository.findAllOutingAccountIdx().toSet()
 
         return accountList.map {
             AccountDto(
@@ -22,11 +25,11 @@ class QueryAllAccountUseCase(
                 grade = it.grade,
                 gender = it.gender,
                 major = it.major,
-                profileUrl = it.profileUrl,
+                profileUrl = it.profileUrl ?: null,
                 authority = it.authority,
-                isBlackList = outingBlackListIdx.contains(it.idx)
+                outing = it.idx in outingSet,
+                isBlackList = it.idx in outingBlackListIdx
             )
         }
     }
-
 }

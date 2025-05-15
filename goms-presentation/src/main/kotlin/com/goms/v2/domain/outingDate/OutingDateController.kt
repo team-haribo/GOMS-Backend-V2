@@ -16,8 +16,11 @@ class OutingDateController(
 	private val outingDateDataMapper: OutingDateDataMapper
 ) {
 	@PostMapping("today")
-	fun setTodayOuting(@RequestBody setTodayOutingRequest: SetTodayOutingRequest): ResponseEntity<Void> =
-		setTodayOutingUseCase.execute(outingDateDataMapper.toDto(setTodayOutingRequest))
+	fun setTodayOuting(
+		@RequestBody setTodayOutingRequest: SetTodayOutingRequest,
+		@RequestHeader("Discord-Client-Token") discordClientToken: String
+	): ResponseEntity<Void> =
+		setTodayOutingUseCase.execute(outingDateDataMapper.toDto(setTodayOutingRequest, discordClientToken))
 			.run { ResponseEntity.ok().build() }
 
 	@GetMapping("today")

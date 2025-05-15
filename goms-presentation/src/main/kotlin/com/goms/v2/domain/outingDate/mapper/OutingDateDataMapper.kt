@@ -13,9 +13,9 @@ import java.time.LocalDateTime
 
 @Component
 class OutingDateDataMapper {
-	fun toDto(setTodayOutingRequest: SetTodayOutingRequest) =
+	fun toDto(setTodayOutingRequest: SetTodayOutingRequest, discordClientToken: String) =
 		SetTodayOutingDto(
 			outingStatus = setTodayOutingRequest.outingStatus,
-			token = setTodayOutingRequest.token
+			token = discordClientToken
 		)
 }

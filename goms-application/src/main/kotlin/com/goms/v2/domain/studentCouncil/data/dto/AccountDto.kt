@@ -13,5 +13,6 @@ data class AccountDto(
     val major: Major,
     val profileUrl: String?,
     val authority: Authority,
+    val outing: Boolean,
     val isBlackList: Boolean
 )

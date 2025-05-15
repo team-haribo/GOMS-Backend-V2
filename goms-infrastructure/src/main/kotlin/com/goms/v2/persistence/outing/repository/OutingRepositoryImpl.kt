@@ -61,6 +61,11 @@ class OutingRepositoryImpl(
             .fetch()
             .map { outingMapper.toDomain(it) }
 
+    override fun findAllOutingAccountIdx(): List<UUID> =
+        queryFactory.select(outingJpaEntity.account.idx)
+            .from(outingJpaEntity)
+            .fetch()
+
     override fun deleteAll() {
         outingJpaRepository.deleteAll()
     }
