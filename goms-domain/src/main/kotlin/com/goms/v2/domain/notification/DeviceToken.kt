@@ -6,5 +6,5 @@ import java.util.UUID
 @RootAggregate
 data class DeviceToken(
     val accountIdx: UUID,
-    val token: String
+    val token: Set<String>
 )
