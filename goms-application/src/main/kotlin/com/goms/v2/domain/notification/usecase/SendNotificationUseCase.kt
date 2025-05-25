@@ -21,7 +21,10 @@ class SendNotificationUseCase(
             NotificationType.FIRST_NOTIFICATION -> {
                 runCatching {
                     notificationPort.sendNotification(
-                        deviceTokens = deviceTokenRepository.findAll().map { it.token },
+                        deviceTokens = deviceTokenRepository.findAll()
+                            .map { it.token }
+                            .distinct()
+                        ,
                         notificationConfig = NotificationConfig(
                                 title = if(isTodayDeniedOuting) Topic.DENIED_NOTIFICATION.title
                                     else Topic.FIRST_NOTIFICATION.title,
@@ -39,7 +42,9 @@ class SendNotificationUseCase(
                 if(!isTodayDeniedOuting){
                     runCatching {
                         notificationPort.sendNotification(
-                            deviceTokens = deviceTokenRepository.findAll().map { it.token },
+                            deviceTokens = deviceTokenRepository.findAll()
+                                .map { it.token }
+                                .distinct(),
                             notificationConfig = NotificationConfig(
                                 title = Topic.FINAL_NOTIFICATION.title,
                                 content = Topic.FINAL_NOTIFICATION.content,

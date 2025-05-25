@@ -25,7 +25,9 @@ class SendCustomNotificationUseCase(
 
         runCatching {
             notificationPort.sendNotification(
-                deviceTokens = deviceTokenRepository.findAll().map { it.token },
+                deviceTokens = deviceTokenRepository.findAll()
+                    .map { it.token }
+                    .distinct(),
                 notificationConfig = NotificationConfig(
                     title = sendCustomNotificationDto.title,
                     content = sendCustomNotificationDto.content,
