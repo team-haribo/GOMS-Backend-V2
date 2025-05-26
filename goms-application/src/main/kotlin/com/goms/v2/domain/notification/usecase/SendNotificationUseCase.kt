@@ -22,7 +22,7 @@ class SendNotificationUseCase(
                 runCatching {
                     notificationPort.sendNotification(
                         deviceTokens = deviceTokenRepository.findAll()
-                            .map { it.token }
+                            .flatMap { it.token }
                             .distinct()
                         ,
                         notificationConfig = NotificationConfig(
@@ -43,7 +43,7 @@ class SendNotificationUseCase(
                     runCatching {
                         notificationPort.sendNotification(
                             deviceTokens = deviceTokenRepository.findAll()
-                                .map { it.token }
+                                .flatMap { it.token }
                                 .distinct(),
                             notificationConfig = NotificationConfig(
                                 title = Topic.FINAL_NOTIFICATION.title,
