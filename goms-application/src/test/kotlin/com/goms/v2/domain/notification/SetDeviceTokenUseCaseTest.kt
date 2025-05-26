@@ -27,7 +27,7 @@ class SetDeviceTokenUseCaseTest: BehaviorSpec({
         val account = AnyValueObjectGenerator.anyValueObject<Account>("idx" to accountIdx)
         val deviceToken = DeviceToken(
             accountIdx = accountIdx,
-            token = "token"
+            token = setOf("token")
         )
 
         every { accountUtil.getCurrentAccountIdx() } returns accountIdx
