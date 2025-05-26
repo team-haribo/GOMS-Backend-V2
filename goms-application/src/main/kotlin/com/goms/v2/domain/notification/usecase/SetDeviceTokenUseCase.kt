@@ -26,7 +26,7 @@ class SetDeviceTokenUseCase(
         deviceTokenRepository.save(
             DeviceToken(
                 accountIdx = account.idx,
-                token = token
+                token = setOf(token)
             )
         )
     }
