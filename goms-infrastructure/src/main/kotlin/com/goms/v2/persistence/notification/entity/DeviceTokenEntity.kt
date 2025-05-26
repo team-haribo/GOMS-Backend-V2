@@ -8,5 +8,5 @@ import java.util.*
 data class DeviceTokenEntity(
     @Id
     val accountIdx: UUID,
-    val token: String
+    val token: Set<String>
 )
