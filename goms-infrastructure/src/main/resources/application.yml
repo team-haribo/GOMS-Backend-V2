@@ -46,11 +46,6 @@ jwt:
     accessExp: ${JWT_ACCESS_EXP}
     refreshExp: ${JWT_REFRESH_EXP}
 
-gauth:
-  clientId: ${GAUTH_CLIENTID}
-  clientSecret: ${CLIENT_SECRET}
-  redirectUri: ${REDIRECT_URI}
-
 outing:
   expiredAt: ${OUTING_EXP}
 
