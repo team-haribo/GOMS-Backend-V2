@@ -7,6 +7,6 @@ data class ChangePasswordRequest(
     @field:NotBlank
     val password: String,
     @field:NotBlank
-    @field:Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#\\\$%^*+=-?<>])(?=.*[0-9]).{6,15}\$")
+    @field:Pattern(regexp = "^(?=(?>[^a-zA-Z]*[a-zA-Z]))(?=(?>[^!@#$%^*+=\\-?<>]*[!@#$%^*+=\\-?<>]))(?=(?>[^0-9]*[0-9])).{6,15}$")
     val newPassword: String
 )
