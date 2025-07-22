@@ -4,9 +4,9 @@ import com.goms.v2.common.AnyValueObjectGenerator
 import com.goms.v2.common.util.AccountUtil
 import com.goms.v2.domain.account.data.dto.ChangePasswordDto
 import com.goms.v2.domain.account.exception.DuplicatedNewPasswordException
-import com.goms.v2.domain.account.exception.PasswordNotMatchException
 import com.goms.v2.domain.account.usecase.ChangePasswordUseCase
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
+import com.goms.v2.domain.auth.exception.PasswordNotMatchException
 import com.goms.v2.domain.auth.spi.PasswordEncoderPort
 import com.goms.v2.repository.account.AccountRepository
 import io.kotest.assertions.throwables.shouldThrow
@@ -18,7 +18,7 @@ import io.mockk.spyk
 import io.mockk.verify
 import java.util.*
 
-class ChangePasswordUseCaseTest: BehaviorSpec({
+class ChangePasswordUseCaseTest : BehaviorSpec({
     isolationMode = IsolationMode.InstancePerLeaf
     val accountRepository = mockk<AccountRepository>()
     val passwordEncoderPort = mockk<PasswordEncoderPort>()

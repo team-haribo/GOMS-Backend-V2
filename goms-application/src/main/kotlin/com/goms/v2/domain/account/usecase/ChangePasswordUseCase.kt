@@ -4,9 +4,9 @@ import com.goms.v2.common.annotation.UseCaseWithTransaction
 import com.goms.v2.common.util.AccountUtil
 import com.goms.v2.domain.account.data.dto.ChangePasswordDto
 import com.goms.v2.domain.account.exception.DuplicatedNewPasswordException
-import com.goms.v2.domain.account.exception.PasswordNotMatchException
 import com.goms.v2.domain.account.updatePassword
 import com.goms.v2.domain.auth.exception.AccountNotFoundException
+import com.goms.v2.domain.auth.exception.PasswordNotMatchException
 import com.goms.v2.domain.auth.spi.PasswordEncoderPort
 import com.goms.v2.repository.account.AccountRepository
 
