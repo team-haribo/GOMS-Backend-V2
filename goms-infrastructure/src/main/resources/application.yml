@@ -82,6 +82,7 @@ server:
   tomcat:
     mbeanregistry:
       enabled: true
+  shutdown: graceful
 
 discord:
   api:
