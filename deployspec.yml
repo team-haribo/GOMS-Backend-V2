@@ -1,0 +1,29 @@
+version: 1.0
+
+hooks:
+  ApplicationStop:
+    - location: scripts/stop_application.sh
+      timeout: 300
+    - location: scripts/cleanup.sh
+      timeout: 300
+  BeforeInstall:
+    - location: scripts/cleanup.sh
+      timeout: 300
+  ApplicationStart:
+    - location: scripts/start_application.sh
+      timeout: 300
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+    mode: 644
+    type:
+      - file
+  - object: /scripts
+    pattern: "*.sh"
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
+    type:
+      - file
