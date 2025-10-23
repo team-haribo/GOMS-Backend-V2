@@ -17,12 +17,12 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
       - name: Remove existing YML File
-        run: rm -f .goms-infrastructure/src/main/resources/application.yml
+        run: rm -f goms-infrastructure/src/main/resources/application.yml
         shell: bash
       - name: Make YML File
         run: |
-          touch .goms-infrastructure/src/main/resources/application.yml
-          echo "${{ secrets.WEB_YML }}" > .goms-infrastructure/src/main/resources/application.yml
+          touch goms-infrastructure/src/main/resources/application.yml
+          echo "${{ secrets.WEB_YML }}" > goms-infrastructure/src/main/resources/application.yml
         shell: bash
       - name: Build with Gradle
         run: ./gradlew --build-cache clean build
