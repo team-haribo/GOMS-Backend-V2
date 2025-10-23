@@ -15,15 +15,15 @@ hooks:
 permissions:
   - object: /
     pattern: "**"
-    owner: root
-    group: root
+    owner: ubuntu
+    group: ubuntu
     mode: 644
     type:
       - file
   - object: /scripts
     pattern: "*.sh"
-    owner: root
-    group: root
+    owner: ubuntu
+    group: ubuntu
     mode: 755
     type:
       - file
