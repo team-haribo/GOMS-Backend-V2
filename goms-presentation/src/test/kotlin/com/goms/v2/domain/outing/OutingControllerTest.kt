@@ -73,6 +73,7 @@ internal class OutingControllerTest : DescribeSpec({
         val accountUUID = UUID.randomUUID()
 
         context("유효한 요청이 전달 되면") {
+            val fixedTime = LocalTime.of(14, 30, 0)
             val outingAccountDto = OutingAccountDto(
                 accountIdx = accountUUID,
                 name = "김태은",
@@ -80,7 +81,7 @@ internal class OutingControllerTest : DescribeSpec({
                 major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
-                createdTime = LocalTime.now()
+                createdTime = fixedTime
             )
             val outingAccountHttpResponse = OutingAccountHttpResponse(
                 accountIdx = accountUUID,
@@ -89,7 +90,7 @@ internal class OutingControllerTest : DescribeSpec({
                 major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
-                createdTime = LocalTime.now()
+                createdTime = fixedTime
             )
 
             every { queryOutingAccountUseCase.execute() } returns listOf(outingAccountDto)
@@ -143,6 +144,7 @@ internal class OutingControllerTest : DescribeSpec({
         val accountUUID = UUID.randomUUID()
 
         context("유효한 요청이 전달 되면") {
+            val fixedTime = LocalTime.of(14, 30, 0)
             val outingAccountDto = OutingAccountDto(
                 accountIdx = accountUUID,
                 name = "김태은",
@@ -150,7 +152,7 @@ internal class OutingControllerTest : DescribeSpec({
                 major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
-                createdTime = LocalTime.now()
+                createdTime = fixedTime
             )
             val outingAccountHttpResponse = OutingAccountHttpResponse(
                 accountIdx = accountUUID,
@@ -159,7 +161,7 @@ internal class OutingControllerTest : DescribeSpec({
                 major = Major.SMART_IOT,
                 gender = Gender.MAN,
                 profileUrl = null,
-                createdTime = LocalTime.now()
+                createdTime = fixedTime
             )
 
             every { searchOutingAccountUseCase.execute(null) } returns listOf(outingAccountDto)
