@@ -27,7 +27,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew --build-cache clean build
       - name: Deploy to Server
-        uses: 8G4B/GSM-SV-Deploy@v1.2.0
+        uses: 8G4B/GSM-SV-Deploy@v1.2.1
         with:
           host: ${{ secrets.SERVER_HOST }}
           target_path: /home/ubuntu/GOMS-Server
