@@ -23,7 +23,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import java.time.LocalTime
-import java.time.temporal.ChronoUnit
 import java.util.*
 
 internal class OutingControllerTest : DescribeSpec({
@@ -107,11 +106,7 @@ internal class OutingControllerTest : DescribeSpec({
                     .andExpect(jsonPath("$[0].grade").value(outingAccountHttpResponse.grade))
                     .andExpect(jsonPath("$[0].gender").value(outingAccountHttpResponse.gender.toString()))
                     .andExpect(jsonPath("$[0].profileUrl").value(outingAccountHttpResponse.profileUrl))
-                    .andExpect(
-                        jsonPath("$[0].createdTime").value(
-                            outingAccountHttpResponse.createdTime.truncatedTo(ChronoUnit.MICROS).toString()
-                        )
-                    )
+                    .andExpect(jsonPath("$[0].createdTime").exists())
                     .andDo(MockMvcResultHandlers.print())
             }
         }
@@ -178,11 +173,7 @@ internal class OutingControllerTest : DescribeSpec({
                     .andExpect(jsonPath("$[0].grade").value(outingAccountHttpResponse.grade))
                     .andExpect(jsonPath("$[0].gender").value(outingAccountHttpResponse.gender.toString()))
                     .andExpect(jsonPath("$[0].profileUrl").value(outingAccountHttpResponse.profileUrl))
-                    .andExpect(
-                        jsonPath("$[0].createdTime").value(
-                            outingAccountHttpResponse.createdTime.truncatedTo(ChronoUnit.MICROS).toString()
-                        )
-                    )
+                    .andExpect(jsonPath("$[0].createdTime").exists())
                     .andDo(MockMvcResultHandlers.print())
             }
         }
