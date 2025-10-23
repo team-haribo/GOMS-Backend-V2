@@ -26,7 +26,7 @@ import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 import java.util.*
 
-internal class OutingControllerTest: DescribeSpec({
+internal class OutingControllerTest : DescribeSpec({
     isolationMode = IsolationMode.InstancePerLeaf
     lateinit var mockMvc: MockMvc
     val outingDataMapper = mockk<OutingDataMapper>()
@@ -106,9 +106,11 @@ internal class OutingControllerTest: DescribeSpec({
                     .andExpect(jsonPath("$[0].grade").value(outingAccountHttpResponse.grade))
                     .andExpect(jsonPath("$[0].gender").value(outingAccountHttpResponse.gender.toString()))
                     .andExpect(jsonPath("$[0].profileUrl").value(outingAccountHttpResponse.profileUrl))
-                    .andExpect(jsonPath("$[0].createdTime").value(
-                        outingAccountHttpResponse.createdTime.truncatedTo(ChronoUnit.MICROS).toString()
-                    ))
+                    .andExpect(
+                        jsonPath("$[0].createdTime").value(
+                            outingAccountHttpResponse.createdTime.truncatedTo(ChronoUnit.MICROS).toString()
+                        )
+                    )
                     .andDo(MockMvcResultHandlers.print())
             }
         }
@@ -174,7 +176,11 @@ internal class OutingControllerTest: DescribeSpec({
                     .andExpect(jsonPath("$[0].grade").value(outingAccountHttpResponse.grade))
                     .andExpect(jsonPath("$[0].gender").value(outingAccountHttpResponse.gender.toString()))
                     .andExpect(jsonPath("$[0].profileUrl").value(outingAccountHttpResponse.profileUrl))
-                    .andExpect(jsonPath("$[0].createdTime").value(outingAccountHttpResponse.createdTime.toString()))
+                    .andExpect(
+                        jsonPath("$[0].createdTime").value(
+                            outingAccountHttpResponse.createdTime.truncatedTo(ChronoUnit.MICROS).toString()
+                        )
+                    )
                     .andDo(MockMvcResultHandlers.print())
             }
         }
