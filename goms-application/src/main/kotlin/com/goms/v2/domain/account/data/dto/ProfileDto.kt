@@ -14,4 +14,16 @@ data class ProfileDto(
     val lateCount: Long,
     val outing: Boolean,
     val blackList: Boolean
-)
+) {
+    constructor() : this(
+        "",
+        6,
+        Major.SMART_IOT,
+        Gender.MAN,
+        Authority.ROLE_STUDENT_COUNCIL,
+        null,
+        0L,
+        false,
+        false
+    )
+}
