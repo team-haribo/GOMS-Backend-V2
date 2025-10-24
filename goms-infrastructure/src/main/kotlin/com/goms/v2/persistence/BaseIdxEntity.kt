@@ -8,6 +8,5 @@ import javax.persistence.MappedSuperclass
 @MappedSuperclass
 abstract class BaseIdxEntity(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open val idx: Long
+    @GeneratedValue(strategy = GenerationType.IDENTITY) val idx: Long
 )
