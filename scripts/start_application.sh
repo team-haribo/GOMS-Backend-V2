@@ -13,7 +13,7 @@ else
     exit 1
 fi
 echo "> Starting Docker container: $CONTAINER_NAME"
-docker run -d --name $CONTAINER_NAME -p 8080:8080 $IMAGE_NAME
+docker run -d --name $CONTAINER_NAME --add-host=host.docker.internal:host-gateway -p 8080:8080 $IMAGE_NAME
 if [ $? -eq 0 ]; then
     echo "> Container started successfully"
     echo "> Application is running on port 8080"
