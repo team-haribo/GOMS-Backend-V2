@@ -1,7 +1,7 @@
 package com.goms.v2.domain.outingDate.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithTransaction
-import com.goms.v2.domain.outing.DeniedOutingDate
+import com.goms.v2.domain.outingDate.DeniedOutingDate
 import com.goms.v2.domain.outingDate.data.dto.SetTodayOutingDto
 import com.goms.v2.domain.outingDate.exception.DuplicatedOutingDateException
 import com.goms.v2.domain.outingDate.exception.UnauthorizedDiscordClientTokenException
@@ -11,9 +11,9 @@ import java.time.LocalDate
 
 @UseCaseWithTransaction
 class SetTodayOutingUseCase(
-	@Value("\${discord.api.token}")
+    @param:Value("\${discord.api.token}")
 	private val discordToken: String,
-	private val deniedOutingDateRepository: DeniedOutingDateRepository,
+    private val deniedOutingDateRepository: DeniedOutingDateRepository,
 ) {
 
 	fun execute(setTodayOutingDto: SetTodayOutingDto) {

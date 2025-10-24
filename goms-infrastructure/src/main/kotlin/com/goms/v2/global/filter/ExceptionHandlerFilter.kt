@@ -2,7 +2,6 @@ package com.goms.v2.global.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.goms.v2.common.exception.ErrorCode
-import com.goms.v2.common.exception.ErrorStatus
 import com.goms.v2.common.exception.GomsException
 import com.goms.v2.global.error.response.ErrorResponse
 import com.goms.v2.global.exception.ExpiredTokenException
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse
 
 private val log = KotlinLogging.logger {}
 
-class ExceptionHandlerFilter: OncePerRequestFilter() {
+class ExceptionHandlerFilter : OncePerRequestFilter() {
 
     override fun doFilterInternal(
         request: HttpServletRequest,
@@ -28,22 +27,41 @@ class ExceptionHandlerFilter: OncePerRequestFilter() {
         runCatching {
             filterChain.doFilter(request, response)
         }.onFailure { exception ->
-            when(exception) {
+            when (exception) {
                 is ExpiredJwtException -> {
-                    log.warn("ExpiredJwtException Exception Occurred - Message = {} | Status = {}", exception.message, ErrorCode.EXPIRED_TOKEN)
+                    log.warn(
+                        "ExpiredJwtException Exception Occurred - Message = {} | Status = {}",
+                        exception.message,
+                        ErrorCode.EXPIRED_TOKEN
+                    )
                     exceptionToResponse(ErrorResponse.of(ExpiredTokenException()), response)
                 }
+
                 is JwtException -> {
-                    log.warn("JwtException Exception Occurred - Message = {} | Status = {}", exception.message, ErrorCode.INVALID_TOKEN)
+                    log.warn(
+                        "JwtException Exception Occurred - Message = {} | Status = {}",
+                        exception.message,
+                        ErrorCode.INVALID_TOKEN
+                    )
                     exceptionToResponse(ErrorResponse.of(InvalidTokenException()), response)
                 }
+
                 is GomsException -> {
-                    log.warn("GomsException Exception Occurred - Message = {} | Status = {}", exception.errorCode.message, exception.errorCode.status)
+                    log.warn(
+                        "GomsException Exception Occurred - Message = {} | Status = {}",
+                        exception.errorCode.message,
+                        exception.errorCode.status
+                    )
                     exceptionToResponse(ErrorResponse.of(exception), response)
                 }
+
                 else -> {
                     exception.printStackTrace()
-                    log.error("Internal Exception Occurred - Message = {} | Status = {}", exception.message, ErrorCode.GOMS_SERVER_ERROR.status)
+                    log.error(
+                        "Internal Exception Occurred - Message = {} | Status = {}",
+                        exception.message,
+                        ErrorCode.GOMS_SERVER_ERROR.status
+                    )
                     exceptionToResponse(ErrorResponse.of(InternalServerException()), response)
                 }
             }

@@ -1,17 +1,14 @@
 package com.goms.v2.repository.outingDate
 
-import com.goms.v2.domain.account.Account
-import com.goms.v2.domain.outing.DeniedOutingDate
-import com.goms.v2.domain.outing.Outing
+import com.goms.v2.domain.outingDate.DeniedOutingDate
 import java.time.LocalDate
-import java.util.*
 
 interface DeniedOutingDateRepository {
-	fun existsByOutingDate(outingDate: LocalDate): Boolean
+    fun existsByOutingDate(outingDate: LocalDate): Boolean
 
-	fun findByOutingDate(outingDate: LocalDate): DeniedOutingDate
+    fun findByOutingDate(outingDate: LocalDate): DeniedOutingDate
 
-	fun deleteByOutingDate(outingDate: LocalDate)
+    fun deleteByOutingDate(outingDate: LocalDate)
 
-	fun save(deniedOutingDate: DeniedOutingDate)
+    fun save(deniedOutingDate: DeniedOutingDate)
 }

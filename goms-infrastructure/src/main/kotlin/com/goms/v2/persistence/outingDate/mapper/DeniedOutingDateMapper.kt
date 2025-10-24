@@ -1,6 +1,6 @@
-package com.goms.v2.persistence.outing.mapper
+package com.goms.v2.persistence.outingDate.mapper
 
-import com.goms.v2.domain.outing.DeniedOutingDate
+import com.goms.v2.domain.outingDate.DeniedOutingDate
 import com.goms.v2.persistence.outingDate.entity.DeniedOutingDateJpaEntity
 import org.springframework.stereotype.Component
 

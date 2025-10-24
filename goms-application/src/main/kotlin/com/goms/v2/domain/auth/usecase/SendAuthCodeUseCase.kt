@@ -6,7 +6,6 @@ import com.goms.v2.domain.auth.Authentication
 import com.goms.v2.domain.auth.EmailStatus
 import com.goms.v2.domain.auth.data.dto.SendAuthCodeDto
 import com.goms.v2.domain.auth.data.event.CreateAuthenticationEvent
-import com.goms.v2.domain.auth.exception.AlreadyExistEmailException
 import com.goms.v2.domain.auth.exception.EmailNotFoundException
 import com.goms.v2.domain.auth.exception.ManyEmailRequestException
 import com.goms.v2.domain.auth.spi.NotificationSendPort

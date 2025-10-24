@@ -1,7 +1,6 @@
 package com.goms.v2.domain.studentCouncil.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithReadOnlyTransaction
-import com.goms.v2.domain.late.exception.LateAccountNotFound
 import com.goms.v2.domain.studentCouncil.data.dto.LateAccountDto
 import com.goms.v2.repository.late.LateRepository
 import java.time.LocalDate
