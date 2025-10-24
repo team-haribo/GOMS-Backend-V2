@@ -1,4 +1,4 @@
-package com.goms.v2.domain.outing
+package com.goms.v2.domain.outingDate
 
 import com.goms.v2.common.annotation.RootAggregate
 import java.time.LocalDate

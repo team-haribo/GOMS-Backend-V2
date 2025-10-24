@@ -3,17 +3,13 @@ package com.goms.v2.domain.notification
 import com.goms.v2.domain.notification.dto.request.SendCustomNotificationByDeviceTokenRequest
 import com.goms.v2.domain.notification.dto.request.SendCustomNotificationRequest
 import com.goms.v2.domain.notification.mapper.NotificationDataMapper
-import com.goms.v2.domain.notification.usecase.*
+import com.goms.v2.domain.notification.usecase.DeleteDeviceTokenUseCase
+import com.goms.v2.domain.notification.usecase.SendCustomNotificationUseCase
+import com.goms.v2.domain.notification.usecase.SendNotificationByDeviceTokenUseCase
+import com.goms.v2.domain.notification.usecase.SetDeviceTokenUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestHeader
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("api/v2/notification")
@@ -34,10 +30,12 @@ class NotificationController(
         @RequestBody sendCustomNotificationRequest: SendCustomNotificationRequest,
         @RequestHeader("Discord-Client-Token") discordClientToken: String
     ): ResponseEntity<Void> {
-        return sendCustomNotificationUseCase.execute(notificationDataMapper.toDto(
-            sendCustomNotificationRequest,
-            discordClientToken
-        )).run {
+        return sendCustomNotificationUseCase.execute(
+            notificationDataMapper.toDto(
+                sendCustomNotificationRequest,
+                discordClientToken
+            )
+        ).run {
             ResponseEntity.status(HttpStatus.NO_CONTENT).build()
         }
     }
@@ -48,11 +46,13 @@ class NotificationController(
         @RequestHeader("Discord-Client-Token") discordClientToken: String,
         @PathVariable deviceToken: String
     ): ResponseEntity<Void> {
-        return sendNotificationByDeviceTokenUseCase.execute(notificationDataMapper.toDto(
-            sendCustomNotificationByDeviceTokenRequest,
-            discordClientToken,
-            deviceToken
-        )).run {
+        return sendNotificationByDeviceTokenUseCase.execute(
+            notificationDataMapper.toDto(
+                sendCustomNotificationByDeviceTokenRequest,
+                discordClientToken,
+                deviceToken
+            )
+        ).run {
             ResponseEntity.status(HttpStatus.NO_CONTENT).build()
         }
     }

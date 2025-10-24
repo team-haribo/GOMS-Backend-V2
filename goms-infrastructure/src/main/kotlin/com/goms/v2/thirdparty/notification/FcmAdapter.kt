@@ -50,7 +50,7 @@ class FcmAdapter: NotificationPort {
         with(notificationConfig) {
             MulticastMessage.builder()
                 .setNotification(
-                    com.google.firebase.messaging.Notification.builder()
+                    Notification.builder()
                         .setTitle(title)
                         .setBody(content)
                         .build()

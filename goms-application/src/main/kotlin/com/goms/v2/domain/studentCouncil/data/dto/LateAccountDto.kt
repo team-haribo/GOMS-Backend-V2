@@ -2,7 +2,6 @@ package com.goms.v2.domain.studentCouncil.data.dto
 
 import com.goms.v2.domain.account.constant.Gender
 import com.goms.v2.domain.account.constant.Major
-import java.time.LocalDate
 import java.util.*
 
 data class LateAccountDto(

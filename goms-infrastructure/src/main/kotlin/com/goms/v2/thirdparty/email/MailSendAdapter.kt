@@ -16,7 +16,7 @@ class MailSendAdapter(
 ): NotificationSendPort {
 
     companion object {
-        val EMAIL_SUBJECT = "GOMS 이메일 인증"
+        const val EMAIL_SUBJECT = "GOMS 이메일 인증"
     }
 
     @Async

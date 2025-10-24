@@ -1,11 +1,8 @@
 package com.goms.v2.domain.account.usecase
 
 import com.goms.v2.common.annotation.UseCaseWithTransaction
-import com.goms.v2.common.util.AccountUtil
-import com.goms.v2.domain.account.exception.FileExtensionInvalidException
 import com.goms.v2.domain.account.spi.S3UtilPort
 import com.goms.v2.domain.account.updateProfileUrl
-import com.goms.v2.domain.auth.exception.AccountNotFoundException
 import com.goms.v2.repository.account.AccountRepository
 import org.springframework.web.multipart.MultipartFile
 

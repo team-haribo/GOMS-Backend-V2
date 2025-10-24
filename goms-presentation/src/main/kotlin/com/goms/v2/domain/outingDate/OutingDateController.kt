@@ -1,6 +1,6 @@
 package com.goms.v2.domain.outingDate
 
-import com.goms.v2.domain.auth.mapper.OutingDateDataMapper
+import com.goms.v2.domain.outingDate.mapper.OutingDateDataMapper
 import com.goms.v2.domain.outingDate.usecase.SetTodayOutingUseCase
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

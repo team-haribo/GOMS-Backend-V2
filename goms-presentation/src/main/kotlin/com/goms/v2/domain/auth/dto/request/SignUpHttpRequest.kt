@@ -10,7 +10,7 @@ data class SignUpHttpRequest(
     @field:NotBlank
     val email: String,
     @field:NotBlank
-    @field:Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#\\\$%^*+=-?<>])(?=.*[0-9]).{6,15}\$")
+    @field:Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-?<>])(?=.*[0-9]).{6,15}$")
     val password: String,
     @field:NotBlank
     val name: String,

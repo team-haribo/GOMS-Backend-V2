@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value
 
 @UseCaseWithReadOnlyTransaction
 class SendNotificationByDeviceTokenUseCase(
-    @Value("\${discord.api.token}")
+    @param:Value("\${discord.api.token}")
     private val discordToken: String,
     private val notificationPort: NotificationPort,
 ) {
