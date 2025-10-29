@@ -15,22 +15,21 @@ class LoggingScheduler(
     private val awsS3Properties: AwsS3Properties
 ) {
 
-    @Scheduled(cron = "0 3 * * * ?")
-    fun sendLog() {
-        val logDir = "./logs/"
-        val logDirectory = File(logDir)
-        logDirectory.listFiles()
-            .forEach { file ->
-                val fileName = file.name
-                val objectMetadata = ObjectMetadata()
-                objectMetadata.contentLength = file.length()
-                objectMetadata.contentType = "text/plain"
-                amazonS3.putObject(
-                    PutObjectRequest(awsS3Properties.bucketLog, fileName, file.inputStream(), objectMetadata)
-                        .withCannedAcl(CannedAccessControlList.PublicRead)
-                )
-                file.delete()
-            }
-    }
-
+//    @Scheduled(cron = "0 3 * * * ?")
+//    fun sendLog() {
+//        val logDir = "./logs/"
+//        val logDirectory = File(logDir)
+//        logDirectory.listFiles()
+//            .forEach { file ->
+//                val fileName = file.name
+//                val objectMetadata = ObjectMetadata()
+//                objectMetadata.contentLength = file.length()
+//                objectMetadata.contentType = "text/plain"
+//                amazonS3.putObject(
+//                    PutObjectRequest(awsS3Properties.bucketLog, fileName, file.inputStream(), objectMetadata)
+//                        .withCannedAcl(CannedAccessControlList.PublicRead)
+//                )
+//                file.delete()
+//            }
+//    }
 }
