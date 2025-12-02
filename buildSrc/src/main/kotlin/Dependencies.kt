@@ -34,6 +34,7 @@ object Dependencies {
     const val SPRING_REDIS = "org.springframework.boot:spring-boot-starter-data-redis"
     const val REDIS = "org.springframework.data:spring-data-redis:${DependenciesVersions.REDIS_VERSION}"
     const val MARIA_DB = "org.mariadb.jdbc:mariadb-java-client:${DependenciesVersions.MARIA_DB_VERSION}"
+    const val MYSQL_DRIVER = "com.mysql:mysql-connector-j:${DependenciesVersions.MYSQL_DRIVER_VERSION}"
 
     /* aws */
     const val AWS_STARTER = "org.springframework.cloud:spring-cloud-starter-aws:${DependenciesVersions.AWS_STARTER}"
