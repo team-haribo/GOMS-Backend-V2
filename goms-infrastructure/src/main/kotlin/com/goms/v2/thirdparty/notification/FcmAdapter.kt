@@ -36,8 +36,14 @@ class FcmAdapter: NotificationPort {
             .setNotification(androidNotification)
             .build()
 
+        val data = mapOf(
+            "title" to notificationConfig.title,
+            "body" to notificationConfig.content
+        )
+
         val message: MulticastMessage = MulticastMessage.builder()
             .setNotification(notification)
+            .putAllData(data)
             .addAllTokens(deviceTokens)
             .setApnsConfig(apnsConfig)
             .setAndroidConfig(androidConfig)
